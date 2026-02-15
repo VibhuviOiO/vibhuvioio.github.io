@@ -1,0 +1,60 @@
+1:"$Sreact.fragment"
+2:I[63327,["/_next/static/chunks/b91f256aa2f971b0.js","/_next/static/chunks/e0ade9baf00eab87.js"],"default"]
+3:I[1651,["/_next/static/chunks/b91f256aa2f971b0.js","/_next/static/chunks/e0ade9baf00eab87.js"],"default"]
+5:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+4:T484,
+# 🐬 Deploy MySQL as Container
+
+MySQL is the world's most popular open source database. Running it in Docker makes deployment and scaling straightforward.
+
+## Quick Start
+
+```bash
+docker run -d \
+  --name mysql \
+  -e MYSQL_ROOT_PASSWORD=secretpassword \
+  -e MYSQL_DATABASE=myapp \
+  -p 3306:3306 \
+  -v mysql_data:/var/lib/mysql \
+  mysql:8.0
+```
+
+## Docker Compose
+
+```yaml
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+```
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `MYSQL_ROOT_PASSWORD` | Root password (required) |
+| `MYSQL_DATABASE` | Database to create |
+| `MYSQL_USER` | Additional user |
+| `MYSQL_PASSWORD` | Password for additional user |
+
+## See Also
+
+- [Backup & Restore](/docs/mysql/backup-restore)
+0:{"buildId":"QkLRzJdEtiMW6LJrOlnvh","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[calc(100vh-4rem)]","children":[["$","$L2",null,{"groups":[{"title":"Web Servers","items":[{"id":"nginx","title":"NGINX","slug":"nginx","items":[{"id":"nginx-container","title":"Run as Container","slug":"nginx/container"},{"id":"nginx-ssl","title":"OpenSSL for Testing","slug":"nginx/ssl"},{"id":"nginx-pam","title":"PAM Authentication","slug":"nginx/pam"},{"id":"nginx-static","title":"Deploy Static App","slug":"nginx/static"}]},{"id":"caddy","title":"Caddy","slug":"caddy","items":[{"id":"caddy-container","title":"Deploy as Container","slug":"caddy/container"}]}]},{"title":"Databases","items":[{"id":"mysql","title":"MySQL","slug":"mysql","items":[{"id":"mysql-container","title":"Deploy as Container","slug":"mysql/container"},{"id":"mysql-backup","title":"Backup & Restore","slug":"mysql/backup-restore"}]},{"id":"cassandra","title":"Cassandra","slug":"cassandra","items":[{"id":"cassandra-container","title":"Deploy as Container","slug":"cassandra/container"},{"id":"cassandra-backup","title":"Backup & Restore","slug":"cassandra/backup-restore"},{"id":"cassandra-cluster","title":"Multi-Node Cluster","slug":"cassandra/cluster"}]}]}],"basePath":"/docs","title":"General Docs"}],["$","main",null,{"className":"flex-1 min-w-0","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 py-8","children":["$","article",null,{"className":"prose prose-invert max-w-none","children":[["$","h1",null,{"className":"text-3xl font-bold text-white mb-2","children":"Deploy MySQL as Container"}],["$","p",null,{"className":"text-gray-400 text-lg mb-8","children":"Run MySQL/MariaDB in Docker with persistent storage"}],["$","$L3",null,{"content":"$4"}]]}]}]}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/e0ade9baf00eab87.js","async":true}]],["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"loading":null,"isPartial":false}
+7:null

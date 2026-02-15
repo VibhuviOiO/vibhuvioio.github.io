@@ -1,0 +1,135 @@
+{
+  "$schema": "./schema.json",
+  "title": "Product Documentation",
+  "type": "product",
+  "products": [
+    {
+      "id": "docker-registry-ui",
+      "name": "Docker Registry UI",
+      "slug": "docker-registry-ui",
+      "description": "Modern web interface for managing Docker registries with security scanning",
+      "icon": "🐳",
+      "status": "live",
+      "repoUrl": "https://github.com/VibhuviOiO/docker-registry-ui",
+      "demoUrl": "https://vibhuvioio.com/docker-registry-ui",
+      "pwdUrl": "https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker-compose.yml",
+      "features": [
+        "Multi-registry support",
+        "Security vulnerability scanning",
+        "Bulk operations",
+        "Image tagging & cleanup",
+        "User-friendly interface"
+      ],
+      "technologies": ["React", "Go", "Docker", "Trivy"],
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "installation", "title": "Installation", "slug": "getting-started" },
+            { "id": "configuration", "title": "Configuration", "slug": "configuration" },
+            { "id": "features", "title": "Features Overview", "slug": "features" }
+          ]
+        },
+        {
+          "title": "Guides",
+          "items": [
+            { "id": "security", "title": "Security Scanning", "slug": "security" },
+            { "id": "bulk-operations", "title": "Bulk Operations", "slug": "bulk-operations" }
+          ]
+        },
+        {
+          "title": "Examples",
+          "items": [
+            { "id": "multi-registry", "title": "Multi-Registry Setup", "slug": "examples/multi-registry" },
+            { "id": "basic-auth", "title": "Basic Auth Registry", "slug": "examples/basic-auth" }
+          ]
+        },
+        {
+          "title": "Development",
+          "items": [
+            { "id": "api", "title": "API Integration", "slug": "api" },
+            { "id": "development", "title": "Development Guide", "slug": "development" },
+            { "id": "testing", "title": "Testing Guide", "slug": "testing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ldap-manager",
+      "name": "LDAP Manager",
+      "slug": "ldap-manager",
+      "description": "Web-based LDAP management interface for directory services",
+      "icon": "🔐",
+      "status": "live",
+      "repoUrl": "https://github.com/VibhuviOiO/ldap-manager",
+      "features": [
+        "User & group management",
+        "Schema browser",
+        "Import/Export LDIF",
+        "Access control management"
+      ],
+      "technologies": ["Vue.js", "Node.js", "LDAP"],
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "installation", "title": "Installation", "slug": "getting-started/installation" },
+            { "id": "configuration", "title": "Configuration", "slug": "getting-started/configuration" }
+          ]
+        },
+        {
+          "title": "Features",
+          "items": [
+            { "id": "overview", "title": "Overview", "slug": "features/overview" },
+            { "id": "security", "title": "Security", "slug": "features/security" }
+          ]
+        },
+        {
+          "title": "Deployment",
+          "items": [
+            { "id": "production", "title": "Production Guide", "slug": "deployment/production" }
+          ]
+        },
+        {
+          "title": "Contributing",
+          "items": [
+            { "id": "development", "title": "Development", "slug": "contributing/development" },
+            { "id": "testing", "title": "Testing Guide", "slug": "contributing/testing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "suchaka",
+      "name": "Suchaka Status Page",
+      "slug": "suchaka",
+      "description": "Beautiful status page for your services with incident management",
+      "icon": "📊",
+      "status": "live",
+      "features": [
+        "Service status monitoring",
+        "Incident management",
+        "Custom branding",
+        "API access"
+      ],
+      "technologies": ["Next.js", "PostgreSQL"],
+      "sidebar": []
+    },
+    {
+      "id": "uptime-o",
+      "name": "Uptime O",
+      "slug": "uptime-o",
+      "description": "Self-hosted uptime monitoring with beautiful dashboards",
+      "icon": "⏱️",
+      "status": "coming-soon",
+      "features": [
+        "Monitor websites & APIs",
+        "Alert notifications",
+        "Response time tracking",
+        "Status pages"
+      ],
+      "technologies": ["Go", "React"],
+      "sidebar": []
+    }
+  ]
+}

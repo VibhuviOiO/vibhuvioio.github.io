@@ -1,0 +1,55 @@
+{
+  "$schema": "./schema.json",
+  "title": "General Documentation",
+  "type": "general",
+  "groups": [
+    {
+      "title": "Web Servers",
+      "items": [
+        {
+          "id": "nginx",
+          "title": "NGINX",
+          "slug": "nginx",
+          "items": [
+            { "id": "nginx-container", "title": "Run as Container", "slug": "nginx/container" },
+            { "id": "nginx-ssl", "title": "OpenSSL for Testing", "slug": "nginx/ssl" },
+            { "id": "nginx-pam", "title": "PAM Authentication", "slug": "nginx/pam" },
+            { "id": "nginx-static", "title": "Deploy Static App", "slug": "nginx/static" }
+          ]
+        },
+        {
+          "id": "caddy",
+          "title": "Caddy",
+          "slug": "caddy",
+          "items": [
+            { "id": "caddy-container", "title": "Deploy as Container", "slug": "caddy/container" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Databases",
+      "items": [
+        {
+          "id": "mysql",
+          "title": "MySQL",
+          "slug": "mysql",
+          "items": [
+            { "id": "mysql-container", "title": "Deploy as Container", "slug": "mysql/container" },
+            { "id": "mysql-backup", "title": "Backup & Restore", "slug": "mysql/backup-restore" }
+          ]
+        },
+        {
+          "id": "cassandra",
+          "title": "Cassandra",
+          "slug": "cassandra",
+          "items": [
+            { "id": "cassandra-container", "title": "Deploy as Container", "slug": "cassandra/container" },
+            { "id": "cassandra-backup", "title": "Backup & Restore", "slug": "cassandra/backup-restore" },
+            { "id": "cassandra-cluster", "title": "Multi-Node Cluster", "slug": "cassandra/cluster" }
+          ]
+        }
+      ]
+    }
+  ]
+}

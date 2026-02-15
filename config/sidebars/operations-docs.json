@@ -1,0 +1,97 @@
+{
+  "$schema": "./schema.json",
+  "title": "Operations Documentation",
+  "type": "operations",
+  "categories": [
+    {
+      "id": "elk",
+      "title": "ELK Stack Operations",
+      "slug": "elk",
+      "description": "End-to-end Elasticsearch, Logstash, and Kibana operations",
+      "icon": "🔍",
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "elk-overview", "title": "Overview", "slug": "elk/overview" },
+            { "id": "elk-architecture", "title": "Architecture", "slug": "elk/architecture" },
+            { "id": "elk-deployment", "title": "Deployment Guide", "slug": "elk/deployment" }
+          ]
+        },
+        {
+          "title": "Elasticsearch",
+          "items": [
+            { "id": "es-cluster", "title": "Cluster Setup", "slug": "elk/elasticsearch/cluster" },
+            { "id": "es-indexing", "title": "Index Management", "slug": "elk/elasticsearch/indexing" },
+            { "id": "es-monitoring", "title": "Monitoring", "slug": "elk/elasticsearch/monitoring" },
+            { "id": "es-backup", "title": "Backup & Restore", "slug": "elk/elasticsearch/backup" }
+          ]
+        },
+        {
+          "title": "Logstash Pipelines",
+          "items": [
+            { "id": "logstash-kafka", "title": "Pipeline for Kafka", "slug": "elk/logstash/kafka" },
+            { "id": "logstash-docker", "title": "Docker Logging", "slug": "elk/logstash/docker" },
+            { "id": "logstash-filebeat", "title": "Filebeat + Infra Logs", "slug": "elk/logstash/filebeat" },
+            { "id": "logstash-custom", "title": "Custom Parsers", "slug": "elk/logstash/custom" }
+          ]
+        },
+        {
+          "title": "Kibana",
+          "items": [
+            { "id": "kibana-dashboards", "title": "Dashboard Creation", "slug": "elk/kibana/dashboards" },
+            { "id": "kibana-alerts", "title": "Alerting", "slug": "elk/kibana/alerts" },
+            { "id": "kibana-security", "title": "Security Setup", "slug": "elk/kibana/security" }
+          ]
+        },
+        {
+          "title": "Operations",
+          "items": [
+            { "id": "elk-scaling", "title": "Scaling Strategies", "slug": "elk/operations/scaling" },
+            { "id": "elk-troubleshooting", "title": "Troubleshooting", "slug": "elk/operations/troubleshooting" },
+            { "id": "elk-maintenance", "title": "Maintenance", "slug": "elk/operations/maintenance" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mongo",
+      "title": "MongoDB Operations",
+      "slug": "mongo",
+      "description": "MongoDB deployment, replication, and cluster management",
+      "icon": "🍃",
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "mongo-overview", "title": "Overview", "slug": "mongo/overview" },
+            { "id": "mongo-deployment", "title": "Deployment", "slug": "mongo/deployment" }
+          ]
+        },
+        {
+          "title": "Replication",
+          "items": [
+            { "id": "mongo-replica", "title": "Replica Set Setup", "slug": "mongo/replication/replicaset" },
+            { "id": "mongo-arbiter", "title": "Arbiter Configuration", "slug": "mongo/replication/arbiter" },
+            { "id": "mongo-elections", "title": "Elections", "slug": "mongo/replication/elections" }
+          ]
+        },
+        {
+          "title": "Migration",
+          "items": [
+            { "id": "mongo-to-atlas", "title": "On-Prem to Atlas", "slug": "mongo/migration/atlas" },
+            { "id": "mongo-live-migration", "title": "Live Migration", "slug": "mongo/migration/live" }
+          ]
+        },
+        {
+          "title": "High Availability",
+          "items": [
+            { "id": "mongo-ha-cluster", "title": "HA Cluster", "slug": "mongo/ha/cluster" },
+            { "id": "mongo-ha-tips", "title": "Management Tips", "slug": "mongo/ha/tips" },
+            { "id": "mongo-disaster", "title": "Disaster Recovery", "slug": "mongo/ha/disaster-recovery" }
+          ]
+        }
+      ]
+    }
+  ]
+}

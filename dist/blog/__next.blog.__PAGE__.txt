@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+0:{"buildId":"QkLRzJdEtiMW6LJrOlnvh","rsc":["$","$1","c",{"children":[["$","main",null,{"className":"min-h-[calc(100vh-4rem)] bg-white","children":["$","div",null,{"className":"mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8","children":[["$","div",null,{"className":"text-center","children":[["$","h1",null,{"className":"text-4xl font-bold text-gray-900","children":"Blog"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"Insights, tutorials, and updates from the VibhuviOiO team."}]]}],["$","div",null,{"className":"mt-16 rounded-xl border border-gray-200 bg-gray-50 p-12 text-center","children":[["$","p",null,{"className":"text-gray-500","children":"Blog posts coming soon."}],["$","p",null,{"className":"text-sm text-gray-400 mt-2","children":"Follow us on GitHub for updates."}]]}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+4:null
