@@ -25,8 +25,6 @@ const docs = [
   { href: '/docker-registry-ui/development', icon: '💻', title: 'Development', desc: 'Contributing and development setup' },
 ];
 
-const tags = ['Docker', 'Registry', 'Container Management', 'Python', 'Flask', 'Trivy'];
-
 export default function DockerRegistryUIPage() {
   return (
     <main className="min-h-screen">
@@ -34,7 +32,7 @@ export default function DockerRegistryUIPage() {
       <header 
         className="py-16 text-white"
         style={{ 
-          background: 'linear-gradient(135deg, #2f02c4 0%, #5020e8 100%)',
+          background: 'linear-gradient(135deg, #200289 0%, #2702a6 100%)',
         }}
       >
         <div className="mx-auto max-w-4xl px-4 text-center">
@@ -160,27 +158,6 @@ services:
         </div>
       </section>
 
-      {/* Technologies Section */}
-      <section className="py-12" style={{ background: '#f8fafc' }}>
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Technologies</h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {tags.map((tag) => (
-              <span 
-                key={tag}
-                className="px-4 py-2 rounded-full text-sm font-medium"
-                style={{ 
-                  background: 'rgba(47, 2, 196, 0.08)',
-                  border: '1px solid rgba(47, 2, 196, 0.2)',
-                  color: '#2f02c4',
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-white">

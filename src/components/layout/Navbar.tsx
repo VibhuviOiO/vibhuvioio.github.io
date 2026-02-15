@@ -67,7 +67,7 @@ type Product = { slug: string; name: string; icon: string; badge?: string };
 
 const liveProducts: Product[] = [
   { slug: '/docker-registry-ui', name: 'Docker Registry UI', icon: '🐳' },
-  { slug: '/products/ldap-manager', name: 'LDAP Manager', icon: '🔐' },
+  { slug: '/ldap-manager', name: 'LDAP Manager', icon: '🗂️' },
   { slug: '/products/openldap-docker', name: 'OpenLDAP Docker', icon: '📦' },
   { slug: '/products/suchaka', name: 'Suchaka Status', icon: '📊' },
 ];

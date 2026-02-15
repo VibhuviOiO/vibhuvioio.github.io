@@ -16,21 +16,18 @@ const sidebarGroups = [
     title: 'Features',
     items: [
       { id: 'features', title: 'Overview', slug: 'features' },
-      { id: 'security', title: 'Security Scanning', slug: 'security' },
-      { id: 'bulk-operations', title: 'Bulk Operations', slug: 'bulk-operations' },
+      { id: 'security', title: 'Security', slug: 'security' },
     ],
   },
   {
-    title: 'Examples',
+    title: 'Deployment',
     items: [
-      { id: 'multi-registry', title: 'Multi-Registry Setup', slug: 'examples/multi-registry' },
-      { id: 'basic-auth', title: 'Basic Auth Registry', slug: 'examples/basic-auth' },
+      { id: 'production', title: 'Production Guide', slug: 'production' },
     ],
   },
   {
-    title: 'Reference',
+    title: 'Contributing',
     items: [
-      { id: 'api', title: 'API Integration', slug: 'api' },
       { id: 'development', title: 'Development', slug: 'development' },
       { id: 'testing', title: 'Testing Guide', slug: 'testing' },
     ],
@@ -43,9 +40,9 @@ interface DocPageProps {
   }>;
 }
 
-export default async function DockerRegistryDocPage({ params }: DocPageProps) {
+export default async function LDAPManagerDocPage({ params }: DocPageProps) {
   const { slug } = await params;
-  const doc = loadDocContent('docker-registry-ui', slug);
+  const doc = loadDocContent('ldap-manager', slug);
   
   if (!doc) {
     notFound();
@@ -56,14 +53,14 @@ export default async function DockerRegistryDocPage({ params }: DocPageProps) {
   return (
     <DocsLayout 
       sidebar={{ groups: sidebarGroups }}
-      basePath="/docker-registry-ui"
+      basePath="/ldap-manager"
     >
       <div className="mb-8">
         <Link 
-          href="/docker-registry-ui"
+          href="/ldap-manager"
           className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1"
         >
-          ← Back to Docker Registry UI
+          ← Back to LDAP Manager
         </Link>
       </div>
       
@@ -80,12 +77,9 @@ export function generateStaticParams() {
     { slug: ['configuration'] },
     { slug: ['features'] },
     { slug: ['security'] },
-    { slug: ['bulk-operations'] },
-    { slug: ['api'] },
+    { slug: ['production'] },
     { slug: ['development'] },
     { slug: ['testing'] },
-    { slug: ['examples', 'multi-registry'] },
-    { slug: ['examples', 'basic-auth'] },
   ];
   return paths;
 }
