@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 const rotatingPhrases = [
   'Infrastructure Boring.',
-  'Deployments Seamless.',
   'Operations Invisible.',
   'Monitoring Effortless.',
 ];
@@ -56,10 +55,10 @@ export default function Home() {
       <section 
         className="relative overflow-hidden py-20 lg:py-32"
         style={{
-          backgroundColor: '#ffffff',
+          backgroundColor: '#f8fafc',
           backgroundImage: `
-            linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px)
+            linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
         }}
@@ -68,7 +67,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at 50% 0%, rgba(47, 2, 196, 0.08) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse at 50% 0%, rgba(47, 2, 196, 0.06) 0%, transparent 50%)',
           }}
         />
         
@@ -80,7 +79,7 @@ export default function Home() {
             right: '-10%',
             width: '500px',
             height: '500px',
-            background: 'radial-gradient(circle, rgba(0, 188, 212, 0.05) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0, 188, 212, 0.04) 0%, transparent 70%)',
             filter: 'blur(60px)',
           }}
         />
@@ -168,7 +167,7 @@ export default function Home() {
             
             {/* Orbit Animation */}
             <div className="relative flex h-80 items-center justify-center">
-              <div className="absolute h-16 w-16 rounded-full flex items-center justify-center shadow-2xl z-10" style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}>
+              <div className="absolute h-16 w-16 rounded-full flex items-center justify-center shadow-2xl shadow-blue-600/30 z-10" style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}>
                 <span className="text-2xl text-white">◉</span>
               </div>
               
@@ -192,117 +191,500 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sleep Soundly - Conscious Operations */}
-      <section className="py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+
+      {/* Sleep Soundly - Conscious Operations - Exact Layout from Docusaurus */}
+      <section className="py-20" style={{ background: 'linear-gradient(to bottom, #ffffff, #f1f5f9, #ffffff)' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Moon Animation */}
-            <div className="relative flex h-80 items-center justify-center order-2 lg:order-1">
-              <div className="relative">
-                {/* Pulse rings */}
-                <div className="absolute inset-0 h-32 w-32 -m-8 rounded-full border border-purple-200 animate-[pulse-ring_3s_ease-out_infinite]"></div>
-                <div className="absolute inset-0 h-32 w-32 -m-8 rounded-full border border-purple-200 animate-[pulse-ring_3s_ease-out_infinite_1s]"></div>
-                <div className="absolute inset-0 h-32 w-32 -m-8 rounded-full border border-purple-100 animate-[pulse-ring_3s_ease-out_infinite_2s]"></div>
-                
-                {/* Moon */}
-                <div className="relative h-16 w-16 rounded-full flex items-center justify-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}>
-                  <span className="text-2xl text-white">☽</span>
-                </div>
-                
-                {/* Floating Z's */}
-                <span className="absolute -top-8 -right-4 text-[#5020e8] text-sm animate-[float_3s_ease-in-out_infinite]">Z</span>
-                <span className="absolute -top-12 right-0 text-[#8a5ff3] text-xs animate-[float_3s_ease-in-out_infinite_0.5s]">z</span>
-                <span className="absolute top-0 -right-8 text-[#8a5ff3] text-xs animate-[float_3s_ease-in-out_infinite_1s]">Z</span>
+          {/* Grid Layout matching Docusaurus exactly */}
+          <div 
+            className="grid gap-4"
+            style={{
+              gridTemplateColumns: '1fr 300px 1fr',
+              gridTemplateRows: 'auto auto 1fr 1fr',
+              gridTemplateAreas: `
+                "badge badge badge"
+                "title title title"
+                "leftTop center right"
+                "leftBottom center right"
+              `,
+              minHeight: '420px',
+            }}
+          >
+            {/* Badge - centered at top */}
+            <div style={{ gridArea: 'badge', textAlign: 'center', marginBottom: '0.5rem' }}>
+              <span 
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  color: '#10b981',
+                }}
+              >
+                Zero Stress Ops
+              </span>
+            </div>
+            
+            {/* Title - centered */}
+            <h2 
+              style={{ 
+                gridArea: 'title', 
+                textAlign: 'center', 
+                fontSize: '2rem',
+                fontWeight: 800,
+                color: '#1a1a2e',
+                marginBottom: '1rem',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              Sleep Soundly
+            </h2>
+            
+            {/* Left Top Item */}
+            <div style={{ gridArea: 'leftTop', justifySelf: 'end', textAlign: 'right', paddingRight: '1rem' }}>
+              <div className="flex items-center gap-3 flex-row-reverse" style={{ maxWidth: '280px' }}>
+                <span 
+                  className="flex items-center justify-center rounded-lg text-white flex-shrink-0"
+                  style={{ 
+                    width: '36px', 
+                    height: '36px',
+                    background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)',
+                    boxShadow: '0 4px 14px rgba(80, 32, 232, 0.3)',
+                    fontSize: '1.1rem',
+                  }}
+                >
+                  🛡
+                </span>
+                <span className="text-gray-700 text-sm">Stable by default. No firefighting.</span>
               </div>
             </div>
             
-            <div className="order-1 lg:order-2">
-              <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium" style={{ backgroundColor: 'rgba(47, 2, 196, 0.1)', color: '#2f02c4' }}>
-                Zero Stress Ops
-              </span>
-              <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-                Sleep Soundly
-              </h2>
-              <p className="mt-4 text-lg text-gray-600">
-                Stable by default. No firefighting. No 3 AM pages. No deployment anxiety.
-                Proactive monitoring with automated remediation.
-              </p>
-              <div className="mt-8 space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg text-white" style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}>🛡</span>
-                  <span className="text-gray-700">Stable by default. No firefighting.</span>
+            {/* Left Bottom Item */}
+            <div style={{ gridArea: 'leftBottom', justifySelf: 'end', textAlign: 'right', paddingRight: '1rem' }}>
+              <div className="flex items-center gap-3 flex-row-reverse" style={{ maxWidth: '280px' }}>
+                <span 
+                  className="flex items-center justify-center rounded-lg flex-shrink-0"
+                  style={{ 
+                    width: '36px', 
+                    height: '36px',
+                    background: 'rgba(80, 32, 232, 0.08)',
+                    border: '1px solid rgba(80, 32, 232, 0.35)',
+                    fontSize: '1.1rem',
+                    color: '#5020e8',
+                  }}
+                >
+                  ☾
+                </span>
+                <span className="text-gray-700 text-sm">No 3 AM pages. No deployment anxiety.</span>
+              </div>
+            </div>
+            
+            {/* Center Animation */}
+            <div style={{ gridArea: 'center', justifySelf: 'center', alignSelf: 'center' }}>
+              <div className="relative flex items-center justify-center" style={{ width: '260px', height: '260px' }}>
+                {/* Pulse rings */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '140px', 
+                    height: '140px',
+                    border: '1px solid rgba(61, 122, 181, 0.2)',
+                    animation: 'pulseExpand 4s ease-out infinite',
+                  }}
+                />
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '180px', 
+                    height: '180px',
+                    border: '1px solid rgba(61, 122, 181, 0.2)',
+                    animation: 'pulseExpand 4s ease-out infinite 1.3s',
+                  }}
+                />
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '220px', 
+                    height: '220px',
+                    border: '1px solid rgba(61, 122, 181, 0.2)',
+                    animation: 'pulseExpand 4s ease-out infinite 2.6s',
+                  }}
+                />
+                
+                {/* Core moon */}
+                <div 
+                  className="relative flex items-center justify-center rounded-full z-10"
+                  style={{ 
+                    width: '90px', 
+                    height: '90px',
+                    background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3d7ab5 100%)',
+                    boxShadow: '0 0 40px rgba(61, 122, 181, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.3)',
+                    animation: 'coreBreathe 6s ease-in-out infinite',
+                  }}
+                >
+                  <span 
+                    className="text-white"
+                    style={{ 
+                      fontSize: '2.5rem',
+                      filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))',
+                      opacity: 0.9,
+                    }}
+                  >
+                    ☽
+                  </span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg text-white" style={{ background: 'linear-gradient(135deg, #8a5ff3 0%, #5020e8 100%)' }}>☾</span>
-                  <span className="text-gray-700">No 3 AM pages. No deployment anxiety.</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg text-white" style={{ background: 'linear-gradient(135deg, #00bcd4 0%, #5020e8 100%)' }}>✓</span>
-                  <span className="text-gray-700">Proactive monitoring. Automated remediation.</span>
-                </div>
+                
+                {/* Floating Z's */}
+                <span 
+                  className="absolute font-semibold pointer-events-none"
+                  style={{ 
+                    top: '20%',
+                    right: '15%',
+                    fontSize: '1.5rem',
+                    color: 'rgba(61, 122, 181, 0.6)',
+                    animation: 'floatZ 5s ease-in-out infinite',
+                  }}
+                >
+                  Z
+                </span>
+                <span 
+                  className="absolute font-semibold pointer-events-none"
+                  style={{ 
+                    top: '35%',
+                    right: '8%',
+                    fontSize: '1rem',
+                    color: 'rgba(61, 122, 181, 0.6)',
+                    animation: 'floatZ 5s ease-in-out infinite 1.6s',
+                  }}
+                >
+                  z
+                </span>
+                <span 
+                  className="absolute font-semibold pointer-events-none"
+                  style={{ 
+                    top: '15%',
+                    right: '25%',
+                    fontSize: '1.2rem',
+                    color: 'rgba(61, 122, 181, 0.6)',
+                    animation: 'floatZ 5s ease-in-out infinite 3.2s',
+                  }}
+                >
+                  Z
+                </span>
+              </div>
+            </div>
+            
+            {/* Right Item */}
+            <div style={{ gridArea: 'right', justifySelf: 'start', paddingLeft: '1rem' }}>
+              <div className="flex items-center gap-3" style={{ maxWidth: '280px' }}>
+                <span 
+                  className="flex items-center justify-center rounded-lg flex-shrink-0"
+                  style={{ 
+                    width: '36px', 
+                    height: '36px',
+                    background: 'rgba(0, 188, 212, 0.06)',
+                    border: '1px solid rgba(0, 188, 212, 0.3)',
+                    fontSize: '1.1rem',
+                    color: '#00bcd4',
+                  }}
+                >
+                  ✓
+                </span>
+                <span className="text-gray-700 text-sm">Proactive monitoring. Automated remediation.</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Built on Industry Standards */}
-      <section className="py-20 bg-white">
+
+      {/* Built on Industry Standards - Exact Animation Replication */}
+      <section className="py-20" style={{ background: '#f8fafc' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
-              Reliability First
-            </span>
-            <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">
+          {/* Grid Layout */}
+          <div 
+            className="grid gap-6"
+            style={{
+              gridTemplateColumns: '1fr 1fr',
+              gridTemplateRows: 'auto auto 1fr',
+              gridTemplateAreas: `
+                "badge badge"
+                "title title"
+                "center right"
+              `,
+              minHeight: '480px',
+            }}
+          >
+            {/* Badge */}
+            <div style={{ gridArea: 'badge', textAlign: 'center', marginBottom: '0.5rem' }}>
+              <span 
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%)',
+                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  color: '#d97706',
+                }}
+              >
+                Reliability First
+              </span>
+            </div>
+            
+            {/* Title */}
+            <h2 
+              style={{ 
+                gridArea: 'title', 
+                textAlign: 'center', 
+                fontSize: '2rem',
+                fontWeight: 800,
+                color: '#1a1a2e',
+                marginBottom: '1rem',
+                letterSpacing: '-0.02em',
+              }}
+            >
               Built on Industry Standards
             </h2>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-lg text-gray-600">
+            
+            {/* Left Content */}
+            <div style={{ gridArea: 'center', justifySelf: 'end', alignSelf: 'center', maxWidth: '460px', padding: '0 1rem' }}>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 Every system is measured against real reliability targets — 
                 not just uptime numbers, but SLAs, SLOs, and SLIs that your 
                 business can depend on.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <span className="rounded-full px-4 py-2 text-sm text-white" style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}>Error Budgets</span>
-                <span className="rounded-full px-4 py-2 text-sm text-white" style={{ background: 'linear-gradient(135deg, #8a5ff3 0%, #5020e8 100%)' }}>Latency Targets</span>
-                <span className="rounded-full px-4 py-2 text-sm text-white" style={{ background: 'linear-gradient(135deg, #00bcd4 0%, #5020e8 100%)' }}>Availability Guarantees</span>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(80, 32, 232, 0.08)', border: '1px solid rgba(80, 32, 232, 0.2)', color: '#4b5563' }}>
+                  Error Budgets
+                </span>
+                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(80, 32, 232, 0.08)', border: '1px solid rgba(80, 32, 232, 0.2)', color: '#4b5563' }}>
+                  Latency Targets
+                </span>
+                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(80, 32, 232, 0.08)', border: '1px solid rgba(80, 32, 232, 0.2)', color: '#4b5563' }}>
+                  Availability Guarantees
+                </span>
               </div>
-              <div className="mt-6 flex items-center gap-2 text-sm">
-                <span className="px-2 py-1 rounded text-white" style={{ background: '#2f02c4' }}>SLA</span>
-                <span className="text-gray-400">→</span>
-                <span className="px-2 py-1 rounded text-white" style={{ background: '#5020e8' }}>SLO</span>
-                <span className="text-gray-400">→</span>
-                <span className="px-2 py-1 rounded text-white" style={{ background: '#8a5ff3' }}>SLI</span>
-                <span className="text-gray-400">→</span>
-                <span className="px-2 py-1 rounded text-white" style={{ background: 'linear-gradient(135deg, #00bcd4 0%, #5020e8 100%)' }}>Uptime Observability</span>
+              
+              {/* SLA → SLO → SLI → Uptime Observability Bridge */}
+              <div className="flex items-center gap-2 pt-4 border-t border-gray-200">
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold"
+                  style={{ 
+                    background: 'rgba(80, 32, 232, 0.08)', 
+                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    color: '#5020e8',
+                    animation: 'floatStandard 3s ease-in-out infinite',
+                  }}
+                >
+                  SLA
+                </span>
+                <span 
+                  className="text-gray-400"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite' }}
+                >
+                  →
+                </span>
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold"
+                  style={{ 
+                    background: 'rgba(80, 32, 232, 0.08)', 
+                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    color: '#5020e8',
+                    animation: 'floatStandard 3s ease-in-out infinite 0.5s',
+                  }}
+                >
+                  SLO
+                </span>
+                <span 
+                  className="text-gray-400"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite 0.33s' }}
+                >
+                  →
+                </span>
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold"
+                  style={{ 
+                    background: 'rgba(80, 32, 232, 0.08)', 
+                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    color: '#5020e8',
+                    animation: 'floatStandard 3s ease-in-out infinite 1s',
+                  }}
+                >
+                  SLI
+                </span>
+                <span 
+                  className="text-gray-400"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite 0.66s' }}
+                >
+                  →
+                </span>
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.08)', 
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    color: '#059669',
+                    animation: 'floatStandard 3s ease-in-out infinite 1.5s',
+                  }}
+                >
+                  Uptime Observability
+                </span>
               </div>
             </div>
             
-            {/* Target Animation */}
-            <div className="relative flex h-80 items-center justify-center">
-              <div className="absolute h-48 w-48 rounded-full border border-gray-200"></div>
-              <div className="absolute h-32 w-32 rounded-full border border-gray-200"></div>
-              <div className="absolute h-16 w-16 rounded-full border border-gray-200"></div>
-              <div className="absolute h-8 w-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}>
-                <span className="text-white font-bold">✓</span>
+            {/* Right Animation - Targets with Orbiting Badges */}
+            <div style={{ gridArea: 'right', justifySelf: 'start', alignSelf: 'center', paddingLeft: '1rem' }}>
+              <div className="relative flex items-center justify-center" style={{ width: '380px', height: '380px' }}>
+                {/* Outer ring - dashed cyan */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '340px', 
+                    height: '340px',
+                    border: '1px dashed rgba(0, 188, 212, 0.15)',
+                    animation: 'targetPulse 4s ease-in-out infinite',
+                  }}
+                />
+                
+                {/* Middle ring - green */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '240px', 
+                    height: '240px',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    animation: 'targetPulse 4s ease-in-out infinite 0.66s',
+                  }}
+                />
+                
+                {/* Inner ring - purple */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '140px', 
+                    height: '140px',
+                    border: '1px solid rgba(80, 32, 232, 0.25)',
+                    animation: 'targetPulse 4s ease-in-out infinite 1.33s',
+                  }}
+                />
+                
+                {/* Center checkmark */}
+                <div 
+                  className="relative flex items-center justify-center rounded-full z-10"
+                  style={{ 
+                    width: '44px', 
+                    height: '44px',
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    boxShadow: '0 4px 15px rgba(16, 185, 129, 0.4)',
+                  }}
+                >
+                  <span className="text-white text-lg font-bold">✓</span>
+                </div>
+                
+                {/* Inner orbit badges - SLA, SLO, SLI */}
+                <span 
+                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(80, 32, 232, 0.1)',
+                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    color: '#5020e8',
+                    animation: 'orbitInner 20s linear infinite',
+                  }}
+                >
+                  SLA
+                </span>
+                <span 
+                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(80, 32, 232, 0.1)',
+                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    color: '#5020e8',
+                    animation: 'orbitInner 20s linear infinite',
+                    animationDelay: '-6.66s',
+                  }}
+                >
+                  SLO
+                </span>
+                <span 
+                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(80, 32, 232, 0.1)',
+                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    color: '#5020e8',
+                    animation: 'orbitInner 20s linear infinite',
+                    animationDelay: '-13.33s',
+                  }}
+                >
+                  SLI
+                </span>
+                
+                {/* Middle orbit badges - Uptime, 99.9% */}
+                <span 
+                  className="absolute px-2.5 py-1 rounded text-xs font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    color: '#059669',
+                    animation: 'orbitMiddle 25s linear infinite reverse',
+                  }}
+                >
+                  Uptime
+                </span>
+                <span 
+                  className="absolute px-2.5 py-1 rounded text-xs font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    color: '#059669',
+                    animation: 'orbitMiddle 25s linear infinite reverse',
+                    animationDelay: '-12.5s',
+                  }}
+                >
+                  99.9%
+                </span>
+                
+                {/* Outer orbit badges - Latency, Errors, Observability */}
+                <span 
+                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(0, 188, 212, 0.1)',
+                    border: '1px solid rgba(0, 188, 212, 0.2)',
+                    color: '#0891b2',
+                    animation: 'orbitOuter 30s linear infinite',
+                  }}
+                >
+                  Latency
+                </span>
+                <span 
+                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(0, 188, 212, 0.1)',
+                    border: '1px solid rgba(0, 188, 212, 0.2)',
+                    color: '#0891b2',
+                    animation: 'orbitOuter 30s linear infinite',
+                    animationDelay: '-10s',
+                  }}
+                >
+                  Errors
+                </span>
+                <span 
+                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(0, 188, 212, 0.1)',
+                    border: '1px solid rgba(0, 188, 212, 0.2)',
+                    color: '#0891b2',
+                    animation: 'orbitOuter 30s linear infinite',
+                    animationDelay: '-20s',
+                  }}
+                >
+                  Observability
+                </span>
               </div>
-              
-              {/* Orbiting labels */}
-              <span className="absolute top-4 left-1/2 -translate-x-1/2 text-xs text-[#2f02c4] animate-[voice-pulse_2s_ease-in-out_infinite]">SLA</span>
-              <span className="absolute bottom-4 left-1/4 text-xs text-[#5020e8] animate-[voice-pulse_2s_ease-in-out_infinite_0.3s]">SLO</span>
-              <span className="absolute bottom-4 right-1/4 text-xs text-[#8a5ff3] animate-[voice-pulse_2s_ease-in-out_infinite_0.6s]">SLI</span>
-              <span className="absolute top-1/3 right-8 text-xs text-gray-400">99.9%</span>
-              <span className="absolute top-1/2 -right-4 text-xs text-gray-400">Uptime</span>
             </div>
           </div>
         </div>
       </section>
 
+
       {/* We Listen to Your Team */}
-      <section className="py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+      <section className="py-20" style={{ background: 'linear-gradient(to bottom, #ffffff, #f1f5f9, #ffffff)' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium" style={{ backgroundColor: 'rgba(47, 2, 196, 0.1)', color: '#2f02c4' }}>
@@ -378,7 +760,7 @@ export default function Home() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: '#f8fafc' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
             Ready to Simplify Your Infrastructure?

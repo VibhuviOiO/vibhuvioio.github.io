@@ -1,0 +1,68 @@
+1:"$Sreact.fragment"
+2:I[63327,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],"default"]
+3:I[22016,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],""]
+7:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1137,<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Configuration Guide</h1>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Configuration Methods</h2>
+You can configure registries in two ways:
+
+
+<strong class="text-gray-900">Setup Wizard</strong>: On first run, the UI shows a setup wizard to configure your registry through the web interface
+<strong class="text-gray-900">Config File</strong>: Pre-create a <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">registries.config.json</code> file for automated deployments
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Environment Variables</h2>
+
+
+
+Variable
+Description
+Default
+
+<p class="text-gray-700 mb-4 leading-relaxed">
+</p>
+
+<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">CONFIG_FILE</code>
+Path to registries configuration file (optional - setup wizard used if not provided). By default the app checks <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">/app/registries.config.json</code>. When running inside the official container it is common to set this to <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">/app/data/registries.config.json</code> (for example by mounting <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">./data:/app/data</code>).
+<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">/app/registries.config.json</code>
+
+
+<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">READ_ONLY</code>
+Enable read-only mode (disable delete operations)
+<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">false</code>
+
+
+<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">PORT</code>
+Port for the web interface
+<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">5000</code>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Setup Wizard (First Run)</h2>
+If no configuration file exists, the UI displays a setup wizard on first access:
+
+<img src="/img/docker-registry-ui/setup-wizard.png" alt="Setup Wizard First Run" class="rounded-lg border border-gray-200 my-6" />
+
+Access the UI at <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">http://localhost:5000</code>
+Enter registry details:
+
+<strong class="text-gray-900">Registry Name</strong>: Friendly name (e.g., "Local Registry")
+<strong class="text-gray-900">Registry URL</strong>: API endpoint (e.g., <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">http://localhost:5001</code>)
+<strong class="text-gray-900">Authentication</strong>: Enable if registry requires credentials
+
+
+Click "Test Connection" to verify
+Save configuration
+Configuration is saved to the directory containing the configured <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">CONFIG_FILE</code> (for example if <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">CONFIG_FILE=/app/data/registries.config.json</code>, files are saved under <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">/app/data</code>).
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Manual Configuration File</h2>
+For automated deployments, create a <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">registries.config.json</code> file before starting the UI:
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Create the config file (example)</h3>
+Create a directory to hold the config (for example <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">./data</code>) and add a file named <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">registries.config.json</code>. The application will read whatever path you point <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">CONFIG_FILE</code> at (see environment variables above). Example minimal file:
+
+```
+mkdir -p data
+cat > ./data/registries.config.json 
+Store credentials securely (use Docker secrets or environment variables)
+Use HTTPS for production registries
+Enable read-only mode in production environments
+Restrict network access to the UI
+Regularly update the UI and Trivy scanner0:{"buildId":"JcHhdlBJ6EkAu5YRxGD7t","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[calc(100vh-4rem)]","children":[["$","$L2",null,{"groups":[{"title":"Getting Started","items":[{"id":"getting-started","title":"Installation","slug":"getting-started"},{"id":"configuration","title":"Configuration","slug":"configuration"}]},{"title":"Features","items":[{"id":"features","title":"Overview","slug":"features"},{"id":"security","title":"Security Scanning","slug":"security"},{"id":"bulk-operations","title":"Bulk Operations","slug":"bulk-operations"}]},{"title":"Examples","items":[{"id":"multi-registry","title":"Multi-Registry Setup","slug":"examples/multi-registry"},{"id":"basic-auth","title":"Basic Auth Registry","slug":"examples/basic-auth"}]},{"title":"Reference","items":[{"id":"api","title":"API Integration","slug":"api"},{"id":"development","title":"Development","slug":"development"},{"id":"testing","title":"Testing Guide","slug":"testing"}]}],"basePath":"/docker-registry-ui"}],["$","main",null,{"className":"flex-1 min-w-0","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 py-8","children":[["$","div",null,{"className":"mb-8","children":["$","$L3",null,{"href":"/docker-registry-ui","className":"text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1","children":"← Back to Docker Registry UI"}]}],["$","article",null,{"className":"prose max-w-none","children":[["$","h1",null,{"className":"text-3xl font-bold text-gray-900 mb-2","children":"Configuration Guide"}],["$","p",null,{"className":"text-gray-600 text-lg mb-8","children":"Configuration Guide for Docker Registry UI"}],["$","div",null,{"className":"prose max-w-none","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}]]}],["$L5"],"$L6"]}],"loading":null,"isPartial":false}
+5:["$","script","script-0",{"src":"/_next/static/chunks/f501513783488158.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

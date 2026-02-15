@@ -1,0 +1,83 @@
+1:"$Sreact.fragment"
+2:I[63327,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],"default"]
+3:I[22016,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],""]
+7:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1443,<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Security Scanning</h1>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Overview</h2>
+Docker Registry UI includes built-in vulnerability scanning powered by Trivy, providing comprehensive security analysis of your container images.
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Quick Start with Trivy</h2>
+Trivy is built into the Docker Registry UI container. No additional setup required!
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Scanning Images</h3>
+
+Navigate to the repository
+Find the tag you want to scan
+Click the "Scan" button (shield icon 🛡️) next to the tag
+Wait for the scan to complete (usually 10-30 seconds)
+View vulnerability badges showing counts by severity
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">What Trivy Detects</h2>
+
+<strong class="text-gray-900">OS Packages</strong>: Alpine, RHEL, CentOS, Ubuntu, Debian, Amazon Linux, etc.
+<strong class="text-gray-900">Application Dependencies</strong>: npm, pip, gem, composer, maven, etc.
+<strong class="text-gray-900">Known CVEs</strong>: From National Vulnerability Database and other sources
+<strong class="text-gray-900">Severity Levels</strong>: Critical, High, Medium, Low, Unknown
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Vulnerability Display</h2>
+Scan results are displayed as color-coded badges:
+
+
+<strong class="text-gray-900">Critical</strong>: Red badge - Immediate action required
+<strong class="text-gray-900">High</strong>: Orange badge - High priority fixes
+<strong class="text-gray-900">Medium</strong>: Yellow badge - Medium priority
+<strong class="text-gray-900">Low</strong>: Blue badge - Low priority
+<strong class="text-gray-900">Unknown</strong>: Gray badge - Severity not determined
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">CVE Details</h2>
+Click on any vulnerability badge to view detailed information:
+
+<img src="/img/docker-registry-ui/cves.png" alt="CVE Details View" class="rounded-lg border border-gray-200 my-6" />
+
+<strong class="text-gray-900">CVE ID</strong>: Clickable link to National Vulnerability Database
+<strong class="text-gray-900">Package</strong>: Affected package name and version
+<strong class="text-gray-900">Severity</strong>: Vulnerability severity level
+<strong class="text-gray-900">Fixed Version</strong>: Version that fixes the vulnerability
+<strong class="text-gray-900">Description</strong>: Detailed vulnerability description
+<strong class="text-gray-900">Layer</strong>: Which image layer introduced the vulnerability
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Layer-by-Layer Analysis</h2>
+View which layer introduced each vulnerability:
+
+
+Click "View Layers" for any tag
+See vulnerability counts per layer
+Identify which Dockerfile commands introduced vulnerabilities
+Optimize your Dockerfile to reduce vulnerabilities
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Scan Results Storage</h2>
+Scan results are persisted to disk:
+
+
+Stored in the same directory that contains the configured <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">CONFIG_FILE</code> (for example, if <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">CONFIG_FILE=/app/data/registries.config.json</code> then results are written under <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">/app/data</code>).
+One JSON file per image tag. Filenames use the pattern <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">&lt;repo_with_slashes_replaced_by_underscores&gt;_&lt;tag&gt;.json</code> (e.g. <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">myrepo_subrepo_latest.json</code>).
+Results remain available after UI restart
+Re-scanning overwrites previous results
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Troubleshooting</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Scanner Not Responding</h3>
+
+Verify Trivy is installed in container
+Check network connectivity to registry
+Verify image exists and is accessible
+Check container logs for errors
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Scan Takes Too Long</h3>
+
+First scan downloads vulnerability database (slower)
+Subsequent scans use cached database (faster)
+Large images take longer to scan
+Network speed affects download time
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Best Practices</h2>
+
+<strong class="text-gray-900">Scan Regularly</strong>: New vulnerabilities are discovered daily
+<strong class="text-gray-900">Fix Critical First</strong>: Prioritize critical and high severity issues
+<strong class="text-gray-900">Update Base Images</strong>: Use latest stable base images
+<strong class="text-gray-900">Minimize Layers</strong>: Fewer layers = smaller attack surface
+<strong class="text-gray-900">Remove Unnecessary Packages</strong>: Only install what you need
+<strong class="text-gray-900">Use Specific Versions</strong>: Avoid <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">latest</code> tags in production0:{"buildId":"JcHhdlBJ6EkAu5YRxGD7t","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[calc(100vh-4rem)]","children":[["$","$L2",null,{"groups":[{"title":"Getting Started","items":[{"id":"getting-started","title":"Installation","slug":"getting-started"},{"id":"configuration","title":"Configuration","slug":"configuration"}]},{"title":"Features","items":[{"id":"features","title":"Overview","slug":"features"},{"id":"security","title":"Security Scanning","slug":"security"},{"id":"bulk-operations","title":"Bulk Operations","slug":"bulk-operations"}]},{"title":"Examples","items":[{"id":"multi-registry","title":"Multi-Registry Setup","slug":"examples/multi-registry"},{"id":"basic-auth","title":"Basic Auth Registry","slug":"examples/basic-auth"}]},{"title":"Reference","items":[{"id":"api","title":"API Integration","slug":"api"},{"id":"development","title":"Development","slug":"development"},{"id":"testing","title":"Testing Guide","slug":"testing"}]}],"basePath":"/docker-registry-ui"}],["$","main",null,{"className":"flex-1 min-w-0","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 py-8","children":[["$","div",null,{"className":"mb-8","children":["$","$L3",null,{"href":"/docker-registry-ui","className":"text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1","children":"← Back to Docker Registry UI"}]}],["$","article",null,{"className":"prose max-w-none","children":[["$","h1",null,{"className":"text-3xl font-bold text-gray-900 mb-2","children":"Vulnerability Scanning"}],["$","p",null,{"className":"text-gray-600 text-lg mb-8","children":"Vulnerability Scanning for Docker Registry UI"}],["$","div",null,{"className":"prose max-w-none","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}]]}],["$L5"],"$L6"]}],"loading":null,"isPartial":false}
+5:["$","script","script-0",{"src":"/_next/static/chunks/f501513783488158.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

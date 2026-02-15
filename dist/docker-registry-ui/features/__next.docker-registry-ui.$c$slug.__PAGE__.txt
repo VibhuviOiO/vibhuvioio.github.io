@@ -1,0 +1,109 @@
+1:"$Sreact.fragment"
+2:I[63327,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],"default"]
+3:I[22016,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],""]
+7:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1458,<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Features Overview</h1>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Repository Management</h2>
+Browse and manage Docker repositories with an intuitive interface:
+
+<img src="/img/docker-registry-ui/repositories.png" alt="Repository Management Interface" class="rounded-lg border border-gray-200 my-6" />
+
+<strong class="text-gray-900">Repository List</strong>: View all repositories in your registry
+<strong class="text-gray-900">Search</strong>: Quickly find repositories by name
+<strong class="text-gray-900">Tags View</strong>: See all tags for each repository
+<strong class="text-gray-900">Tag Details</strong>: View manifest, layers, and metadata
+<strong class="text-gray-900">Delete Tags</strong>: Remove individual tags (when not in read-only mode)
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Multi-Registry Support</h2>
+Manage multiple Docker registries from a single interface:
+
+<img src="/img/docker-registry-ui/registry-configuration-for-multi-registry-support.png" alt="Multi-Registry Configuration" class="rounded-lg border border-gray-200 my-6" />
+
+Switch between registries using the dropdown selector
+Support for local and remote registries
+Basic authentication support
+Independent configuration per registry
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Image Information</h2>
+Detailed information about each image tag:
+
+
+<strong class="text-gray-900">Size</strong>: Total image size
+<strong class="text-gray-900">Created</strong>: Image creation timestamp
+<strong class="text-gray-900">Digest</strong>: SHA256 digest for verification
+<strong class="text-gray-900">Architecture</strong>: Platform architecture (amd64, arm64, etc.)
+<strong class="text-gray-900">OS</strong>: Operating system
+<strong class="text-gray-900">Layers</strong>: Layer-by-layer breakdown with sizes
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Layer Inspection</h2>
+View detailed layer information:
+
+<img src="/img/docker-registry-ui/layer-inspection.png" alt="Layer Inspection View" class="rounded-lg border border-gray-200 my-6" />
+
+Layer digest and size
+Command that created the layer
+Vulnerability count per layer
+Layer order and hierarchy
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Vulnerability Scanning</h2>
+Built-in Trivy integration for security scanning:
+
+<img src="/img/docker-registry-ui/cves.png" alt="Vulnerability Scanning with CVE Details" class="rounded-lg border border-gray-200 my-6" />
+
+<strong class="text-gray-900">On-Demand Scanning</strong>: Scan any image tag
+<strong class="text-gray-900">Severity Levels</strong>: Critical, High, Medium, Low, Unknown
+<strong class="text-gray-900">CVE Details</strong>: View detailed vulnerability information
+<strong class="text-gray-900">NVD Links</strong>: Direct links to National Vulnerability Database
+<strong class="text-gray-900">Layer Attribution</strong>: See which layer introduced each vulnerability
+<strong class="text-gray-900">Persistent Results</strong>: Scan results saved for future reference
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Bulk Operations</h2>
+Efficiently manage multiple images:
+
+
+<strong class="text-gray-900">Pattern Matching</strong>: Delete tags matching wildcards (e.g., <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">dev-*</code>)
+<strong class="text-gray-900">Age-Based Cleanup</strong>: Remove tags older than specified days
+<strong class="text-gray-900">Retention Policies</strong>: Keep minimum number of recent tags
+<strong class="text-gray-900">Dry Run Mode</strong>: Preview deletions before executing
+<strong class="text-gray-900">Batch Processing</strong>: Delete multiple tags in one operation
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Read/Write Modes</h2>
+Control access levels:
+
+
+<strong class="text-gray-900">Read-Only Mode</strong>: Browse and scan without modification
+<strong class="text-gray-900">Read-Write Mode</strong>: Full access including delete operations
+Toggle via environment variable or UI
+Ideal for production environments
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">User Interface</h2>
+Modern, responsive design:
+
+
+Clean, intuitive layout inspired by Jira/Bitbucket
+Responsive design for mobile and desktop
+Dark mode support
+Fast, client-side rendering
+Real-time updates
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">API Integration</h2>
+Full Docker Registry v2 API support:
+
+
+List repositories and tags
+Get image manifests
+Delete images by digest
+CORS support for browser access
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Storage Analytics</h2>
+Understand registry storage usage:
+
+<img src="/img/docker-registry-ui/analytics-understand-disk-usage.png" alt="Storage Analytics Dashboard" class="rounded-lg border border-gray-200 my-6" />
+
+Total repository size
+Per-tag storage breakdown
+Layer deduplication visibility
+Storage trends over time
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Search and Filter</h2>
+Find what you need quickly:
+
+
+Repository name search
+Tag filtering
+Vulnerability severity filtering
+Sort by name, date, or size0:{"buildId":"JcHhdlBJ6EkAu5YRxGD7t","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[calc(100vh-4rem)]","children":[["$","$L2",null,{"groups":[{"title":"Getting Started","items":[{"id":"getting-started","title":"Installation","slug":"getting-started"},{"id":"configuration","title":"Configuration","slug":"configuration"}]},{"title":"Features","items":[{"id":"features","title":"Overview","slug":"features"},{"id":"security","title":"Security Scanning","slug":"security"},{"id":"bulk-operations","title":"Bulk Operations","slug":"bulk-operations"}]},{"title":"Examples","items":[{"id":"multi-registry","title":"Multi-Registry Setup","slug":"examples/multi-registry"},{"id":"basic-auth","title":"Basic Auth Registry","slug":"examples/basic-auth"}]},{"title":"Reference","items":[{"id":"api","title":"API Integration","slug":"api"},{"id":"development","title":"Development","slug":"development"},{"id":"testing","title":"Testing Guide","slug":"testing"}]}],"basePath":"/docker-registry-ui"}],["$","main",null,{"className":"flex-1 min-w-0","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 py-8","children":[["$","div",null,{"className":"mb-8","children":["$","$L3",null,{"href":"/docker-registry-ui","className":"text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1","children":"← Back to Docker Registry UI"}]}],["$","article",null,{"className":"prose max-w-none","children":[["$","h1",null,{"className":"text-3xl font-bold text-gray-900 mb-2","children":"Features"}],["$","p",null,{"className":"text-gray-600 text-lg mb-8","children":"Features for Docker Registry UI"}],["$","div",null,{"className":"prose max-w-none","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}]]}],["$L5"],"$L6"]}],"loading":null,"isPartial":false}
+5:["$","script","script-0",{"src":"/_next/static/chunks/f501513783488158.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

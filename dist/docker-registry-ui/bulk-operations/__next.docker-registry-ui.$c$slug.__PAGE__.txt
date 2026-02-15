@@ -1,0 +1,132 @@
+1:"$Sreact.fragment"
+2:I[63327,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],"default"]
+3:I[22016,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],""]
+7:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1507,<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Bulk Operations</h1>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Overview</h2>
+Bulk operations allow you to delete multiple image tags efficiently based on patterns, age, or retention policies.
+
+<img src="/img/docker-registry-ui/bulk-operations.png" alt="Bulk Operations Interface" class="rounded-lg border border-gray-200 my-6" />
+
+<strong class="text-gray-900">⚠️ WARNING: Expert-Only Activity</strong>
+This is a dangerous operation that <strong class="text-gray-900">cannot be undone</strong>. Deleted tags cannot be recovered. The system has no knowledge of which images are in use or deployed.
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Pattern-Based Deletion</h2>
+Delete tags matching wildcard patterns:
+
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Delete all dev tags
+Pattern: dev-<em>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Delete all feature branch tags</h1>
+Pattern: feature-</em>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Delete all tags with specific suffix</h1>
+Pattern: <em>-snapshot
+</code></pre>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Age-Based Cleanup</h2>
+Remove tags older than specified days:
+
+
+Delete tags older than 30 days
+Delete tags older than 90 days
+Custom age threshold
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Retention Policies</h2>
+Keep minimum number of recent tags:
+
+
+Keep last 5 tags, delete older ones
+Keep last 10 tags, delete older ones
+Custom retention count
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Dry Run Mode</h2>
+Preview deletions before executing:
+
+
+Enable dry run mode
+Configure deletion criteria
+Review list of tags to be deleted
+Execute if satisfied
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Safety Features</h2>
+
+<strong class="text-gray-900">Mandatory Keep Minimum</strong>: Required field when using age-based deletion
+<strong class="text-gray-900">Dry Run by Default</strong>: Preview results before actual deletion
+<strong class="text-gray-900">Confirmation Checkbox</strong>: Must acknowledge danger before running
+<strong class="text-gray-900">Operation Summary</strong>: AWS-style summary showing exactly what will happen
+<strong class="text-gray-900">Visual Warnings</strong>: Red danger buttons and prominent alerts
+<strong class="text-gray-900">Input Validation</strong>: Frontend and backend validation of parameters
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Recommended Keep Minimum Values</h2>
+
+
+
+Repository Type
+Keep Minimum
+Reason
+
+<p class="text-gray-700 mb-4 leading-relaxed">
+</p>
+
+Development
+5-10 tags
+Recent builds for debugging
+
+
+Staging
+10-20 tags
+Testing and rollback capability
+
+
+Production
+20-50 tags
+Multiple rollback options
+
+
+Base Images
+50+ or avoid
+May be used by many other images
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">When NOT to Use Bulk Operations</h2>
+
+Production base images (company-wide base images)
+Images with unknown usage
+Repositories you don't fully understand
+When unsure about deployment dependencies
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Limitations (By Design)</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">No Usage History</h3>
+
+System does <strong class="text-gray-900">NOT track</strong> which images are in use
+Cannot detect if image is deployed in production
+Cannot identify base images used by other images
+User must know their deployment architecture
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Manual Garbage Collection Required</h3>
+
+Deleting tags only removes manifest references
+Actual image layers remain on disk
+Must run garbage collection manually to free space
+See "Cleanup Instructions" menu for commands
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Example Workflows</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Clean Up Development Tags</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300">1. Navigate to repository
+2. Click "Bulk Delete"
+3. Pattern: dev-</em>
+4. Enable dry run
+5. Review tags to delete
+6. Execute deletion
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Implement Retention Policy</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300">1. Navigate to repository
+2. Click "Bulk Delete"
+3. Select "Keep last N tags"
+4. Set retention count: 10
+5. Enable dry run
+6. Review tags to delete
+7. Execute deletion
+</code></pre>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Recovery Options</h2>
+If you accidentally delete important tags:
+
+
+<strong class="text-gray-900">Check CI/CD pipeline</strong>: May have build artifacts
+<strong class="text-gray-900">Rebuild from source</strong>: If you have Dockerfile and code
+<strong class="text-gray-900">Restore from backup</strong>: If you backup your registry
+<strong class="text-gray-900">Pull from other environments</strong>: Dev/staging may have copies
+
+<strong class="text-gray-900">Prevention is key</strong>: Always use dry run, keep higher minimum than needed, and document critical images before cleanup.0:{"buildId":"JcHhdlBJ6EkAu5YRxGD7t","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[calc(100vh-4rem)]","children":[["$","$L2",null,{"groups":[{"title":"Getting Started","items":[{"id":"getting-started","title":"Installation","slug":"getting-started"},{"id":"configuration","title":"Configuration","slug":"configuration"}]},{"title":"Features","items":[{"id":"features","title":"Overview","slug":"features"},{"id":"security","title":"Security Scanning","slug":"security"},{"id":"bulk-operations","title":"Bulk Operations","slug":"bulk-operations"}]},{"title":"Examples","items":[{"id":"multi-registry","title":"Multi-Registry Setup","slug":"examples/multi-registry"},{"id":"basic-auth","title":"Basic Auth Registry","slug":"examples/basic-auth"}]},{"title":"Reference","items":[{"id":"api","title":"API Integration","slug":"api"},{"id":"development","title":"Development","slug":"development"},{"id":"testing","title":"Testing Guide","slug":"testing"}]}],"basePath":"/docker-registry-ui"}],["$","main",null,{"className":"flex-1 min-w-0","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 py-8","children":[["$","div",null,{"className":"mb-8","children":["$","$L3",null,{"href":"/docker-registry-ui","className":"text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1","children":"← Back to Docker Registry UI"}]}],["$","article",null,{"className":"prose max-w-none","children":[["$","h1",null,{"className":"text-3xl font-bold text-gray-900 mb-2","children":"Bulk Delete Operations"}],["$","p",null,{"className":"text-gray-600 text-lg mb-8","children":"Bulk Delete Operations for Docker Registry UI"}],["$","div",null,{"className":"prose max-w-none","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}]]}],["$L5"],"$L6"]}],"loading":null,"isPartial":false}
+5:["$","script","script-0",{"src":"/_next/static/chunks/f501513783488158.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

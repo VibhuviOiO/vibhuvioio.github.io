@@ -1,0 +1,161 @@
+1:"$Sreact.fragment"
+2:I[63327,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],"default"]
+3:I[22016,["/_next/static/chunks/2fd32df42ef26f8b.js","/_next/static/chunks/f501513783488158.js"],""]
+7:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T2564,<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Testing Guide</h1>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Full Feature Testing with Multi-Registry Setup</h2>
+Test all features of Docker Registry UI with a realistic multi-registry environment populated with real images.
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Quick Setup</h2>
+Download the required files and start testing in minutes:
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Step 1: Download Files</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Create a test directory
+mkdir docker-registry-ui-test
+cd docker-registry-ui-test
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Download multi-registry compose file</h1>
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/docker-compose-multi-registry.yml
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Download test image population script</h1>
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/populate-test-images.sh
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Make script executable</h1>
+chmod +x populate-test-images.sh
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Step 2: Start Multi-Registry Environment</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Start two registries and the UI
+docker-compose -f docker-compose-multi-registry.yml up -d
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Wait for services to be ready (about 10 seconds)</h1>
+sleep 10
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Step 3: Populate with Test Images</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Run the population script
+./populate-test-images.sh
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">This will:</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">- Pull popular images (alpine, nginx, redis, postgres, node, python, etc.)</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">- Push them to both test registries</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">- Create ~40+ images in Registry 1</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">- Create ~10+ images in Registry 2</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">- Takes about 5-10 minutes depending on your internet speed</h1>
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Step 4: Access the UI</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Open in your browser
+http://localhost:5003
+</code></pre>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">What Gets Created</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Registry 1 (localhost:5001)</h3>
+
+<strong class="text-gray-900">alpine</strong>: 3.18, 3.17, 3.16, latest
+<strong class="text-gray-900">nginx</strong>: 1.25, 1.24, 1.23, alpine, latest
+<strong class="text-gray-900">redis</strong>: 7.2, 7.0, 6.2, alpine, latest
+<strong class="text-gray-900">postgres</strong>: 16, 15, 14, 13, alpine
+<strong class="text-gray-900">node</strong>: 20, 18, 16, 20-alpine, 18-alpine
+<strong class="text-gray-900">python</strong>: 3.11, 3.10, 3.9, 3.11-slim, 3.10-alpine
+<strong class="text-gray-900">busybox</strong>: 1.36, 1.35, latest, musl
+<strong class="text-gray-900">ubuntu</strong>: 22.04, 20.04, 18.04, latest
+<strong class="text-gray-900">mysql</strong>: 8.0, 5.7, latest
+<strong class="text-gray-900">mongo</strong>: 7.0, 6.0, 5.0, latest
+<strong class="text-gray-900">myapp/service-1,2,3</strong>: v1.0.0, v1.1.0, latest
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Registry 2 (localhost:5002)</h3>
+
+<strong class="text-gray-900">alpine</strong>: 3.18, latest
+<strong class="text-gray-900">nginx</strong>: 1.25, alpine
+<strong class="text-gray-900">redis</strong>: 7.2, alpine
+<strong class="text-gray-900">postgres</strong>: 16, alpine
+<strong class="text-gray-900">node</strong>: 20, 20-alpine
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Features to Test</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">1. Multi-Registry Management</h3>
+
+Switch between Registry 1 and Registry 2 using dropdown
+View different image sets in each registry
+Configure registry settings
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">2. Repository Browsing</h3>
+
+Browse all repositories
+Search for specific repositories
+View repository details and statistics
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">3. Tag Management</h3>
+
+View all tags for each repository
+See tag sizes and creation dates
+View layer information
+Delete individual tags
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">4. Vulnerability Scanning</h3>
+
+Scan any image tag for vulnerabilities
+View CVE details with severity levels
+Filter vulnerabilities by severity
+See which layer introduced each vulnerability
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">5. Bulk Operations</h3>
+
+Delete multiple tags by pattern (e.g., <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono"><em>-alpine</code>)
+Age-based cleanup (e.g., older than 30 days)
+Retention policies (keep last N tags)
+Dry run mode to preview deletions
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">6. Analytics</h3>
+
+View storage usage by repository
+See tag distribution
+Analyze disk usage patterns
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Test Scenarios</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Scenario 1: Clean Up Old Alpine Versions</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300">1. Navigate to Bulk Operations
+2. Repository pattern: alpine
+3. Tag pattern: 3.</em>
+4. Keep minimum: 2
+5. Enable dry run
+6. Review what would be deleted
+7. Execute deletion
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Scenario 2: Scan for Vulnerabilities</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300">1. Navigate to nginx repository
+2. Click "Scan" on nginx:latest
+3. Wait for scan to complete
+4. View vulnerability badges
+5. Click badge to see CVE details
+6. Filter by severity (Critical, High)
+7. Click CVE ID to view in NVD
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Scenario 3: Layer Inspection</h3>
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300">1. Navigate to postgres repository
+2. Click on postgres:16 tag
+3. Click "View Layers"
+4. See layer sizes and commands
+5. View vulnerability counts per layer
+</code></pre>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Cleanup</h2>
+When done testing, clean up everything:
+
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Stop and remove all containers
+docker-compose -f docker-compose-multi-registry.yml down -v
+<h1 class="text-3xl font-bold text-gray-900 mb-4 mt-8">Remove downloaded images (optional)</h1>
+docker image prune -a
+</code></pre>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Troubleshooting</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Script Fails to Pull Images</h3>
+
+Check internet connectivity
+Verify Docker Hub is accessible
+Try running script again (it will skip already pulled images)
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">UI Not Accessible</h3>
+
+Check if containers are running: <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">docker ps</code>
+Check logs: <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">docker-compose logs registry-ui</code>
+Verify port 5003 is not in use
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Registries Not Showing Images</h3>
+
+Ensure populate script completed successfully
+Check registry logs: <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">docker-compose logs registry-1</code>
+Verify images were pushed: <code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-sm font-mono">curl http://localhost:5001/v2/_catalog</code>
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Advanced Testing</h2>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Custom Test Images</h3>
+Add your own test images:
+
+<pre class="overflow-x-auto rounded-lg bg-gray-900 p-4 mb-4 border border-gray-700"><code class="text-sm font-mono text-gray-300"># Tag and push custom image
+docker tag myapp:latest localhost:5001/myapp:v1.0.0
+docker push localhost:5001/myapp:v1.0.0
+</code></pre>
+<h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">Test with Authentication</h3>
+Modify docker-compose-multi-registry.yml to add basic auth to registries and test authentication flow.
+<h2 class="text-2xl font-semibold text-gray-900 mb-3 mt-8">Automated Testing</h2>
+<strong class="text-gray-900">Note:</strong> This project currently does not have automated test coverage. Contributions for unit and integration tests are welcome!0:{"buildId":"JcHhdlBJ6EkAu5YRxGD7t","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-[calc(100vh-4rem)]","children":[["$","$L2",null,{"groups":[{"title":"Getting Started","items":[{"id":"getting-started","title":"Installation","slug":"getting-started"},{"id":"configuration","title":"Configuration","slug":"configuration"}]},{"title":"Features","items":[{"id":"features","title":"Overview","slug":"features"},{"id":"security","title":"Security Scanning","slug":"security"},{"id":"bulk-operations","title":"Bulk Operations","slug":"bulk-operations"}]},{"title":"Examples","items":[{"id":"multi-registry","title":"Multi-Registry Setup","slug":"examples/multi-registry"},{"id":"basic-auth","title":"Basic Auth Registry","slug":"examples/basic-auth"}]},{"title":"Reference","items":[{"id":"api","title":"API Integration","slug":"api"},{"id":"development","title":"Development","slug":"development"},{"id":"testing","title":"Testing Guide","slug":"testing"}]}],"basePath":"/docker-registry-ui"}],["$","main",null,{"className":"flex-1 min-w-0","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 py-8","children":[["$","div",null,{"className":"mb-8","children":["$","$L3",null,{"href":"/docker-registry-ui","className":"text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1","children":"← Back to Docker Registry UI"}]}],["$","article",null,{"className":"prose max-w-none","children":[["$","h1",null,{"className":"text-3xl font-bold text-gray-900 mb-2","children":"Testing Guide"}],["$","p",null,{"className":"text-gray-600 text-lg mb-8","children":"Testing Guide for Docker Registry UI"}],["$","div",null,{"className":"prose max-w-none","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}]]}],["$L5"],"$L6"]}],"loading":null,"isPartial":false}
+5:["$","script","script-0",{"src":"/_next/static/chunks/f501513783488158.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null
