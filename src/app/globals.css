@@ -586,3 +586,25 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Footer large branding — same style as navbar logo, bright on dark */
+.footer-brand-vibhuvi {
+  font-size: clamp(3rem, 12vw, 10rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.footer-brand-oio {
+  font-size: clamp(3.5rem, 14vw, 12rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #00bcd4 0%, #00bcd4 36%, #ffffff 36%, #ffffff 64%, #00bcd4 64%, #00bcd4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

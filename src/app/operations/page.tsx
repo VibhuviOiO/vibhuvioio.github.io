@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import Link from 'next/link';
-import { Github, ArrowRight, Search, Database, Shield, Layers, Activity, Globe, Network } from 'lucide-react';
+import {
+  Github, ArrowRight, Search, Database, Shield, Layers,
+  Activity, Globe, Network, BookOpen, BarChart2, Clock,
+  GraduationCap,
+} from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: "Operations Documentation",
-  description: "Production runbooks and operational guides for ELK Stack, MongoDB, LDAP, Cassandra, Keepalived, NGINX, Caddy, and HAProxy.",
+  title: "Learn - Free Infrastructure Courses",
+  description: "Free, hands-on courses for production infrastructure — ELK Stack, MongoDB, LDAP, Cassandra, Keepalived, NGINX, Caddy, and HAProxy.",
   openGraph: {
-    title: "Operations Documentation | VibhuviOiO",
-    description: "Production runbooks and operational guides for infrastructure technologies.",
+    title: "Learn - Free Infrastructure Courses | VibhuviOiO",
+    description: "Free, hands-on courses for production infrastructure.",
     url: "https://vibhuvioio.com/operations",
     type: "website",
   },
@@ -16,165 +20,279 @@ export const metadata: Metadata = {
   },
 };
 
-const operations = [
+type Operation = {
+  id: string;
+  name: string;
+  icon: typeof Search;
+  description: string;
+  docs?: string;
+  github?: string;
+  tags: string[];
+  lessons: number;
+  duration: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  updated: string;
+  status: 'live' | 'coming';
+};
+
+const operations: Operation[] = [
   {
     id: 'elk',
-    name: 'ELK Stack',
+    name: 'ELK Stack Operations',
     icon: Search,
-    description: 'End-to-end Elasticsearch, Logstash & Kibana operations. Cluster setup, index management, pipeline configurations, and scaling strategies.',
+    description: 'End-to-end Elasticsearch, Logstash & Kibana. From cluster setup to index management, pipeline configs, scaling, and troubleshooting.',
     docs: '/operations/elk/overview',
     github: 'https://github.com/VibhuviOiO',
-    tags: ['Elasticsearch', 'Logstash', 'Kibana', 'Logging'],
-    status: 'live' as const,
+    tags: ['Elasticsearch', 'Logstash', 'Kibana'],
+    lessons: 16,
+    duration: '4h 30m',
+    level: 'Advanced',
+    updated: 'Feb 2026',
+    status: 'live',
   },
   {
     id: 'mongo',
-    name: 'MongoDB',
+    name: 'MongoDB Operations',
     icon: Database,
-    description: 'MongoDB deployment, replica sets, sharding, live migration, and disaster recovery. Production-grade cluster management guides.',
+    description: 'Replica sets, sharding, live migration, and disaster recovery. Production-grade MongoDB cluster management from day one.',
     docs: '/operations/mongo/overview',
     github: 'https://github.com/VibhuviOiO',
-    tags: ['NoSQL', 'Replication', 'Sharding', 'HA'],
-    status: 'live' as const,
+    tags: ['NoSQL', 'Replication', 'HA'],
+    lessons: 10,
+    duration: '3h 15m',
+    level: 'Intermediate',
+    updated: 'Feb 2026',
+    status: 'live',
   },
   {
     id: 'ldap',
-    name: 'LDAP',
+    name: 'LDAP Operations',
     icon: Shield,
-    description: 'OpenLDAP operations — directory services, replication, access control, schema management, and integration with applications.',
+    description: 'OpenLDAP directory services — replication, access control, schema management, and application integration.',
     tags: ['Directory', 'Authentication', 'SSO'],
-    status: 'coming' as const,
+    lessons: 8,
+    duration: '2h 30m',
+    level: 'Intermediate',
+    updated: '',
+    status: 'coming',
   },
   {
     id: 'cassandra',
-    name: 'Cassandra',
+    name: 'Cassandra Operations',
     icon: Layers,
-    description: 'Distributed Cassandra cluster operations. Ring topology, compaction strategies, repair, backup, and multi-datacenter replication.',
+    description: 'Distributed cluster ops — ring topology, compaction, repair, backup, and multi-datacenter replication.',
     tags: ['NoSQL', 'Distributed', 'Cluster'],
-    status: 'coming' as const,
+    lessons: 12,
+    duration: '3h 45m',
+    level: 'Advanced',
+    updated: '',
+    status: 'coming',
   },
   {
     id: 'keepalived',
-    name: 'Keepalived',
+    name: 'Keepalived & HA',
     icon: Activity,
-    description: 'VRRP-based high availability and failover. Virtual IP management, health checks, and active-passive/active-active configurations.',
+    description: 'VRRP-based high availability. Virtual IP management, health checks, active-passive and active-active setups.',
     tags: ['HA', 'VRRP', 'Failover'],
-    status: 'coming' as const,
+    lessons: 6,
+    duration: '1h 45m',
+    level: 'Intermediate',
+    updated: '',
+    status: 'coming',
   },
   {
     id: 'nginx',
-    name: 'NGINX',
+    name: 'NGINX Operations',
     icon: Globe,
-    description: 'NGINX operations at scale. Reverse proxy, load balancing, TLS termination, rate limiting, and performance tuning.',
+    description: 'Reverse proxy, load balancing, TLS termination, rate limiting, caching, and performance tuning at scale.',
     tags: ['Reverse Proxy', 'Load Balancer', 'TLS'],
-    status: 'coming' as const,
+    lessons: 10,
+    duration: '3h',
+    level: 'Intermediate',
+    updated: '',
+    status: 'coming',
   },
   {
     id: 'caddy',
-    name: 'Caddy',
+    name: 'Caddy Server',
     icon: Globe,
-    description: 'Caddy server operations with automatic HTTPS. Zero-downtime deployments, Caddyfile patterns, and reverse proxy setups.',
-    tags: ['Auto HTTPS', 'Web Server', 'Reverse Proxy'],
-    status: 'coming' as const,
+    description: 'Automatic HTTPS, zero-downtime deploys, Caddyfile patterns, and reverse proxy configurations.',
+    tags: ['Auto HTTPS', 'Web Server'],
+    lessons: 5,
+    duration: '1h 30m',
+    level: 'Beginner',
+    updated: '',
+    status: 'coming',
   },
   {
     id: 'haproxy',
-    name: 'HAProxy',
+    name: 'HAProxy Operations',
     icon: Network,
-    description: 'HAProxy TCP/HTTP load balancing. Backend pools, health checks, sticky sessions, SSL passthrough, and stats monitoring.',
+    description: 'TCP/HTTP load balancing — backend pools, health checks, sticky sessions, SSL passthrough, and stats.',
     tags: ['Load Balancer', 'TCP', 'HTTP'],
-    status: 'coming' as const,
+    lessons: 8,
+    duration: '2h 30m',
+    level: 'Intermediate',
+    updated: '',
+    status: 'coming',
   },
 ];
 
-export default function OperationsPage() {
-  const live = operations.filter(op => op.status === 'live');
-  const coming = operations.filter(op => op.status === 'coming');
+function LevelBadge({ level }: { level: string }) {
+  const colors: Record<string, string> = {
+    Beginner: 'bg-green-500/20 text-green-300',
+    Intermediate: 'bg-amber-500/20 text-amber-300',
+    Advanced: 'bg-red-500/20 text-red-300',
+  };
+  const colorsLight: Record<string, string> = {
+    Beginner: 'bg-green-100 text-green-700',
+    Intermediate: 'bg-amber-100 text-amber-700',
+    Advanced: 'bg-red-100 text-red-700',
+  };
+  return (
+    <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${colorsLight[level] || 'bg-gray-100 text-gray-600'}`}>
+      {level}
+    </span>
+  );
+}
+
+function CourseCard({ op }: { op: Operation }) {
+  const Icon = op.icon;
+  const isLive = op.status === 'live';
+  const Wrapper = isLive ? Link : 'div';
+  const wrapperProps = isLive ? { href: op.docs! } : {};
 
   return (
-    <main className="min-h-screen bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900">Operations</h1>
-        <p className="mt-2 text-gray-600 max-w-2xl">
-          Production runbooks and operational guides for infrastructure technologies.
-        </p>
+    <Wrapper
+      {...(wrapperProps as any)}
+      className={`group flex flex-col rounded-2xl overflow-hidden border transition-all duration-300 ${
+        isLive
+          ? 'border-gray-200 bg-white hover:shadow-2xl hover:-translate-y-1.5 cursor-pointer'
+          : 'border-gray-100 bg-white/60 opacity-70'
+      }`}
+    >
+      {/* Banner — tall, prominent */}
+      <div
+        className="relative h-52 flex items-center justify-center"
+        style={{
+          background: isLive
+            ? 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)'
+            : 'linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%)',
+        }}
+      >
+        <Icon className="h-20 w-20 text-white/20" strokeWidth={1} />
+        {/* Course name overlay on banner */}
+        <div className="absolute inset-0 flex flex-col justify-end p-6">
+          <h3 className="text-xl font-extrabold text-white leading-tight">
+            {op.name}
+          </h3>
+        </div>
+        {!isLive && (
+          <div className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-gray-500 uppercase">
+            Coming Soon
+          </div>
+        )}
+        {isLive && (
+          <div className="absolute top-4 left-5">
+            <span className="rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-xs font-bold text-white uppercase tracking-wider">
+              Free
+            </span>
+          </div>
+        )}
+      </div>
 
-        {/* Live operations */}
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {live.map((op) => {
-            const Icon = op.icon;
-            return (
-              <div
-                key={op.id}
-                className="flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                <div className="p-5 flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                      style={{ backgroundColor: 'rgba(39,2,166,0.1)' }}
-                    >
-                      <Icon className="h-5 w-5" style={{ color: '#2702a6' }} />
-                    </div>
-                    <h2 className="text-lg font-bold text-gray-900">{op.name}</h2>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-4">{op.description}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {op.tags.map((tag) => (
-                      <span key={tag} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="px-5 py-3 border-t border-gray-100 flex justify-between items-center">
-                  <Link
-                    href={op.docs!}
-                    className="text-[#2702a6] text-sm font-medium hover:underline flex items-center gap-1"
-                  >
-                    View Docs <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                  {op.github && (
-                    <a
-                      href={op.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-gray-700 flex items-center gap-1 text-sm"
-                    >
-                      <Github className="h-3.5 w-3.5" /> GitHub
-                    </a>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+      {/* Body — compact, no description */}
+      <div className="p-5 flex flex-col gap-4">
+        {/* Meta row */}
+        <div className="flex items-center gap-4 flex-wrap">
+          <div className={`flex items-center gap-1.5 text-sm ${isLive ? 'text-gray-600' : 'text-gray-300'}`}>
+            <BookOpen className="h-4 w-4" />
+            <span>{op.lessons} lessons</span>
+          </div>
+          <div className={`flex items-center gap-1.5 text-sm ${isLive ? 'text-gray-600' : 'text-gray-300'}`}>
+            <Clock className="h-4 w-4" />
+            <span>{op.duration}</span>
+          </div>
         </div>
 
-        {/* Coming soon */}
-        <h2 className="mt-12 text-lg font-semibold text-gray-900">Coming Soon</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {coming.map((op) => {
-            const Icon = op.icon;
-            return (
-              <div
-                key={op.id}
-                className="rounded-xl border border-gray-100 bg-gray-50 p-5"
-              >
-                <div className="flex items-center gap-2.5 mb-2">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-100">
-                    <Icon className="h-4 w-4 text-gray-400" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-gray-500">{op.name}</span>
-                    <span className="rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-medium text-gray-500">
-                      Coming Soon
-                    </span>
-                  </div>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">{op.description}</p>
-              </div>
-            );
-          })}
+        {/* Tags + Level */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <LevelBadge level={op.level} />
+          {op.tags.map((tag) => (
+            <span
+              key={tag}
+              className={`px-2.5 py-1 text-xs font-medium rounded-full ${
+                isLive ? 'bg-gray-100 text-gray-600' : 'bg-gray-50 text-gray-300'
+              }`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Updated + arrow */}
+        <div className="flex items-center justify-between">
+          {op.updated ? (
+            <span className={`text-xs ${isLive ? 'text-gray-400' : 'text-gray-300'}`}>Updated {op.updated}</span>
+          ) : (
+            <span />
+          )}
+          {isLive && (
+            <ArrowRight className="h-5 w-5 text-gray-300 group-hover:text-[#2702a6] group-hover:translate-x-1 transition-all" />
+          )}
+        </div>
+      </div>
+    </Wrapper>
+  );
+}
+
+export default function OperationsPage() {
+  const liveCourses = operations.filter(o => o.status === 'live');
+  const comingCourses = operations.filter(o => o.status === 'coming');
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      {/* Hero */}
+      <div style={{ background: 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)' }}>
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="flex items-center gap-4 mb-4">
+            <GraduationCap className="h-10 w-10 text-white/70" />
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white">Learn</h1>
+          </div>
+          <p className="text-white/70 max-w-2xl text-lg sm:text-xl leading-relaxed">
+            Free, hands-on courses for production infrastructure. Deploy, scale,
+            monitor, and troubleshoot real systems — from engineers who run them.
+          </p>
+          <div className="flex items-center gap-5 mt-6">
+            <span className="flex items-center gap-2 text-white/50 text-base">
+              <BookOpen className="h-5 w-5" />
+              {liveCourses.length} courses live
+            </span>
+            <span className="flex items-center gap-2 text-white/50 text-base">
+              <Clock className="h-5 w-5" />
+              {comingCourses.length} coming soon
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Live courses */}
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-extrabold text-gray-900 mb-8">Courses to get you started</h2>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {liveCourses.map((op) => (
+            <CourseCard key={op.id} op={op} />
+          ))}
+        </div>
+      </div>
+
+      {/* Coming soon */}
+      <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-extrabold text-gray-900 mb-8">Coming Soon</h2>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {comingCourses.map((op) => (
+            <CourseCard key={op.id} op={op} />
+          ))}
         </div>
       </div>
     </main>

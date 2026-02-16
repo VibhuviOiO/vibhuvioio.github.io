@@ -42,20 +42,20 @@ function NineDotsIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 
 // Products data
-type Product = { slug: string; name: string; icon: string; badge?: string };
+type Product = { slug: string; name: string; icon: string; badge?: string; disabled?: boolean };
 
 const liveProducts: Product[] = [
   { slug: '/docker-registry-ui', name: 'Docker Registry UI', icon: '🐳' },
   { slug: '/ldap-manager', name: 'LDAP Manager', icon: '🗂️' },
-  { slug: '/products/openldap-docker', name: 'OpenLDAP Docker', icon: '📦' },
-  { slug: '/products/suchaka', name: 'Suchaka Status', icon: '📊' },
+  { slug: '/products/openldap-docker', name: 'OpenLDAP Docker', icon: '📦', disabled: true },
+  { slug: '/products/suchaka', name: 'Suchaka Status', icon: '📊', disabled: true },
 ];
 
 const devProducts: Product[] = [
-  { slug: '/products/uptime-o', name: 'Uptime O', icon: '⏱️', badge: 'Beta' },
-  { slug: '/products/solrlens', name: 'SolrLens', icon: '🔍' },
-  { slug: '/products/infra-mirror', name: 'Infra Mirror', icon: '📡' },
-  { slug: '/products/container-talks', name: 'Container Talks', icon: '📚' },
+  { slug: '/products/uptime-o', name: 'Uptime O', icon: '⏱️', badge: 'Beta', disabled: true },
+  { slug: '/products/solrlens', name: 'SolrLens', icon: '🔍', disabled: true },
+  { slug: '/products/infra-mirror', name: 'Infra Mirror', icon: '📡', disabled: true },
+  { slug: '/products/container-talks', name: 'Container Talks', icon: '📚', disabled: true },
 ];
 
 export default function Navbar() {
@@ -91,23 +91,26 @@ export default function Navbar() {
             <span>Docs</span>
           </Link>
           
-          {/* Operations with Icon */}
+          {/* Learn with Icon */}
           <Link
             href="/operations"
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-[#2702a6] transition-colors rounded-lg hover:bg-gray-50"
           >
             <Server className="h-4 w-4" />
-            <span>Operations</span>
+            <span>Learn</span>
           </Link>
 
-          {/* Products Mega Menu Trigger - 9 dots icon only */}
+          {/* Products Mega Menu Trigger - button with icon + label */}
           <div className="relative">
             <button
               onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-              className="flex items-center justify-center p-2 text-gray-600 hover:text-[#2702a6] transition-colors rounded-lg hover:bg-gray-100 ml-2"
-              title="Products"
+              className="flex items-center gap-2 ml-2 px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-600 hover:text-[#2702a6] hover:border-[#2702a6]/30 hover:bg-[#2702a6]/5 transition-all"
             >
-              <NineDotsIcon className="h-6 w-6" />
+              <NineDotsIcon className="h-5 w-5" />
+              <span className="text-sm font-medium">Products</span>
+              <svg className={`h-4 w-4 transition-transform ${megaMenuOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
             </button>
             
             {/* Mega Menu Dropdown */}
@@ -130,15 +133,25 @@ export default function Navbar() {
                       </div>
                       <div className="space-y-1">
                         {liveProducts.map((product) => (
-                          <Link
-                            key={product.slug}
-                            href={product.slug}
-                            onClick={() => setMegaMenuOpen(false)}
-                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
-                          >
-                            <span className="text-xl">{product.icon}</span>
-                            <span>{product.name}</span>
-                          </Link>
+                          product.disabled ? (
+                            <span
+                              key={product.slug}
+                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 cursor-default"
+                            >
+                              <span className="text-xl grayscale opacity-40">{product.icon}</span>
+                              <span>{product.name}</span>
+                            </span>
+                          ) : (
+                            <Link
+                              key={product.slug}
+                              href={product.slug}
+                              onClick={() => setMegaMenuOpen(false)}
+                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
+                            >
+                              <span className="text-xl">{product.icon}</span>
+                              <span>{product.name}</span>
+                            </Link>
+                          )
                         ))}
                       </div>
                     </div>
@@ -150,22 +163,39 @@ export default function Navbar() {
                       </div>
                       <div className="space-y-1">
                         {devProducts.map((product) => (
-                          <Link
-                            key={product.slug}
-                            href={product.slug}
-                            onClick={() => setMegaMenuOpen(false)}
-                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
-                          >
-                            <span className="text-xl">{product.icon}</span>
-                            <span className="flex items-center gap-2">
-                              {product.name}
-                              {product.badge && (
-                                <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700 font-medium">
-                                  {product.badge}
-                                </span>
-                              )}
+                          product.disabled ? (
+                            <span
+                              key={product.slug}
+                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 cursor-default"
+                            >
+                              <span className="text-xl grayscale opacity-40">{product.icon}</span>
+                              <span className="flex items-center gap-2">
+                                {product.name}
+                                {product.badge && (
+                                  <span className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-400 font-medium">
+                                    {product.badge}
+                                  </span>
+                                )}
+                              </span>
                             </span>
-                          </Link>
+                          ) : (
+                            <Link
+                              key={product.slug}
+                              href={product.slug}
+                              onClick={() => setMegaMenuOpen(false)}
+                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
+                            >
+                              <span className="text-xl">{product.icon}</span>
+                              <span className="flex items-center gap-2">
+                                {product.name}
+                                {product.badge && (
+                                  <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700 font-medium">
+                                    {product.badge}
+                                  </span>
+                                )}
+                              </span>
+                            </Link>
+                          )
                         ))}
                       </div>
                     </div>
@@ -217,7 +247,7 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <Server className="h-4 w-4" />
-              Operations
+              Learn
             </Link>
             <div className="border-t border-gray-100 my-2 pt-2">
               <div className="px-3 py-2 text-sm font-semibold text-gray-900 flex items-center gap-2">
@@ -225,20 +255,35 @@ export default function Navbar() {
                 Products
               </div>
               {([...liveProducts, ...devProducts] as Product[]).map((product) => (
-                <Link
-                  key={product.slug}
-                  href={product.slug}
-                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span>{product.icon}</span>
-                  {product.name}
-                  {product.badge && (
-                    <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700">
-                      {product.badge}
-                    </span>
-                  )}
-                </Link>
+                product.disabled ? (
+                  <span
+                    key={product.slug}
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 cursor-default"
+                  >
+                    <span className="grayscale opacity-40">{product.icon}</span>
+                    {product.name}
+                    {product.badge && (
+                      <span className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-400">
+                        {product.badge}
+                      </span>
+                    )}
+                  </span>
+                ) : (
+                  <Link
+                    key={product.slug}
+                    href={product.slug}
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span>{product.icon}</span>
+                    {product.name}
+                    {product.badge && (
+                      <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700">
+                        {product.badge}
+                      </span>
+                    )}
+                  </Link>
+                )
               ))}
               <Link
                 href="/products"
