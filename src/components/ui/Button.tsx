@@ -11,20 +11,12 @@ interface ButtonProps {
   external?: boolean;
 }
 
-const buttonStyles = {
-  primary: {
-    background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
-    boxShadow: '0 4px 14px rgba(39, 2, 166, 0.3)',
-    color: 'white',
-  },
-  secondary: {
-    background: 'transparent',
-    border: '1px solid rgba(0, 0, 0, 0.2)',
-    color: 'rgba(0, 0, 0, 0.7)',
-  },
+const variantClasses = {
+  primary: 'bg-gradient-primary shadow-primary text-white hover:opacity-90',
+  secondary: 'bg-transparent border border-black/20 text-black/70 hover:bg-gray-50',
 };
 
-const sizeStyles = {
+const sizeClasses = {
   sm: 'px-4 py-2 text-sm',
   md: 'px-6 py-3 text-sm',
   lg: 'px-8 py-4 text-base',
@@ -39,9 +31,7 @@ export default function Button({
   className = '',
   external = false,
 }: ButtonProps) {
-  const baseClassName = `inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all hover:opacity-90 ${sizeStyles[size]} ${className}`;
-  
-  const style = variant === 'primary' ? buttonStyles.primary : buttonStyles.secondary;
+  const baseClassName = `inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
   
   if (href) {
     if (external) {
@@ -51,21 +41,20 @@ export default function Button({
           target="_blank"
           rel="noopener noreferrer"
           className={baseClassName}
-          style={style}
         >
           {children}
         </a>
       );
     }
     return (
-      <Link href={href} className={baseClassName} style={style}>
+      <Link href={href} className={baseClassName}>
         {children}
       </Link>
     );
   }
   
   return (
-    <button onClick={onClick} className={baseClassName} style={style}>
+    <button onClick={onClick} className={baseClassName}>
       {children}
     </button>
   );

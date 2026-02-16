@@ -4,6 +4,16 @@
   "type": "general",
   "groups": [
     {
+      "title": "Getting Started",
+      "items": [
+        {
+          "id": "intro",
+          "title": "Introduction",
+          "slug": "intro"
+        }
+      ]
+    },
+    {
       "title": "Web Servers",
       "items": [
         {

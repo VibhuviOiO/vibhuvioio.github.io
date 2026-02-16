@@ -23,6 +23,11 @@ interface SidebarItemProps {
   depth?: number;
 }
 
+function getPaddingLeft(depth: number, hasChildren: boolean): string {
+  const base = hasChildren ? 8 : 12;
+  return `${depth * 12 + base}px`;
+}
+
 function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
   const pathname = usePathname();
   const itemPath = `${basePath}/${item.slug}`;
@@ -30,36 +35,27 @@ function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
   const hasChildren = item.items && item.items.length > 0;
   const [expanded, setExpanded] = useState(isActive);
 
+  const baseClasses = "flex items-center gap-2 py-1.5 pr-2 text-sm transition-colors rounded-md mx-2";
+  const activeClasses = "sidebar-active";
+  const inactiveClasses = "text-gray-700 hover:text-gray-900 hover:bg-gray-100";
+  
+  const paddingLeft = getPaddingLeft(depth, !!hasChildren);
+
   if (hasChildren) {
     return (
       <div className="select-none">
         <button
           onClick={() => setExpanded(!expanded)}
-          className={`flex w-full items-center gap-2 py-1.5 pr-2 text-left text-sm transition-colors rounded-md mx-2 ${
-            isActive 
-              ? 'text-white' 
-              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
-          }`}
-          style={{ 
-            paddingLeft: `${depth * 12 + 8}px`,
-            fontWeight: isActive ? 500 : 400,
-            backgroundColor: isActive ? '#2702a6' : undefined,
-          }}
-          onMouseEnter={(e) => {
-            if (isActive) e.currentTarget.style.backgroundColor = '#200289';
-          }}
-          onMouseLeave={(e) => {
-            if (isActive) e.currentTarget.style.backgroundColor = '#2702a6';
-          }}
+          className={`${baseClasses} w-full text-left ${isActive ? activeClasses : inactiveClasses}`}
+          style={{ paddingLeft, fontWeight: isActive ? 500 : 400 }}
         >
           <ChevronRight 
-            className={`h-3.5 w-3.5 shrink-0 transition-transform ${expanded ? 'rotate-90' : ''}`} 
-            style={{ color: isActive ? '#ffffff' : '#9ca3af' }}
+            className={`h-3.5 w-3.5 shrink-0 transition-transform ${expanded ? 'rotate-90' : ''} ${isActive ? 'text-white' : 'text-gray-400'}`}
           />
           {expanded ? (
-            <FolderOpen className="h-4 w-4 shrink-0" style={{ color: isActive ? '#ffffff' : '#9ca3af' }} />
+            <FolderOpen className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-gray-400'}`} />
           ) : (
-            <Folder className="h-4 w-4 shrink-0" style={{ color: isActive ? '#ffffff' : '#9ca3af' }} />
+            <Folder className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-gray-400'}`} />
           )}
           <span className="truncate">{item.title}</span>
         </button>
@@ -83,24 +79,10 @@ function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
   return (
     <Link
       href={itemPath}
-      className={`flex items-center gap-2 py-1.5 pr-2 text-sm transition-colors rounded-md mx-2 ${
-        isActive 
-          ? 'text-white' 
-          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
-      }`}
-      style={{ 
-        paddingLeft: `${depth * 12 + 12}px`,
-        fontWeight: isActive ? 500 : 400,
-        backgroundColor: isActive ? '#2702a6' : undefined,
-      }}
-      onMouseEnter={(e) => {
-        if (isActive) e.currentTarget.style.backgroundColor = '#200289';
-      }}
-      onMouseLeave={(e) => {
-        if (isActive) e.currentTarget.style.backgroundColor = '#2702a6';
-      }}
+      className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+      style={{ paddingLeft, fontWeight: isActive ? 500 : 400 }}
     >
-      <FileText className="h-3.5 w-3.5 shrink-0" style={{ color: isActive ? '#ffffff' : '#9ca3af' }} />
+      <FileText className={`h-3.5 w-3.5 shrink-0 ${isActive ? 'text-white' : 'text-gray-400'}`} />
       <span className="truncate">{item.title}</span>
     </Link>
   );

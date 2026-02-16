@@ -21,7 +21,7 @@ export default async function DocPage({ params }: DocPageProps) {
 
   return (
     <DocsLayout 
-      sidebar={{ groups: sidebar.groups, title: 'General Docs' }}
+      sidebar={{ groups: sidebar.groups }}
       basePath="/docs"
     >
       <article className="prose prose-invert max-w-none">

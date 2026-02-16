@@ -6,32 +6,11 @@ function LogoTitle() {
   return (
     <div className="flex items-baseline">
       {/* "Vibhuvi" in purple */}
-      <span 
-        className="font-extrabold whitespace-nowrap"
-        style={{ 
-          color: '#2702a6',
-          fontSize: '1.25rem',
-          letterSpacing: '-0.02em',
-        }}
-      >
-        Vibhuvi
-      </span>
+      <span className="logo-vibhuvi">Vibhuvi</span>
       {/* Space */}
       <span>&nbsp;</span>
       {/* "OiO" with gradient */}
-      <span 
-        className="font-extrabold whitespace-nowrap"
-        style={{ 
-          fontSize: '1.5rem',
-          letterSpacing: '-0.02em',
-          background: 'linear-gradient(90deg, #00bcd4 0%, #00bcd4 36%, #2702a6 36%, #2702a6 64%, #00bcd4 64%, #00bcd4 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}
-      >
-        OiO
-      </span>
+      <span className="logo-oio">OiO</span>
     </div>
   );
 }
@@ -39,7 +18,7 @@ function LogoTitle() {
 export default function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 py-8">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col items-center md:items-start">
             {/* Logo with Image + Title */}

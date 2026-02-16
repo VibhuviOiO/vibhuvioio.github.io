@@ -10,32 +10,11 @@ function LogoTitle() {
   return (
     <div className="flex items-baseline">
       {/* "Vibhuvi" in purple */}
-      <span 
-        className="font-extrabold whitespace-nowrap"
-        style={{ 
-          color: '#2702a6',
-          fontSize: '1.25rem',
-          letterSpacing: '-0.02em',
-        }}
-      >
-        Vibhuvi
-      </span>
+      <span className="logo-vibhuvi">Vibhuvi</span>
       {/* Space */}
       <span>&nbsp;</span>
       {/* "OiO" with gradient - O in turquoise, i in purple, O in turquoise */}
-      <span 
-        className="font-extrabold whitespace-nowrap"
-        style={{ 
-          fontSize: '1.5rem',
-          letterSpacing: '-0.02em',
-          background: 'linear-gradient(90deg, #00bcd4 0%, #00bcd4 36%, #2702a6 36%, #2702a6 64%, #00bcd4 64%, #00bcd4 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}
-      >
-        OiO
-      </span>
+      <span className="logo-oio">OiO</span>
     </div>
   );
 }

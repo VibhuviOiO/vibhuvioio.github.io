@@ -1,102 +1,180 @@
+import type { Metadata } from "next";
 import Link from 'next/link';
-import { loadOperationsSidebarClient } from '@/lib/docs-client';
-import { Search, Database, BarChart3 } from 'lucide-react';
+import { Github, ArrowRight, Search, Database, Shield, Layers, Activity, Globe, Network } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: "Operations Documentation",
+  description: "Production runbooks and operational guides for ELK Stack, MongoDB, LDAP, Cassandra, Keepalived, NGINX, Caddy, and HAProxy.",
+  openGraph: {
+    title: "Operations Documentation | VibhuviOiO",
+    description: "Production runbooks and operational guides for infrastructure technologies.",
+    url: "https://vibhuvioio.com/operations",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://vibhuvioio.com/operations",
+  },
+};
+
+const operations = [
+  {
+    id: 'elk',
+    name: 'ELK Stack',
+    icon: Search,
+    description: 'End-to-end Elasticsearch, Logstash & Kibana operations. Cluster setup, index management, pipeline configurations, and scaling strategies.',
+    docs: '/operations/elk/overview',
+    github: 'https://github.com/VibhuviOiO',
+    tags: ['Elasticsearch', 'Logstash', 'Kibana', 'Logging'],
+    status: 'live' as const,
+  },
+  {
+    id: 'mongo',
+    name: 'MongoDB',
+    icon: Database,
+    description: 'MongoDB deployment, replica sets, sharding, live migration, and disaster recovery. Production-grade cluster management guides.',
+    docs: '/operations/mongo/overview',
+    github: 'https://github.com/VibhuviOiO',
+    tags: ['NoSQL', 'Replication', 'Sharding', 'HA'],
+    status: 'live' as const,
+  },
+  {
+    id: 'ldap',
+    name: 'LDAP',
+    icon: Shield,
+    description: 'OpenLDAP operations — directory services, replication, access control, schema management, and integration with applications.',
+    tags: ['Directory', 'Authentication', 'SSO'],
+    status: 'coming' as const,
+  },
+  {
+    id: 'cassandra',
+    name: 'Cassandra',
+    icon: Layers,
+    description: 'Distributed Cassandra cluster operations. Ring topology, compaction strategies, repair, backup, and multi-datacenter replication.',
+    tags: ['NoSQL', 'Distributed', 'Cluster'],
+    status: 'coming' as const,
+  },
+  {
+    id: 'keepalived',
+    name: 'Keepalived',
+    icon: Activity,
+    description: 'VRRP-based high availability and failover. Virtual IP management, health checks, and active-passive/active-active configurations.',
+    tags: ['HA', 'VRRP', 'Failover'],
+    status: 'coming' as const,
+  },
+  {
+    id: 'nginx',
+    name: 'NGINX',
+    icon: Globe,
+    description: 'NGINX operations at scale. Reverse proxy, load balancing, TLS termination, rate limiting, and performance tuning.',
+    tags: ['Reverse Proxy', 'Load Balancer', 'TLS'],
+    status: 'coming' as const,
+  },
+  {
+    id: 'caddy',
+    name: 'Caddy',
+    icon: Globe,
+    description: 'Caddy server operations with automatic HTTPS. Zero-downtime deployments, Caddyfile patterns, and reverse proxy setups.',
+    tags: ['Auto HTTPS', 'Web Server', 'Reverse Proxy'],
+    status: 'coming' as const,
+  },
+  {
+    id: 'haproxy',
+    name: 'HAProxy',
+    icon: Network,
+    description: 'HAProxy TCP/HTTP load balancing. Backend pools, health checks, sticky sessions, SSL passthrough, and stats monitoring.',
+    tags: ['Load Balancer', 'TCP', 'HTTP'],
+    status: 'coming' as const,
+  },
+];
 
 export default function OperationsPage() {
-  const { categories } = loadOperationsSidebarClient();
+  const live = operations.filter(op => op.status === 'live');
+  const coming = operations.filter(op => op.status === 'coming');
 
   return (
-    <main className="min-h-[calc(100vh-4rem)] bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium mb-4" style={{ backgroundColor: 'rgba(39, 2, 166, 0.1)', color: '#2702a6' }}>
-            End-to-End Operations
-          </span>
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-            Operations Documentation
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
-            Deep operational guides for production systems. When you need comprehensive 
-            maintenance, scaling, and troubleshooting knowledge.
-          </p>
-        </div>
+    <main className="min-h-screen bg-white">
+      <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold text-gray-900">Operations</h1>
+        <p className="mt-2 text-gray-600 max-w-2xl">
+          Production runbooks and operational guides for infrastructure technologies.
+        </p>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2">
-          {categories.map((category) => (
-            <div 
-              key={category.id}
-              className="rounded-xl border border-gray-200 bg-white p-6 hover:border-[#2702a6] hover:shadow-lg transition-all"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-4xl">{category.icon}</span>
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900">{category.title}</h2>
-                  <p className="text-sm text-gray-500">{category.description}</p>
+        {/* Live operations */}
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {live.map((op) => {
+            const Icon = op.icon;
+            return (
+              <div
+                key={op.id}
+                className="flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden hover:shadow-lg transition-shadow"
+              >
+                <div className="p-5 flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                      style={{ backgroundColor: 'rgba(39,2,166,0.1)' }}
+                    >
+                      <Icon className="h-5 w-5" style={{ color: '#2702a6' }} />
+                    </div>
+                    <h2 className="text-lg font-bold text-gray-900">{op.name}</h2>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-4">{op.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {op.tags.map((tag) => (
+                      <span key={tag} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="px-5 py-3 border-t border-gray-100 flex justify-between items-center">
+                  <Link
+                    href={op.docs!}
+                    className="text-[#2702a6] text-sm font-medium hover:underline flex items-center gap-1"
+                  >
+                    View Docs <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  {op.github && (
+                    <a
+                      href={op.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-gray-700 flex items-center gap-1 text-sm"
+                    >
+                      <Github className="h-3.5 w-3.5" /> GitHub
+                    </a>
+                  )}
                 </div>
               </div>
-              
-              <div className="space-y-4">
-                {category.sidebar.map((group) => (
-                  <div key={group.title}>
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                      {group.title}
-                    </h3>
-                    <div className="space-y-1">
-                      {group.items.slice(0, 4).map((item) => (
-                        <Link
-                          key={item.id}
-                          href={`/operations/${item.slug}`}
-                          className="block rounded-lg px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
-                        >
-                          {item.title}
-                        </Link>
-                      ))}
-                      {group.items.length > 4 && (
-                        <span className="block px-3 py-1.5 text-xs text-gray-400">
-                          +{group.items.length - 4} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-6 pt-4 border-t border-gray-200">
-                <Link 
-                  href={`/operations/${category.slug}`}
-                  className="text-sm font-medium"
-                  style={{ color: '#2702a6' }}
-                >
-                  View all {category.title} docs →
-                </Link>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Features Grid */}
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg mb-4" style={{ backgroundColor: 'rgba(39, 2, 166, 0.1)' }}>
-              <Search className="h-6 w-6" style={{ color: '#2702a6' }} />
-            </div>
-            <h3 className="font-semibold text-gray-900">Deep Search</h3>
-            <p className="mt-2 text-sm text-gray-600">Comprehensive guides for every operation</p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg mb-4" style={{ backgroundColor: 'rgba(39, 2, 166, 0.1)' }}>
-              <Database className="h-6 w-6" style={{ color: '#2702a6' }} />
-            </div>
-            <h3 className="font-semibold text-gray-900">Production Ready</h3>
-            <p className="mt-2 text-sm text-gray-600">Battle-tested in real environments</p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg mb-4" style={{ backgroundColor: 'rgba(39, 2, 166, 0.1)' }}>
-              <BarChart3 className="h-6 w-6" style={{ color: '#2702a6' }} />
-            </div>
-            <h3 className="font-semibold text-gray-900">Monitoring</h3>
-            <p className="mt-2 text-sm text-gray-600">Observability built-in</p>
-          </div>
+        {/* Coming soon */}
+        <h2 className="mt-12 text-lg font-semibold text-gray-900">Coming Soon</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {coming.map((op) => {
+            const Icon = op.icon;
+            return (
+              <div
+                key={op.id}
+                className="rounded-xl border border-gray-100 bg-gray-50 p-5"
+              >
+                <div className="flex items-center gap-2.5 mb-2">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-100">
+                    <Icon className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold text-gray-500">{op.name}</span>
+                    <span className="rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-medium text-gray-500">
+                      Coming Soon
+                    </span>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">{op.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </main>
