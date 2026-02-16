@@ -612,23 +612,21 @@ export default function HomeContent() {
       </section>
 
       {/* Built on Industry Standards */}
-      <section className="py-16 lg:py-20 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6" style={{ gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto 1fr', gridTemplateAreas: '"badge badge" "title title" "center right"' }}>
-            {/* Badge */}
-            <div className="text-center mb-2" style={{ gridArea: 'badge' }}>
-              <span className="badge-amber inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div>
+              {/* Badge */}
+              <span className="badge-amber inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
                 Reliability First
               </span>
-            </div>
-            
-            {/* Title */}
-            <h2 className="text-center text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-4" style={{ gridArea: 'title' }}>
-              Built on Industry Standards
-            </h2>
-            
-            {/* Left Content */}
-            <div className="justify-self-end self-center max-w-md px-4" style={{ gridArea: 'center' }}>
+              
+              {/* Title */}
+              <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-6">
+                Built on Industry Standards
+              </h2>
+              
               <p className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-6">
                 Every system is measured against real reliability targets —
                 not just uptime numbers, but SLAs, SLOs, and SLIs that your
@@ -661,12 +659,12 @@ export default function HomeContent() {
             </div>
             
             {/* Right Animation */}
-            <div className="justify-self-start self-center pl-4" style={{ gridArea: 'right' }}>
-              <div className="relative flex items-center justify-center w-[380px] h-[380px]">
+            <div className="flex justify-center items-center">
+              <div className="relative flex items-center justify-center w-[400px] h-[400px]">
                 {/* Orbit rings */}
-                <div className="absolute w-[340px] h-[340px] rounded-full border border-dashed border-cyan-200/50 animate-[targetPulse_4s_ease-in-out_infinite]" />
-                <div className="absolute w-[240px] h-[240px] rounded-full border border-green-200/50 animate-[targetPulse_4s_ease-in-out_infinite_0.66s]" />
-                <div className="absolute w-[140px] h-[140px] rounded-full border border-primary/25 animate-[targetPulse_4s_ease-in-out_infinite_1.33s]" />
+                <div className="absolute w-[360px] h-[360px] rounded-full border border-dashed border-cyan-200/50 animate-[targetPulse_4s_ease-in-out_infinite]" />
+                <div className="absolute w-[260px] h-[260px] rounded-full border border-green-200/50 animate-[targetPulse_4s_ease-in-out_infinite_0.66s]" />
+                <div className="absolute w-[160px] h-[160px] rounded-full border border-primary/25 animate-[targetPulse_4s_ease-in-out_infinite_1.33s]" />
                 
                 {/* Center checkmark */}
                 <div className="relative flex items-center justify-center w-11 h-11 rounded-full z-10 bg-gradient-primary shadow-primary">
@@ -691,53 +689,67 @@ export default function HomeContent() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 lg:py-16 bg-gray-50">
+      <section className="py-8 lg:py-10 bg-gray-50">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-3 gap-6 text-center">
             <div>
-              <div className="text-4xl sm:text-5xl font-extrabold text-primary">140+</div>
-              <div className="mt-2 text-sm sm:text-base text-gray-500 uppercase tracking-wider font-medium">Guides</div>
+              <div className="text-3xl sm:text-4xl font-bold text-primary">140+</div>
+              <div className="mt-1 text-xs sm:text-sm text-gray-500 uppercase tracking-wide">Guides</div>
             </div>
             <div>
-              <div className="text-4xl sm:text-5xl font-extrabold text-primary">5</div>
-              <div className="mt-2 text-sm sm:text-base text-gray-500 uppercase tracking-wider font-medium">Products</div>
+              <div className="text-3xl sm:text-4xl font-bold text-primary">5</div>
+              <div className="mt-1 text-xs sm:text-sm text-gray-500 uppercase tracking-wide">Products</div>
             </div>
             <div>
-              <div className="text-4xl sm:text-5xl font-extrabold text-primary">100%</div>
-              <div className="mt-2 text-sm sm:text-base text-gray-500 uppercase tracking-wider font-medium">Open Source</div>
+              <div className="text-3xl sm:text-4xl font-bold text-primary">100%</div>
+              <div className="mt-1 text-xs sm:text-sm text-gray-500 uppercase tracking-wide">Open Source</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Everything Connected */}
-      <section className="py-16 lg:py-20 bg-white">
+      <section className="py-12 lg:py-16 bg-section-alt">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-4" style={{ gridTemplateColumns: '1fr 320px 1fr', gridTemplateRows: 'auto auto 1fr 1fr', gridTemplateAreas: '"badge badge badge" "title title title" "left center topRight" "left center bottomRight"' }}>
-            {/* Badge */}
-            <div className="text-center mb-2" style={{ gridArea: 'badge' }}>
-              <span className="badge-primary inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left - Content */}
+            <div>
+              {/* Badge */}
+              <span className="badge-primary inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
                 AI-Powered Platform
               </span>
-            </div>
-            
-            {/* Title */}
-            <h2 className="text-center text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-4" style={{ gridArea: 'title' }}>
-              Everything Connected
-            </h2>
-            
-            {/* Left item */}
-            <div className="justify-self-end text-right pr-4" style={{ gridArea: 'left' }}>
-              <div className="flex items-center gap-3 flex-row-reverse" style={{ maxWidth: '280px' }}>
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg text-white flex-shrink-0 icon-box-primary text-lg">
-                  ◉
-                </span>
-                <span className="text-gray-700 text-base">Unified control plane for infrastructure</span>
+              
+              {/* Title */}
+              <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-6">
+                Everything Connected
+              </h2>
+              
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center justify-center w-9 h-9 rounded-lg text-white flex-shrink-0 icon-box-primary text-lg">
+                    ◉
+                  </span>
+                  <span className="text-gray-700 text-base">Unified control plane for infrastructure</span>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0 icon-box-light text-lg">
+                    ◈
+                  </span>
+                  <span className="text-gray-700 text-base">AI-assisted tools built for your stack</span>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0 orbit-node-outer text-lg">
+                    ◇
+                  </span>
+                  <span className="text-gray-700 text-base">On-demand products for infrastructure needs</span>
+                </div>
               </div>
             </div>
             
-            {/* Center Animation */}
-            <div style={{ gridArea: 'center', justifySelf: 'center', alignSelf: 'center' }}>
+            {/* Right - Animation */}
+            <div className="flex justify-center">
               <div className="relative flex items-center justify-center" style={{ width: '280px', height: '280px' }}>
                 {/* Hub Center */}
                 <div className="absolute flex items-center justify-center w-20 h-20 rounded-full z-10 bg-gradient-primary shadow-primary-lg hub-pulse">
@@ -793,96 +805,76 @@ export default function HomeContent() {
                 </div>
               </div>
             </div>
-            
-            {/* Top Right item */}
-            <div style={{ gridArea: 'topRight', justifySelf: 'start', paddingLeft: '1rem' }}>
-              <div className="flex items-center gap-3" style={{ maxWidth: '280px' }}>
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0 icon-box-light text-lg">
-                  ◈
-                </span>
-                <span className="text-gray-700 text-base">AI-assisted tools built for your stack</span>
-              </div>
-            </div>
-            
-            {/* Bottom Right item */}
-            <div style={{ gridArea: 'bottomRight', justifySelf: 'start', paddingLeft: '1rem' }}>
-              <div className="flex items-center gap-3" style={{ maxWidth: '280px' }}>
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0 orbit-node-outer text-lg">
-                  ◇
-                </span>
-                <span className="text-gray-700 text-base">On-demand products for infrastructure needs</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
 
       {/* Sleep Soundly */}
-      <section className="py-16 lg:py-20 bg-section-alt">
+      <section className="py-12 lg:py-16 bg-section-alt">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-4" style={{ gridTemplateColumns: '1fr 300px 1fr', gridTemplateRows: 'auto auto 1fr 1fr', gridTemplateAreas: '"badge badge badge" "title title title" "leftTop center right" "leftBottom center right"' }}>
-            {/* Badge */}
-            <div className="text-center mb-2" style={{ gridArea: 'badge' }}>
-              <span className="badge-green inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
-                Zero Stress Ops
-              </span>
-            </div>
-
-            {/* Title */}
-            <h2 className="text-center text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-4" style={{ gridArea: 'title' }}>
-              Sleep Soundly
-            </h2>
-            
-            {/* Left Top Item */}
-            <div style={{ gridArea: 'leftTop', justifySelf: 'end', textAlign: 'right', paddingRight: '1rem' }}>
-              <div className="flex items-center gap-3 flex-row-reverse" style={{ maxWidth: '280px' }}>
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg text-white flex-shrink-0 icon-box-primary text-lg">
-                  🛡
-                </span>
-                <span className="text-gray-700 text-base">Stable by default. No firefighting.</span>
-              </div>
-            </div>
-            
-            {/* Left Bottom Item */}
-            <div style={{ gridArea: 'leftBottom', justifySelf: 'end', textAlign: 'right', paddingRight: '1rem' }}>
-              <div className="flex items-center gap-3 flex-row-reverse" style={{ maxWidth: '280px' }}>
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0 icon-box-light text-lg">
-                  ☾
-                </span>
-                <span className="text-gray-700 text-base">No 3 AM pages. No deployment anxiety.</span>
-              </div>
-            </div>
-            
-            {/* Center Animation */}
-            <div style={{ gridArea: 'center', justifySelf: 'center', alignSelf: 'center' }}>
-              <div className="relative flex items-center justify-center" style={{ width: '260px', height: '260px' }}>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left - Animation */}
+            <div className="flex justify-center items-center">
+              <div className="relative flex items-center justify-center" style={{ width: '380px', height: '380px' }}>
                 {/* Pulse rings */}
-                <div className="absolute rounded-full" style={{ width: '140px', height: '140px', border: '1px solid rgba(61, 122, 181, 0.2)', animation: 'pulseExpand 4s ease-out infinite' }} />
-                <div className="absolute rounded-full" style={{ width: '180px', height: '180px', border: '1px solid rgba(61, 122, 181, 0.2)', animation: 'pulseExpand 4s ease-out infinite 1.3s' }} />
-                <div className="absolute rounded-full" style={{ width: '220px', height: '220px', border: '1px solid rgba(61, 122, 181, 0.2)', animation: 'pulseExpand 4s ease-out infinite 2.6s' }} />
+                <div className="absolute rounded-full" style={{ width: '200px', height: '200px', border: '1px solid rgba(61, 122, 181, 0.2)', animation: 'pulseExpand 4s ease-out infinite' }} />
+                <div className="absolute rounded-full" style={{ width: '260px', height: '260px', border: '1px solid rgba(61, 122, 181, 0.2)', animation: 'pulseExpand 4s ease-out infinite 1.3s' }} />
+                <div className="absolute rounded-full" style={{ width: '320px', height: '320px', border: '1px solid rgba(61, 122, 181, 0.2)', animation: 'pulseExpand 4s ease-out infinite 2.6s' }} />
                 
                 {/* Core moon */}
-                <div className="relative flex items-center justify-center rounded-full z-10" style={{ width: '90px', height: '90px', background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)', boxShadow: '0 0 40px rgba(39, 2, 166, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.3)', animation: 'coreBreathe 6s ease-in-out infinite' }}>
-                  <span className="text-white" style={{ fontSize: '2.5rem', filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))', opacity: 0.9 }}>
+                <div className="relative flex items-center justify-center rounded-full z-10" style={{ width: '110px', height: '110px', background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)', boxShadow: '0 0 50px rgba(39, 2, 166, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.3)', animation: 'coreBreathe 6s ease-in-out infinite' }}>
+                  <span className="text-white" style={{ fontSize: '3rem', filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))', opacity: 0.9 }}>
                     ☽
                   </span>
                 </div>
                 
                 {/* Floating Z's */}
-                <span className="absolute font-semibold pointer-events-none" style={{ top: '20%', right: '15%', fontSize: '1.5rem', color: 'rgba(39, 2, 166, 0.5)', animation: 'floatZ 5s ease-in-out infinite' }}>Z</span>
-                <span className="absolute font-semibold pointer-events-none" style={{ top: '35%', right: '8%', fontSize: '1rem', color: 'rgba(39, 2, 166, 0.5)', animation: 'floatZ 5s ease-in-out infinite 1.6s' }}>z</span>
-                <span className="absolute font-semibold pointer-events-none" style={{ top: '15%', right: '25%', fontSize: '1.2rem', color: 'rgba(39, 2, 166, 0.5)', animation: 'floatZ 5s ease-in-out infinite 3.2s' }}>Z</span>
+                <span className="absolute font-semibold pointer-events-none" style={{ top: '18%', right: '18%', fontSize: '1.8rem', color: 'rgba(39, 2, 166, 0.5)', animation: 'floatZ 5s ease-in-out infinite' }}>Z</span>
+                <span className="absolute font-semibold pointer-events-none" style={{ top: '32%', right: '10%', fontSize: '1.2rem', color: 'rgba(39, 2, 166, 0.5)', animation: 'floatZ 5s ease-in-out infinite 1.6s' }}>z</span>
+                <span className="absolute font-semibold pointer-events-none" style={{ top: '12%', right: '28%', fontSize: '1.5rem', color: 'rgba(39, 2, 166, 0.5)', animation: 'floatZ 5s ease-in-out infinite 3.2s' }}>Z</span>
               </div>
             </div>
             
-            {/* Right Item */}
-            <div style={{ gridArea: 'right', justifySelf: 'start', paddingLeft: '1rem' }}>
-              <div className="flex items-center gap-3" style={{ maxWidth: '280px' }}>
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0" style={{ background: 'rgba(0, 188, 212, 0.06)', border: '1px solid rgba(0, 188, 212, 0.3)', fontSize: '1.1rem', color: '#00bcd4' }}>
-                  ✓
+            {/* Right - Content */}
+            <div>
+              {/* Badge */}
+              <span className="badge-green inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
+                Zero Stress Ops
+              </span>
+              
+              {/* Title */}
+              <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-6">
+                Sleep Soundly
+              </h2>
+              
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-6">
+                Infrastructure that just works — no midnight alerts, no emergency
+                rollbacks, no sweating over deployments. We have got you covered.
+              </p>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="tag-primary px-4 py-2 rounded-full text-sm sm:text-base font-medium">Auto-Remediation</span>
+                <span className="tag-primary px-4 py-2 rounded-full text-sm sm:text-base font-medium">Zero Downtime</span>
+                <span className="tag-primary px-4 py-2 rounded-full text-sm sm:text-base font-medium">24/7 Monitoring</span>
+              </div>
+              
+              {/* Status Flow */}
+              <div className="flex items-center gap-2 pt-4 border-t border-gray-200">
+                <span className="px-3 py-1.5 rounded text-xs font-bold text-red-600 bg-red-50 border border-red-200 animate-[floatStandard_3s_ease-in-out_infinite]">
+                  Alert
                 </span>
-                <span className="text-gray-700 text-base">Proactive monitoring. Automated remediation.</span>
+                <span className="text-gray-400 animate-[arrowPulse_2s_ease-in-out_infinite]">→</span>
+                <span className="px-3 py-1.5 rounded text-xs font-bold text-amber-600 bg-amber-50 border border-amber-200 animate-[floatStandard_3s_ease-in-out_infinite_0.5s]">
+                  Detect
+                </span>
+                <span className="text-gray-400 animate-[arrowPulse_2s_ease-in-out_infinite_0.33s]">→</span>
+                <span className="px-3 py-1.5 rounded text-xs font-bold text-primary bg-primary-light border border-primary-light animate-[floatStandard_3s_ease-in-out_infinite_1s]">
+                  Fix
+                </span>
+                <span className="text-gray-400 animate-[arrowPulse_2s_ease-in-out_infinite_0.66s]">→</span>
+                <span className="px-3 py-1.5 rounded text-xs font-bold text-green-700 bg-green-50 border border-green-200 whitespace-nowrap animate-[floatStandard_3s_ease-in-out_infinite_1.5s]">
+                  💤 You Sleep
+                </span>
               </div>
             </div>
           </div>
@@ -966,7 +958,7 @@ export default function HomeContent() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-16 lg:py-20 bg-gray-50">
+      <section className="py-16 lg:py-20 bg-section-alt">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">
             Ready to Simplify Your Infrastructure?
