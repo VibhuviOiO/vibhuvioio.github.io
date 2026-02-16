@@ -2,8 +2,19 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Docker Registry UI | VibhuviOiO',
-  description: 'Modern, lightweight web interface for managing your Docker Registry with vulnerability scanning, bulk operations, and multi-registry support.',
+  title: 'Docker Registry UI - Web Interface for Docker Registry',
+  description: 'Modern web interface for managing Docker Registry. Browse images, vulnerability scanning with Trivy, bulk operations, and multi-registry support. Self-hosted and open source.',
+  keywords: ['docker registry ui', 'docker registry web interface', 'container management', 'trivy scanning', 'docker images', 'self-hosted registry'],
+  openGraph: {
+    title: 'Docker Registry UI - Web Interface for Docker Registry',
+    description: 'Modern web interface for managing Docker Registry with vulnerability scanning and multi-registry support.',
+    url: 'https://vibhuvioio.com/docker-registry-ui',
+    type: 'website',
+    images: ['/img/docker-registry-ui.png'],
+  },
+  alternates: {
+    canonical: 'https://vibhuvioio.com/docker-registry-ui',
+  },
 };
 
 const features = [

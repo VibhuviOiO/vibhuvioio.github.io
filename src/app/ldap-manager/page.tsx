@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import Link from 'next/link';
 import Image from 'next/image';
 import { Github, ExternalLink, BookOpen, Shield, Users, Layers, Search, BarChart3 } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'LDAP Manager - Web Interface for OpenLDAP',
+  description: 'Modern web interface for managing OpenLDAP servers. Multi-cluster support, user/group management, real-time monitoring, and custom schema support. Self-hosted and open source.',
+  keywords: ['LDAP manager', 'OpenLDAP web interface', 'LDAP user management', 'directory services', 'identity management', 'self-hosted LDAP'],
+  openGraph: {
+    title: 'LDAP Manager - Web Interface for OpenLDAP',
+    description: 'Modern web interface for managing OpenLDAP servers with multi-cluster support and real-time monitoring.',
+    url: 'https://vibhuvioio.com/ldap-manager',
+    type: 'website',
+    images: ['/img/ldap-manager/1ldap-cluster-home.png'],
+  },
+  alternates: {
+    canonical: 'https://vibhuvioio.com/ldap-manager',
+  },
+};
 
 const features = [
   { icon: '🗂️', title: 'Directory Management', desc: 'Browse, search, and manage LDAP entries with an intuitive interface' },

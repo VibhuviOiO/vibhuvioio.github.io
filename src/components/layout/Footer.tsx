@@ -1,36 +1,77 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
+// Logo Title component matching Navbar styling
+function LogoTitle() {
+  return (
+    <div className="flex items-baseline">
+      {/* "Vibhuvi" in purple */}
+      <span 
+        className="font-extrabold whitespace-nowrap"
+        style={{ 
+          color: '#2f02c4',
+          fontSize: '1.25rem',
+          letterSpacing: '-0.02em',
+        }}
+      >
+        Vibhuvi
+      </span>
+      {/* Space */}
+      <span>&nbsp;</span>
+      {/* "OiO" with gradient */}
+      <span 
+        className="font-extrabold whitespace-nowrap"
+        style={{ 
+          fontSize: '1.5rem',
+          letterSpacing: '-0.02em',
+          background: 'linear-gradient(90deg, #00bcd4 0%, #00bcd4 36%, #2f02c4 36%, #2f02c4 64%, #00bcd4 64%, #00bcd4 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        OiO
+      </span>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-gray-900">VibhuviOiO</span>
-            <span className="text-gray-300">|</span>
-            <span className="text-sm text-gray-500">Infinite Operations</span>
+          <div className="flex flex-col items-center md:items-start">
+            {/* Logo with Image + Title */}
+            <div className="flex items-center gap-2">
+              <Image 
+                src="/img/logo.svg" 
+                alt="" 
+                width={28} 
+                height={28}
+                className="h-7 w-7"
+              />
+              <LogoTitle />
+            </div>
+            <span className="text-sm text-gray-500 mt-1">Experience The Operations.</span>
+            <span className="text-xs text-gray-400 mt-1">Hyderabad, Telangana, India</span>
           </div>
           
           <div className="flex items-center gap-6 text-sm text-gray-600">
             <Link href="/docs" className="hover:text-gray-900 transition-colors">
               Documentation
             </Link>
-            <Link href="/blog" className="hover:text-gray-900 transition-colors">
-              Blog
+            <Link href="/operations" className="hover:text-gray-900 transition-colors">
+              Operations
             </Link>
-            <a 
-              href="https://github.com/VibhuviOiO" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-gray-900 transition-colors"
-            >
-              GitHub
-            </a>
+            <Link href="/products" className="hover:text-gray-900 transition-colors">
+              Products
+            </Link>
           </div>
         </div>
         
         <div className="mt-8 text-center text-sm text-gray-400">
-          © {new Date().getFullYear()} VibhuviOiO. Experience The Operations.
+          © {new Date().getFullYear()} VibhuviOiO.
         </div>
       </div>
     </footer>

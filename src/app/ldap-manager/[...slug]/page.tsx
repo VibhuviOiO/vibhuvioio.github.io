@@ -1,8 +1,58 @@
+import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { loadDocContent } from '@/lib/docs-server';
 import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
+
+// SEO metadata mapping for doc pages
+const docSeo: Record<string, { title: string; description: string }> = {
+  'getting-started': {
+    title: 'Getting Started - LDAP Manager Installation',
+    description: 'Learn how to install and configure LDAP Manager. Quick start guide for Docker, Docker Compose, and OpenLDAP setup.',
+  },
+  'configuration': {
+    title: 'Configuration Guide - LDAP Manager',
+    description: 'Complete configuration guide for LDAP Manager. Set up LDAP clusters, user creation forms, and environment variables.',
+  },
+  'features': {
+    title: 'Features - LDAP Manager',
+    description: 'Explore LDAP Manager features: multi-cluster management, user/group management, real-time monitoring, and custom schema support.',
+  },
+  'security': {
+    title: 'Security - LDAP Manager',
+    description: 'Learn about LDAP Manager security features. Password encryption, LDAP injection protection, and best practices.',
+  },
+  'production': {
+    title: 'Production Guide - LDAP Manager',
+    description: 'Deploy LDAP Manager in production. High availability setup, CORS configuration, logging, and monitoring.',
+  },
+  'development': {
+    title: 'Development Guide - LDAP Manager',
+    description: 'Contribute to LDAP Manager. Development setup, backend/frontend structure, and testing.',
+  },
+  'testing': {
+    title: 'Testing Guide - LDAP Manager',
+    description: 'Testing guide for LDAP Manager. Run tests, validate multi-registry setup, and ensure feature coverage.',
+  },
+};
+
+export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const slugKey = slug.join('/');
+  const seo = docSeo[slugKey] || {
+    title: 'LDAP Manager Documentation',
+    description: 'Documentation for LDAP Manager - Modern web interface for OpenLDAP.',
+  };
+  
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `https://vibhuvioio.com/ldap-manager/${slugKey}`,
+    },
+  };
+}
 
 const sidebarGroups = [
   {

@@ -1,8 +1,62 @@
+import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { loadDocContent } from '@/lib/docs-server';
 import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
+
+// SEO metadata mapping for doc pages
+const docSeo: Record<string, { title: string; description: string }> = {
+  'getting-started': {
+    title: 'Getting Started - Docker Registry UI Installation',
+    description: 'Learn how to install and configure Docker Registry UI. Quick start guide for Docker, Docker Compose, and local development setup.',
+  },
+  'configuration': {
+    title: 'Configuration Guide - Docker Registry UI',
+    description: 'Complete configuration guide for Docker Registry UI. Set up registries, environment variables, and authentication.',
+  },
+  'features': {
+    title: 'Features - Docker Registry UI',
+    description: 'Explore Docker Registry UI features: repository management, vulnerability scanning, bulk operations, and multi-registry support.',
+  },
+  'security': {
+    title: 'Security Scanning - Docker Registry UI',
+    description: 'Learn about vulnerability scanning with Trivy in Docker Registry UI. Scan images and view CVE details.',
+  },
+  'bulk-operations': {
+    title: 'Bulk Operations - Docker Registry UI',
+    description: 'Perform bulk operations on Docker images. Delete multiple tags based on patterns, age, and retention policies.',
+  },
+  'api': {
+    title: 'API Integration - Docker Registry UI',
+    description: 'Docker Registry API integration guide. Programmatically manage your Docker Registry through the API.',
+  },
+  'development': {
+    title: 'Development Guide - Docker Registry UI',
+    description: 'Contribute to Docker Registry UI. Development setup, build instructions, and contribution guidelines.',
+  },
+  'testing': {
+    title: 'Testing Guide - Docker Registry UI',
+    description: 'Testing guide for Docker Registry UI. Learn how to test with multi-registry setup and validate all features.',
+  },
+};
+
+export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const slugKey = slug.join('/');
+  const seo = docSeo[slugKey] || {
+    title: 'Docker Registry UI Documentation',
+    description: 'Documentation for Docker Registry UI - Modern web interface for managing Docker Registry.',
+  };
+  
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: `https://vibhuvioio.com/docker-registry-ui/${slugKey}`,
+    },
+  };
+}
 
 const sidebarGroups = [
   {

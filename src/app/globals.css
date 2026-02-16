@@ -180,3 +180,100 @@ body {
     transform: translateX(3px); 
   }
 }
+
+/* ============================================
+   EVERYTHING CONNECTED - ORBIT ANIMATIONS
+   ============================================ */
+
+@keyframes hubPulse {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(80, 32, 232, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(80, 32, 232, 0.7);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes orbitRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitRotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes nodeGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(80, 32, 232, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(80, 32, 232, 0.5);
+  }
+}
+
+/* ============================================
+   WE LISTEN SECTION ANIMATIONS
+   ============================================ */
+
+@keyframes earPulse {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 rgba(80, 32, 232, 0.2); 
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 30px 10px rgba(80, 32, 232, 0.1); 
+  }
+}
+
+@keyframes waveExpand {
+  0% { 
+    transform: translate(-50%, -50%) scale(0.5); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 0; 
+  }
+}
+
+@keyframes voicePulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: scale(1.4); 
+    opacity: 1; 
+  }
+}
+
+@keyframes voiceFloat {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-6px); 
+  }
+}
+
+@keyframes lineDash {
+  to { 
+    stroke-dashoffset: -15; 
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
