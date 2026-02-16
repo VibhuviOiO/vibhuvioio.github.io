@@ -13,8 +13,8 @@ interface ButtonProps {
 
 const buttonStyles = {
   primary: {
-    background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)',
-    boxShadow: '0 4px 14px rgba(80, 32, 232, 0.3)',
+    background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
+    boxShadow: '0 4px 14px rgba(39, 2, 166, 0.3)',
     color: 'white',
   },
   secondary: {

@@ -155,7 +155,7 @@ export default function Navbar() {
                             key={product.slug}
                             href={product.slug}
                             onClick={() => setMegaMenuOpen(false)}
-                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
+                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors","replace_all":true},{
                           >
                             <span className="text-xl">{product.icon}</span>
                             <span>{product.name}</span>
@@ -175,7 +175,7 @@ export default function Navbar() {
                             key={product.slug}
                             href={product.slug}
                             onClick={() => setMegaMenuOpen(false)}
-                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
+                            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2f02c4] transition-colors"
                           >
                             <span className="text-xl">{product.icon}</span>
                             <span className="flex items-center gap-2">

@@ -5,7 +5,17 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vibhuvioio.com/"),
   title: "VibhuviOiO - Open Source Infrastructure Tools & DevOps Automation",
   description: "Production-ready open source infrastructure tools for Docker, Kubernetes, LDAP, and monitoring. We make your infrastructure boring, operations invisible, and monitoring effortless.",
-  keywords: ["infrastructure", "devops", "open source", "docker", "kubernetes", "monitoring", "LDAP", "self-hosted", "automation"],
+  keywords: [
+    "private cloud",
+    "self-hosted infrastructure",
+    "bare metal cloud",
+    "devops automation",
+    "kubernetes",
+    "observability",
+    "on-prem",
+    "platform engineering",
+    "open source"
+  ],
   openGraph: {
     title: "VibhuviOiO - Open Source Infrastructure Tools",
     description: "Production-ready open source infrastructure tools for Docker, Kubernetes, LDAP, and monitoring. Self-hosted DevOps automation.",

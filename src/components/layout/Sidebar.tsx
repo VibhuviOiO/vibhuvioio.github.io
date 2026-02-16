@@ -37,12 +37,19 @@ function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
           onClick={() => setExpanded(!expanded)}
           className={`flex w-full items-center gap-2 py-1.5 pr-2 text-left text-sm transition-colors rounded-md mx-2 ${
             isActive 
-              ? 'bg-blue-600 text-white hover:bg-blue-700' 
+              ? 'text-white' 
               : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
           }`}
           style={{ 
             paddingLeft: `${depth * 12 + 8}px`,
-            fontWeight: isActive ? 500 : 400
+            fontWeight: isActive ? 500 : 400,
+            backgroundColor: isActive ? '#2702a6' : undefined,
+          }}
+          onMouseEnter={(e) => {
+            if (isActive) e.currentTarget.style.backgroundColor = '#200289';
+          }}
+          onMouseLeave={(e) => {
+            if (isActive) e.currentTarget.style.backgroundColor = '#2702a6';
           }}
         >
           <ChevronRight 
@@ -78,12 +85,19 @@ function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
       href={itemPath}
       className={`flex items-center gap-2 py-1.5 pr-2 text-sm transition-colors rounded-md mx-2 ${
         isActive 
-          ? 'bg-blue-600 text-white hover:bg-blue-700' 
+          ? 'text-white' 
           : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
       }`}
       style={{ 
         paddingLeft: `${depth * 12 + 12}px`,
-        fontWeight: isActive ? 500 : 400
+        fontWeight: isActive ? 500 : 400,
+        backgroundColor: isActive ? '#2702a6' : undefined,
+      }}
+      onMouseEnter={(e) => {
+        if (isActive) e.currentTarget.style.backgroundColor = '#200289';
+      }}
+      onMouseLeave={(e) => {
+        if (isActive) e.currentTarget.style.backgroundColor = '#2702a6';
       }}
     >
       <FileText className="h-3.5 w-3.5 shrink-0" style={{ color: isActive ? '#ffffff' : '#9ca3af' }} />

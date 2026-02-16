@@ -115,27 +115,316 @@ export default function HomeContent() {
                 Read the Docs
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Built on Industry Standards - SECOND SECTION */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Grid Layout */}
+          <div 
+            className="grid gap-6"
+            style={{
+              gridTemplateColumns: '1fr 1fr',
+              gridTemplateRows: 'auto auto 1fr',
+              gridTemplateAreas: `
+                "badge badge"
+                "title title"
+                "center right"
+              `,
+              minHeight: '480px',
+            }}
+          >
+            {/* Badge */}
+            <div style={{ gridArea: 'badge', textAlign: 'center', marginBottom: '0.5rem' }}>
+              <span 
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(39, 2, 166, 0.1) 0%, rgba(32, 2, 137, 0.1) 100%)',
+                  border: '1px solid rgba(39, 2, 166, 0.3)',
+                  color: '#2702a6',
+                }}
+              >
+                Reliability First
+              </span>
+            </div>
             
-            {/* Stats */}
-            <div className="mt-16 grid grid-cols-3 gap-8 border-t border-gray-200 pt-10">
-              <div>
-                <div className="text-3xl font-bold text-gray-900">140+</div>
-                <div className="mt-1 text-sm text-gray-500">Guides</div>
+            {/* Title */}
+            <h2 
+              style={{ 
+                gridArea: 'title', 
+                textAlign: 'center', 
+                fontSize: '2rem',
+                fontWeight: 800,
+                color: '#1a1a2e',
+                marginBottom: '1rem',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              Built on Industry Standards
+            </h2>
+            
+            {/* Left Content */}
+            <div style={{ gridArea: 'center', justifySelf: 'end', alignSelf: 'center', maxWidth: '460px', padding: '0 1rem' }}>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                Every system is measured against real reliability targets — 
+                not just uptime numbers, but SLAs, SLOs, and SLIs that your 
+                business can depend on.
+              </p>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(39, 2, 166, 0.08)', border: '1px solid rgba(39, 2, 166, 0.2)', color: '#4b5563' }}>
+                  Error Budgets
+                </span>
+                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(39, 2, 166, 0.08)', border: '1px solid rgba(39, 2, 166, 0.2)', color: '#4b5563' }}>
+                  Latency Targets
+                </span>
+                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(39, 2, 166, 0.08)', border: '1px solid rgba(39, 2, 166, 0.2)', color: '#4b5563' }}>
+                  Availability Guarantees
+                </span>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-gray-900">5</div>
-                <div className="mt-1 text-sm text-gray-500">Products</div>
+              
+              {/* SLA → SLO → SLI → Uptime Observability Bridge */}
+              <div className="flex items-center gap-2 pt-4 border-t border-gray-200">
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold"
+                  style={{ 
+                    background: 'rgba(39, 2, 166, 0.08)', 
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
+                    color: '#2702a6',
+                    animation: 'floatStandard 3s ease-in-out infinite',
+                  }}
+                >
+                  SLA
+                </span>
+                <span 
+                  className="text-gray-400"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite' }}
+                >
+                  →
+                </span>
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold"
+                  style={{ 
+                    background: 'rgba(39, 2, 166, 0.08)', 
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
+                    color: '#2702a6',
+                    animation: 'floatStandard 3s ease-in-out infinite 0.5s',
+                  }}
+                >
+                  SLO
+                </span>
+                <span 
+                  className="text-gray-400"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite 0.33s' }}
+                >
+                  →
+                </span>
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold"
+                  style={{ 
+                    background: 'rgba(39, 2, 166, 0.08)', 
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
+                    color: '#2702a6',
+                    animation: 'floatStandard 3s ease-in-out infinite 1s',
+                  }}
+                >
+                  SLI
+                </span>
+                <span 
+                  className="text-gray-400"
+                  style={{ animation: 'arrowPulse 2s ease-in-out infinite 0.66s' }}
+                >
+                  →
+                </span>
+                <span 
+                  className="px-3 py-1.5 rounded text-xs font-bold whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.08)', 
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    color: '#059669',
+                    animation: 'floatStandard 3s ease-in-out infinite 1.5s',
+                  }}
+                >
+                  Uptime Observability
+                </span>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-gray-900">100%</div>
-                <div className="mt-1 text-sm text-gray-500">Open Source</div>
+            </div>
+            
+            {/* Right Animation - Targets with Orbiting Badges */}
+            <div style={{ gridArea: 'right', justifySelf: 'start', alignSelf: 'center', paddingLeft: '1rem' }}>
+              <div className="relative flex items-center justify-center" style={{ width: '380px', height: '380px' }}>
+                {/* Outer ring - dashed cyan */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '340px', 
+                    height: '340px',
+                    border: '1px dashed rgba(0, 188, 212, 0.15)',
+                    animation: 'targetPulse 4s ease-in-out infinite',
+                  }}
+                />
+                
+                {/* Middle ring - green */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '240px', 
+                    height: '240px',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    animation: 'targetPulse 4s ease-in-out infinite 0.66s',
+                  }}
+                />
+                
+                {/* Inner ring - purple */}
+                <div 
+                  className="absolute rounded-full"
+                  style={{ 
+                    width: '140px', 
+                    height: '140px',
+                    border: '1px solid rgba(39, 2, 166, 0.25)',
+                    animation: 'targetPulse 4s ease-in-out infinite 1.33s',
+                  }}
+                />
+                
+                {/* Center checkmark */}
+                <div 
+                  className="relative flex items-center justify-center rounded-full z-10"
+                  style={{ 
+                    width: '44px', 
+                    height: '44px',
+                    background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
+                    boxShadow: '0 4px 15px rgba(39, 2, 166, 0.4)',
+                  }}
+                >
+                  <span className="text-white text-lg font-bold">✓</span>
+                </div>
+                
+                {/* Inner orbit badges - SLA, SLO, SLI */}
+                <span 
+                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(39, 2, 166, 0.1)',
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
+                    color: '#2702a6',
+                    animation: 'orbitInner 20s linear infinite',
+                  }}
+                >
+                  SLA
+                </span>
+                <span 
+                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(39, 2, 166, 0.1)',
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
+                    color: '#2702a6',
+                    animation: 'orbitInner 20s linear infinite',
+                    animationDelay: '-6.66s',
+                  }}
+                >
+                  SLO
+                </span>
+                <span 
+                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(39, 2, 166, 0.1)',
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
+                    color: '#2702a6',
+                    animation: 'orbitInner 20s linear infinite',
+                    animationDelay: '-13.33s',
+                  }}
+                >
+                  SLI
+                </span>
+                
+                {/* Middle orbit badges - Uptime, 99.9% */}
+                <span 
+                  className="absolute px-2.5 py-1 rounded text-xs font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    color: '#059669',
+                    animation: 'orbitMiddle 25s linear infinite reverse',
+                  }}
+                >
+                  Uptime
+                </span>
+                <span 
+                  className="absolute px-2.5 py-1 rounded text-xs font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                    color: '#059669',
+                    animation: 'orbitMiddle 25s linear infinite reverse',
+                    animationDelay: '-12.5s',
+                  }}
+                >
+                  99.9%
+                </span>
+                
+                {/* Outer orbit badges - Latency, Errors, Observability */}
+                <span 
+                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(0, 188, 212, 0.1)',
+                    border: '1px solid rgba(0, 188, 212, 0.2)',
+                    color: '#0891b2',
+                    animation: 'orbitOuter 30s linear infinite',
+                  }}
+                >
+                  Latency
+                </span>
+                <span 
+                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(0, 188, 212, 0.1)',
+                    border: '1px solid rgba(0, 188, 212, 0.2)',
+                    color: '#0891b2',
+                    animation: 'orbitOuter 30s linear infinite',
+                    animationDelay: '-10s',
+                  }}
+                >
+                  Errors
+                </span>
+                <span 
+                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
+                  style={{ 
+                    background: 'rgba(0, 188, 212, 0.1)',
+                    border: '1px solid rgba(0, 188, 212, 0.2)',
+                    color: '#0891b2',
+                    animation: 'orbitOuter 30s linear infinite',
+                    animationDelay: '-20s',
+                  }}
+                >
+                  Observability
+                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Everything Connected - Centralised Operations - Docusaurus Style */}
+      {/* Stats Section - THIRD SECTION */}
+      <section className="py-16" style={{ background: '#f8fafc' }}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold" style={{ color: '#2702a6' }}>140+</div>
+              <div className="mt-2 text-sm text-gray-500 uppercase tracking-wider">Guides</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold" style={{ color: '#2702a6' }}>5</div>
+              <div className="mt-2 text-sm text-gray-500 uppercase tracking-wider">Products</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold" style={{ color: '#2702a6' }}>100%</div>
+              <div className="mt-2 text-sm text-gray-500 uppercase tracking-wider">Open Source</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Everything Connected - Centralised Operations */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Grid Layout matching Docusaurus */}
@@ -158,8 +447,8 @@ export default function HomeContent() {
               <span 
                 className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
                 style={{ 
-                  background: 'linear-gradient(135deg, rgba(80, 32, 232, 0.15) 0%, rgba(39, 2, 166, 0.15) 100%)',
-                  border: '1px solid rgba(80, 32, 232, 0.3)',
+                  background: 'linear-gradient(135deg, rgba(39, 2, 166, 0.1) 0%, rgba(32, 2, 137, 0.1) 100%)',
+                  border: '1px solid rgba(39, 2, 166, 0.3)',
                   color: '#2702a6',
                 }}
               >
@@ -191,7 +480,7 @@ export default function HomeContent() {
                     width: '36px', 
                     height: '36px',
                     background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
-                    boxShadow: '0 4px 14px rgba(80, 32, 232, 0.3)',
+                    boxShadow: '0 4px 14px rgba(39, 2, 166, 0.3)',
                     fontSize: '1.1rem',
                   }}
                 >
@@ -214,7 +503,7 @@ export default function HomeContent() {
                     width: '80px', 
                     height: '80px',
                     background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
-                    boxShadow: '0 0 40px rgba(80, 32, 232, 0.5)',
+                    boxShadow: '0 0 40px rgba(39, 2, 166, 0.5)',
                     animation: 'hubPulse 3s ease-in-out infinite',
                   }}
                 >
@@ -227,7 +516,7 @@ export default function HomeContent() {
                   style={{ 
                     width: '200px', 
                     height: '200px',
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
+                    border: '1px solid rgba(39, 2, 166, 0.2)',
                     animation: 'orbitRotate 20s linear infinite',
                   }}
                 >
@@ -241,8 +530,8 @@ export default function HomeContent() {
                         top: '50%',
                         left: '50%',
                         margin: '-16px 0 0 -16px',
-                        background: 'rgba(80, 32, 232, 0.08)',
-                        border: '1px solid rgba(80, 32, 232, 0.25)',
+                        background: 'rgba(39, 2, 166, 0.08)',
+                        border: '1px solid rgba(39, 2, 166, 0.25)',
                         color: '#2702a6',
                         transform: `rotate(${angle}deg) translateX(100px) rotate(-${angle}deg)`,
                         animation: 'nodeGlow 3s ease-in-out infinite',
@@ -295,8 +584,8 @@ export default function HomeContent() {
                   style={{ 
                     width: '36px', 
                     height: '36px',
-                    background: 'rgba(80, 32, 232, 0.08)',
-                    border: '1px solid rgba(80, 32, 232, 0.25)',
+                    background: 'rgba(39, 2, 166, 0.08)',
+                    border: '1px solid rgba(39, 2, 166, 0.25)',
                     fontSize: '1.1rem',
                     color: '#2702a6',
                   }}
@@ -387,7 +676,7 @@ export default function HomeContent() {
                     width: '36px', 
                     height: '36px',
                     background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
-                    boxShadow: '0 4px 14px rgba(80, 32, 232, 0.3)',
+                    boxShadow: '0 4px 14px rgba(39, 2, 166, 0.3)',
                     fontSize: '1.1rem',
                   }}
                 >
@@ -405,8 +694,8 @@ export default function HomeContent() {
                   style={{ 
                     width: '36px', 
                     height: '36px',
-                    background: 'rgba(80, 32, 232, 0.08)',
-                    border: '1px solid rgba(80, 32, 232, 0.35)',
+                    background: 'rgba(39, 2, 166, 0.08)',
+                    border: '1px solid rgba(39, 2, 166, 0.35)',
                     fontSize: '1.1rem',
                     color: '#2702a6',
                   }}
@@ -455,8 +744,8 @@ export default function HomeContent() {
                   style={{ 
                     width: '90px', 
                     height: '90px',
-                    background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3d7ab5 100%)',
-                    boxShadow: '0 0 40px rgba(61, 122, 181, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.3)',
+                    background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
+                    boxShadow: '0 0 40px rgba(39, 2, 166, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.3)',
                     animation: 'coreBreathe 6s ease-in-out infinite',
                   }}
                 >
@@ -479,7 +768,7 @@ export default function HomeContent() {
                     top: '20%',
                     right: '15%',
                     fontSize: '1.5rem',
-                    color: 'rgba(61, 122, 181, 0.6)',
+                    color: 'rgba(39, 2, 166, 0.5)',
                     animation: 'floatZ 5s ease-in-out infinite',
                   }}
                 >
@@ -491,7 +780,7 @@ export default function HomeContent() {
                     top: '35%',
                     right: '8%',
                     fontSize: '1rem',
-                    color: 'rgba(61, 122, 181, 0.6)',
+                    color: 'rgba(39, 2, 166, 0.5)',
                     animation: 'floatZ 5s ease-in-out infinite 1.6s',
                   }}
                 >
@@ -503,7 +792,7 @@ export default function HomeContent() {
                     top: '15%',
                     right: '25%',
                     fontSize: '1.2rem',
-                    color: 'rgba(61, 122, 181, 0.6)',
+                    color: 'rgba(39, 2, 166, 0.5)',
                     animation: 'floatZ 5s ease-in-out infinite 3.2s',
                   }}
                 >
@@ -535,295 +824,8 @@ export default function HomeContent() {
         </div>
       </section>
 
-
-      {/* Built on Industry Standards */}
-      <section className="py-20" style={{ background: '#f8fafc' }}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Grid Layout */}
-          <div 
-            className="grid gap-6"
-            style={{
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: 'auto auto 1fr',
-              gridTemplateAreas: `
-                "badge badge"
-                "title title"
-                "center right"
-              `,
-              minHeight: '480px',
-            }}
-          >
-            {/* Badge */}
-            <div style={{ gridArea: 'badge', textAlign: 'center', marginBottom: '0.5rem' }}>
-              <span 
-                className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%)',
-                  border: '1px solid rgba(245, 158, 11, 0.3)',
-                  color: '#d97706',
-                }}
-              >
-                Reliability First
-              </span>
-            </div>
-            
-            {/* Title */}
-            <h2 
-              style={{ 
-                gridArea: 'title', 
-                textAlign: 'center', 
-                fontSize: '2rem',
-                fontWeight: 800,
-                color: '#1a1a2e',
-                marginBottom: '1rem',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              Built on Industry Standards
-            </h2>
-            
-            {/* Left Content */}
-            <div style={{ gridArea: 'center', justifySelf: 'end', alignSelf: 'center', maxWidth: '460px', padding: '0 1rem' }}>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Every system is measured against real reliability targets — 
-                not just uptime numbers, but SLAs, SLOs, and SLIs that your 
-                business can depend on.
-              </p>
-              <div className="flex flex-wrap gap-3 mb-6">
-                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(80, 32, 232, 0.08)', border: '1px solid rgba(80, 32, 232, 0.2)', color: '#4b5563' }}>
-                  Error Budgets
-                </span>
-                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(80, 32, 232, 0.08)', border: '1px solid rgba(80, 32, 232, 0.2)', color: '#4b5563' }}>
-                  Latency Targets
-                </span>
-                <span className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(80, 32, 232, 0.08)', border: '1px solid rgba(80, 32, 232, 0.2)', color: '#4b5563' }}>
-                  Availability Guarantees
-                </span>
-              </div>
-              
-              {/* SLA → SLO → SLI → Uptime Observability Bridge */}
-              <div className="flex items-center gap-2 pt-4 border-t border-gray-200">
-                <span 
-                  className="px-3 py-1.5 rounded text-xs font-bold"
-                  style={{ 
-                    background: 'rgba(80, 32, 232, 0.08)', 
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
-                    color: '#2702a6',
-                    animation: 'floatStandard 3s ease-in-out infinite',
-                  }}
-                >
-                  SLA
-                </span>
-                <span 
-                  className="text-gray-400"
-                  style={{ animation: 'arrowPulse 2s ease-in-out infinite' }}
-                >
-                  →
-                </span>
-                <span 
-                  className="px-3 py-1.5 rounded text-xs font-bold"
-                  style={{ 
-                    background: 'rgba(80, 32, 232, 0.08)', 
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
-                    color: '#2702a6',
-                    animation: 'floatStandard 3s ease-in-out infinite 0.5s',
-                  }}
-                >
-                  SLO
-                </span>
-                <span 
-                  className="text-gray-400"
-                  style={{ animation: 'arrowPulse 2s ease-in-out infinite 0.33s' }}
-                >
-                  →
-                </span>
-                <span 
-                  className="px-3 py-1.5 rounded text-xs font-bold"
-                  style={{ 
-                    background: 'rgba(80, 32, 232, 0.08)', 
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
-                    color: '#2702a6',
-                    animation: 'floatStandard 3s ease-in-out infinite 1s',
-                  }}
-                >
-                  SLI
-                </span>
-                <span 
-                  className="text-gray-400"
-                  style={{ animation: 'arrowPulse 2s ease-in-out infinite 0.66s' }}
-                >
-                  →
-                </span>
-                <span 
-                  className="px-3 py-1.5 rounded text-xs font-bold whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(16, 185, 129, 0.08)', 
-                    border: '1px solid rgba(16, 185, 129, 0.2)',
-                    color: '#059669',
-                    animation: 'floatStandard 3s ease-in-out infinite 1.5s',
-                  }}
-                >
-                  Uptime Observability
-                </span>
-              </div>
-            </div>
-            
-            {/* Right Animation - Targets with Orbiting Badges */}
-            <div style={{ gridArea: 'right', justifySelf: 'start', alignSelf: 'center', paddingLeft: '1rem' }}>
-              <div className="relative flex items-center justify-center" style={{ width: '380px', height: '380px' }}>
-                {/* Outer ring - dashed cyan */}
-                <div 
-                  className="absolute rounded-full"
-                  style={{ 
-                    width: '340px', 
-                    height: '340px',
-                    border: '1px dashed rgba(0, 188, 212, 0.15)',
-                    animation: 'targetPulse 4s ease-in-out infinite',
-                  }}
-                />
-                
-                {/* Middle ring - green */}
-                <div 
-                  className="absolute rounded-full"
-                  style={{ 
-                    width: '240px', 
-                    height: '240px',
-                    border: '1px solid rgba(16, 185, 129, 0.2)',
-                    animation: 'targetPulse 4s ease-in-out infinite 0.66s',
-                  }}
-                />
-                
-                {/* Inner ring - purple */}
-                <div 
-                  className="absolute rounded-full"
-                  style={{ 
-                    width: '140px', 
-                    height: '140px',
-                    border: '1px solid rgba(80, 32, 232, 0.25)',
-                    animation: 'targetPulse 4s ease-in-out infinite 1.33s',
-                  }}
-                />
-                
-                {/* Center checkmark */}
-                <div 
-                  className="relative flex items-center justify-center rounded-full z-10"
-                  style={{ 
-                    width: '44px', 
-                    height: '44px',
-                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                    boxShadow: '0 4px 15px rgba(16, 185, 129, 0.4)',
-                  }}
-                >
-                  <span className="text-white text-lg font-bold">✓</span>
-                </div>
-                
-                {/* Inner orbit badges - SLA, SLO, SLI */}
-                <span 
-                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(80, 32, 232, 0.1)',
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
-                    color: '#2702a6',
-                    animation: 'orbitInner 20s linear infinite',
-                  }}
-                >
-                  SLA
-                </span>
-                <span 
-                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(80, 32, 232, 0.1)',
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
-                    color: '#2702a6',
-                    animation: 'orbitInner 20s linear infinite',
-                    animationDelay: '-6.66s',
-                  }}
-                >
-                  SLO
-                </span>
-                <span 
-                  className="absolute px-1.5 py-0.5 rounded text-[0.55rem] font-bold uppercase tracking-wider whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(80, 32, 232, 0.1)',
-                    border: '1px solid rgba(80, 32, 232, 0.2)',
-                    color: '#2702a6',
-                    animation: 'orbitInner 20s linear infinite',
-                    animationDelay: '-13.33s',
-                  }}
-                >
-                  SLI
-                </span>
-                
-                {/* Middle orbit badges - Uptime, 99.9% */}
-                <span 
-                  className="absolute px-2.5 py-1 rounded text-xs font-semibold tracking-wide whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(16, 185, 129, 0.1)',
-                    border: '1px solid rgba(16, 185, 129, 0.2)',
-                    color: '#059669',
-                    animation: 'orbitMiddle 25s linear infinite reverse',
-                  }}
-                >
-                  Uptime
-                </span>
-                <span 
-                  className="absolute px-2.5 py-1 rounded text-xs font-semibold tracking-wide whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(16, 185, 129, 0.1)',
-                    border: '1px solid rgba(16, 185, 129, 0.2)',
-                    color: '#059669',
-                    animation: 'orbitMiddle 25s linear infinite reverse',
-                    animationDelay: '-12.5s',
-                  }}
-                >
-                  99.9%
-                </span>
-                
-                {/* Outer orbit badges - Latency, Errors, Observability */}
-                <span 
-                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(0, 188, 212, 0.1)',
-                    border: '1px solid rgba(0, 188, 212, 0.2)',
-                    color: '#0891b2',
-                    animation: 'orbitOuter 30s linear infinite',
-                  }}
-                >
-                  Latency
-                </span>
-                <span 
-                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(0, 188, 212, 0.1)',
-                    border: '1px solid rgba(0, 188, 212, 0.2)',
-                    color: '#0891b2',
-                    animation: 'orbitOuter 30s linear infinite',
-                    animationDelay: '-10s',
-                  }}
-                >
-                  Errors
-                </span>
-                <span 
-                  className="absolute px-3 py-1 rounded text-sm font-semibold tracking-wide whitespace-nowrap"
-                  style={{ 
-                    background: 'rgba(0, 188, 212, 0.1)',
-                    border: '1px solid rgba(0, 188, 212, 0.2)',
-                    color: '#0891b2',
-                    animation: 'orbitOuter 30s linear infinite',
-                    animationDelay: '-20s',
-                  }}
-                >
-                  Observability
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* We Listen to Your Team - Docusaurus Style */}
-      <section className="py-20" style={{ background: 'linear-gradient(180deg, rgba(80, 32, 232, 0.03) 0%, transparent 60%)' }}>
+      {/* We Listen to Your Team */}
+      <section className="py-20" style={{ background: 'linear-gradient(180deg, rgba(39, 2, 166, 0.03) 0%, transparent 60%)' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-12">
@@ -866,8 +868,8 @@ export default function HomeContent() {
                 style={{ 
                   width: '80px', 
                   height: '80px',
-                  background: 'linear-gradient(135deg, rgba(80, 32, 232, 0.1) 0%, rgba(0, 188, 212, 0.1) 100%)',
-                  border: '2px solid rgba(80, 32, 232, 0.2)',
+                  background: 'linear-gradient(135deg, rgba(39, 2, 166, 0.1) 0%, rgba(0, 188, 212, 0.1) 100%)',
+                  border: '2px solid rgba(39, 2, 166, 0.2)',
                   padding: '1rem',
                   animation: 'earPulse 3s ease-in-out infinite',
                 }}
@@ -881,7 +883,7 @@ export default function HomeContent() {
                   />
                   <defs>
                     <linearGradient id="earGrad" x1="12" y1="8" x2="52" y2="56">
-                      <stop stopColor="#5020e8"/>
+                      <stop stopColor="#2702a6"/>
                       <stop offset="1" stopColor="#00bcd4"/>
                     </linearGradient>
                   </defs>
@@ -906,7 +908,7 @@ export default function HomeContent() {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    borderColor: 'rgba(80, 32, 232, 0.15)',
+                    borderColor: 'rgba(39, 2, 166, 0.15)',
                     opacity: 0,
                     animation: 'waveExpand 4s ease-out infinite',
                     animationDelay: `${delay}s`,
@@ -934,7 +936,7 @@ export default function HomeContent() {
                 <div 
                   className="w-4 h-4 rounded-full"
                   style={{ 
-                    background: 'linear-gradient(135deg, #5020e8, #00bcd4)',
+                    background: 'linear-gradient(135deg, #2702a6, #00bcd4)',
                     animation: 'voicePulse 2s ease-in-out infinite',
                     animationDelay: voice.delay,
                   }}
@@ -942,8 +944,8 @@ export default function HomeContent() {
                 <span 
                   className="text-xs font-bold text-gray-700 px-2 py-1 rounded-full whitespace-nowrap"
                   style={{ 
-                    background: 'rgba(80, 32, 232, 0.08)',
-                    border: '1px solid rgba(80, 32, 232, 0.15)',
+                    background: 'rgba(39, 2, 166, 0.08)',
+                    border: '1px solid rgba(39, 2, 166, 0.15)',
                   }}
                 >
                   {voice.label}
@@ -960,7 +962,7 @@ export default function HomeContent() {
             >
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#5020e8" stopOpacity="0.9"/>
+                  <stop offset="0%" stopColor="#2702a6" stopOpacity="0.9"/>
                   <stop offset="100%" stopColor="#00bcd4" stopOpacity="0.9"/>
                 </linearGradient>
               </defs>
@@ -1011,7 +1013,7 @@ export default function HomeContent() {
               className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-base font-semibold text-white transition-all hover:opacity-90"
               style={{
                 background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)',
-                boxShadow: '0 4px 14px rgba(80, 32, 232, 0.3)',
+                boxShadow: '0 4px 14px rgba(39, 2, 166, 0.3)',
               }}
             >
               Get Started

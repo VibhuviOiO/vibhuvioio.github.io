@@ -120,7 +120,7 @@ function LiveProductCard({ title, description, link, github, tags }: {
         </div>
       </div>
       <div className="p-4 border-t border-gray-100 flex justify-between items-center">
-        <Link href={link} className="text-[#2f02c4] font-medium hover:underline flex items-center gap-1">
+        <Link href={link} className="text-[#2702a6] font-medium hover:underline flex items-center gap-1">
           View Product <ArrowRight className="h-4 w-4" />
         </Link>
         {github && (
@@ -172,7 +172,7 @@ function UpcomingProductCard({ title, description, status, link, features, tags,
         )}
       </div>
       <div className="p-4 border-t border-gray-100 flex justify-between items-center">
-        <Link href={link} className="text-[#2f02c4] font-medium hover:underline flex items-center gap-1">
+        <Link href={link} className="text-[#2702a6] font-medium hover:underline flex items-center gap-1">
           Learn More <ArrowRight className="h-4 w-4" />
         </Link>
         {(isLive || status === 'Beta') && github && (
@@ -193,7 +193,7 @@ function FutureProductCard({ title, description, status, link }: {
 }) {
   return (
     <Link href={link} className="block">
-      <div className="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:border-[#2f02c4]/30 hover:shadow-md transition-all">
+      <div className="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:border-[#2702a6]/30 hover:shadow-md transition-all">
         <div className="mb-4">
           <StatusBadge status={status} />
         </div>
@@ -283,7 +283,7 @@ export default function ProductsPage() {
             <Link
               href="/"
               className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-base font-semibold text-white transition-all hover:opacity-90"
-              style={{ background: 'linear-gradient(135deg, #5020e8 0%, #2f02c4 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #2702a6 0%, #200289 100%)' }}
             >
               Browse Documentation
             </Link>

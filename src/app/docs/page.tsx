@@ -32,8 +32,8 @@ export default function DocsPage() {
                 className="rounded-xl border border-gray-200 bg-white p-6 hover:border-gray-300 hover:shadow-lg transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: 'rgba(47, 2, 196, 0.1)' }}>
-                    <Icon className="h-5 w-5" style={{ color: '#2f02c4' }} />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: 'rgba(39, 2, 166, 0.1)' }}>
+                    <Icon className="h-5 w-5" style={{ color: '#2702a6' }} />
                   </div>
                   <h2 className="text-xl font-semibold text-gray-900">{group.title}</h2>
                 </div>
@@ -69,24 +69,24 @@ export default function DocsPage() {
             Popular Guides
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/docs/nginx/container" className="group flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 hover:border-[#2f02c4] hover:shadow-md transition-all">
+            <Link href="/docs/nginx/container" className="group flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 hover:border-[#2702a6] hover:shadow-md transition-all">
               <span className="text-2xl">🌐</span>
               <div>
-                <div className="font-medium text-gray-900 group-hover:text-[#2f02c4]">NGINX Container</div>
+                <div className="font-medium text-gray-900 group-hover:text-[#2702a6]">NGINX Container</div>
                 <div className="text-xs text-gray-500">Run NGINX as container</div>
               </div>
             </Link>
             <Link href="/docs/mysql/container" className="group flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 hover:shadow-md transition-all">
               <span className="text-2xl">🐬</span>
               <div>
-                <div className="font-medium text-gray-900 group-hover:text-[#2f02c4]">MySQL Container</div>
+                <div className="font-medium text-gray-900 group-hover:text-[#2702a6]">MySQL Container</div>
                 <div className="text-xs text-gray-500">Deploy MySQL as container</div>
               </div>
             </Link>
             <Link href="/docs/cassandra/cluster" className="group flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 hover:shadow-md transition-all">
               <span className="text-2xl">🟣</span>
               <div>
-                <div className="font-medium text-gray-900 group-hover:text-[#2f02c4]">Cassandra Cluster</div>
+                <div className="font-medium text-gray-900 group-hover:text-[#2702a6]">Cassandra Cluster</div>
                 <div className="text-xs text-gray-500">Multi-node cluster setup</div>
               </div>
             </Link>

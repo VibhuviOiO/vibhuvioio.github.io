@@ -9,7 +9,7 @@ function LogoTitle() {
       <span 
         className="font-extrabold whitespace-nowrap"
         style={{ 
-          color: '#2f02c4',
+          color: '#2702a6',
           fontSize: '1.25rem',
           letterSpacing: '-0.02em',
         }}
@@ -24,7 +24,7 @@ function LogoTitle() {
         style={{ 
           fontSize: '1.5rem',
           letterSpacing: '-0.02em',
-          background: 'linear-gradient(90deg, #00bcd4 0%, #00bcd4 36%, #2f02c4 36%, #2f02c4 64%, #00bcd4 64%, #00bcd4 100%)',
+          background: 'linear-gradient(90deg, #00bcd4 0%, #00bcd4 36%, #2702a6 36%, #2702a6 64%, #00bcd4 64%, #00bcd4 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

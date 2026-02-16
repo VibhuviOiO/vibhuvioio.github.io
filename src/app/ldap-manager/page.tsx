@@ -109,7 +109,7 @@ export default function LDAPManagerPage() {
             {features.map((f) => (
               <div 
                 key={f.title}
-                className="rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg hover:border-[#2f02c4]/30 transition-all"
+                className="rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg hover:border-[#2702a6]/30 transition-all"
               >
                 <div className="text-4xl mb-4">{f.icon}</div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{f.title}</h3>
@@ -175,9 +175,9 @@ services:
               <Link
                 key={doc.href}
                 href={doc.href}
-                className="group rounded-xl border border-gray-200 p-5 hover:border-[#2f02c4]/30 hover:shadow-md transition-all"
+                className="group rounded-xl border border-gray-200 p-5 hover:border-[#2702a6]/30 hover:shadow-md transition-all"
               >
-                <h3 className="font-bold text-gray-900 mb-1 flex items-center gap-2 group-hover:text-[#2f02c4]">
+                <h3 className="font-bold text-gray-900 mb-1 flex items-center gap-2 group-hover:text-[#2702a6]">
                   <span>{doc.icon}</span>
                   {doc.title}
                 </h3>
