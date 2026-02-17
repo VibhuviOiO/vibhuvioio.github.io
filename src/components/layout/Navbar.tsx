@@ -42,11 +42,11 @@ function NineDotsIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 
 // Products data
-type Product = { slug: string; name: string; icon: string; badge?: string; disabled?: boolean };
+type Product = { slug: string; name: string; icon: string; image?: string; badge?: string; disabled?: boolean };
 
 const liveProducts: Product[] = [
-  { slug: '/docker-registry-ui', name: 'Docker Registry UI', icon: '🐳' },
-  { slug: '/ldap-manager', name: 'LDAP Manager', icon: '🗂️' },
+  { slug: '/docker-registry-ui', name: 'Docker Registry UI', icon: '🐳', image: '/img/docker-registry-ui/docker-registry-ui.svg' },
+  { slug: '/ldap-manager', name: 'LDAP Manager', icon: '🗂️', image: '/img/ldap-manager/ldap-manager-ui.png' },
   { slug: '/products/openldap-docker', name: 'OpenLDAP Docker', icon: '📦', disabled: true },
   { slug: '/products/suchaka', name: 'Suchaka Status', icon: '📊', disabled: true },
 ];
@@ -58,22 +58,37 @@ const devProducts: Product[] = [
   { slug: '/products/container-talks', name: 'Container Talks', icon: '📚', disabled: true },
 ];
 
+function ProductIcon({ product, disabled }: { product: Product; disabled?: boolean }) {
+  if (product.image) {
+    return (
+      <Image
+        src={product.image}
+        alt=""
+        width={24}
+        height={24}
+        className={`w-6 h-6 rounded ${disabled ? 'grayscale opacity-40' : ''}`}
+      />
+    );
+  }
+  return <span className={`text-xl ${disabled ? 'grayscale opacity-40' : ''}`}>{product.icon}</span>;
+}
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-xl">
-      <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="flex h-[4.5rem] items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo with Image + Title */}
         <Link href="/" className="flex items-center gap-2">
           {/* Logo Image */}
-          <Image 
-            src="/img/logo.svg" 
-            alt="" 
-            width={28} 
-            height={28}
-            className="h-7 w-7"
+          <Image
+            src="/img/logo.svg"
+            alt=""
+            width={32}
+            height={32}
+            className="h-8 w-8"
             priority
           />
           {/* Logo Title */}
@@ -138,7 +153,7 @@ export default function Navbar() {
                               key={product.slug}
                               className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 cursor-default"
                             >
-                              <span className="text-xl grayscale opacity-40">{product.icon}</span>
+                              <ProductIcon product={product} disabled />
                               <span>{product.name}</span>
                             </span>
                           ) : (
@@ -148,7 +163,7 @@ export default function Navbar() {
                               onClick={() => setMegaMenuOpen(false)}
                               className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
                             >
-                              <span className="text-xl">{product.icon}</span>
+                              <ProductIcon product={product} />
                               <span>{product.name}</span>
                             </Link>
                           )
@@ -168,7 +183,7 @@ export default function Navbar() {
                               key={product.slug}
                               className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 cursor-default"
                             >
-                              <span className="text-xl grayscale opacity-40">{product.icon}</span>
+                              <ProductIcon product={product} disabled />
                               <span className="flex items-center gap-2">
                                 {product.name}
                                 {product.badge && (
@@ -185,7 +200,7 @@ export default function Navbar() {
                               onClick={() => setMegaMenuOpen(false)}
                               className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
                             >
-                              <span className="text-xl">{product.icon}</span>
+                              <ProductIcon product={product} />
                               <span className="flex items-center gap-2">
                                 {product.name}
                                 {product.badge && (
@@ -260,7 +275,7 @@ export default function Navbar() {
                     key={product.slug}
                     className="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 cursor-default"
                   >
-                    <span className="grayscale opacity-40">{product.icon}</span>
+                    <ProductIcon product={product} disabled />
                     {product.name}
                     {product.badge && (
                       <span className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-400">
@@ -275,7 +290,7 @@ export default function Navbar() {
                     className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <span>{product.icon}</span>
+                    <ProductIcon product={product} />
                     {product.name}
                     {product.badge && (
                       <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700">
