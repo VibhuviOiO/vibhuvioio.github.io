@@ -581,7 +581,7 @@ export default function HomeContent() {
         {/* Animated infrastructure grid */}
         <InfraGrid />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
               We Make Your
@@ -613,7 +613,7 @@ export default function HomeContent() {
 
       {/* Built on Industry Standards */}
       <section className="py-12 lg:py-16 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
             <div>
@@ -690,7 +690,7 @@ export default function HomeContent() {
 
       {/* Stats Section */}
       <section className="py-8 lg:py-10 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-3 gap-6 text-center">
             <div>
               <div className="text-3xl sm:text-4xl font-bold text-primary">140+</div>
@@ -710,7 +710,7 @@ export default function HomeContent() {
 
       {/* Everything Connected */}
       <section className="py-12 lg:py-16 bg-section-alt">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left - Content */}
             <div>
@@ -812,7 +812,7 @@ export default function HomeContent() {
 
       {/* Sleep Soundly */}
       <section className="py-12 lg:py-16 bg-section-alt">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left - Animation */}
             <div className="flex justify-center items-center">
@@ -906,7 +906,7 @@ export default function HomeContent() {
           <div className="absolute w-[250px] h-[250px] rounded-full" style={{ bottom: '-5%', right: '-3%', background: 'radial-gradient(circle, rgba(0,188,212,0.03) 0%, transparent 70%)', animation: 'convGlow 8s ease-in-out infinite 3s' }} />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left — text content */}
             <div>
@@ -959,7 +959,7 @@ export default function HomeContent() {
 
       {/* Bottom CTA */}
       <section className="py-16 lg:py-20 bg-section-alt">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">
             Ready to Simplify Your Infrastructure?
           </h2>

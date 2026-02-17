@@ -21,6 +21,8 @@
         {
           "title": "Elasticsearch",
           "items": [
+            { "id": "es-single-node", "title": "Single Node Setup", "slug": "elk/elasticsearch/single-node" },
+            { "id": "es-crud", "title": "CRUD Operations", "slug": "elk/elasticsearch/crud-operations" },
             { "id": "es-cluster", "title": "Cluster Setup", "slug": "elk/elasticsearch/cluster" },
             { "id": "es-indexing", "title": "Index Management", "slug": "elk/elasticsearch/indexing" },
             { "id": "es-monitoring", "title": "Monitoring", "slug": "elk/elasticsearch/monitoring" },
@@ -30,6 +32,7 @@
         {
           "title": "Logstash Pipelines",
           "items": [
+            { "id": "logstash-pipeline", "title": "Basic Pipeline", "slug": "elk/logstash/pipeline" },
             { "id": "logstash-kafka", "title": "Pipeline for Kafka", "slug": "elk/logstash/kafka" },
             { "id": "logstash-docker", "title": "Docker Logging", "slug": "elk/logstash/docker" },
             { "id": "logstash-filebeat", "title": "Filebeat + Infra Logs", "slug": "elk/logstash/filebeat" },
@@ -39,6 +42,7 @@
         {
           "title": "Kibana",
           "items": [
+            { "id": "kibana-container", "title": "Run Kibana", "slug": "elk/kibana/container" },
             { "id": "kibana-dashboards", "title": "Dashboard Creation", "slug": "elk/kibana/dashboards" },
             { "id": "kibana-alerts", "title": "Alerting", "slug": "elk/kibana/alerts" },
             { "id": "kibana-security", "title": "Security Setup", "slug": "elk/kibana/security" }

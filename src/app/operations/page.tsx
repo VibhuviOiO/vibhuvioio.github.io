@@ -127,7 +127,7 @@ export default function OperationsPage() {
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)' }}>
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="flex items-center gap-4 mb-4">
             <GraduationCap className="h-10 w-10 text-white/70" />
             <h1 className="text-4xl sm:text-5xl font-extrabold text-white">Learn</h1>

@@ -3,6 +3,7 @@ import { loadDocContent } from '@/lib/docs-server';
 import { loadGeneralSidebarClient } from '@/lib/docs-client';
 import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
+import TableOfContents from '@/components/docs/TableOfContents';
 
 interface DocPageProps {
   params: Promise<{
@@ -24,13 +25,12 @@ export default async function DocPage({ params }: DocPageProps) {
       sidebar={{ groups: sidebar.groups }}
       basePath="/docs"
     >
-      <article className="prose prose-invert max-w-none">
-        <h1 className="text-3xl font-bold text-white mb-2">{doc.meta.title || slug[slug.length - 1]}</h1>
-        {doc.meta.description && (
-          <p className="text-gray-400 text-lg mb-8">{doc.meta.description}</p>
-        )}
-        <DocContent content={doc.content} />
-      </article>
+      <div className="flex gap-8">
+        <article className="flex-1 min-w-0 max-w-none">
+          <DocContent content={doc.content} />
+        </article>
+        <TableOfContents content={doc.content} />
+      </div>
     </DocsLayout>
   );
 }

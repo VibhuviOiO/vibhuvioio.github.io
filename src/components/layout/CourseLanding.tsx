@@ -68,7 +68,7 @@ export default function CourseLanding({
     <main className="min-h-screen bg-gray-50">
       {/* Full-width hero — primary dark */}
       <div style={{ background: 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)' }}>
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-8">
           <Link
             href="/operations"
             className="inline-flex items-center gap-1.5 text-white/50 hover:text-white/80 text-sm mb-6 transition-colors"
@@ -143,7 +143,7 @@ export default function CourseLanding({
       </div>
 
       {/* Content — full width */}
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Main */}
           <div className="lg:col-span-2 space-y-6">

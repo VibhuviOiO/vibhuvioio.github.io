@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { loadDocContent } from '@/lib/docs-server';
 import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
+import TableOfContents from '@/components/docs/TableOfContents';
 
 // SEO metadata mapping for doc pages
 const docSeo: Record<string, { title: string; description: string }> = {
@@ -121,9 +122,12 @@ export default async function DockerRegistryDocPage({ params }: DocPageProps) {
         </Link>
       </div>
       
-      <article className="prose max-w-none">
-        <DocContent content={doc.content} />
-      </article>
+      <div className="flex gap-8">
+        <article className="flex-1 min-w-0 max-w-none">
+          <DocContent content={doc.content} />
+        </article>
+        <TableOfContents content={doc.content} />
+      </div>
     </DocsLayout>
   );
 }

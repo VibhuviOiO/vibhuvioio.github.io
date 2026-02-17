@@ -145,7 +145,7 @@ export function CourseLessonLayout({
         courseSlug={courseSlug}
       />
       <main className="flex-1 min-w-0 bg-white">
-        <div className="mx-auto max-w-4xl px-6 py-8">
+        <div className="w-full px-6 md:px-10 lg:px-12 py-10">
           {children}
         </div>
       </main>

@@ -108,28 +108,34 @@ function renderMarkdown(content: string): string {
   });
 
   // Step 5: Process remaining markdown
+  // Helper to create ID from heading text
+  const createId = (text: string) => text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-');
+  
   processed = processed
-    // Headers - dark blue color like in expected design
-    .replace(/^\s*# (.+)$/gm, '<h1 class="text-4xl font-bold text-[#1a365d] mb-4 mt-8">$1</h1>')
-    .replace(/^\s*## (.+)$/gm, '<h2 class="text-3xl font-bold text-[#1a365d] mb-3 mt-8">$1</h2>')
-    .replace(/^\s*### (.+)$/gm, '<h3 class="text-2xl font-bold text-[#1a365d] mb-3 mt-6">$1</h3>')
-    .replace(/^\s*#### (.+)$/gm, '<h4 class="text-xl font-semibold text-[#1a365d] mb-2 mt-4">$1</h4>')
+    // Headers - Clean, readable sizes
+    .replace(/^\s*# (.+)$/gm, (match, text) => `<h1 id="${createId(text)}" class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-0">${text}</h1>`)
+    .replace(/^\s*## (.+)$/gm, (match, text) => `<h2 id="${createId(text)}" class="text-2xl md:text-3xl font-bold text-gray-900 mb-5 mt-10">${text}</h2>`)
+    .replace(/^\s*### (.+)$/gm, (match, text) => `<h3 id="${createId(text)}" class="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-8">${text}</h3>`)
+    .replace(/^\s*#### (.+)$/gm, (match, text) => `<h4 id="${createId(text)}" class="text-lg md:text-xl font-semibold text-gray-900 mb-3 mt-6">${text}</h4>`)
     // Bold
-    .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>')
     // Italic
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    // Images
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="rounded-lg border border-gray-200 my-6 max-w-full" />')
-    // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 hover:text-blue-800 underline">$1</a>')
-    // Inline code - pink/red background like in expected design
-    .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-pink-50 text-pink-700 text-sm font-mono">$1</code>')
+    .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>')
+    // Images - Medium style full width
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="rounded-lg my-10 max-w-full mx-auto" />')
+    // Links - Medium style (no underline, color only)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[#2702a6] hover:underline underline-offset-2 decoration-2">$1</a>')
+    // Inline code - subtle style
+    .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-[0.875em] font-mono">$1</code>')
     // Horizontal rule
-    .replace(/^\s*---$/gm, '<hr class="border-gray-200 my-8" />');
+    .replace(/^\s*---$/gm, '<hr class="border-gray-200 my-12" />');
 
-  // Step 6: Paragraphs - must be last, but don't wrap block elements
-  processed = processed.replace(/\n\n([^<\n][^\n]*(?:\n[^<\n][^\n]*)*)\n\n/g, '\n\n<p class="text-gray-700 mb-4 leading-relaxed">$1</p>\n\n');
-  processed = processed.replace(/\n\n([^<\n][^\n]*)$/g, '\n\n<p class="text-gray-700 mb-4 leading-relaxed">$1</p>');
+  // Step 6: Paragraphs - Full width with comfortable reading
+  processed = processed.replace(/\n\n([^<\n][^\n]*(?:\n[^<\n][^\n]*)*)\n\n/g, '\n\n<p class="text-[16px] md:text-[17px] text-gray-700 mb-6 leading-[1.7] max-w-4xl">$1</p>\n\n');
+  processed = processed.replace(/\n\n([^<\n][^\n]*)$/g, '\n\n<p class="text-[16px] md:text-[17px] text-gray-700 mb-6 leading-[1.7] max-w-4xl">$1</p>');
 
   // Step 7: Restore code blocks
   codeBlocks.forEach((block, i) => {

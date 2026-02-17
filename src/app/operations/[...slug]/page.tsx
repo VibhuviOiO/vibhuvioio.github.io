@@ -4,6 +4,7 @@ import { loadOperationsSidebarClient } from '@/lib/docs-client';
 import { CourseLessonLayout } from '@/components/layout/CourseLayout';
 import CourseLanding from '@/components/layout/CourseLanding';
 import DocContent from '@/components/docs/DocContent';
+import TableOfContents from '@/components/docs/TableOfContents';
 import DisqusComments from '@/components/DisqusComments';
 import { Search, Database } from 'lucide-react';
 
@@ -114,16 +115,26 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
       courseTitle={category.title}
       courseSlug={categoryId}
     >
-      <article className="prose max-w-none">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          {doc.meta.title || slug[slug.length - 1]}
-        </h1>
-        {doc.meta.description && (
-          <p className="text-gray-500 text-base mb-8">{doc.meta.description}</p>
-        )}
-        <DocContent content={doc.content} />
-      </article>
-      <DisqusComments title={doc.meta.title || slug[slug.length - 1]} />
+      <div className="flex gap-8">
+        <div className="flex-1 min-w-0 max-w-none">
+          <article className="course-content">
+            {/* Lesson Header - O'Reilly Style */}
+            <div className="border-b border-gray-200 pb-6 mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                {doc.meta.title || slug[slug.length - 1]}
+              </h1>
+              {doc.meta.description && (
+                <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
+                  {doc.meta.description}
+                </p>
+              )}
+            </div>
+            <DocContent content={doc.content} />
+          </article>
+          <DisqusComments title={doc.meta.title || slug[slug.length - 1]} />
+        </div>
+        <TableOfContents content={doc.content} />
+      </div>
     </CourseLessonLayout>
   );
 }

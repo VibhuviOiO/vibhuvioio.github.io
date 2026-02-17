@@ -218,7 +218,7 @@ export default function ProductsPage() {
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)' }}>
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="flex items-center gap-4 mb-4">
             <Package className="h-10 w-10 text-white/70" />
             <h1 className="text-4xl sm:text-5xl font-extrabold text-white">Products</h1>
@@ -242,7 +242,7 @@ export default function ProductsPage() {
 
       {/* Live Products */}
       <section className="py-12 lg:py-16 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-extrabold text-gray-900 mb-8">Live Products</h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {liveProducts.map((product) => (
@@ -254,7 +254,7 @@ export default function ProductsPage() {
 
       {/* Coming Soon */}
       <section className="pb-16 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-extrabold text-gray-900 mb-8">Coming Soon</h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {comingProducts.map((product) => (
@@ -266,7 +266,7 @@ export default function ProductsPage() {
 
       {/* Bottom CTA */}
       <section className="py-16 lg:py-20 bg-section-alt">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Need Setup Help?
           </h2>

@@ -3,18 +3,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, BookOpen, Server } from 'lucide-react';
+import { Menu, X, BookOpen, Server, ChevronDown } from 'lucide-react';
 
-// Logo Title component with exact styling from Docusaurus
+// Logo Title component with larger text for better visibility
 function LogoTitle() {
   return (
     <div className="flex items-baseline">
       {/* "Vibhuvi" in purple */}
-      <span className="logo-vibhuvi">Vibhuvi</span>
+      <span className="text-xl font-bold text-[#2702a6]">Vibhuvi</span>
       {/* Space */}
       <span>&nbsp;</span>
-      {/* "OiO" with gradient - O in turquoise, i in purple, O in turquoise */}
-      <span className="logo-oio">OiO</span>
+      {/* "OiO" with gradient */}
+      <span className="text-xl font-bold bg-gradient-to-r from-[#00bcd4] via-[#2702a6] to-[#00bcd4] bg-clip-text text-transparent">OiO</span>
     </div>
   );
 }
@@ -78,17 +78,17 @@ export default function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-xl">
-      <div className="flex h-[4.5rem] items-center justify-between px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-xl">
+      <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
         {/* Logo with Image + Title */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2.5">
           {/* Logo Image */}
           <Image
             src="/img/logo.svg"
             alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8"
+            width={36}
+            height={36}
+            className="h-9 w-9"
             priority
           />
           {/* Logo Title */}
@@ -96,75 +96,72 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation - Right Side */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-2">
           {/* Docs with Icon */}
           <Link
             href="/docs"
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-[#2702a6] transition-colors rounded-lg hover:bg-gray-50"
+            className="flex items-center gap-2 px-4 py-2.5 text-[15px] font-semibold text-gray-700 hover:text-[#2702a6] transition-all rounded-lg hover:bg-gray-50/80"
           >
-            <BookOpen className="h-4 w-4" />
+            <BookOpen className="h-[18px] w-[18px]" />
             <span>Docs</span>
           </Link>
           
           {/* Learn with Icon */}
           <Link
             href="/operations"
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-[#2702a6] transition-colors rounded-lg hover:bg-gray-50"
+            className="flex items-center gap-2 px-4 py-2.5 text-[15px] font-semibold text-gray-700 hover:text-[#2702a6] transition-all rounded-lg hover:bg-gray-50/80"
           >
-            <Server className="h-4 w-4" />
+            <Server className="h-[18px] w-[18px]" />
             <span>Learn</span>
           </Link>
 
-          {/* Products Mega Menu Trigger - button with icon + label */}
-          <div className="relative">
+          {/* Products Mega Menu Trigger */}
+          <div className="relative ml-2">
             <button
               onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-              className="flex items-center gap-2 ml-2 px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-600 hover:text-[#2702a6] hover:border-[#2702a6]/30 hover:bg-[#2702a6]/5 transition-all"
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-[#2702a6] text-white hover:bg-[#1a0175] transition-all shadow-lg shadow-[#2702a6]/20"
             >
               <NineDotsIcon className="h-5 w-5" />
-              <span className="text-sm font-medium">Products</span>
-              <svg className={`h-4 w-4 transition-transform ${megaMenuOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              <span className="text-[15px] font-semibold">Products</span>
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {/* Mega Menu Dropdown */}
             {megaMenuOpen && (
               <>
-                {/* Backdrop */}
+                {/* Invisible backdrop to catch clicks - doesn't affect appearance */}
                 <div 
-                  className="fixed inset-0 z-40"
+                  className="fixed inset-0 z-[-1]"
                   onClick={() => setMegaMenuOpen(false)}
                 />
-                {/* Menu */}
-                <div 
-                  className="absolute top-full right-0 mt-2 w-[480px] rounded-xl border border-gray-200 bg-white p-5 shadow-2xl z-50"
-                >
-                  <div className="grid grid-cols-2 gap-4">
+                {/* Menu with its own shadow */}
+                <div className="absolute top-full right-0 mt-3 w-[520px] rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl z-50">
+                  <div className="grid grid-cols-2 gap-6">
                     {/* Live Products Column */}
                     <div>
-                      <div className="text-xs font-semibold text-gray-900 mb-3 flex items-center gap-1 uppercase tracking-wider">
-                        🚀 Live Products
+                      <div className="text-xs font-bold text-gray-900 mb-4 flex items-center gap-2 uppercase tracking-wider">
+                        <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                        Live Products
                       </div>
                       <div className="space-y-1">
                         {liveProducts.map((product) => (
                           product.disabled ? (
                             <span
                               key={product.slug}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 cursor-default"
+                              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[14px] text-gray-300 cursor-default"
                             >
                               <ProductIcon product={product} disabled />
-                              <span>{product.name}</span>
+                              <span className="font-medium">{product.name}</span>
                             </span>
                           ) : (
                             <Link
                               key={product.slug}
                               href={product.slug}
                               onClick={() => setMegaMenuOpen(false)}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
+                              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[14px] text-gray-700 hover:bg-[#2702a6]/5 hover:text-[#2702a6] transition-all group"
                             >
                               <ProductIcon product={product} />
-                              <span>{product.name}</span>
+                              <span className="font-medium">{product.name}</span>
                             </Link>
                           )
                         ))}
@@ -173,21 +170,22 @@ export default function Navbar() {
                     
                     {/* In Development Column */}
                     <div>
-                      <div className="text-xs font-semibold text-gray-900 mb-3 flex items-center gap-1 uppercase tracking-wider">
-                        🔨 In Development
+                      <div className="text-xs font-bold text-gray-900 mb-4 flex items-center gap-2 uppercase tracking-wider">
+                        <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                        Coming Soon
                       </div>
                       <div className="space-y-1">
                         {devProducts.map((product) => (
                           product.disabled ? (
                             <span
                               key={product.slug}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 cursor-default"
+                              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[14px] text-gray-300 cursor-default"
                             >
                               <ProductIcon product={product} disabled />
-                              <span className="flex items-center gap-2">
+                              <span className="font-medium flex items-center gap-2">
                                 {product.name}
                                 {product.badge && (
-                                  <span className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-400 font-medium">
+                                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] text-gray-400 font-semibold">
                                     {product.badge}
                                   </span>
                                 )}
@@ -198,13 +196,13 @@ export default function Navbar() {
                               key={product.slug}
                               href={product.slug}
                               onClick={() => setMegaMenuOpen(false)}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2702a6] transition-colors"
+                              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[14px] text-gray-700 hover:bg-[#2702a6]/5 hover:text-[#2702a6] transition-all group"
                             >
                               <ProductIcon product={product} />
-                              <span className="flex items-center gap-2">
+                              <span className="font-medium flex items-center gap-2">
                                 {product.name}
                                 {product.badge && (
-                                  <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700 font-medium">
+                                  <span className="rounded-full bg-purple-100 px-2 py-0.5 text-[10px] text-purple-700 font-semibold">
                                     {product.badge}
                                   </span>
                                 )}
@@ -217,15 +215,15 @@ export default function Navbar() {
                   </div>
                   
                   {/* View All Footer */}
-                  <div className="mt-4 pt-3 border-t border-gray-100">
+                  <div className="mt-5 pt-4 border-t border-gray-100">
                     <Link
                       href="/products"
                       onClick={() => setMegaMenuOpen(false)}
-                      className="flex items-center justify-center gap-1 text-sm text-[#2702a6] hover:opacity-80 font-medium"
+                      className="flex items-center justify-center gap-2 text-[14px] text-[#2702a6] hover:text-[#1a0175] font-semibold transition-colors"
                     >
-                      View All Products
-                      <svg className="h-4 w-4 rotate-[-90deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      Explore All Products
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </Link>
                   </div>
@@ -246,26 +244,26 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="px-4 py-3 space-y-1">
+        <div className="md:hidden border-t border-gray-200 bg-white shadow-lg">
+          <div className="px-4 py-4 space-y-1">
             <Link
               href="/docs"
-              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
+              className="flex items-center gap-3 px-4 py-3 text-[16px] font-semibold text-gray-700 hover:text-[#2702a6] hover:bg-gray-50 rounded-lg transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <BookOpen className="h-4 w-4" />
+              <BookOpen className="h-5 w-5" />
               Docs
             </Link>
             <Link
               href="/operations"
-              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
+              className="flex items-center gap-3 px-4 py-3 text-[16px] font-semibold text-gray-700 hover:text-[#2702a6] hover:bg-gray-50 rounded-lg transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Server className="h-4 w-4" />
+              <Server className="h-5 w-5" />
               Learn
             </Link>
-            <div className="border-t border-gray-100 my-2 pt-2">
-              <div className="px-3 py-2 text-sm font-semibold text-gray-900 flex items-center gap-2">
+            <div className="border-t border-gray-100 my-3 pt-3">
+              <div className="px-4 py-2 text-[14px] font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
                 <NineDotsIcon className="h-4 w-4" />
                 Products
               </div>
@@ -273,12 +271,12 @@ export default function Navbar() {
                 product.disabled ? (
                   <span
                     key={product.slug}
-                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 cursor-default"
+                    className="flex items-center gap-3 px-4 py-2.5 text-[15px] text-gray-300 cursor-default"
                   >
                     <ProductIcon product={product} disabled />
                     {product.name}
                     {product.badge && (
-                      <span className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-400">
+                      <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-400 font-medium">
                         {product.badge}
                       </span>
                     )}
@@ -287,13 +285,13 @@ export default function Navbar() {
                   <Link
                     key={product.slug}
                     href={product.slug}
-                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900"
+                    className="flex items-center gap-3 px-4 py-2.5 text-[15px] text-gray-700 hover:text-[#2702a6] hover:bg-gray-50 rounded-lg transition-all font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <ProductIcon product={product} />
                     {product.name}
                     {product.badge && (
-                      <span className="rounded-full bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700">
+                      <span className="rounded-full bg-purple-100 px-2 py-0.5 text-[11px] text-purple-700 font-medium">
                         {product.badge}
                       </span>
                     )}
@@ -302,10 +300,13 @@ export default function Navbar() {
               ))}
               <Link
                 href="/products"
-                className="block px-3 py-2 text-sm text-[#2702a6] font-medium"
+                className="flex items-center gap-2 px-4 py-3 mt-2 text-[15px] text-[#2702a6] font-semibold hover:bg-[#2702a6]/5 rounded-lg transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                View All Products →
+                Explore All Products
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Link>
             </div>
           </div>

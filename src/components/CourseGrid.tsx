@@ -143,7 +143,7 @@ export default function CourseGrid({
   return (
     <>
       {/* Live courses */}
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
           <h2 className="text-2xl font-extrabold text-gray-900">Courses to get you started</h2>
           <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export default function CourseGrid({
       </div>
 
       {/* Coming soon */}
-      <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1440px] px-4 pb-16 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-extrabold text-gray-900 mb-8">Coming Soon</h2>
         {filteredComing.length > 0 ? (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

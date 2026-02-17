@@ -215,7 +215,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)' }}>
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="flex items-center gap-4 mb-6">
@@ -287,7 +287,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
 
       {/* Trust badges */}
       <section className="py-6 bg-white border-b border-gray-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-8 text-sm">
             {config.badges.map((badge) => (
               <span key={badge} className="flex items-center gap-2 text-gray-600">
@@ -301,7 +301,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
 
       {/* Features */}
       <section className="py-16 lg:py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-[#2702a6]/10 text-[#2702a6] border border-[#2702a6]/20">
               Features
@@ -330,7 +330,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
       {/* Screenshots */}
       {config.screenshots.length > 0 && (
         <section className="py-16 lg:py-20 bg-gray-50">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-cyan-50 text-cyan-700 border border-cyan-200">
                 Screenshots
@@ -362,7 +362,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
       {/* Video Section (optional) */}
       {config.video && (
         <section className="py-16 lg:py-20 bg-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
                 <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-[#2702a6]/10 text-[#2702a6] border border-[#2702a6]/20">
@@ -427,7 +427,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
 
       {/* Quick Start */}
       <section className="py-16 lg:py-20 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-green-50 text-green-700 border border-green-200">
               Quick Start
@@ -463,7 +463,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
 
       {/* Documentation */}
       <section className="py-16 lg:py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
               Documentation
@@ -491,7 +491,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
 
       {/* Bottom CTA */}
       <section className="py-16 lg:py-20 bg-section-alt">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Ready to get started?
           </h2>
