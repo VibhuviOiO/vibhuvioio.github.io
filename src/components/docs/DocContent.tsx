@@ -2,36 +2,51 @@ interface DocContentProps {
   content: string;
 }
 
-// Simple syntax highlighter for YAML
-function highlightYAML(code: string): string {
-  return code
-    // Comments (must be first)
-    .replace(/(#.*$)/gm, '<span class="text-gray-500">$1</span>')
-    // Keys (before colon) - match at start of line or after whitespace
-    .replace(/(^|\s+)([a-zA-Z_][a-zA-Z0-9_]*)(:)/gm, '$1<span class="text-blue-400">$2</span><span class="text-gray-300">$3</span>')
-    // String values with quotes
-    .replace(/(:\s*)("[^"]*")/g, '$1<span class="text-green-400">$2</span>')
-    // Numbers
-    .replace(/(:\s*)(\d+)(\s*$|\s*#)/gm, '$1<span class="text-orange-400">$2</span>$3')
-    // Boolean values
-    .replace(/(:\s*)(true|false)(\s*$|\s*#)/gmi, '$1<span class="text-purple-400">$2</span>$3')
-    // List markers at start of line
-    .replace(/^(\s*)(-)(\s)(?!\s)/gm, '$1<span class="text-gray-400">$2</span>$3');
+// Escape HTML entities
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
 
 // Simple syntax highlighter for Bash
 function highlightBash(code: string): string {
-  return code
-    // Comments (must be first)
-    .replace(/(#.*$)/gm, '<span class="text-gray-500">$1</span>')
-    // Strings in quotes (before other patterns to avoid conflicts)
-    .replace(/("[^"]*"|'[^']*')/g, '<span class="text-green-400">$1</span>')
-    // URLs (before commands to avoid conflicts)
+  // First escape HTML to prevent XSS and handle special characters
+  let result = escapeHtml(code);
+  
+  // Then apply syntax highlighting on the escaped text
+  return result
+    // Comments (must be first) - match # after whitespace or at start of line
+    .replace(/(^|\s)(#[^\n]*)/gm, '$1<span class="text-gray-500">$2</span>')
+    // Strings in quotes (single and double)
+    .replace(/(&quot;[^&]*&quot;|&#039;[^&#]*&#039;)/g, '<span class="text-green-400">$1</span>')
+    // URLs
     .replace(/(https?:\/\/[^\s]+)/g, '<span class="text-cyan-400">$1</span>')
-    // Commands at start of line or after &&, ||, ;, |, $(
-    .replace(/(^|\&\&|\|\||;|\||\$\(|\`\s*)(\s*)([a-zA-Z_][a-zA-Z0-9_-]+)/gm, '$1$2<span class="text-yellow-400">$3</span>')
+    // Commands at start of line or after operators
+    .replace(/(^|&amp;&amp;|\|\||;|\||\$\(|\`\s*)(\s*)([a-zA-Z_][a-zA-Z0-9_-]+)/gm, '$1$2<span class="text-yellow-400">$3</span>')
     // Flags and options
     .replace(/(\s|^)(-[a-zA-Z-]+)/g, '$1<span class="text-blue-400">$2</span>');
+}
+
+// Simple syntax highlighter for YAML  
+function highlightYAML(code: string): string {
+  // First escape HTML
+  let result = escapeHtml(code);
+  
+  return result
+    // Comments
+    .replace(/(#.*$)/gm, '<span class="text-gray-500">$1</span>')
+    // Keys (before colon)
+    .replace(/(^|\s+)([a-zA-Z_][a-zA-Z0-9_]*)(:)/gm, '$1<span class="text-blue-400">$2</span><span class="text-gray-300">$3</span>')
+    // String values with quotes (escaped)
+    .replace(/(:\s*)(&quot;[^&]*&quot;)/g, '$1<span class="text-green-400">$2</span>')
+    // Numbers
+    .replace(/(:\s*)(\d+)(\s*$|\s*#)/gm, '$1<span class="text-orange-400">$2</span>$3')
+    // Boolean values
+    .replace(/(:\s*)(true|false)(\s*$|\s*#)/gmi, '$1<span class="text-purple-400">$2</span>$3')
+    // List markers
+    .replace(/^(\s*)(-)(\s)(?!\s)/gm, '$1<span class="text-gray-400">$2</span>$3');
 }
 
 // Markdown renderer with proper handling of nested elements
@@ -41,7 +56,7 @@ function renderMarkdown(content: string): string {
   let processed = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
     const placeholder = `___CODE_BLOCK_${codeBlocks.length}___`;
     
-    // Apply syntax highlighting BEFORE escaping HTML (using the raw code)
+    // Apply syntax highlighting (we control the markdown content, so no HTML escaping needed)
     const language = (lang || '').toLowerCase();
     // Auto-detect YAML if no language specified but content looks like YAML
     const looksLikeYAML = !language && (
@@ -58,25 +73,6 @@ function renderMarkdown(content: string): string {
     } else if (language === 'bash' || language === 'sh' || language === 'shell' || looksLikeBash) {
       highlightedCode = highlightBash(code);
     }
-    
-    // Now escape HTML (but preserve our span tags)
-    // First protect our span tags
-    const spans: string[] = [];
-    highlightedCode = highlightedCode.replace(/<span class="[^"]*">[^<]*<\/span>/g, (spanMatch: string) => {
-      spans.push(spanMatch);
-      return `___SPAN_${spans.length - 1}___`;
-    });
-    
-    // Escape remaining HTML
-    highlightedCode = highlightedCode
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-    
-    // Restore span tags
-    spans.forEach((span, i) => {
-      highlightedCode = highlightedCode.replace(`___SPAN_${i}___`, span);
-    });
     
     codeBlocks.push(
       `<pre class="overflow-x-auto rounded-lg bg-[#1e1e1e] p-4 mb-4"><code class="text-sm font-mono text-gray-300">${highlightedCode}</code></pre>`

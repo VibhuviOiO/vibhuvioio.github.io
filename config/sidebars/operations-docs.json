@@ -21,39 +21,65 @@
         {
           "title": "Elasticsearch",
           "items": [
-            { "id": "es-single-node", "title": "Single Node Setup", "slug": "elk/elasticsearch/single-node" },
-            { "id": "es-crud", "title": "CRUD Operations", "slug": "elk/elasticsearch/crud-operations" },
-            { "id": "es-cluster", "title": "Cluster Setup", "slug": "elk/elasticsearch/cluster" },
-            { "id": "es-indexing", "title": "Index Management", "slug": "elk/elasticsearch/indexing" },
-            { "id": "es-monitoring", "title": "Monitoring", "slug": "elk/elasticsearch/monitoring" },
-            { "id": "es-backup", "title": "Backup & Restore", "slug": "elk/elasticsearch/backup" }
+            { "id": "es-run-single", "title": "Run Single Node Container", "slug": "elk/elasticsearch/RunSingleNodeElasticsearchContainer" },
+            { "id": "es-crud", "title": "Execute CRUD on API", "slug": "elk/elasticsearch/ExecuteCRUDOnElasticsearchAPI" },
+            { "id": "es-xpack", "title": "Enable X-Pack", "slug": "elk/elasticsearch/EnableXPackInElasticsearchContainer" },
+            { "id": "es-reindex", "title": "Reindexing Guide", "slug": "elk/elasticsearch/2022-05-02-Reindexing-Guide" }
           ]
         },
         {
-          "title": "Logstash Pipelines",
+          "title": "High Availability Cluster",
           "items": [
-            { "id": "logstash-pipeline", "title": "Basic Pipeline", "slug": "elk/logstash/pipeline" },
-            { "id": "logstash-kafka", "title": "Pipeline for Kafka", "slug": "elk/logstash/kafka" },
-            { "id": "logstash-docker", "title": "Docker Logging", "slug": "elk/logstash/docker" },
-            { "id": "logstash-filebeat", "title": "Filebeat + Infra Logs", "slug": "elk/logstash/filebeat" },
-            { "id": "logstash-custom", "title": "Custom Parsers", "slug": "elk/logstash/custom" }
+            { "id": "ha-understand", "title": "Understanding HA Cluster", "slug": "elk/elasticsearch/high-availability-elasticsearch-cluster/UnderstandHigh-AvailabilityElasticsearchCluster" },
+            { "id": "ha-three-node", "title": "Run Three Node Cluster", "slug": "elk/elasticsearch/high-availability-elasticsearch-cluster/RunThreeNodeCluster" },
+            { "id": "ha-failure", "title": "Cluster Failure Simulation", "slug": "elk/elasticsearch/high-availability-elasticsearch-cluster/ClusterFailureSimulation" }
+          ]
+        },
+        {
+          "title": "Index Management",
+          "items": [
+            { "id": "idx-design", "title": "Index Design", "slug": "elk/elasticsearch/index/IndexDesign" },
+            { "id": "idx-mappings", "title": "Mappings", "slug": "elk/elasticsearch/index/Mappings" },
+            { "id": "idx-settings", "title": "Settings", "slug": "elk/elasticsearch/index/Settings" },
+            { "id": "idx-alias", "title": "Alias", "slug": "elk/elasticsearch/index/Alias" },
+            { "id": "idx-inverted", "title": "Inverted Index", "slug": "elk/elasticsearch/index/InvertedIndex" },
+            { "id": "idx-structured", "title": "Structured vs Unstructured Data", "slug": "elk/elasticsearch/index/StructuredAndUnstructuredData" },
+            { "id": "idx-fulltext", "title": "Fulltext vs Exact Match", "slug": "elk/elasticsearch/index/FulltextSearchVsExactMatch" }
+          ]
+        },
+        {
+          "title": "Analyzers",
+          "items": [
+            { "id": "analyzer-intro", "title": "Analyzer Overview", "slug": "elk/elasticsearch/index/Analyzer" },
+            { "id": "analyzer-token", "title": "Tokenization Analysis", "slug": "elk/elasticsearch/index/TokenizationAnalysis" },
+            { "id": "analyzer-ngram", "title": "N-Gram Analyzer", "slug": "elk/elasticsearch/index/AnalyzerNGram" },
+            { "id": "analyzer-edge", "title": "Edge N-Gram Analyzer", "slug": "elk/elasticsearch/index/AnalyzerEdgeNGrams" },
+            { "id": "analyzer-synonyms", "title": "Synonyms Analyzer", "slug": "elk/elasticsearch/index/AnalyzerSynonyms" },
+            { "id": "analyzer-language", "title": "Language Analyzer", "slug": "elk/elasticsearch/index/AnalyzerLanguage" }
+          ]
+        },
+        {
+          "title": "Logstash",
+          "items": [
+            { "id": "ls-intro", "title": "Introduction", "slug": "elk/elasticsearch/logstash/Intro" },
+            { "id": "ls-pipeline", "title": "Run Pipeline with Container", "slug": "elk/elasticsearch/RunLogstashPipeineWithContainer" },
+            { "id": "ls-xpack", "title": "Enable X-Pack", "slug": "elk/elasticsearch/EnableXPackInLogstashContainer" },
+            { "id": "ls-masking", "title": "Masking PII", "slug": "elk/elasticsearch/logstash/MaskingPII" }
           ]
         },
         {
           "title": "Kibana",
           "items": [
-            { "id": "kibana-container", "title": "Run Kibana", "slug": "elk/kibana/container" },
-            { "id": "kibana-dashboards", "title": "Dashboard Creation", "slug": "elk/kibana/dashboards" },
-            { "id": "kibana-alerts", "title": "Alerting", "slug": "elk/kibana/alerts" },
-            { "id": "kibana-security", "title": "Security Setup", "slug": "elk/kibana/security" }
+            { "id": "kibana-run", "title": "Run Kibana Container", "slug": "elk/elasticsearch/RunKibanaContainer" },
+            { "id": "kibana-xpack", "title": "Enable X-Pack", "slug": "elk/elasticsearch/EnableXPackInKibanaContainer" }
           ]
         },
         {
-          "title": "Operations",
+          "title": "Certificates & Security",
           "items": [
-            { "id": "elk-scaling", "title": "Scaling Strategies", "slug": "elk/operations/scaling" },
-            { "id": "elk-troubleshooting", "title": "Troubleshooting", "slug": "elk/operations/troubleshooting" },
-            { "id": "elk-maintenance", "title": "Maintenance", "slug": "elk/operations/maintenance" }
+            { "id": "certs-bash", "title": "Certs with Bash", "slug": "elk/elasticsearch/miscellaneous/CertsWithBash" },
+            { "id": "certs-docker", "title": "Certs with Docker Run", "slug": "elk/elasticsearch/miscellaneous/CertsWithDockerRun" },
+            { "id": "certs-compose", "title": "Certs with Docker Compose", "slug": "elk/elasticsearch/miscellaneous/CertsWithDockerCompose" }
           ]
         }
       ]

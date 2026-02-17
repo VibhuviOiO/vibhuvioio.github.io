@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { loadDocContent } from '@/lib/docs-server';
 import { loadOperationsSidebarClient } from '@/lib/docs-client';
-import { CourseLessonLayout } from '@/components/layout/CourseLayout';
+import DocsLayout from '@/components/layout/DocsLayout';
 import CourseLanding from '@/components/layout/CourseLanding';
 import DocContent from '@/components/docs/DocContent';
 import TableOfContents from '@/components/docs/TableOfContents';
@@ -108,34 +108,40 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
     notFound();
   }
 
+  // Convert operations sidebar to docs sidebar format
+  const sidebarGroups = category.sidebar.map(section => ({
+    title: section.title,
+    items: section.items.map(item => ({
+      id: item.id,
+      title: item.title,
+      slug: item.slug
+    }))
+  }));
+
   return (
-    <CourseLessonLayout
-      sections={category.sidebar}
+    <DocsLayout
+      sidebar={{ groups: sidebarGroups }}
       basePath="/operations"
-      courseTitle={category.title}
-      courseSlug={categoryId}
     >
       <div className="flex gap-8">
-        <div className="flex-1 min-w-0 max-w-none">
-          <article className="course-content">
-            {/* Lesson Header - O'Reilly Style */}
-            <div className="border-b border-gray-200 pb-6 mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-                {doc.meta.title || slug[slug.length - 1]}
-              </h1>
-              {doc.meta.description && (
-                <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
-                  {doc.meta.description}
-                </p>
-              )}
-            </div>
-            <DocContent content={doc.content} />
-          </article>
+        <article className="flex-1 min-w-0 max-w-none">
+          {/* Lesson Header */}
+          <div className="border-b border-gray-200 pb-6 mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              {doc.meta.title || slug[slug.length - 1]}
+            </h1>
+            {doc.meta.description && (
+              <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
+                {doc.meta.description}
+              </p>
+            )}
+          </div>
+          <DocContent content={doc.content} />
           <DisqusComments title={doc.meta.title || slug[slug.length - 1]} />
-        </div>
+        </article>
         <TableOfContents content={doc.content} />
       </div>
-    </CourseLessonLayout>
+    </DocsLayout>
   );
 }
 
