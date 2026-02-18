@@ -79,7 +79,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-xl">
-      <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
+      <div className="flex h-[4.5rem] items-center justify-between px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
         {/* Logo with Image + Title */}
         <Link href="/" className="flex items-center gap-2.5">
           {/* Logo Image */}
