@@ -4,7 +4,6 @@ import {
   ArrowLeft, Play, FileText, Clock, Github, Youtube,
   Calendar, GraduationCap,
 } from 'lucide-react';
-import DisqusComments from '@/components/DisqusComments';
 
 interface LessonItem {
   id: string;
@@ -227,8 +226,6 @@ export default function CourseLanding({
               ))}
             </div>
 
-            {/* Disqus comments */}
-            <DisqusComments title={title} />
           </div>
 
           {/* Sticky sidebar */}

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 // Replace with your actual Disqus shortname
-const DISQUS_SHORTNAME = 'vibhuvioio';
+const DISQUS_SHORTNAME = 'vibhuvi-oio';
 
 interface DisqusCommentsProps {
   title?: string;
