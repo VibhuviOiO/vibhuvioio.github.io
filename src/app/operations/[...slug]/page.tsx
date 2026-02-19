@@ -18,6 +18,8 @@ const courseMeta: Record<string, {
   updated?: string;
   totalDuration?: string;
   githubUrl?: string;
+  readingTime?: string;
+  labTime?: string;
 }> = {
   elk: {
     color: 'linear-gradient(135deg, #1e3a5f 0%, #2d5f8a 100%)',
@@ -25,20 +27,22 @@ const courseMeta: Record<string, {
     icon: <Search className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
     whatYoullLearn: [
       'Deploy a production ELK cluster from scratch',
-      'Configure Logstash pipelines for Kafka, Docker, and Filebeat',
+      'Configure Logstash pipelines for MongoDB, S3, and Filebeat',
       'Manage Elasticsearch indices, snapshots, and backups',
-      'Build Kibana dashboards and set up alerting',
+      'Build Kibana dashboards and set up monitoring',
       'Scale and troubleshoot ELK in production',
-      'Secure your ELK stack with authentication and TLS',
+      'Implement data migration between clusters',
     ],
     prerequisites: [
       'Basic Linux command line knowledge',
       'Docker and Docker Compose fundamentals',
-      'Understanding of JSON and YAML',
+      'Understanding of JSON and REST APIs',
     ],
     updated: 'Feb 2026',
-    totalDuration: '4h 30m',
-    githubUrl: 'https://github.com/vibhuvioio/elk-stack',
+    totalDuration: '8h 30m',
+    readingTime: '4h 15m',
+    labTime: '4h 15m',
+    githubUrl: 'https://github.com/JinnaBalu/infinite-containers',
   },
   mongo: {
     color: 'linear-gradient(135deg, #2d6a30 0%, #4a9e4e 100%)',
@@ -97,8 +101,10 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
         whatYoullLearn={meta?.whatYoullLearn || []}
         prerequisites={meta?.prerequisites}
         updated={meta?.updated}
-        totalDuration={meta?.totalDuration}
-        githubUrl={meta?.githubUrl}
+        totalDuration={category.totalDuration || meta?.totalDuration}
+        readingTime={category.readingTime || meta?.readingTime}
+        labTime={category.labTime || meta?.labTime}
+        githubUrl={category.githubUrl || meta?.githubUrl}
       />
     );
   }

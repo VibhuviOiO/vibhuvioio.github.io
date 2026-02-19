@@ -14,6 +14,36 @@
       ]
     },
     {
+      "title": "Docker Containers",
+      "items": [
+        {
+          "id": "docker-overview",
+          "title": "Overview",
+          "slug": "docker-containers/overview"
+        },
+        {
+          "id": "docker-postgresql",
+          "title": "PostgreSQL with Adminer",
+          "slug": "docker-containers/postgresql"
+        },
+        {
+          "id": "docker-minio",
+          "title": "MinIO Object Storage",
+          "slug": "docker-containers/minio"
+        },
+        {
+          "id": "docker-keycloak",
+          "title": "Keycloak IAM",
+          "slug": "docker-containers/keycloak"
+        },
+        {
+          "id": "docker-ollama",
+          "title": "Ollama LLMs",
+          "slug": "docker-containers/ollama"
+        }
+      ]
+    },
+    {
       "title": "Web Servers",
       "items": [
         {

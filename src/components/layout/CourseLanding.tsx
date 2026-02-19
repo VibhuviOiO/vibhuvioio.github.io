@@ -10,7 +10,7 @@ interface LessonItem {
   title: string;
   slug: string;
   duration?: string;
-  type?: 'doc' | 'video' | 'github';
+  type?: string;
   videoUrl?: string;
   githubUrl?: string;
 }
@@ -32,18 +32,19 @@ interface CourseLandingProps {
   prerequisites?: string[];
   updated?: string;
   totalDuration?: string;
+  readingTime?: string;
+  labTime?: string;
   githubUrl?: string;
 }
 
 function LessonIcon({ type }: { type?: string }) {
-  switch (type) {
-    case 'video':
-      return <Youtube className="h-4 w-4 text-red-400 shrink-0" />;
-    case 'github':
-      return <Github className="h-4 w-4 text-gray-500 shrink-0" />;
-    default:
-      return <FileText className="h-4 w-4 text-gray-400 shrink-0" />;
+  if (type === 'video') {
+    return <Youtube className="h-4 w-4 text-red-400 shrink-0" />;
   }
+  if (type === 'github') {
+    return <Github className="h-4 w-4 text-gray-500 shrink-0" />;
+  }
+  return <FileText className="h-4 w-4 text-gray-400 shrink-0" />;
 }
 
 export default function CourseLanding({
@@ -58,6 +59,8 @@ export default function CourseLanding({
   prerequisites,
   updated,
   totalDuration,
+  readingTime,
+  labTime,
   githubUrl,
 }: CourseLandingProps) {
   const totalLessons = sections.reduce((sum, s) => sum + s.items.length, 0);
@@ -91,6 +94,12 @@ export default function CourseLanding({
                   <span className="flex items-center gap-1.5 text-white/60 text-sm">
                     <Clock className="h-4 w-4" />
                     {totalDuration}
+                  </span>
+                )}
+                {readingTime && (
+                  <span className="flex items-center gap-1.5 text-white/60 text-sm">
+                    <FileText className="h-4 w-4" />
+                    {readingTime} reading
                   </span>
                 )}
                 <span className="flex items-center gap-1.5 text-white/60 text-sm">
@@ -258,6 +267,18 @@ export default function CourseLanding({
                     <div className="flex items-center gap-2.5">
                       <Clock className="h-4 w-4 text-gray-400" />
                       <span>{totalDuration} total</span>
+                    </div>
+                  )}
+                  {readingTime && (
+                    <div className="flex items-center gap-2.5">
+                      <FileText className="h-4 w-4 text-gray-400" />
+                      <span>{readingTime} reading</span>
+                    </div>
+                  )}
+                  {labTime && (
+                    <div className="flex items-center gap-2.5">
+                      <GraduationCap className="h-4 w-4 text-gray-400" />
+                      <span>{labTime} hands-on</span>
                     </div>
                   )}
                   <div className="flex items-center gap-2.5">

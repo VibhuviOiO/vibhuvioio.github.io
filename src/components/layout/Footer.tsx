@@ -79,6 +79,9 @@ export default function Footer() {
                 <Link href="/ldap-manager" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">
                   LDAP Manager
                 </Link>
+                <Link href="/openldap-docker" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">
+                  OpenLDAP Docker
+                </Link>
                 <Link href="/products" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">
                   View All →
                 </Link>

@@ -100,6 +100,52 @@
       ]
     },
     {
+      "id": "openldap-docker",
+      "name": "OpenLDAP Docker",
+      "slug": "openldap-docker",
+      "description": "Production-grade OpenLDAP container with multi-master replication and enterprise security",
+      "icon": "📦",
+      "status": "live",
+      "repoUrl": "https://github.com/VibhuviOiO/openldap-docker",
+      "features": [
+        "Multi-master replication",
+        "TLS/SSL support",
+        "Custom schemas",
+        "Enterprise security",
+        "Built-in monitoring"
+      ],
+      "technologies": ["OpenLDAP", "AlmaLinux 9", "Docker"],
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "getting-started", "title": "Quick Start", "slug": "getting-started" },
+            { "id": "configuration", "title": "Configuration", "slug": "configuration" }
+          ]
+        },
+        {
+          "title": "Deployment",
+          "items": [
+            { "id": "replication", "title": "Multi-Master Replication", "slug": "replication" },
+            { "id": "overlays", "title": "Overlays", "slug": "overlays" },
+            { "id": "monitoring", "title": "Monitoring", "slug": "monitoring" },
+            { "id": "security", "title": "Security", "slug": "security" }
+          ]
+        },
+        {
+          "title": "Integrations",
+          "items": [
+            { "id": "keycloak", "title": "Keycloak (SSO)", "slug": "integrations/keycloak" },
+            { "id": "keycloak-auth-only", "title": "Keycloak (Auth Only)", "slug": "integrations/keycloak-auth-only" },
+            { "id": "sonarqube", "title": "SonarQube", "slug": "integrations/sonarqube" },
+            { "id": "jenkins", "title": "Jenkins", "slug": "integrations/jenkins" },
+            { "id": "vault", "title": "HashiCorp Vault", "slug": "integrations/vault" },
+            { "id": "splunk", "title": "Splunk Enterprise", "slug": "integrations/splunk" }
+          ]
+        }
+      ]
+    },
+    {
       "id": "suchaka",
       "name": "Suchaka Status Page",
       "slug": "suchaka",

@@ -58,7 +58,7 @@ const products: Product[] = [
     title: 'OpenLDAP Docker',
     description: 'Production-ready OpenLDAP Docker image with sensible defaults, SSL/TLS support, and easy configuration.',
     icon: '📦',
-    link: '/products/openldap-docker',
+    link: '/openldap-docker',
     github: 'https://github.com/VibhuviOiO/openldap-docker',
     tags: ['Docker', 'LDAP', 'Identity', 'SSO'],
     status: 'live',

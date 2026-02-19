@@ -47,7 +47,7 @@ type Product = { slug: string; name: string; icon: string; image?: string; badge
 const liveProducts: Product[] = [
   { slug: '/docker-registry-ui', name: 'Docker Registry UI', icon: '🐳', image: '/img/docker-registry-ui/docker-registry-ui.svg' },
   { slug: '/ldap-manager', name: 'LDAP Manager', icon: '🗂️', image: '/img/ldap-manager/ldap-manager-ui.png' },
-  { slug: '/products/openldap-docker', name: 'OpenLDAP Docker', icon: '📦', disabled: true },
+  { slug: '/openldap-docker', name: 'OpenLDAP Docker', icon: '📦' },
   { slug: '/products/suchaka', name: 'Suchaka Status', icon: '📊', disabled: true },
 ];
 
@@ -75,7 +75,7 @@ function ProductIcon({ product, disabled }: { product: Product; disabled?: boole
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [productsMenuOpen, setProductsMenuOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-xl">
@@ -106,7 +106,7 @@ export default function Navbar() {
             <span>Docs</span>
           </Link>
           
-          {/* Learn with Icon */}
+          {/* Learn - Simple Link */}
           <Link
             href="/operations"
             className="flex items-center gap-2 px-4 py-2.5 text-[15px] font-semibold text-gray-700 hover:text-[#2702a6] transition-all rounded-lg hover:bg-gray-50/80"
@@ -118,21 +118,21 @@ export default function Navbar() {
           {/* Products Mega Menu Trigger */}
           <div className="relative ml-2">
             <button
-              onClick={() => setMegaMenuOpen(!megaMenuOpen)}
+              onClick={() => setProductsMenuOpen(!productsMenuOpen)}
               className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-[#2702a6] text-white hover:bg-[#1a0175] transition-all shadow-lg shadow-[#2702a6]/20"
             >
               <NineDotsIcon className="h-5 w-5" />
               <span className="text-[15px] font-semibold">Products</span>
-              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${productsMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {/* Mega Menu Dropdown */}
-            {megaMenuOpen && (
+            {productsMenuOpen && (
               <>
                 {/* Invisible backdrop to catch clicks - doesn't affect appearance */}
                 <div 
                   className="fixed inset-0 z-[-1]"
-                  onClick={() => setMegaMenuOpen(false)}
+                  onClick={() => setProductsMenuOpen(false)}
                 />
                 {/* Menu with its own shadow */}
                 <div className="absolute top-full right-0 mt-3 w-[520px] rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl z-50">
@@ -157,7 +157,7 @@ export default function Navbar() {
                             <Link
                               key={product.slug}
                               href={product.slug}
-                              onClick={() => setMegaMenuOpen(false)}
+                              onClick={() => setProductsMenuOpen(false)}
                               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[14px] text-gray-700 hover:bg-[#2702a6]/5 hover:text-[#2702a6] transition-all group"
                             >
                               <ProductIcon product={product} />
@@ -195,7 +195,7 @@ export default function Navbar() {
                             <Link
                               key={product.slug}
                               href={product.slug}
-                              onClick={() => setMegaMenuOpen(false)}
+                              onClick={() => setProductsMenuOpen(false)}
                               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[14px] text-gray-700 hover:bg-[#2702a6]/5 hover:text-[#2702a6] transition-all group"
                             >
                               <ProductIcon product={product} />
@@ -218,7 +218,7 @@ export default function Navbar() {
                   <div className="mt-5 pt-4 border-t border-gray-100">
                     <Link
                       href="/products"
-                      onClick={() => setMegaMenuOpen(false)}
+                      onClick={() => setProductsMenuOpen(false)}
                       className="flex items-center justify-center gap-2 text-[14px] text-[#2702a6] hover:text-[#1a0175] font-semibold transition-colors"
                     >
                       Explore All Products

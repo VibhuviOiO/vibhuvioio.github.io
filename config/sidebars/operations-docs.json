@@ -7,79 +7,68 @@
       "id": "elk",
       "title": "ELK Stack Operations",
       "slug": "elk",
-      "description": "End-to-end Elasticsearch, Logstash, and Kibana operations",
+      "description": "Master Elasticsearch, Logstash, and Kibana for production operations",
       "icon": "🔍",
+      "totalDuration": "8h 30m",
+      "readingTime": "4h 15m",
+      "labTime": "4h 15m",
+      "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack",
       "sidebar": [
         {
-          "title": "Getting Started",
+          "title": "Phase 1: Getting Started (25m)",
           "items": [
-            { "id": "elk-overview", "title": "Overview", "slug": "elk/overview" },
-            { "id": "elk-architecture", "title": "Architecture", "slug": "elk/architecture" },
-            { "id": "elk-deployment", "title": "Deployment Guide", "slug": "elk/deployment" }
+            { "id": "elk-overview", "title": "Course Overview", "slug": "elk/overview", "duration": "10m", "type": "doc" },
+            { "id": "elk-architecture", "title": "Architecture", "slug": "elk/architecture", "duration": "15m", "type": "doc" }
           ]
         },
         {
-          "title": "Elasticsearch",
+          "title": "Phase 2: Single Node Setup (45m)",
           "items": [
-            { "id": "es-run-single", "title": "Run Single Node Container", "slug": "elk/elasticsearch/RunSingleNodeElasticsearchContainer" },
-            { "id": "es-crud", "title": "Execute CRUD on API", "slug": "elk/elasticsearch/ExecuteCRUDOnElasticsearchAPI" },
-            { "id": "es-xpack", "title": "Enable X-Pack", "slug": "elk/elasticsearch/EnableXPackInElasticsearchContainer" },
-            { "id": "es-reindex", "title": "Reindexing Guide", "slug": "elk/elasticsearch/2022-05-02-Reindexing-Guide" }
+            { "id": "es-single", "title": "Single Node Elasticsearch", "slug": "elk/single-node/01-single-node-setup", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" },
+            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/02-kibana-setup", "duration": "15m", "type": "doc" }
           ]
         },
         {
-          "title": "High Availability Cluster",
+          "title": "Phase 3: CRUD Operations (45m)",
           "items": [
-            { "id": "ha-understand", "title": "Understanding HA Cluster", "slug": "elk/elasticsearch/high-availability-elasticsearch-cluster/UnderstandHigh-AvailabilityElasticsearchCluster" },
-            { "id": "ha-three-node", "title": "Run Three Node Cluster", "slug": "elk/elasticsearch/high-availability-elasticsearch-cluster/RunThreeNodeCluster" },
-            { "id": "ha-failure", "title": "Cluster Failure Simulation", "slug": "elk/elasticsearch/high-availability-elasticsearch-cluster/ClusterFailureSimulation" }
+            { "id": "crud-index", "title": "Index Operations", "slug": "elk/crud/01-index-operations", "duration": "20m", "type": "doc" },
+            { "id": "crud-doc", "title": "Document CRUD", "slug": "elk/crud/02-document-operations", "duration": "25m", "type": "doc" }
           ]
         },
         {
-          "title": "Index Management",
+          "title": "Phase 4: Cluster Operations (2h)",
           "items": [
-            { "id": "idx-design", "title": "Index Design", "slug": "elk/elasticsearch/index/IndexDesign" },
-            { "id": "idx-mappings", "title": "Mappings", "slug": "elk/elasticsearch/index/Mappings" },
-            { "id": "idx-settings", "title": "Settings", "slug": "elk/elasticsearch/index/Settings" },
-            { "id": "idx-alias", "title": "Alias", "slug": "elk/elasticsearch/index/Alias" },
-            { "id": "idx-inverted", "title": "Inverted Index", "slug": "elk/elasticsearch/index/InvertedIndex" },
-            { "id": "idx-structured", "title": "Structured vs Unstructured Data", "slug": "elk/elasticsearch/index/StructuredAndUnstructuredData" },
-            { "id": "idx-fulltext", "title": "Fulltext vs Exact Match", "slug": "elk/elasticsearch/index/FulltextSearchVsExactMatch" }
+            { "id": "cluster-ha", "title": "Understanding HA", "slug": "elk/cluster/01-understanding-ha", "duration": "30m", "type": "doc" },
+            { "id": "cluster-three", "title": "Three Node Cluster", "slug": "elk/cluster/02-three-node-cluster", "duration": "45m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/three-node-cluster" },
+            { "id": "cluster-five", "title": "Five Node Cluster", "slug": "elk/cluster/03-five-node-cluster", "duration": "45m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/five-node-elasticsearch" }
           ]
         },
         {
-          "title": "Analyzers",
+          "title": "Phase 5: Index Management (30m)",
           "items": [
-            { "id": "analyzer-intro", "title": "Analyzer Overview", "slug": "elk/elasticsearch/index/Analyzer" },
-            { "id": "analyzer-token", "title": "Tokenization Analysis", "slug": "elk/elasticsearch/index/TokenizationAnalysis" },
-            { "id": "analyzer-ngram", "title": "N-Gram Analyzer", "slug": "elk/elasticsearch/index/AnalyzerNGram" },
-            { "id": "analyzer-edge", "title": "Edge N-Gram Analyzer", "slug": "elk/elasticsearch/index/AnalyzerEdgeNGrams" },
-            { "id": "analyzer-synonyms", "title": "Synonyms Analyzer", "slug": "elk/elasticsearch/index/AnalyzerSynonyms" },
-            { "id": "analyzer-language", "title": "Language Analyzer", "slug": "elk/elasticsearch/index/AnalyzerLanguage" }
+            { "id": "idx-design", "title": "Index Design", "slug": "elk/index-management/01-index-design", "duration": "30m", "type": "doc" }
           ]
         },
         {
-          "title": "Logstash",
+          "title": "Phase 6: Logstash Pipelines (2h 30m)",
           "items": [
-            { "id": "ls-intro", "title": "Introduction", "slug": "elk/elasticsearch/logstash/Intro" },
-            { "id": "ls-pipeline", "title": "Run Pipeline with Container", "slug": "elk/elasticsearch/RunLogstashPipeineWithContainer" },
-            { "id": "ls-xpack", "title": "Enable X-Pack", "slug": "elk/elasticsearch/EnableXPackInLogstashContainer" },
-            { "id": "ls-masking", "title": "Masking PII", "slug": "elk/elasticsearch/logstash/MaskingPII" }
+            { "id": "ls-intro", "title": "Logstash Introduction", "slug": "elk/logstash/01-introduction", "duration": "30m", "type": "doc" },
+            { "id": "ls-mongo", "title": "MongoDB to Elasticsearch", "slug": "elk/logstash/02-mongodb-pipeline", "duration": "1h 30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash" },
+            { "id": "ls-s3", "title": "S3 to Elasticsearch", "slug": "elk/logstash/03-s3-pipeline", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/s3-to-es" }
           ]
         },
         {
-          "title": "Kibana",
+          "title": "Phase 7: Use Cases (30m)",
           "items": [
-            { "id": "kibana-run", "title": "Run Kibana Container", "slug": "elk/elasticsearch/RunKibanaContainer" },
-            { "id": "kibana-xpack", "title": "Enable X-Pack", "slug": "elk/elasticsearch/EnableXPackInKibanaContainer" }
+            { "id": "uc-overview", "title": "Use Cases Overview", "slug": "elk/use-cases/overview", "duration": "15m", "type": "doc" },
+            { "id": "uc-mongo", "title": "MongoDB Pipeline Guide", "slug": "elk/use-cases/mongodb-pipeline", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash" }
           ]
         },
         {
-          "title": "Certificates & Security",
+          "title": "Phase 8: Production (45m)",
           "items": [
-            { "id": "certs-bash", "title": "Certs with Bash", "slug": "elk/elasticsearch/miscellaneous/CertsWithBash" },
-            { "id": "certs-docker", "title": "Certs with Docker Run", "slug": "elk/elasticsearch/miscellaneous/CertsWithDockerRun" },
-            { "id": "certs-compose", "title": "Certs with Docker Compose", "slug": "elk/elasticsearch/miscellaneous/CertsWithDockerCompose" }
+            { "id": "prod-reindex", "title": "Reindexing", "slug": "elk/production/01-reindexing", "duration": "20m", "type": "doc" },
+            { "id": "prod-remote", "title": "Remote Reindexing", "slug": "elk/production/02-remote-reindexing", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/elasticsearch-remote-reindexing" }
           ]
         }
       ]
@@ -90,35 +79,39 @@
       "slug": "mongo",
       "description": "MongoDB deployment, replication, and cluster management",
       "icon": "🍃",
+      "totalDuration": "6h 45m",
+      "readingTime": "3h 30m",
+      "labTime": "3h 15m",
+      "githubUrl": "https://github.com/jinnabaalu/mongodb-ops",
       "sidebar": [
         {
           "title": "Getting Started",
           "items": [
-            { "id": "mongo-overview", "title": "Overview", "slug": "mongo/overview" },
-            { "id": "mongo-deployment", "title": "Deployment", "slug": "mongo/deployment" }
+            { "id": "mongo-overview", "title": "Course Overview", "slug": "mongo/overview", "duration": "15m", "type": "doc" },
+            { "id": "mongo-deployment", "title": "Deployment", "slug": "mongo/deployment", "duration": "30m", "type": "doc" }
           ]
         },
         {
           "title": "Replication",
           "items": [
-            { "id": "mongo-replica", "title": "Replica Set Setup", "slug": "mongo/replication/replicaset" },
-            { "id": "mongo-arbiter", "title": "Arbiter Configuration", "slug": "mongo/replication/arbiter" },
-            { "id": "mongo-elections", "title": "Elections", "slug": "mongo/replication/elections" }
+            { "id": "mongo-replica", "title": "Replica Set Setup", "slug": "mongo/replication/replicaset", "duration": "1h", "type": "doc" },
+            { "id": "mongo-arbiter", "title": "Arbiter Configuration", "slug": "mongo/replication/arbiter", "duration": "30m", "type": "doc" },
+            { "id": "mongo-elections", "title": "Elections", "slug": "mongo/replication/elections", "duration": "30m", "type": "doc" }
           ]
         },
         {
           "title": "Migration",
           "items": [
-            { "id": "mongo-to-atlas", "title": "On-Prem to Atlas", "slug": "mongo/migration/atlas" },
-            { "id": "mongo-live-migration", "title": "Live Migration", "slug": "mongo/migration/live" }
+            { "id": "mongo-to-atlas", "title": "On-Prem to Atlas", "slug": "mongo/migration/atlas", "duration": "45m", "type": "doc" },
+            { "id": "mongo-live-migration", "title": "Live Migration", "slug": "mongo/migration/live", "duration": "1h", "type": "doc" }
           ]
         },
         {
           "title": "High Availability",
           "items": [
-            { "id": "mongo-ha-cluster", "title": "HA Cluster", "slug": "mongo/ha/cluster" },
-            { "id": "mongo-ha-tips", "title": "Management Tips", "slug": "mongo/ha/tips" },
-            { "id": "mongo-disaster", "title": "Disaster Recovery", "slug": "mongo/ha/disaster-recovery" }
+            { "id": "mongo-ha-cluster", "title": "HA Cluster", "slug": "mongo/ha/cluster", "duration": "1h 30m", "type": "doc" },
+            { "id": "mongo-ha-tips", "title": "Management Tips", "slug": "mongo/ha/tips", "duration": "30m", "type": "doc" },
+            { "id": "mongo-disaster", "title": "Disaster Recovery", "slug": "mongo/ha/disaster-recovery", "duration": "45m", "type": "doc" }
           ]
         }
       ]

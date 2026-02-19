@@ -49,6 +49,20 @@ body {
   background: transparent !important;
 }
 
+/* Collapsible details/summary styling */
+details summary::-webkit-details-marker,
+details summary::marker {
+  display: none;
+}
+
+details[open] summary .details-open-rotate {
+  transform: rotate(180deg);
+}
+
+details summary .details-open-rotate {
+  transition: transform 0.2s ease;
+}
+
 /* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }

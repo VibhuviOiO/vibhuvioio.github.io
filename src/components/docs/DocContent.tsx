@@ -80,6 +80,17 @@ function renderMarkdown(content: string): string {
     return placeholder;
   });
 
+  // Step 1.5: Wrap "📋 Click to view" + code block in collapsible <details>
+  processed = processed.replace(
+    /\*\*📋\s*Click to view ([^*]*)\*\*(?:\s*\([^)]*\))?\s*\n\s*(___CODE_BLOCK_\d+___)/g,
+    (_, label, codeRef) =>
+      `<details class="mb-4 rounded-lg border border-gray-200 overflow-hidden">`
+      + `<summary class="cursor-pointer select-none px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors text-sm font-semibold text-gray-700 flex items-center gap-2">`
+      + `<svg class="h-4 w-4 text-gray-500 transition-transform details-open-rotate" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>`
+      + `📋 Click to view ${label.trim()}</summary>`
+      + `<div class="p-4 bg-white">${codeRef}</div></details>`
+  );
+
   // Step 2: Now remove excessive indentation from the processed content (code blocks are protected)
   const lines = processed.split('\n');
   const cleanedLines = lines.map(line => line.replace(/^[\s\t]{8,}/, ''));
