@@ -96,7 +96,7 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
         color={meta?.color || 'linear-gradient(135deg, #2702a6 0%, #200289 100%)'}
         icon={meta?.icon || null}
         sections={category.sidebar}
-        basePath="/operations"
+        basePath="/learn"
         level={meta?.level || 'Intermediate'}
         whatYoullLearn={meta?.whatYoullLearn || []}
         prerequisites={meta?.prerequisites}
@@ -127,7 +127,7 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
   return (
     <DocsLayout
       sidebar={{ groups: sidebarGroups }}
-      basePath="/operations"
+      basePath="/learn"
     >
       <div className="flex gap-8">
         <article className="flex-1 min-w-0 max-w-none">

@@ -108,7 +108,7 @@ export default function Navbar() {
           
           {/* Learn - Simple Link */}
           <Link
-            href="/operations"
+            href="/learn"
             className="flex items-center gap-2 px-4 py-2.5 text-[15px] font-semibold text-gray-700 hover:text-[#2702a6] transition-all rounded-lg hover:bg-gray-50/80"
           >
             <Server className="h-[18px] w-[18px]" />
@@ -255,7 +255,7 @@ export default function Navbar() {
               Docs
             </Link>
             <Link
-              href="/operations"
+              href="/learn"
               className="flex items-center gap-3 px-4 py-3 text-[16px] font-semibold text-gray-700 hover:text-[#2702a6] hover:bg-gray-50 rounded-lg transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >

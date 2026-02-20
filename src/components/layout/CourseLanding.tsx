@@ -72,7 +72,7 @@ export default function CourseLanding({
       <div style={{ background: 'linear-gradient(135deg, #200289 0%, #2702a6 50%, #3d0fd4 100%)' }}>
         <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-8">
           <Link
-            href="/operations"
+            href="/learn"
             className="inline-flex items-center gap-1.5 text-white/50 hover:text-white/80 text-sm mb-6 transition-colors"
           >
             <ArrowLeft className="h-3.5 w-3.5" />

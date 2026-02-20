@@ -34,7 +34,7 @@ export function CourseSidebar({ sections, basePath, courseTitle, courseSlug }: C
         {/* Course header */}
         <div className="p-4 border-b border-gray-200">
           <Link
-            href="/operations"
+            href="/learn"
             className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 mb-2"
           >
             <ArrowLeft className="h-3 w-3" />

@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Learn - Free Infrastructure Courses | VibhuviOiO",
     description: "Free, hands-on courses for production infrastructure.",
-    url: "https://vibhuvioio.com/operations",
+    url: "https://vibhuvioio.com/learn",
     type: "website",
   },
   alternates: {
-    canonical: "https://vibhuvioio.com/operations",
+    canonical: "https://vibhuvioio.com/learn",
   },
 };
 
@@ -22,7 +22,7 @@ const operations = [
     name: 'ELK Stack Operations',
     iconName: 'Search',
     description: 'End-to-end Elasticsearch, Logstash & Kibana. From cluster setup to index management, pipeline configs, scaling, and troubleshooting.',
-    docs: '/operations/elk/overview',
+    docs: '/learn/elk/overview',
     github: 'https://github.com/VibhuviOiO',
     tags: ['Elasticsearch', 'Logstash', 'Kibana'],
     lessons: 16,
@@ -36,7 +36,7 @@ const operations = [
     name: 'MongoDB Operations',
     iconName: 'Database',
     description: 'Replica sets, sharding, live migration, and disaster recovery. Production-grade MongoDB cluster management from day one.',
-    docs: '/operations/mongo/overview',
+    docs: '/learn/mongo/overview',
     github: 'https://github.com/VibhuviOiO',
     tags: ['NoSQL', 'Replication', 'HA'],
     lessons: 10,

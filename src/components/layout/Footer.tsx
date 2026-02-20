@@ -60,7 +60,7 @@ export default function Footer() {
                 <Link href="/docs" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">
                   Documentation
                 </Link>
-                <Link href="/operations" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">
+                <Link href="/learn" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">
                   Learn & Courses
                 </Link>
                 <Link href="/products" className="text-gray-600 hover:text-[#2702a6] transition-colors font-medium">

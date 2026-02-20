@@ -31,7 +31,7 @@ export type ProductPageConfig = {
   description: string;
   heroIcon?: string;
   heroImage?: string;
-  heroScreenshot: { src: string; alt: string };
+  heroScreenshot?: { src: string; alt: string };
   tryInBrowserUrl?: string;
   docsUrl: string;
   githubUrl: string;
@@ -52,7 +52,7 @@ export type ProductPageConfig = {
   };
 
   // Screenshots
-  screenshots: ProductScreenshot[];
+  screenshots?: ProductScreenshot[];
 
   // Quick Start
   quickStart: QuickStartBlock[];
@@ -270,17 +270,19 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
               </div>
             </div>
 
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                <Image
-                  src={config.heroScreenshot.src}
-                  alt={config.heroScreenshot.alt}
-                  width={800}
-                  height={500}
-                  className="w-full h-auto"
-                />
+            {config.heroScreenshot && (
+              <div className="relative">
+                <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                  <Image
+                    src={config.heroScreenshot.src}
+                    alt={config.heroScreenshot.alt}
+                    width={800}
+                    height={500}
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -328,7 +330,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
       </section>
 
       {/* Screenshots */}
-      {config.screenshots.length > 0 && (
+      {config.screenshots && config.screenshots.length > 0 && (
         <section className="py-16 lg:py-20 bg-gray-50">
           <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
