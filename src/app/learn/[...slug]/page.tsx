@@ -6,7 +6,7 @@ import CourseLanding from '@/components/layout/CourseLanding';
 import DocContent from '@/components/docs/DocContent';
 import TableOfContents from '@/components/docs/TableOfContents';
 import DisqusComments from '@/components/DisqusComments';
-import { Search, Database } from 'lucide-react';
+import { Search, Database, Github } from 'lucide-react';
 
 // Course metadata — colors, levels, learning outcomes
 const courseMeta: Record<string, {
@@ -26,12 +26,14 @@ const courseMeta: Record<string, {
     level: 'Advanced',
     icon: <Search className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
     whatYoullLearn: [
-      'Deploy a production ELK cluster from scratch',
-      'Configure Logstash pipelines for MongoDB, S3, and Filebeat',
-      'Manage Elasticsearch indices, snapshots, and backups',
-      'Build Kibana dashboards and set up monitoring',
-      'Scale and troubleshoot ELK in production',
-      'Implement data migration between clusters',
+      'Deploy and configure production Elasticsearch clusters',
+      'Secure clusters with TLS certificates and role-based access control',
+      'Build Logstash pipelines for MongoDB, S3, Kafka, and cluster migration',
+      'Collect logs and metrics with Filebeat and Metricbeat',
+      'Monitor cluster health, slow queries, and thread pool performance',
+      'Manage index lifecycles, analyzers, backups, and disaster recovery',
+      'Analyze Nginx access logs with bot detection and attack identification',
+      'Tune JVM heap, garbage collection, and OS-level performance',
     ],
     prerequisites: [
       'Basic Linux command line knowledge',
@@ -39,9 +41,9 @@ const courseMeta: Record<string, {
       'Understanding of JSON and REST APIs',
     ],
     updated: 'Feb 2026',
-    totalDuration: '8h 30m',
-    readingTime: '4h 15m',
-    labTime: '4h 15m',
+    totalDuration: '16h',
+    readingTime: '8h',
+    labTime: '8h',
     githubUrl: 'https://github.com/JinnaBalu/infinite-containers',
   },
   mongo: {
@@ -114,6 +116,48 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
     notFound();
   }
 
+  // Resolve ```fetch:lang``` blocks — fetch raw URLs at build time
+  const fetchPattern = /```fetch:(\w+)\n(https?:\/\/[^\s]+)\n```/g;
+  const fetchMatches = [...doc.content.matchAll(fetchPattern)];
+  if (fetchMatches.length > 0) {
+    const results = await Promise.all(
+      fetchMatches.map(async (match) => {
+        const [, , url] = match;
+        try {
+          const res = await fetch(url, { next: { revalidate: 3600 } });
+          if (!res.ok) return null;
+          return await res.text();
+        } catch {
+          return null;
+        }
+      })
+    );
+    let resolvedContent = doc.content;
+    fetchMatches.forEach((match, i) => {
+      const [fullMatch, lang] = match;
+      const fetched = results[i];
+      if (fetched !== null) {
+        resolvedContent = resolvedContent.replace(fullMatch, '```' + lang + '\n' + fetched + '```');
+      } else {
+        resolvedContent = resolvedContent.replace(fullMatch, '```' + lang + '\n# Failed to fetch file\n```');
+      }
+    });
+    doc.content = resolvedContent;
+  }
+
+  // Find the current lesson's githubUrl from sidebar config
+  const currentSlug = slug.join('/');
+  let lessonGithubUrl: string | undefined;
+  for (const section of category.sidebar) {
+    for (const item of section.items) {
+      if (item.slug === currentSlug && (item as any).githubUrl) {
+        lessonGithubUrl = (item as any).githubUrl;
+        break;
+      }
+    }
+    if (lessonGithubUrl) break;
+  }
+
   // Convert operations sidebar to docs sidebar format
   const sidebarGroups = category.sidebar.map(section => ({
     title: section.title,
@@ -133,9 +177,23 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
         <article className="flex-1 min-w-0 max-w-none">
           {/* Lesson Header */}
           <div className="border-b border-gray-200 pb-6 mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-              {doc.meta.title || slug[slug.length - 1]}
-            </h1>
+            <div className="flex items-start gap-3 mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+                {doc.meta.title || slug[slug.length - 1]}
+              </h1>
+              {lessonGithubUrl && (
+                <a
+                  href={lessonGithubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 mt-1 rounded-md bg-gray-900 text-white text-xs font-medium hover:bg-gray-700 transition-colors shrink-0"
+                  title="View source on GitHub"
+                >
+                  <Github className="h-3.5 w-3.5" />
+                  <span>GitHub</span>
+                </a>
+              )}
+            </div>
             {doc.meta.description && (
               <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
                 {doc.meta.description}

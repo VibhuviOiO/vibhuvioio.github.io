@@ -1,34 +1,33 @@
 ---
 title: ELK Stack Operations - Course Overview
-description: Master Elasticsearch, Logstash, and Kibana for production operations
-duration: "8h 30m"
-readingTime: "4h 15m"
-labTime: "4h 15m"
-lessons: 27
+description: Master Elasticsearch, Logstash, Kibana, and Beats for production operations
+duration: "16h"
+readingTime: "8h"
+labTime: "8h"
+lessons: 31
 level: "Beginner to Advanced"
 order: 1
 ---
-
-# ELK Stack Operations
-
-Master Elasticsearch, Logstash, and Kibana for production-grade operations. This course takes you from single-node setups to high-availability clusters.
-
 ## Course Stats
 
 | Metric | Value |
 |--------|-------|
-| **Total Duration** | 8h 30m |
-| **Reading Time** | 4h 15m |
-| **Hands-on Labs** | 4h 15m |
-| **Lessons** | 27 |
+| **Total Duration** | 16h |
+| **Reading Time** | 8h |
+| **Hands-on Labs** | 8h |
+| **Lessons** | 31 |
+| **Phases** | 12 |
 | **Level** | Beginner to Advanced |
 
 ## What You'll Learn
 
-- **Elasticsearch Core**: Indexing, search, mappings, and cluster management
-- **Logstash Pipelines**: Data ingestion from multiple sources
-- **Kibana**: Visualization and monitoring
-- **Production Skills**: Backup, security, scaling, and troubleshooting
+- **Elasticsearch Core**: Configuration, indexing, search, mappings, and cluster management
+- **Security & TLS**: Certificate generation, HTTPS, authentication, roles, and API keys
+- **Index Management**: ILM policies, analyzers, tokenizers, and shard design
+- **Logstash Pipelines**: Data ingestion from MongoDB, S3, Kafka, and cluster migration
+- **Beats**: Filebeat log collection, Metricbeat system metrics, Docker autodiscover
+- **Monitoring**: Cluster health, cat APIs, thread pools, slow logs, and hot threads
+- **Production Skills**: Backup/restore, reindexing, Nginx log analysis, and disaster recovery
 
 ## Prerequisites
 
@@ -47,50 +46,84 @@ All course materials are available in these repositories:
 
 ## Course Structure
 
-### Phase 1: Foundation (1h 30m)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Course Overview | 10m | 10m | - |
-| Architecture | 15m | 15m | - |
-| Single Node Setup | 30m | 10m | 20m |
-| Kibana Setup | 15m | 5m | 10m |
-| Index Operations | 20m | 10m | 10m |
+### Phase 1: Getting Started (25m)
+| Lesson | Duration |
+|--------|----------|
+| Course Overview | 10m |
+| Architecture | 15m |
 
-### Phase 2: CRUD Operations (45m)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Document CRUD | 45m | 20m | 25m |
+### Phase 2: Single Node Setup (45m)
+| Lesson | Duration |
+|--------|----------|
+| Single Node Elasticsearch | 30m |
+| Kibana Setup | 15m |
 
-### Phase 3: Cluster Operations (2h)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Understanding HA | 30m | 20m | 10m |
-| Three Node Cluster | 45m | 15m | 30m |
-| Five Node Cluster | 45m | 15m | 30m |
+### Phase 3: Configuration (1h)
+| Lesson | Duration |
+|--------|----------|
+| Elasticsearch Configuration Reference | 35m |
+| JVM & Performance Tuning | 25m |
 
-### Phase 4: Index Management (30m)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Index Design | 30m | 20m | 10m |
+### Phase 4: CRUD Operations (45m)
+| Lesson | Duration |
+|--------|----------|
+| Index Operations | 20m |
+| Document CRUD | 25m |
 
-### Phase 5: Logstash Pipelines (2h 30m)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Logstash Introduction | 30m | 20m | 10m |
-| MongoDB Pipeline | 1h 30m | 30m | 1h |
-| S3 Pipeline | 30m | 15m | 15m |
+### Phase 5: Cluster Operations (2h)
+| Lesson | Duration |
+|--------|----------|
+| Understanding HA | 30m |
+| Three Node Cluster | 45m |
+| Five Node Cluster | 45m |
 
-### Phase 6: Use Cases (30m)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Use Cases Overview | 15m | 15m | - |
-| MongoDB Pipeline Guide | 15m | 15m | - |
+### Phase 6: Index Management (1h 30m)
+| Lesson | Duration |
+|--------|----------|
+| Index Design Best Practices | 30m |
+| Index Lifecycle Management | 30m |
+| Analyzers & Tokenizers | 25m |
 
-### Phase 7: Production (45m)
-| Lesson | Duration | Reading | Lab |
-|--------|----------|---------|-----|
-| Reindexing | 20m | 10m | 10m |
-| Remote Reindexing | 25m | 10m | 15m |
+### Phase 7: Security & TLS (1h 10m)
+| Lesson | Duration |
+|--------|----------|
+| TLS & Certificate Setup | 35m |
+| Authentication & Authorization | 30m |
+
+### Phase 8: Logstash Pipelines (3h)
+| Lesson | Duration |
+|--------|----------|
+| Logstash Introduction | 30m |
+| MongoDB to Elasticsearch | 1h 30m |
+| S3 to Elasticsearch | 30m |
+| Cluster Data Migration | 30m |
+
+### Phase 9: Beats & Data Collection (1h)
+| Lesson | Duration |
+|--------|----------|
+| Filebeat — Log Collection | 30m |
+| Metricbeat — System Metrics | 25m |
+
+### Phase 10: Monitoring & Performance (1h)
+| Lesson | Duration |
+|--------|----------|
+| Cluster Monitoring | 30m |
+| Slow Logs | 25m |
+
+### Phase 11: Use Cases (1h 10m)
+| Lesson | Duration |
+|--------|----------|
+| Use Cases Overview | 15m |
+| MongoDB Pipeline Guide | 15m |
+| Nginx Log Analysis | 40m |
+
+### Phase 12: Production Operations (1h 40m)
+| Lesson | Duration |
+|--------|----------|
+| Reindexing | 20m |
+| Remote Reindexing | 25m |
+| Backup & Restore | 30m |
+| Troubleshooting | 25m |
 
 ## Quick Start
 
@@ -109,3 +142,5 @@ Each lesson references configuration files from:
 - **Docker Compose**: `elastic-stack/*/docker-compose.yml`
 - **Pipelines**: `elastic-stack/logstash-pipeline-list/`
 - **Beats Config**: `elastic-stack/beats-conf/`
+- **Nginx Logs**: `elastic-stack/nginx-logs-study/`
+- **Data Migration**: `elastic-stack/data-migration-logstash/`

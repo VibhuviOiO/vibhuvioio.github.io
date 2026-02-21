@@ -8,20 +8,13 @@ github: "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stac
 order: 2
 ---
 
-# Three Node Cluster Setup
+## Project Structure
 
-Deploy a resilient three-node Elasticsearch cluster with proper master election.
-
-## Time Estimate
-- **Reading**: 15 minutes
-- **Lab**: 30 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers/elastic-stack/three-node-cluster](https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/three-node-cluster)
-- **Files**:
-  - `elasticsearch-one.yaml` - Node 1 configuration
-  - `elasticsearch-two.yaml` - Node 2 configuration
-  - `elasticsearch-three.yaml` - Node 3 configuration
+```tree
+three-node-cluster/
+├── docker-compose.yml
+└── .env
+```
 
 ## Architecture
 
@@ -116,6 +109,15 @@ docker stop oio-elasticsearch-three
 # Check new master election (wait 30 seconds)
 curl -X GET "http://192.168.0.11:9200/_cluster/health?pretty"
 ```
+
+## Lab: Deploy a Three Node Cluster
+
+1. Download the configuration files for all three nodes
+2. Start Node One and verify Elasticsearch is running
+3. Start Node Two and Node Three, then check cluster health
+4. Run `GET _cat/nodes?v` and confirm all three nodes are visible
+5. Stop the master node and observe automatic master re-election
+6. Restart the stopped node and verify it rejoins the cluster
 
 ## Next Steps
 

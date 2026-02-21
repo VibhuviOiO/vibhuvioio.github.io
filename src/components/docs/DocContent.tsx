@@ -49,6 +49,32 @@ function highlightYAML(code: string): string {
     .replace(/^(\s*)(-)(\s)(?!\s)/gm, '$1<span class="text-gray-400">$2</span>$3');
 }
 
+// Render file tree structure with folder/file icons
+function renderFileTree(code: string): string {
+  const lines = code.trim().split('\n');
+  const items = lines.map(line => {
+    const escaped = escapeHtml(line);
+    // Detect tree connectors (├── └── │)
+    const match = escaped.match(/^([\s│├└─┬┤┐┘┌┼]*(?:├──|└──)\s*)(.*)/);
+    const prefix = match ? match[1] : '';
+    const name = match ? match[2] : escaped.trim();
+
+    // Determine if it's a directory (ends with / or has no extension)
+    const isDir = name.endsWith('/') || (!name.includes('.') && name !== '');
+    const displayName = name.replace(/\/$/, '');
+
+    const icon = isDir
+      ? '<span class="text-yellow-500 mr-1.5">📁</span>'
+      : '<span class="text-gray-400 mr-1.5">📄</span>';
+
+    const nameClass = isDir ? 'font-semibold text-gray-800' : 'text-gray-600';
+
+    return `<div class="leading-7 font-mono text-sm whitespace-pre"><span class="text-gray-400">${prefix}</span>${icon}<span class="${nameClass}">${displayName}</span></div>`;
+  }).join('');
+
+  return `<div class="rounded-lg border border-gray-200 bg-gray-50 p-4 mb-4">${items}</div>`;
+}
+
 // Markdown renderer with proper handling of nested elements
 function renderMarkdown(content: string): string {
   // Step 1: Extract code blocks FIRST (before any processing) to preserve their indentation
@@ -67,13 +93,20 @@ function renderMarkdown(content: string): string {
     // Auto-detect bash if no language specified but content looks like bash
     const looksLikeBash = !language && /^(docker|kubectl|npm|pip|python|curl|wget|cd|ls|cat|echo|export|source|mkdir|rm|cp|mv|chmod|chown)/m.test(code);
     
+    // File tree rendering
+    if (language === 'tree') {
+      const treeHtml = renderFileTree(code);
+      codeBlocks.push(treeHtml);
+      return placeholder;
+    }
+
     let highlightedCode = code;
     if (language === 'yaml' || language === 'yml' || looksLikeYAML) {
       highlightedCode = highlightYAML(code);
     } else if (language === 'bash' || language === 'sh' || language === 'shell' || looksLikeBash) {
       highlightedCode = highlightBash(code);
     }
-    
+
     codeBlocks.push(
       `<pre class="overflow-x-auto rounded-lg bg-[#1e1e1e] p-4 mb-4"><code class="text-sm font-mono text-gray-300">${highlightedCode}</code></pre>`
     );

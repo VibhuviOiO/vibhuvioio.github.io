@@ -4,18 +4,8 @@ description: Real-world use cases and integrations for the ELK Stack
 duration: "15m"
 readingTime: "15m"
 order: 1
+labTime: "0m"
 ---
-
-# ELK Use Cases
-
-Real-world scenarios and integrations for Elasticsearch, Logstash, and Kibana.
-
-## Time Estimate
-- **Reading**: 15 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers](https://github.com/JinnaBalu/infinite-containers)
-- **Files**: Various use case configurations in elastic-stack and mongo-elasticsearch-logstash directories
 
 ## Available Use Cases
 

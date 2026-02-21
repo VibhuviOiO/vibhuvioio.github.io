@@ -8,21 +8,15 @@ github: "https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasti
 order: 2
 ---
 
-# MongoDB to Elasticsearch Pipeline
+## Project Structure
 
-Build a data pipeline to sync MongoDB collections to Elasticsearch indices using Logstash.
-
-## Time Estimate
-- **Reading**: 30 minutes
-- **Lab**: 1 hour
-
-## GitHub Reference
-- **Repository**: [infinite-containers/mongo-elasticsearch-logstash](https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash)
-- **Files**:
-  - `mongo/docker-compose.yml` - MongoDB + Mongo Express
-  - `elk/docker-compose.yml` - Elasticsearch + Kibana
-  - `elk/logstash/Dockerfile` - Custom Logstash image
-  - `elk/logstash/pipeline/logstash.conf` - Pipeline configuration
+```tree
+mongo-elasticsearch-logstash/
+├── docker-compose.yml
+├── .env
+└── pipeline/
+    └── logstash.conf
+```
 
 ## Architecture
 
@@ -149,6 +143,15 @@ docker stop $(docker ps -qa)
 docker rm $(docker ps -qa)
 docker network rm datapipeline
 ```
+
+## Lab: Build the MongoDB Pipeline
+
+1. Create the Docker network and start MongoDB with Mongo Express
+2. Import the sample `movies.json` data into MongoDB
+3. Start Elasticsearch and Kibana, verify both are healthy
+4. Build the custom Logstash image with the MongoDB JDBC driver
+5. Run Logstash and verify documents appear in Elasticsearch
+6. Search for a movie in Kibana Dev Tools
 
 ## Next Steps
 

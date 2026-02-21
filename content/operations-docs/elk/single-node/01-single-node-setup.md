@@ -4,24 +4,17 @@ description: Deploy a single-node Elasticsearch cluster with Docker Compose for 
 duration: "30m"
 readingTime: "10m"
 labTime: "20m"
-github: "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch"
+github: "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch"
 order: 1
 ---
 
-# Single Node Elasticsearch Setup
+## Project Structure
 
-Deploy a single-node Elasticsearch instance for local development and testing.
-
-## Time Estimate
-- **Reading**: 10 minutes
-- **Lab**: 20 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers/elastic-stack/single-node-elasticsearch](https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch)
-- **Files**:
-  - `docker-compose.yml` - Main configuration
-  - `.env` - Environment variables
-  - `log4j.properties` - Logging configuration
+```tree
+elasticsearch-single/
+├── docker-compose.yml
+└── .env
+```
 
 ## Download Configuration Files
 
@@ -30,22 +23,23 @@ Deploy a single-node Elasticsearch instance for local development and testing.
 mkdir ~/elasticsearch-single && cd ~/elasticsearch-single
 
 # Download docker-compose.yml
-wget https://raw.githubusercontent.com/JinnaBalu/infinite-containers/main/elastic-stack/single-node-elasticsearch/docker-compose.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/docker-compose.yml
 
 # Download environment variables
-wget https://raw.githubusercontent.com/JinnaBalu/infinite-containers/main/elastic-stack/single-node-elasticsearch/.env
+wget https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/.env
+```
+
+
+```fetch:bash
+https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/docker-compose.yml
 ```
 
 ## Environment Variables
 
 The `.env` file contains:
 
-```bash
-STACK_VERSION=8.17.1
-CLUSTER_NAME=elasticsearch
-LICENSE=basic
-MEM_LIMIT=2g
-KIBANA_PORT=5601
+```fetch:bash
+https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/.env
 ```
 
 Modify `MEM_LIMIT` based on your available RAM.

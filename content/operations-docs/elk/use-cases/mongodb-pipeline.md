@@ -6,21 +6,6 @@ readingTime: "15m"
 order: 2
 ---
 
-# MongoDB to Elasticsearch - Complete Guide
-
-A production-ready data pipeline to sync MongoDB collections to Elasticsearch indices.
-
-## Time Estimate
-- **Reading**: 15 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers/mongo-elasticsearch-logstash](https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash)
-- **Files**:
-  - `mongo/docker-compose.yml` - MongoDB + Mongo Express
-  - `elk/docker-compose.yml` - Elasticsearch + Kibana
-  - `elk/logstash/` - Custom Logstash configuration
-  - `movies.json` - Sample data
-
 ## Use Case
 
 **Problem**: MongoDB is great for document storage but lacks advanced full-text search and analytics capabilities.
@@ -221,7 +206,7 @@ docker rm logstash mongodb elasticsearch kibana mongo-express
 docker network rm datapipeline
 ```
 
-## Related Resources
+## Next Steps
 
 - [Logstash Introduction](../logstash/01-introduction)
 - [Remote Reindexing](../production/02-remote-reindexing)

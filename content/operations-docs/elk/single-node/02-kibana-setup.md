@@ -7,18 +7,13 @@ labTime: "10m"
 order: 2
 ---
 
-# Kibana Setup
+## Project Structure
 
-Kibana provides a web interface for exploring and visualizing Elasticsearch data.
-
-## Time Estimate
-- **Reading**: 5 minutes
-- **Lab**: 10 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers/elastic-stack/single-node-elasticsearch](https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch)
-- **Files**:
-  - `docker-compose.yml` - Includes Elasticsearch and Kibana services
+```tree
+elasticsearch-kibana/
+├── docker-compose.yml
+└── .env
+```
 
 ## Using the Combined Stack
 
@@ -65,6 +60,14 @@ curl -I http://localhost:5601
 # Check Elasticsearch from Kibana container
 docker exec kibana curl -s http://elasticsearch:9200
 ```
+
+## Lab: Explore Kibana
+
+1. Open Kibana at `http://localhost:5601`
+2. Navigate to Dev Tools and run a basic health check
+3. Create an index pattern for sample data
+4. Explore the Discover tab with sample data
+5. Build a simple visualization in the Dashboard
 
 ## Next Steps
 

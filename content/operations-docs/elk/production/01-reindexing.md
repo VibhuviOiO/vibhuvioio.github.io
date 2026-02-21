@@ -7,20 +7,13 @@ labTime: "10m"
 order: 1
 ---
 
-# Reindexing Data
+## Project Structure
 
-## Time Estimate
-- **Reading**: 10 minutes
-- **Lab**: 10 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers/elastic-stack](https://github.com/JinnaBalu/infinite-containers)
-- **Files**: Reindexing examples in elastic-stack directories
-
-Reindexing copies documents from one index to another, useful for:
-- Changing mappings
-- Splitting/merging indices
-- Migrating to new cluster versions
+```tree
+elasticsearch-remote-reindexing/
+├── docker-compose.yml
+└── .env
+```
 
 ## Basic Reindex
 
@@ -128,6 +121,14 @@ curl -X POST "localhost:9200/_reindex" -H 'Content-Type: application/json' -d'
   }
 }'
 ```
+
+## Lab: Practice Reindexing
+
+1. Create a source index with sample documents
+2. Reindex all documents to a new index
+3. Reindex with a query filter (only specific documents)
+4. Use `_tasks` API to monitor reindex progress
+5. Verify document counts match between source and destination
 
 ## Next Steps
 

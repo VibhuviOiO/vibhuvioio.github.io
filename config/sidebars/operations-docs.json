@@ -9,9 +9,9 @@
       "slug": "elk",
       "description": "Master Elasticsearch, Logstash, and Kibana for production operations",
       "icon": "🔍",
-      "totalDuration": "8h 30m",
-      "readingTime": "4h 15m",
-      "labTime": "4h 15m",
+      "totalDuration": "16h",
+      "readingTime": "8h",
+      "labTime": "8h",
       "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack",
       "sidebar": [
         {
@@ -25,18 +25,25 @@
           "title": "Phase 2: Single Node Setup (45m)",
           "items": [
             { "id": "es-single", "title": "Single Node Elasticsearch", "slug": "elk/single-node/01-single-node-setup", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" },
-            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/02-kibana-setup", "duration": "15m", "type": "doc" }
+            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/02-kibana-setup", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" }
           ]
         },
         {
-          "title": "Phase 3: CRUD Operations (45m)",
+          "title": "Phase 3: Configuration (1h)",
+          "items": [
+            { "id": "cfg-elasticsearch", "title": "Elasticsearch Configuration", "slug": "elk/configuration/01-elasticsearch-config", "duration": "35m", "type": "doc" },
+            { "id": "cfg-jvm", "title": "JVM & Performance Tuning", "slug": "elk/configuration/02-jvm-performance", "duration": "25m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 4: CRUD Operations (45m)",
           "items": [
             { "id": "crud-index", "title": "Index Operations", "slug": "elk/crud/01-index-operations", "duration": "20m", "type": "doc" },
             { "id": "crud-doc", "title": "Document CRUD", "slug": "elk/crud/02-document-operations", "duration": "25m", "type": "doc" }
           ]
         },
         {
-          "title": "Phase 4: Cluster Operations (2h)",
+          "title": "Phase 5: Cluster Operations (2h)",
           "items": [
             { "id": "cluster-ha", "title": "Understanding HA", "slug": "elk/cluster/01-understanding-ha", "duration": "30m", "type": "doc" },
             { "id": "cluster-three", "title": "Three Node Cluster", "slug": "elk/cluster/02-three-node-cluster", "duration": "45m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/three-node-cluster" },
@@ -44,31 +51,58 @@
           ]
         },
         {
-          "title": "Phase 5: Index Management (30m)",
+          "title": "Phase 6: Index Management (1h 30m)",
           "items": [
-            { "id": "idx-design", "title": "Index Design", "slug": "elk/index-management/01-index-design", "duration": "30m", "type": "doc" }
+            { "id": "idx-design", "title": "Index Design", "slug": "elk/index-management/01-index-design", "duration": "30m", "type": "doc" },
+            { "id": "idx-lifecycle", "title": "Index Lifecycle Management", "slug": "elk/index-management/02-index-lifecycle", "duration": "30m", "type": "doc" },
+            { "id": "idx-analyzers", "title": "Analyzers & Tokenizers", "slug": "elk/index-management/03-analyzers", "duration": "25m", "type": "doc" }
           ]
         },
         {
-          "title": "Phase 6: Logstash Pipelines (2h 30m)",
+          "title": "Phase 7: Security & TLS (1h 10m)",
           "items": [
-            { "id": "ls-intro", "title": "Logstash Introduction", "slug": "elk/logstash/01-introduction", "duration": "30m", "type": "doc" },
+            { "id": "sec-tls", "title": "TLS & Certificate Setup", "slug": "elk/security/01-tls-setup", "duration": "35m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/five-node-elasticsearch/one-server-five-containers" },
+            { "id": "sec-auth", "title": "Authentication & Authorization", "slug": "elk/security/02-authentication", "duration": "30m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 8: Logstash Pipelines (3h)",
+          "items": [
+            { "id": "ls-intro", "title": "Logstash Introduction", "slug": "elk/logstash/01-introduction", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/logstash-pipeline-list" },
             { "id": "ls-mongo", "title": "MongoDB to Elasticsearch", "slug": "elk/logstash/02-mongodb-pipeline", "duration": "1h 30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash" },
-            { "id": "ls-s3", "title": "S3 to Elasticsearch", "slug": "elk/logstash/03-s3-pipeline", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/s3-to-es" }
+            { "id": "ls-s3", "title": "S3 to Elasticsearch", "slug": "elk/logstash/03-s3-pipeline", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/s3-to-es" },
+            { "id": "ls-migration", "title": "Cluster Data Migration", "slug": "elk/logstash/04-data-migration", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/data-migration-logstash" }
           ]
         },
         {
-          "title": "Phase 7: Use Cases (30m)",
+          "title": "Phase 9: Beats & Data Collection (1h)",
+          "items": [
+            { "id": "beats-filebeat", "title": "Filebeat — Log Collection", "slug": "elk/beats/01-filebeat", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/beats-conf/filebeat" },
+            { "id": "beats-metricbeat", "title": "Metricbeat — System Metrics", "slug": "elk/beats/02-metricbeat", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/beats-conf/metricbeat" }
+          ]
+        },
+        {
+          "title": "Phase 10: Monitoring & Performance (1h)",
+          "items": [
+            { "id": "mon-cluster", "title": "Cluster Monitoring", "slug": "elk/monitoring/01-cluster-monitoring", "duration": "30m", "type": "doc" },
+            { "id": "mon-slowlogs", "title": "Slow Logs", "slug": "elk/monitoring/02-slow-logs", "duration": "25m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 11: Use Cases (1h 10m)",
           "items": [
             { "id": "uc-overview", "title": "Use Cases Overview", "slug": "elk/use-cases/overview", "duration": "15m", "type": "doc" },
-            { "id": "uc-mongo", "title": "MongoDB Pipeline Guide", "slug": "elk/use-cases/mongodb-pipeline", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash" }
+            { "id": "uc-mongo", "title": "MongoDB Pipeline Guide", "slug": "elk/use-cases/mongodb-pipeline", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/mongo-elasticsearch-logstash" },
+            { "id": "uc-nginx", "title": "Nginx Log Analysis", "slug": "elk/use-cases/nginx-log-analysis", "duration": "40m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/nginx-logs-study" }
           ]
         },
         {
-          "title": "Phase 8: Production (45m)",
+          "title": "Phase 12: Production Operations (1h 40m)",
           "items": [
-            { "id": "prod-reindex", "title": "Reindexing", "slug": "elk/production/01-reindexing", "duration": "20m", "type": "doc" },
-            { "id": "prod-remote", "title": "Remote Reindexing", "slug": "elk/production/02-remote-reindexing", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/elasticsearch-remote-reindexing" }
+            { "id": "prod-reindex", "title": "Reindexing", "slug": "elk/production/01-reindexing", "duration": "20m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/elasticsearch-remote-reindexing" },
+            { "id": "prod-remote", "title": "Remote Reindexing", "slug": "elk/production/02-remote-reindexing", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/elasticsearch-remote-reindexing" },
+            { "id": "prod-backup", "title": "Backup & Restore", "slug": "elk/production/03-backup-restore", "duration": "30m", "type": "doc" },
+            { "id": "prod-troubleshoot", "title": "Troubleshooting", "slug": "elk/production/04-troubleshooting", "duration": "25m", "type": "doc" }
           ]
         }
       ]

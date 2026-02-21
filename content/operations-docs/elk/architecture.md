@@ -4,16 +4,8 @@ description: Understanding the components and data flow of Elasticsearch, Logsta
 duration: "15m"
 readingTime: "15m"
 order: 2
+labTime: "0m"
 ---
-
-# ELK Stack Architecture
-
-## Time Estimate
-- **Reading**: 15 minutes
-
-## GitHub Reference
-- **Repository**: [infinite-containers](https://github.com/JinnaBalu/infinite-containers)
-- **Files**: Various configurations across elastic-stack directories
 
 ## Components Overview
 
@@ -79,3 +71,15 @@ JDBC Input → Logstash → Elasticsearch
 ```
 Metricbeat → Elasticsearch → Kibana Dashboard
 ```
+
+## Lab: Explore the Architecture
+
+1. Start a single-node Elasticsearch cluster with Docker
+2. Open Kibana and explore the Dev Tools console
+3. Run `GET _cluster/health` and identify the response fields
+4. Run `GET _cat/nodes?v` and note the node roles
+
+## Next Steps
+
+- [Single Node Setup](/learn/elk/single-node/01-single-node-setup) — deploy your first Elasticsearch node
+- [Elasticsearch Configuration](/learn/elk/configuration/01-elasticsearch-config) — configure elasticsearch.yml
