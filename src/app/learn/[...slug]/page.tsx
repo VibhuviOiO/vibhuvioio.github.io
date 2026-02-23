@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { loadDocContent } from '@/lib/docs-server';
 import { loadOperationsSidebarClient } from '@/lib/docs-client';
 import {
@@ -69,6 +70,61 @@ const courseMeta: Record<string, {
 
 interface OperationsPageProps {
   params: Promise<{ slug: string[] }>;
+}
+
+export async function generateMetadata({ params }: OperationsPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const categoryId = slug[0];
+  const { categories } = loadOperationsSidebarClient(categoryId);
+  if (categories.length === 0) return {};
+
+  const category = categories[0];
+  const url = `/learn/${slug.join('/')}/`;
+  const isOverview = slug.length === 2 && slug[1] === 'overview';
+
+  if (isOverview) {
+    return {
+      title: category.title,
+      description: category.description || '',
+      openGraph: {
+        title: category.title,
+        description: category.description || '',
+        type: 'website',
+        url,
+        siteName: 'VibhuviOiO',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: category.title,
+        description: category.description || '',
+      },
+      alternates: { canonical: url },
+    };
+  }
+
+  const doc = loadDocContent('operations-docs', slug);
+  if (!doc) return {};
+
+  const title = doc.meta.title || slug[slug.length - 1];
+  const description = doc.meta.description || '';
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url,
+      siteName: 'VibhuviOiO',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    alternates: { canonical: url },
+  };
 }
 
 export default async function OperationsDocPage({ params }: OperationsPageProps) {
