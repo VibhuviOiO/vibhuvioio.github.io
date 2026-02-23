@@ -24,8 +24,8 @@
         {
           "title": "Phase 2: Single Node Setup (45m)",
           "items": [
-            { "id": "es-single", "title": "Single Node Elasticsearch", "slug": "elk/single-node/01-single-node-setup", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" },
-            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/02-kibana-setup", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" }
+            { "id": "es-single", "title": "Single Node Elasticsearch", "slug": "elk/single-node/single-node-setup", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" },
+            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/kibana-setup", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" }
           ]
         },
         {

@@ -138,4 +138,4 @@ ES_PORT=9201
 
 ## Next Steps
 
-- [Kibana Setup](./02-kibana-setup) — connect a UI to your running node
+- [Kibana Setup](./kibana-setup) — connect a UI to your running node
