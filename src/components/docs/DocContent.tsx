@@ -2,7 +2,6 @@ interface DocContentProps {
   content: string;
 }
 
-// Escape HTML entities
 function escapeHtml(text: string): string {
   return text
     .replace(/&/g, '&amp;')
@@ -10,110 +9,152 @@ function escapeHtml(text: string): string {
     .replace(/>/g, '&gt;');
 }
 
-// Simple syntax highlighter for Bash
+// ─── Syntax highlighters ────────────────────────────────────────────────────
+
 function highlightBash(code: string): string {
-  // First escape HTML to prevent XSS and handle special characters
   let result = escapeHtml(code);
-  
-  // Then apply syntax highlighting on the escaped text
   return result
-    // Comments (must be first) - match # after whitespace or at start of line
     .replace(/(^|\s)(#[^\n]*)/gm, '$1<span class="text-gray-500">$2</span>')
-    // Strings in quotes (single and double)
     .replace(/(&quot;[^&]*&quot;|&#039;[^&#]*&#039;)/g, '<span class="text-green-400">$1</span>')
-    // URLs
     .replace(/(https?:\/\/[^\s]+)/g, '<span class="text-cyan-400">$1</span>')
-    // Commands at start of line or after operators
     .replace(/(^|&amp;&amp;|\|\||;|\||\$\(|\`\s*)(\s*)([a-zA-Z_][a-zA-Z0-9_-]+)/gm, '$1$2<span class="text-yellow-400">$3</span>')
-    // Flags and options
     .replace(/(\s|^)(-[a-zA-Z-]+)/g, '$1<span class="text-blue-400">$2</span>');
 }
 
-// Simple syntax highlighter for YAML  
 function highlightYAML(code: string): string {
-  // First escape HTML
   let result = escapeHtml(code);
-  
   return result
-    // Comments
     .replace(/(#.*$)/gm, '<span class="text-gray-500">$1</span>')
-    // Keys (before colon)
     .replace(/(^|\s+)([a-zA-Z_][a-zA-Z0-9_]*)(:)/gm, '$1<span class="text-blue-400">$2</span><span class="text-gray-300">$3</span>')
-    // String values with quotes (escaped)
     .replace(/(:\s*)(&quot;[^&]*&quot;)/g, '$1<span class="text-green-400">$2</span>')
-    // Numbers
     .replace(/(:\s*)(\d+)(\s*$|\s*#)/gm, '$1<span class="text-orange-400">$2</span>$3')
-    // Boolean values
     .replace(/(:\s*)(true|false)(\s*$|\s*#)/gmi, '$1<span class="text-purple-400">$2</span>$3')
-    // List markers
     .replace(/^(\s*)(-)(\s)(?!\s)/gm, '$1<span class="text-gray-400">$2</span>$3');
 }
 
-// Render file tree structure with folder/file icons
+// ─── File tree ───────────────────────────────────────────────────────────────
+
 function renderFileTree(code: string): string {
   const lines = code.trim().split('\n');
   const items = lines.map(line => {
     const escaped = escapeHtml(line);
-    // Detect tree connectors (├── └── │)
     const match = escaped.match(/^([\s│├└─┬┤┐┘┌┼]*(?:├──|└──)\s*)(.*)/);
     const prefix = match ? match[1] : '';
     const name = match ? match[2] : escaped.trim();
-
-    // Determine if it's a directory (ends with / or has no extension)
     const isDir = name.endsWith('/') || (!name.includes('.') && name !== '');
     const displayName = name.replace(/\/$/, '');
-
     const icon = isDir
       ? '<span class="text-yellow-500 mr-1.5">📁</span>'
       : '<span class="text-gray-400 mr-1.5">📄</span>';
-
     const nameClass = isDir ? 'font-semibold text-gray-800' : 'text-gray-600';
-
     return `<div class="leading-7 font-mono text-sm whitespace-pre"><span class="text-gray-400">${prefix}</span>${icon}<span class="${nameClass}">${displayName}</span></div>`;
   }).join('');
-
   return `<div class="rounded-lg border border-gray-200 bg-gray-50 p-4 mb-4">${items}</div>`;
 }
 
-// Markdown renderer with proper handling of nested elements
+// ─── Inline formatting (used for table cells too) ───────────────────────────
+
+function renderInline(text: string): string {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>')
+    .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-[0.875em] font-mono">$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[#2702a6] hover:underline underline-offset-2 decoration-2" target="_blank" rel="noopener noreferrer">$1</a>');
+}
+
+// ─── Tables ──────────────────────────────────────────────────────────────────
+
+function renderTable(block: string): string {
+  const rows = block.trim().split('\n');
+  if (rows.length < 2) return block;
+
+  const parseRow = (row: string) =>
+    row.split('|').slice(1, -1).map(cell => cell.trim());
+
+  const headers = parseRow(rows[0]);
+  // rows[1] is the separator (|---|---|), skip it
+  const bodyRows = rows.slice(2);
+
+  const thead = `<thead><tr>${headers
+    .map(h => `<th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">${renderInline(h)}</th>`)
+    .join('')}</tr></thead>`;
+
+  const tbody = `<tbody>${bodyRows
+    .map((row, i) => {
+      const cells = parseRow(row);
+      const bg = i % 2 === 0 ? '' : 'class="bg-gray-50/60"';
+      return `<tr ${bg}>${cells
+        .map(cell => `<td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">${renderInline(cell)}</td>`)
+        .join('')}</tr>`;
+    })
+    .join('')}</tbody>`;
+
+  return `<div class="overflow-x-auto mb-6 rounded-xl border border-gray-200 shadow-sm"><table class="min-w-full divide-y divide-gray-200 bg-white"><thead class="bg-gray-50">${thead.replace('<thead>', '').replace('</thead>', '')}</thead>${tbody}</table></div>`;
+}
+
+// ─── Callout boxes ───────────────────────────────────────────────────────────
+
+const calloutConfig: Record<string, { bg: string; border: string; icon: string; titleColor: string }> = {
+  Note:     { bg: 'bg-blue-50',   border: 'border-blue-400',   icon: 'ℹ️',  titleColor: 'text-blue-800' },
+  Tip:      { bg: 'bg-green-50',  border: 'border-green-400',  icon: '💡', titleColor: 'text-green-800' },
+  Warning:  { bg: 'bg-amber-50',  border: 'border-amber-400',  icon: '⚠️', titleColor: 'text-amber-800' },
+  Security: { bg: 'bg-red-50',    border: 'border-red-400',    icon: '🔒', titleColor: 'text-red-800' },
+  Lab:      { bg: 'bg-purple-50', border: 'border-purple-400', icon: '⚗️', titleColor: 'text-purple-800' },
+  Expected: { bg: 'bg-gray-100',  border: 'border-gray-400',   icon: '✅', titleColor: 'text-gray-700' },
+};
+
+function makeCallout(label: string, body: string): string {
+  const cfg = calloutConfig[label] ?? calloutConfig['Note'];
+  return `<div class="flex gap-3 ${cfg.bg} border-l-4 ${cfg.border} px-4 py-3 mb-4 rounded-r-lg">
+    <span class="text-base mt-0.5 shrink-0">${cfg.icon}</span>
+    <p class="m-0 text-sm text-gray-700 leading-relaxed"><strong class="${cfg.titleColor} font-semibold">${label}:</strong> ${renderInline(body)}</p>
+  </div>`;
+}
+
+// ─── Main markdown renderer ──────────────────────────────────────────────────
+
 function renderMarkdown(content: string): string {
-  // Step 1: Extract code blocks FIRST (before any processing) to preserve their indentation
+  // Step 1 — Extract triple-backtick code blocks (protects them from all other processing)
   const codeBlocks: string[] = [];
-  let processed = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+  let processed = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
     const placeholder = `___CODE_BLOCK_${codeBlocks.length}___`;
-    
-    // Apply syntax highlighting (we control the markdown content, so no HTML escaping needed)
     const language = (lang || '').toLowerCase();
-    // Auto-detect YAML if no language specified but content looks like YAML
+
     const looksLikeYAML = !language && (
-      /^\s*[a-zA-Z_][a-zA-Z0-9_]*:/m.test(code) || 
-      /^\s*-\s+[a-zA-Z_]/m.test(code) ||
-      /:\s*["']?[^\n]*["']?\s*$/m.test(code)
+      /^\s*[a-zA-Z_][a-zA-Z0-9_]*:/m.test(code) ||
+      /^\s*-\s+[a-zA-Z_]/m.test(code)
     );
-    // Auto-detect bash if no language specified but content looks like bash
-    const looksLikeBash = !language && /^(docker|kubectl|npm|pip|python|curl|wget|cd|ls|cat|echo|export|source|mkdir|rm|cp|mv|chmod|chown)/m.test(code);
-    
-    // File tree rendering
+    const looksLikeBash = !language &&
+      /^(docker|kubectl|npm|pip|python|curl|wget|cd|ls|cat|echo|export|source|mkdir|rm|cp|mv|chmod|chown)/m.test(code);
+
     if (language === 'tree') {
-      const treeHtml = renderFileTree(code);
-      codeBlocks.push(treeHtml);
+      codeBlocks.push(renderFileTree(code));
       return placeholder;
     }
 
-    let highlightedCode = code;
+    let highlighted = code;
     if (language === 'yaml' || language === 'yml' || looksLikeYAML) {
-      highlightedCode = highlightYAML(code);
+      highlighted = highlightYAML(code);
     } else if (language === 'bash' || language === 'sh' || language === 'shell' || looksLikeBash) {
-      highlightedCode = highlightBash(code);
+      highlighted = highlightBash(code);
+    } else {
+      highlighted = escapeHtml(code);
     }
 
+    // Optional filename header: ```bash filename=".env"
+    const fileMatch = (lang || '').match(/\w+\s+filename="?([^"]+)"?/);
+    const header = fileMatch
+      ? `<div class="flex items-center gap-2 px-4 py-2 bg-gray-800 border-b border-gray-700 rounded-t-lg"><span class="text-xs font-mono text-gray-400">${escapeHtml(fileMatch[1])}</span></div>`
+      : '';
+    const wrapClass = fileMatch ? 'rounded-b-lg rounded-t-none' : 'rounded-lg';
+
     codeBlocks.push(
-      `<pre class="overflow-x-auto rounded-lg bg-[#1e1e1e] p-4 mb-4"><code class="text-sm font-mono text-gray-300">${highlightedCode}</code></pre>`
+      `${header}<pre class="overflow-x-auto ${wrapClass} bg-[#1e1e1e] p-4 mb-4"><code class="text-sm font-mono text-gray-300">${highlighted}</code></pre>`
     );
     return placeholder;
   });
 
-  // Step 1.5: Wrap "📋 Click to view" + code block in collapsible <details>
+  // Step 1.5 — "📋 Click to view" collapsible blocks
   processed = processed.replace(
     /\*\*📋\s*Click to view ([^*]*)\*\*(?:\s*\([^)]*\))?\s*\n\s*(___CODE_BLOCK_\d+___)/g,
     (_, label, codeRef) =>
@@ -124,73 +165,98 @@ function renderMarkdown(content: string): string {
       + `<div class="p-4 bg-white">${codeRef}</div></details>`
   );
 
-  // Step 2: Now remove excessive indentation from the processed content (code blocks are protected)
-  const lines = processed.split('\n');
-  const cleanedLines = lines.map(line => line.replace(/^[\s\t]{8,}/, ''));
-  processed = cleanedLines.join('\n');
+  // Step 2 — Extract markdown tables (protects them from paragraph wrapping)
+  const tables: string[] = [];
+  processed = processed.replace(
+    /(\|[^\n]+\|\n)((?:\|[\s:|-]+\|?\n))((?:\|[^\n]+\|\n?)+)/g,
+    (match) => {
+      const placeholder = `___TABLE_${tables.length}___`;
+      tables.push(renderTable(match));
+      return placeholder;
+    }
+  );
 
-  // Step 3: Process blockquotes BEFORE bold/italic to capture raw markdown
-  // Info/Tip boxes - blockquotes with bold label at start
+  // Step 3 — Reduce excessive indentation
   processed = processed
-    .replace(/^\s*> \*\*Note:\*\*\s*\*\*(Tip|Security|Warning):\*\*\s*(.+?)(?=\n\s*\n|___CODE_BLOCK|$)/gmi, 
-      '<div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded-r-lg"><p class="m-0 text-gray-700"><strong class="text-gray-900">$1:</strong> $2</p></div>')
-    .replace(/^\s*> \*\*(Tip|Warning|Security):\*\*\s*(.+?)(?=\n\s*\n|___CODE_BLOCK|$)/gmi, 
-      '<div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded-r-lg"><p class="m-0 text-gray-700"><strong class="text-gray-900">$1:</strong> $2</p></div>')
-    // Regular blockquotes (that weren't matched above)
+    .split('\n')
+    .map(line => line.replace(/^[\s\t]{8,}/, ''))
+    .join('\n');
+
+  // Step 4 — Callout blockquotes (must run before generic blockquote)
+  const calloutPattern = Object.keys(calloutConfig).join('|');
+  const calloutRe = new RegExp(
+    `^\\s*> \\*\\*(${calloutPattern}):\\*\\*\\s*(.+?)(?=\\n\\s*\\n|___CODE_BLOCK|___TABLE|$)`,
+    'gmi'
+  );
+  processed = processed
+    .replace(calloutRe, (_, label, body) => makeCallout(label, body))
+    // Generic blockquote fallback
     .replace(/^\s*> (.+)$/gm, '<blockquote class="border-l-4 border-gray-300 pl-4 italic text-gray-600 mb-4">$1</blockquote>');
 
-  // Step 4: Process lists
+  // Step 5 — Unordered lists
   processed = processed.replace(/(^\s*- .+\n?)+/gm, (match) => {
-    const items = match.trim().split('\n').map(line => {
-      return line.replace(/^\s*- (.+)$/, '<li class="text-gray-700 mb-1">$1</li>');
-    }).join('');
-    return `<ul class="list-disc pl-6 mb-4">${items}</ul>`;
+    const items = match.trim().split('\n').map(line =>
+      `<li class="flex items-start gap-2 text-gray-700 mb-1">
+        <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2702a6] shrink-0"></span>
+        <span>${renderInline(line.replace(/^\s*- /, ''))}</span>
+       </li>`
+    ).join('');
+    return `<ul class="pl-2 mb-5 space-y-1">${items}</ul>`;
   });
 
-  // Step 5: Process remaining markdown
-  // Helper to create ID from heading text
-  const createId = (text: string) => text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-');
-  
+  // Step 6 — Ordered lists (lab steps with numbered badges)
+  processed = processed.replace(/(^\s*\d+\. .+\n?)+/gm, (match) => {
+    const items = match.trim().split('\n').map((line, idx) => {
+      const text = line.replace(/^\s*\d+\.\s*/, '');
+      return `<li class="flex items-start gap-3 mb-3">
+        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#2702a6] text-white text-xs font-bold mt-0.5">${idx + 1}</span>
+        <span class="text-gray-700 text-[15px] leading-relaxed">${renderInline(text)}</span>
+      </li>`;
+    }).join('');
+    return `<ol class="pl-0 mb-5 space-y-1 list-none">${items}</ol>`;
+  });
+
+  // Step 7 — Headings, inline formatting, images, links, inline code, HR
+  const createId = (text: string) =>
+    text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+
   processed = processed
-    // Headers - Clean, readable sizes
-    .replace(/^\s*# (.+)$/gm, (match, text) => `<h1 id="${createId(text)}" class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-0">${text}</h1>`)
-    .replace(/^\s*## (.+)$/gm, (match, text) => `<h2 id="${createId(text)}" class="text-2xl md:text-3xl font-bold text-gray-900 mb-5 mt-10">${text}</h2>`)
-    .replace(/^\s*### (.+)$/gm, (match, text) => `<h3 id="${createId(text)}" class="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-8">${text}</h3>`)
-    .replace(/^\s*#### (.+)$/gm, (match, text) => `<h4 id="${createId(text)}" class="text-lg md:text-xl font-semibold text-gray-900 mb-3 mt-6">${text}</h4>`)
-    // Bold
-    .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>')
-    // Italic
+    .replace(/^\s*# (.+)$/gm, (_, t) => `<h1 id="${createId(t)}" class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-0">${t}</h1>`)
+    .replace(/^\s*## (.+)$/gm, (_, t) => `<h2 id="${createId(t)}" class="text-2xl font-bold text-gray-900 mb-4 mt-10 pb-2 border-b border-gray-100">${t}</h2>`)
+    .replace(/^\s*### (.+)$/gm, (_, t) => `<h3 id="${createId(t)}" class="text-lg font-bold text-gray-900 mb-3 mt-7">${t}</h3>`)
+    .replace(/^\s*#### (.+)$/gm, (_, t) => `<h4 id="${createId(t)}" class="text-base font-semibold text-gray-800 mb-2 mt-5">${t}</h4>`)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
     .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>')
-    // Images - Medium style full width
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="rounded-lg my-10 max-w-full mx-auto" />')
-    // Links - Medium style (no underline, color only)
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="rounded-lg my-8 max-w-full mx-auto shadow-sm" />')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[#2702a6] hover:underline underline-offset-2 decoration-2">$1</a>')
-    // Inline code - subtle style
     .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 text-[0.875em] font-mono">$1</code>')
-    // Horizontal rule
-    .replace(/^\s*---$/gm, '<hr class="border-gray-200 my-12" />');
+    .replace(/^\s*---$/gm, '<hr class="border-gray-200 my-10" />');
 
-  // Step 6: Paragraphs - Full width with comfortable reading
-  processed = processed.replace(/\n\n([^<\n][^\n]*(?:\n[^<\n][^\n]*)*)\n\n/g, '\n\n<p class="text-[16px] md:text-[17px] text-gray-700 mb-6 leading-[1.7] max-w-4xl">$1</p>\n\n');
-  processed = processed.replace(/\n\n([^<\n][^\n]*)$/g, '\n\n<p class="text-[16px] md:text-[17px] text-gray-700 mb-6 leading-[1.7] max-w-4xl">$1</p>');
+  // Step 8 — Paragraphs
+  processed = processed.replace(
+    /\n\n([^<\n][^\n]*(?:\n[^<\n][^\n]*)*)\n\n/g,
+    '\n\n<p class="text-[16px] text-gray-700 mb-5 leading-[1.75]">$1</p>\n\n'
+  );
+  processed = processed.replace(
+    /\n\n([^<\n][^\n]*)$/g,
+    '\n\n<p class="text-[16px] text-gray-700 mb-5 leading-[1.75]">$1</p>'
+  );
 
-  // Step 7: Restore code blocks
+  // Step 9 — Restore code blocks and tables
   codeBlocks.forEach((block, i) => {
     processed = processed.replace(`___CODE_BLOCK_${i}___`, block);
+  });
+  tables.forEach((table, i) => {
+    processed = processed.replace(`___TABLE_${i}___`, table);
   });
 
   return processed;
 }
 
-// Server component - renders markdown to HTML at build time
 export default function DocContent({ content }: DocContentProps) {
   const html = renderMarkdown(content);
-  
   return (
-    <div 
+    <div
       className="prose max-w-none"
       dangerouslySetInnerHTML={{ __html: html }}
     />

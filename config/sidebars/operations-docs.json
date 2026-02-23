@@ -7,12 +7,12 @@
       "id": "elk",
       "title": "ELK Stack Operations",
       "slug": "elk",
-      "description": "Master Elasticsearch, Logstash, and Kibana for production operations",
+      "description": "Master Elasticsearch, Logstash, Kibana, and Beats for production operations",
       "icon": "🔍",
       "totalDuration": "16h",
       "readingTime": "8h",
       "labTime": "8h",
-      "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack",
+      "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack",
       "sidebar": [
         {
           "title": "Phase 1: Getting Started (25m)",
@@ -24,8 +24,8 @@
         {
           "title": "Phase 2: Single Node Setup (45m)",
           "items": [
-            { "id": "es-single", "title": "Single Node Elasticsearch", "slug": "elk/single-node/01-single-node-setup", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" },
-            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/02-kibana-setup", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/JinnaBalu/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" }
+            { "id": "es-single", "title": "Single Node Elasticsearch", "slug": "elk/single-node/01-single-node-setup", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" },
+            { "id": "es-kibana", "title": "Kibana Setup", "slug": "elk/single-node/02-kibana-setup", "duration": "15m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch" }
           ]
         },
         {

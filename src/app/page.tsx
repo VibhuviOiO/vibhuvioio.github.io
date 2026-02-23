@@ -43,5 +43,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomeContent />;
+  return <div className="show-footer"><HomeContent /></div>;
 }

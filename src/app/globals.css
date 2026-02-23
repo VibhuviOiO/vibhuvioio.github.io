@@ -25,9 +25,12 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Hide footer on learn/docs pages */
-body:has(.hide-footer) footer {
+/* Footer only visible on home page */
+footer {
   display: none;
+}
+body:has(.show-footer) footer {
+  display: block;
 }
 
 /* Custom scrollbar */
