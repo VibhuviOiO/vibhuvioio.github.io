@@ -1,75 +1,154 @@
 ---
 title: Kibana Setup
-description: Add Kibana visualization to your Elasticsearch single-node setup
+description: Connect Kibana to your running Elasticsearch node and run your first queries from Dev Tools.
 duration: "15m"
 readingTime: "5m"
 labTime: "10m"
 order: 2
 ---
 
-## Project Structure
+## Project Files
 
-```tree
-elasticsearch-kibana/
-├── docker-compose.yml
-└── .env
+```project
+name: kibana-single
+kibana-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/kibana-compose.yml
+.env: https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/.env
 ```
 
-## Using the Combined Stack
+> **Note:** Elasticsearch must be running before starting Kibana. If you haven't completed the previous lesson, do that first.
 
-The single-node configuration already includes Kibana:
+---
+
+## How the two services connect
+
+Both `elasticsearch-compose.yml` and `kibana-compose.yml` must live in the **same folder**. Docker Compose uses the folder name as the project name — both containers end up on the same Docker network, so Kibana can reach Elasticsearch using the container name `elasticsearch` as a hostname.
+
+---
+
+## Configuration
+
+### kibana-compose.yml — environment
+
+```yaml
+environment:
+  - SERVERNAME=kibana
+  - ELASTICSEARCH_HOSTS=https://elasticsearch:9200  # ES container hostname on the shared Docker network
+```
+
+### .env
+
+Same `.env` as the Elasticsearch lesson — both services read from it:
 
 ```bash
-# The docker-compose.yml includes both Elasticsearch and Kibana
-docker compose up -d
-
-# Access Kibana
-open http://localhost:5601
+STACK_VERSION=9.3.0
+MEM_LIMIT=1073741824  # bytes — Kibana respects the same memory limit
+KIBANA_PORT=5601      # change if port is in use
 ```
 
-## Verify Kibana is Connected
+---
 
-1. Open http://localhost:5601
-2. Navigate to **Stack Management** → **Index Management**
-3. You should see the `.security-7` index (created automatically)
+## Deploy
 
-## First Steps in Kibana
+From the **same folder** where you started Elasticsearch:
 
-### Create an Index Pattern
+```bash
+docker compose -f kibana-compose.yml up -d
+```
 
-1. Go to **Stack Management** → **Index Patterns**
-2. Click **Create index pattern**
-3. Enter `*` to match all indices
-4. Select `@timestamp` as time field
+Watch it come up:
 
-### Use Dev Tools
+```bash
+watch docker ps
+```
 
-Navigate to **Dev Tools** for direct API access:
+Expected when both are healthy:
+
+```bash
+CONTAINER ID   IMAGE                  STATUS
+abc123         elasticsearch:9.3.0    Up 5 min (healthy)
+def456         kibana:9.3.0           Up 2 min (healthy)
+```
+
+Kibana takes longer than Elasticsearch to start — it waits until ES is reachable.
+
+---
+
+## Verify
+
+Open [http://localhost:5601](http://localhost:5601) in a browser.
+
+You should land on the Kibana home page with no login prompt — security is off.
+
+Check the server status page:
+
+```bash
+curl -s "http://localhost:5601/api/status" | grep -o '"overall":{"level":"[^"]*"'
+```
+
+Expected:
+
+```bash
+"overall":{"level":"available"
+```
+
+---
+
+## Lab: First queries in Dev Tools
+
+Dev Tools is Kibana's built-in REST console — the fastest way to interact with Elasticsearch without writing curl commands. You'll use it throughout the course.
+
+Navigate to **Dev Tools**: sidebar → Management → Dev Tools (or go to `http://localhost:5601/app/dev_tools`).
+
+Run these in order:
+
+**Check cluster health:**
 
 ```json
 GET _cluster/health
+```
+
+**List all nodes:**
+
+```json
+GET _cat/nodes?v
+```
+
+Expected output shows one row — your single node, with its name, heap usage, and role (`dim` = data, ingest, master):
+
+```bash
+ip        heap.percent ram.percent cpu load_1m node.role name
+127.0.0.1           15          62   2    0.10 dim       algo-es-node
+```
+
+**List all indices (none yet):**
+
+```json
 GET _cat/indices?v
 ```
 
-## Health Check
+Returns empty — no data indexed yet. You'll fix that in Phase 4.
+
+---
+
+## Common Issues
+
+### Kibana cannot connect to Elasticsearch
 
 ```bash
-# Check Kibana status
-curl -I http://localhost:5601
-
-# Check Elasticsearch from Kibana container
-docker exec kibana curl -s http://elasticsearch:9200
+# Check Kibana logs
+docker logs kibana --tail 30
 ```
 
-## Lab: Explore Kibana
+If you see `Unable to retrieve version information from Elasticsearch nodes`:
+- Confirm Elasticsearch is healthy: `curl localhost:9200`
+- Confirm both compose files are in the same directory — containers must be on the same Docker network
 
-1. Open Kibana at `http://localhost:5601`
-2. Navigate to Dev Tools and run a basic health check
-3. Create an index pattern for sample data
-4. Explore the Discover tab with sample data
-5. Build a simple visualization in the Dashboard
+### Blank page or infinite loading
+
+Kibana sometimes takes 2–3 minutes on first start. Run `watch docker ps` and wait for `(healthy)` before opening the browser.
+
+---
 
 ## Next Steps
 
-- [Create your first index](../crud/01-index-operations)
-- [Import sample data](../crud/02-document-operations)
+- [Elasticsearch Configuration](../configuration/01-elasticsearch-config) — tune elasticsearch.yml for your environment

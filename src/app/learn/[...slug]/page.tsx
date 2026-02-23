@@ -13,6 +13,8 @@ import TableOfContents from '@/components/docs/TableOfContents';
 import DisqusComments from '@/components/DisqusComments';
 import ProjectExplorer from '@/components/docs/ProjectExplorer';
 import LessonHeader from '@/components/docs/LessonHeader';
+import InvertedIndexDemo from '@/components/docs/InvertedIndexDemo';
+import CourseJourneyDemo from '@/components/docs/CourseJourneyDemo';
 import { Search, Database } from 'lucide-react';
 
 // Per-course metadata — colors, icons, learning outcomes
@@ -124,19 +126,27 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
             labTime={doc.meta.labTime}
             githubUrl={lessonGithubUrl}
           />
-          {projects.length > 0 ? (
-            doc.content.split(/(___PROJECT_BLOCK_\d+___)/).map((segment, i) => {
-              const match = segment.match(/___PROJECT_BLOCK_(\d+)___/);
-              if (match) {
-                const project = projects[parseInt(match[1])];
-                return project
-                  ? <ProjectExplorer key={`project-${i}`} name={project.name} files={project.files} />
+          {(
+            projects.length > 0 ||
+            doc.content.includes('___INVERTED_INDEX_DEMO___') ||
+            doc.content.includes('___COURSE_JOURNEY_DEMO___')
+          ) ? (
+            doc.content
+              .split(/(___PROJECT_BLOCK_\d+___|___INVERTED_INDEX_DEMO___|___COURSE_JOURNEY_DEMO___)/)
+              .map((segment, i) => {
+                if (segment === '___INVERTED_INDEX_DEMO___') return <InvertedIndexDemo key={`demo-${i}`} />;
+                if (segment === '___COURSE_JOURNEY_DEMO___') return <CourseJourneyDemo key={`journey-${i}`} />;
+                const projectMatch = segment.match(/___PROJECT_BLOCK_(\d+)___/);
+                if (projectMatch) {
+                  const project = projects[parseInt(projectMatch[1])];
+                  return project
+                    ? <ProjectExplorer key={`project-${i}`} name={project.name} files={project.files} />
+                    : null;
+                }
+                return segment.trim()
+                  ? <DocContent key={`content-${i}`} content={segment} />
                   : null;
-              }
-              return segment.trim()
-                ? <DocContent key={`content-${i}`} content={segment} />
-                : null;
-            })
+              })
           ) : (
             <DocContent content={doc.content} />
           )}

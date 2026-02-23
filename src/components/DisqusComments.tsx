@@ -17,15 +17,22 @@ export default function DisqusComments({ title, identifier }: DisqusCommentsProp
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Skip if no window (SSR)
     if (typeof window === 'undefined') return;
-    
+
     const pageUrl = `${window.location.origin}${pathname}`;
     const pageId = identifier || pathname;
 
+    // Always set config first — covers the race where the script is loading
+    // but window.DISQUS isn't set yet and the user navigates to a new page.
+    (window as any).disqus_config = function (this: any) {
+      this.page.url = pageUrl;
+      this.page.identifier = pageId;
+      this.page.title = title || document.title;
+    };
+
     try {
-      // Reset Disqus if already loaded
       if ((window as any).DISQUS) {
+        // Already loaded — reset with new page config
         (window as any).DISQUS.reset({
           reload: true,
           config: function (this: any) {
@@ -37,43 +44,28 @@ export default function DisqusComments({ title, identifier }: DisqusCommentsProp
         return;
       }
 
-      // Set config BEFORE loading script
-      (window as any).disqus_config = function (this: any) {
-        this.page.url = pageUrl;
-        this.page.identifier = pageId;
-        this.page.title = title || document.title;
-      };
-
-      // Check if script already exists
-      const existingScript = document.getElementById('disqus-script');
-      if (existingScript) {
-        return; // Script already loading/loaded
+      if (document.getElementById('disqus-script')) {
+        // Script is already loading; disqus_config is set above, nothing more to do.
+        return;
       }
 
-      // Load Disqus script
       const script = document.createElement('script');
       script.id = 'disqus-script';
       script.src = `https://${DISQUS_SHORTNAME}.disqus.com/embed.js`;
       script.setAttribute('data-timestamp', String(+new Date()));
       script.async = true;
-      
       script.onerror = () => {
         setError('Failed to load Disqus. Please check your ad blocker or network connection.');
       };
-      
       document.body.appendChild(script);
-
     } catch (err) {
       setError('Error initializing Disqus comments.');
       console.error('Disqus error:', err);
     }
 
     return () => {
-      // Cleanup on unmount
       const disqusThread = document.getElementById('disqus_thread');
-      if (disqusThread) {
-        disqusThread.innerHTML = '';
-      }
+      if (disqusThread) disqusThread.innerHTML = '';
     };
   }, [pathname, title, identifier]);
 

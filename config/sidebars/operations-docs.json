@@ -18,7 +18,7 @@
           "title": "Phase 1: Getting Started (25m)",
           "items": [
             { "id": "elk-overview", "title": "Course Overview", "slug": "elk/overview", "duration": "10m", "type": "doc" },
-            { "id": "elk-architecture", "title": "Architecture", "slug": "elk/architecture", "duration": "15m", "type": "doc" }
+            { "id": "elk-architecture", "title": "Course Roadmap", "slug": "elk/architecture", "duration": "10m", "type": "doc" }
           ]
         },
         {
@@ -36,8 +36,9 @@
           ]
         },
         {
-          "title": "Phase 4: CRUD Operations (45m)",
+          "title": "Phase 4: CRUD Operations (1h 10m)",
           "items": [
+            { "id": "crud-indices", "title": "Understanding Indices", "slug": "elk/crud/00-understanding-indices", "duration": "25m", "type": "doc" },
             { "id": "crud-index", "title": "Index Operations", "slug": "elk/crud/01-index-operations", "duration": "20m", "type": "doc" },
             { "id": "crud-doc", "title": "Document CRUD", "slug": "elk/crud/02-document-operations", "duration": "25m", "type": "doc" }
           ]

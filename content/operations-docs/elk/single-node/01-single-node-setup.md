@@ -1,10 +1,9 @@
 ---
-title: Single Node Elasticsearch Setup
-description: Deploy Elasticsearch and Kibana on a single node using Docker Compose.
+title: Single Node Elasticsearch
+description: Deploy a single Elasticsearch node using Docker Compose.
 duration: "30m"
 readingTime: "5m"
 labTime: "25m"
-github: "https://github.com/VibhuviOiO/infinite-containers/tree/main/elastic-stack/single-node-elasticsearch"
 order: 1
 ---
 
@@ -12,7 +11,7 @@ order: 1
 
 ```project
 name: elasticsearch-single
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/docker-compose.yml
+elasticsearch-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/elasticsearch-compose.yml
 .env: https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/refs/heads/main/elastic-stack/single-node-elasticsearch/.env
 ```
 
@@ -20,28 +19,33 @@ docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/infinite-contai
 
 ## Configuration
 
-Before deploying, update `.env` to match your machine. The two files work together — see [Docker Compose environment variables](https://docs.docker.com/compose/environment-variables/set-environment-variables/) and [Elasticsearch important settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html) for full reference.
+Download both files into a new folder — they work together. See [Docker Compose environment variables](https://docs.docker.com/compose/environment-variables/set-environment-variables/) and [Elasticsearch important settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html) for full reference.
 
-### Compose environment settings
+### elasticsearch-compose.yml — environment
 
-| Variable | Value | Purpose |
-|---|---|---|
-| `node.name` | `algo-es-node` | Node label shown in cluster stats |
-| `cluster.name` | from `.env` | Nodes with the same name form a cluster |
-| `discovery.type` | `single-node` | Skips master election for one-node setup |
-| `bootstrap.memory_lock` | `true` | Pins JVM heap in RAM — prevents OS swap. [Docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html) |
-| `xpack.security.enabled` | `false` | No TLS/auth — development only |
+```yaml
+environment:
+  - "ES_JAVA_OPTS=-Xms512m -Xmx512m"              # JVM heap — set to half of MEM_LIMIT
+  - network.host=0.0.0.0                           # bind REST API to all interfaces
+  - transport.host=0.0.0.0                         # bind inter-node transport to all interfaces
+  - node.name=algo-es-node                         # node label shown in cluster stats
+  - cluster.name=${CLUSTER_NAME}                   # nodes with the same name form a cluster
+  - discovery.type=single-node                     # skip master election for one-node setup
+  - bootstrap.memory_lock=true                     # pin JVM heap in RAM — prevent OS swap
+  - xpack.security.enabled=false                   # no TLS/auth — development only
+  - xpack.license.self_generated.type=${LICENSE}
+```
 
-### .env variables
+### .env
 
-| Variable | Default | Change when |
-|---|---|---|
-| `STACK_VERSION` | `8.4.1` | Upgrading — keep ES and Kibana versions in sync |
-| `CLUSTER_NAME` | `vbv-ec-cluster` | Any name works |
-| `MEM_LIMIT` | `1073741824` | Bytes — set to 50% of your available RAM. [Calculator](https://www.gbmb.org/gb-to-bytes) |
-| `ES_PORT` | `9200` | Change if port is in use |
-| `KIBANA_PORT` | `5601` | Change if port is in use |
-| `LICENSE` | `basic` | `trial` for 30-day enterprise features |
+```bash
+STACK_VERSION=9.3.0
+CLUSTER_NAME=vbv-ec-cluster
+LICENSE=basic              # trial = 30-day enterprise features
+MEM_LIMIT=1073741824       # bytes — set to 50% of your available RAM (1 GB shown)
+ES_PORT=9200               # change if port is in use
+KIBANA_PORT=5601           # used by Kibana — change if port is in use
+```
 
 > **Tip:** `MEM_LIMIT` is in bytes. 2 GB = `2147483648`, 4 GB = `4294967296`, 8 GB = `8589934592`.
 
@@ -49,29 +53,28 @@ Before deploying, update `.env` to match your machine. The two files work togeth
 
 ## Deploy
 
-1. Use **Download All** in the Project Files section above to save `docker-compose.yml` and `.env` into a new folder, e.g. `elasticsearch-single/`
-2. Open `.env` and update `MEM_LIMIT` to 50% of your RAM (see table above)
+1. Use **Download All** in the Project Files section above to save both files into a new folder, e.g. `elasticsearch-single/`
+2. Open `.env` and update `MEM_LIMIT` to 50% of your available RAM
 3. Open a terminal in that folder
 
 ```bash
 # Linux only — macOS Docker Desktop handles this internally
 sudo sysctl -w vm.max_map_count=262144
 
-docker compose up -d
+docker compose -f elasticsearch-compose.yml up -d
 ```
 
-Watch containers start — Kibana starts only after Elasticsearch passes its health check:
+Watch the container start:
 
 ```bash
 watch docker ps
 ```
 
-Expected when ready:
+Expected when healthy:
 
 ```bash
-CONTAINER ID   IMAGE                STATUS
-abc123         elasticsearch:8.4.1  Up 2 min (healthy)
-def456         kibana:8.4.1         Up 1 min (healthy)
+CONTAINER ID   IMAGE                           STATUS
+abc123         elasticsearch:9.3.0             Up 2 min (healthy)
 ```
 
 ---
@@ -87,20 +90,12 @@ Expected response:
 ```bash
 {
   "cluster_name" : "vbv-ec-cluster",
-  "status" : "green",
-  "number_of_nodes" : 1,
+  "status" : "green",           # green = all shards assigned | yellow = replicas unassigned | red = data missing
+  "number_of_nodes" : 1,        # 1 = one node, as configured
   "number_of_data_nodes" : 1,
-  "unassigned_shards" : 0
+  "unassigned_shards" : 0       # 0 = nothing waiting for placement
 }
 ```
-
-| Field | Expected | Meaning |
-|---|---|---|
-| `status` | `green` | All shards assigned. `yellow` = replicas unassigned (normal on single-node). `red` = data missing |
-| `number_of_nodes` | `1` | One node — as configured |
-| `unassigned_shards` | `0` | Nothing waiting for placement |
-
-Kibana UI → [http://localhost:5601](http://localhost:5601) (no login — security is off).
 
 ---
 
@@ -126,7 +121,7 @@ echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 Unable to lock JVM Memory: error=12, reason=Cannot allocate memory
 
 # Fix — lower MEM_LIMIT in .env to free up headroom, then restart
-docker compose down && docker compose up -d
+docker compose -f elasticsearch-compose.yml down && docker compose -f elasticsearch-compose.yml up -d
 ```
 
 ### Port already in use
@@ -143,5 +138,4 @@ ES_PORT=9201
 
 ## Next Steps
 
-- [Add Kibana for visualization](./02-kibana-setup)
-- [Index and query data](../crud/01-index-operations)
+- [Kibana Setup](./02-kibana-setup) — connect a UI to your running node

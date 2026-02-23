@@ -1,85 +1,35 @@
 ---
-title: ELK Stack Architecture
-description: Understanding the components and data flow of Elasticsearch, Logstash, and Kibana
-duration: "15m"
-readingTime: "15m"
-order: 2
+title: "Course Roadmap"
+description: What you'll deploy, configure, and operate — and who this course is for.
+duration: "10m"
+readingTime: "10m"
 labTime: "0m"
+order: 2
 ---
 
-## Components Overview
+This course is not a "what is Elasticsearch" introduction — the internet has plenty of those. It's a hands-on operations guide: you deploy real clusters, configure them correctly, secure them, feed data in, and keep them running.
 
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Beats     │────▶│   Logstash  │────▶│Elasticsearch│
-│  (Agents)   │     │  (Pipeline) │     │   (Store)   │
-└─────────────┘     └─────────────┘     └──────┬──────┘
-                                               │
-                                        ┌──────▼──────┐
-                                        │    Kibana   │
-                                        │ (Visualize) │
-                                        └─────────────┘
-```
+The interactive walkthrough below shows exactly what you'll be doing across each phase.
 
-## Elasticsearch
+___COURSE_JOURNEY_DEMO___
 
-**Role**: Distributed search and analytics engine
+## What this course is not
 
-**Key Concepts**:
-- **Index**: Collection of documents (like a database)
-- **Document**: JSON object, basic unit of information
-- **Type**: Logical category (deprecated in ES 7+)
-- **Mapping**: Schema definition for fields
-- **Shard**: Partition of an index
-- **Replica**: Copy of a shard for failover
+- A deep-dive into query DSL or search relevance tuning
+- A beginner programming course
+- Theory-heavy documentation
 
-## Logstash
+Every lesson follows a lab pattern: download config files, run commands, observe the result, understand what happened.
 
-**Role**: Data processing pipeline
+## Prerequisites
 
-**Pipeline Structure**:
-```
-Input → Filter → Output
-```
+You'll get the most out of this course if you're comfortable with:
 
-**Common Inputs**: Beats, Kafka, JDBC, Files
-**Common Outputs**: Elasticsearch, S3, Kafka
-
-## Kibana
-
-**Role**: Visualization and exploration
-
-**Features**:
-- Discover: Search and filter documents
-- Visualize: Charts and graphs
-- Dashboard: Combine visualizations
-- Dev Tools: Direct API access
-
-## Data Flow Examples
-
-### Web Server Logs
-```
-Filebeat → Logstash → Elasticsearch → Kibana
-```
-
-### Database Sync
-```
-JDBC Input → Logstash → Elasticsearch
-```
-
-### Metrics Monitoring
-```
-Metricbeat → Elasticsearch → Kibana Dashboard
-```
-
-## Lab: Explore the Architecture
-
-1. Start a single-node Elasticsearch cluster with Docker
-2. Open Kibana and explore the Dev Tools console
-3. Run `GET _cluster/health` and identify the response fields
-4. Run `GET _cat/nodes?v` and note the node roles
+- Linux command line (navigate, edit files, run commands)
+- Docker and Docker Compose (pull images, run containers)
+- Basic JSON (read and write key-value structures)
+- REST APIs (what a `curl -X GET` does)
 
 ## Next Steps
 
-- [Single Node Setup](/learn/elk/single-node/01-single-node-setup) — deploy your first Elasticsearch node
-- [Elasticsearch Configuration](/learn/elk/configuration/01-elasticsearch-config) — configure elasticsearch.yml
+- [Single Node Setup](./single-node/01-single-node-setup) — first thing to run
