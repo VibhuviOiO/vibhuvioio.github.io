@@ -250,6 +250,13 @@ function renderMarkdown(content: string): string {
     processed = processed.replace(`___TABLE_${i}___`, table);
   });
 
+  // Step 10 — Special component placeholders (must be handled by parent)
+  // ___COURSE_JOURNEY_DEMO___ → replaced by CourseJourneyDemo component
+  // ___MILVUS_ARCHITECTURE___ → replaced by MilvusArchitecture component
+  // ___MILVUS_COURSE_JOURNEY___ → replaced by MilvusCourseJourneyDemo component
+  // ___MILVUS_DEPLOYMENT_ARCHITECTURE___ → replaced by MilvusDeploymentArchitecture component
+  // ___MILVUS_INTERACTIVE_ARCHITECTURE___ → replaced by MilvusInteractiveArchitecture component
+
   return processed;
 }
 

@@ -16,7 +16,13 @@ import ProjectExplorer from '@/components/docs/ProjectExplorer';
 import LessonHeader from '@/components/docs/LessonHeader';
 import InvertedIndexDemo from '@/components/docs/InvertedIndexDemo';
 import CourseJourneyDemo from '@/components/docs/CourseJourneyDemo';
-import { Search, Database } from 'lucide-react';
+import MilvusCourseJourneyDemo from '@/components/docs/MilvusCourseJourneyDemo';
+import MilvusArchitecture from '@/components/ui/MilvusArchitecture';
+import MilvusDeploymentArchitecture from '@/components/ui/MilvusDeploymentArchitecture';
+import MilvusInteractiveArchitecture from '@/components/ui/MilvusInteractiveArchitecture';
+import PineconeLearningPath from '@/components/docs/PineconeLearningPath';
+import QdrantLearningPath from '@/components/docs/QdrantLearningPath';
+import { Search, Database, Layers, TreePine, Target } from 'lucide-react';
 
 // Per-course metadata — colors, icons, learning outcomes
 const courseMeta: Record<string, {
@@ -65,6 +71,67 @@ const courseMeta: Record<string, {
     updated: 'Jan 2026',
     totalDuration: '3h 15m',
     githubUrl: 'https://github.com/VibhuviOiO/mongodb-ops',
+  },
+  milvus: {
+    color: 'linear-gradient(135deg, #00bcd4 0%, #00796b 100%)',
+    level: 'Advanced',
+    icon: <Layers className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
+    whatYoullLearn: [
+      'Deploy Milvus in all modes: Lite, Standalone, Docker Compose, and Kubernetes',
+      'Configure etcd, MinIO, and Pulsar for production reliability',
+      'Master milvus.yaml with 500+ parameters — know what matters',
+      'Design collections and choose indexes for your workload',
+      'Scale horizontally and perform rolling upgrades',
+      'Optimize query performance and memory usage',
+      'Implement security with TLS and RBAC',
+      'Backup, restore, and cross-cluster migration',
+      'Monitor metrics and troubleshoot common issues',
+    ],
+    updated: 'Feb 2026',
+    totalDuration: '8h',
+    readingTime: '4h',
+    labTime: '4h',
+    githubUrl: 'https://github.com/VibhuviOiO/milvus-ops',
+  },
+  pinecone: {
+    color: 'linear-gradient(135deg, #2d5016 0%, #4a7c2e 100%)',
+    level: 'Intermediate',
+    icon: <TreePine className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
+    whatYoullLearn: [
+      'Set up Pinecone accounts and manage API keys across environments',
+      'Create and configure indexes with proper sizing for your workload',
+      'Understand the difference between pods and serverless pricing models',
+      'Implement metadata filtering and understand its limitations',
+      'Optimize costs through proper index sizing and model selection',
+      'Monitor query performance and resource utilization',
+      'Implement backup and migration strategies for vector data',
+      'Apply security best practices for production deployments',
+    ],
+    updated: 'Feb 2026',
+    totalDuration: '6h',
+    readingTime: '3h',
+    labTime: '3h',
+    githubUrl: 'https://github.com/VibhuviOiO/pinecone-ops',
+  },
+  qdrant: {
+    color: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
+    level: 'Advanced',
+    icon: <Target className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
+    whatYoullLearn: [
+      'Deploy Qdrant with Docker, Docker Compose, and Kubernetes Helm charts',
+      'Configure storage options: in-memory, on-disk, and hybrid modes',
+      'Tune performance parameters for low-latency vector search',
+      'Implement vector quantization to reduce memory usage',
+      'Set up distributed Qdrant clusters with sharding and replication',
+      'Configure Prometheus monitoring and Grafana dashboards',
+      'Enable TLS encryption and API key authentication',
+      'Perform backup and restore operations with snapshots',
+    ],
+    updated: 'Feb 2026',
+    totalDuration: '8h',
+    readingTime: '4h',
+    labTime: '4h',
+    githubUrl: 'https://github.com/VibhuviOiO/qdrant-ops',
   },
 };
 
@@ -185,13 +252,25 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
           {(
             projects.length > 0 ||
             doc.content.includes('___INVERTED_INDEX_DEMO___') ||
-            doc.content.includes('___COURSE_JOURNEY_DEMO___')
+            doc.content.includes('___COURSE_JOURNEY_DEMO___') ||
+            doc.content.includes('___MILVUS_ARCHITECTURE___') ||
+            doc.content.includes('___MILVUS_COURSE_JOURNEY___') ||
+            doc.content.includes('___MILVUS_DEPLOYMENT_ARCHITECTURE___') ||
+            doc.content.includes('___MILVUS_INTERACTIVE_ARCHITECTURE___') ||
+            doc.content.includes('___PINECONE_LEARNING_PATH___') ||
+            doc.content.includes('___QDRANT_LEARNING_PATH___')
           ) ? (
             doc.content
-              .split(/(___PROJECT_BLOCK_\d+___|___INVERTED_INDEX_DEMO___|___COURSE_JOURNEY_DEMO___)/)
+              .split(/(___PROJECT_BLOCK_\d+___|___INVERTED_INDEX_DEMO___|___COURSE_JOURNEY_DEMO___|___MILVUS_ARCHITECTURE___|___MILVUS_COURSE_JOURNEY___|___MILVUS_DEPLOYMENT_ARCHITECTURE___|___MILVUS_INTERACTIVE_ARCHITECTURE___|___PINECONE_LEARNING_PATH___|___QDRANT_LEARNING_PATH___)/)
               .map((segment, i) => {
                 if (segment === '___INVERTED_INDEX_DEMO___') return <InvertedIndexDemo key={`demo-${i}`} />;
                 if (segment === '___COURSE_JOURNEY_DEMO___') return <CourseJourneyDemo key={`journey-${i}`} />;
+                if (segment === '___MILVUS_ARCHITECTURE___') return <MilvusArchitecture key={`arch-${i}`} />;
+                if (segment === '___MILVUS_COURSE_JOURNEY___') return <MilvusCourseJourneyDemo key={`milvus-journey-${i}`} />;
+                if (segment === '___MILVUS_DEPLOYMENT_ARCHITECTURE___') return <MilvusDeploymentArchitecture key={`deploy-arch-${i}`} />;
+                if (segment === '___MILVUS_INTERACTIVE_ARCHITECTURE___') return <MilvusInteractiveArchitecture key={`interactive-arch-${i}`} />;
+                if (segment === '___PINECONE_LEARNING_PATH___') return <PineconeLearningPath key={`pinecone-path-${i}`} />;
+                if (segment === '___QDRANT_LEARNING_PATH___') return <QdrantLearningPath key={`qdrant-path-${i}`} />;
                 const projectMatch = segment.match(/___PROJECT_BLOCK_(\d+)___/);
                 if (projectMatch) {
                   const project = projects[parseInt(projectMatch[1])];

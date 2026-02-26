@@ -150,6 +150,197 @@
           ]
         }
       ]
+    },
+    {
+      "id": "milvus",
+      "title": "Milvus Vector Database Operations",
+      "slug": "milvus",
+      "description": "Master Milvus vector database deployment, scaling, and operations — from single-node to billion-scale distributed clusters.",
+      "icon": "🔍",
+      "totalDuration": "8h",
+      "readingTime": "4h",
+      "labTime": "4h",
+      "githubUrl": "https://github.com/VibhuviOiO/milvus-ops",
+      "sidebar": [
+        {
+          "title": "Phase 1: Introduction (30m)",
+          "items": [
+            { "id": "milvus-overview", "title": "Course Overview", "slug": "milvus/overview", "duration": "15m", "type": "doc" },
+            { "id": "milvus-roadmap", "title": "Course Roadmap", "slug": "milvus/roadmap", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 2: Deployment Options (2h)",
+          "items": [
+            { "id": "milvus-lite", "title": "Milvus Lite — Local Development", "slug": "milvus/deployment/lite", "duration": "20m", "type": "doc" },
+            { "id": "milvus-standalone", "title": "Standalone — Single Server", "slug": "milvus/deployment/standalone", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/milvus-ops/tree/main/standalone" },
+            { "id": "milvus-docker-compose", "title": "Docker Compose Setup", "slug": "milvus/deployment/docker-compose", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/milvus-ops/tree/main/docker-compose" },
+            { "id": "milvus-helm", "title": "Helm on Kubernetes", "slug": "milvus/deployment/helm", "duration": "45m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/milvus-ops/tree/main/helm" }
+          ]
+        },
+        {
+          "title": "Phase 3: Dependencies Deep Dive (1h 30m)",
+          "items": [
+            { "id": "milvus-etcd", "title": "etcd — Metadata Store", "slug": "milvus/deps/etcd", "duration": "30m", "type": "doc" },
+            { "id": "milvus-minio", "title": "MinIO/S3 — Object Storage", "slug": "milvus/deps/minio", "duration": "25m", "type": "doc" },
+            { "id": "milvus-pulsar", "title": "Pulsar/Kafka — Message Queue", "slug": "milvus/deps/pulsar", "duration": "35m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 4: Configuration Mastery (25m)",
+          "items": [
+            { "id": "milvus-config-overview", "title": "Understanding milvus.yaml", "slug": "milvus/config/overview", "duration": "25m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 5: Data Operations (1h 5m)",
+          "items": [
+            { "id": "milvus-collections", "title": "Collection Design Patterns", "slug": "milvus/data/collections", "duration": "30m", "type": "doc" },
+            { "id": "milvus-indexing", "title": "Index Types & Selection", "slug": "milvus/data/indexing", "duration": "35m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 6: Performance Optimization (25m)",
+          "items": [
+            { "id": "milvus-query-optimization", "title": "Query Performance", "slug": "milvus/perf/query-optimization", "duration": "25m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 7: Backup & Recovery (30m)",
+          "items": [
+            { "id": "milvus-backup", "title": "Backup Strategies", "slug": "milvus/backup/backup-strategies", "duration": "30m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 8: Troubleshooting (30m)",
+          "items": [
+            { "id": "milvus-troubleshooting", "title": "Common Issues", "slug": "milvus/observability/troubleshooting", "duration": "30m", "type": "doc" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pinecone",
+      "title": "Pinecone Vector Database",
+      "slug": "pinecone",
+      "description": "Master Pinecone — the fully managed vector database. Learn cloud deployment, cost optimization, pod vs serverless, and production best practices.",
+      "icon": "🌲",
+      "totalDuration": "6h",
+      "readingTime": "3h",
+      "labTime": "3h",
+      "githubUrl": "https://github.com/VibhuviOiO/pinecone-ops",
+      "sidebar": [
+        {
+          "title": "Phase 1: Introduction (30m)",
+          "items": [
+            { "id": "pinecone-overview", "title": "Course Overview", "slug": "pinecone/overview", "duration": "15m", "type": "doc" },
+            { "id": "pinecone-roadmap", "title": "Course Roadmap", "slug": "pinecone/roadmap", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 2: Getting Started (1h)",
+          "items": [
+            { "id": "pinecone-setup", "title": "Account Setup & API Keys", "slug": "pinecone/getting-started/setup", "duration": "20m", "type": "doc" },
+            { "id": "pinecone-first-index", "title": "Your First Index", "slug": "pinecone/getting-started/first-index", "duration": "25m", "type": "doc" },
+            { "id": "pinecone-sdk", "title": "SDK & Client Setup", "slug": "pinecone/getting-started/sdk", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 3: Architecture & Concepts (1h)",
+          "items": [
+            { "id": "pinecone-architecture", "title": "Pinecone Architecture", "slug": "pinecone/concepts/architecture", "duration": "25m", "type": "doc" },
+            { "id": "pinecone-pods", "title": "Pods vs Serverless", "slug": "pinecone/concepts/pods-vs-serverless", "duration": "20m", "type": "doc" },
+            { "id": "pinecone-metadata", "title": "Metadata & Filtering", "slug": "pinecone/concepts/metadata", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 4: Index Management (1h)",
+          "items": [
+            { "id": "pinecone-index-types", "title": "Index Types & Metrics", "slug": "pinecone/indexes/types", "duration": "20m", "type": "doc" },
+            { "id": "pinecone-sizing", "title": "Index Sizing Guide", "slug": "pinecone/indexes/sizing", "duration": "25m", "type": "doc" },
+            { "id": "pinecone-scaling", "title": "Scaling & Replicas", "slug": "pinecone/indexes/scaling", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 5: Cost Optimization (1h)",
+          "items": [
+            { "id": "pinecone-pricing", "title": "Understanding Pricing", "slug": "pinecone/cost/pricing", "duration": "25m", "type": "doc" },
+            { "id": "pinecone-optimization", "title": "Cost Optimization Strategies", "slug": "pinecone/cost/optimization", "duration": "20m", "type": "doc" },
+            { "id": "pinecone-serverless", "title": "When to Use Serverless", "slug": "pinecone/cost/serverless", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 6: Production Operations (1h 30m)",
+          "items": [
+            { "id": "pinecone-monitoring", "title": "Monitoring & Alerts", "slug": "pinecone/ops/monitoring", "duration": "25m", "type": "doc" },
+            { "id": "pinecone-backup", "title": "Backup & Migration", "slug": "pinecone/ops/backup", "duration": "25m", "type": "doc" },
+            { "id": "pinecone-security", "title": "Security Best Practices", "slug": "pinecone/ops/security", "duration": "20m", "type": "doc" },
+            { "id": "pinecone-troubleshooting", "title": "Troubleshooting", "slug": "pinecone/ops/troubleshooting", "duration": "20m", "type": "doc" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qdrant",
+      "title": "Qdrant Vector Database",
+      "slug": "qdrant",
+      "description": "Master Qdrant — the open-source vector database. Deploy with Docker, Kubernetes, configure for performance, and manage production clusters.",
+      "icon": "🎯",
+      "totalDuration": "8h",
+      "readingTime": "4h",
+      "labTime": "4h",
+      "githubUrl": "https://github.com/VibhuviOiO/qdrant-ops",
+      "sidebar": [
+        {
+          "title": "Phase 1: Introduction (30m)",
+          "items": [
+            { "id": "qdrant-overview", "title": "Course Overview", "slug": "qdrant/overview", "duration": "15m", "type": "doc" },
+            { "id": "qdrant-roadmap", "title": "Course Roadmap", "slug": "qdrant/roadmap", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 2: Deployment Options (1h 30m)",
+          "items": [
+            { "id": "qdrant-docker", "title": "Docker Deployment", "slug": "qdrant/deployment/docker", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/qdrant-ops/tree/main/docker" },
+            { "id": "qdrant-docker-compose", "title": "Docker Compose Setup", "slug": "qdrant/deployment/docker-compose", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/qdrant-ops/tree/main/docker-compose" },
+            { "id": "qdrant-kubernetes", "title": "Kubernetes with Helm", "slug": "qdrant/deployment/kubernetes", "duration": "40m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/qdrant-ops/tree/main/helm" }
+          ]
+        },
+        {
+          "title": "Phase 3: Configuration (1h)",
+          "items": [
+            { "id": "qdrant-config", "title": "Configuration File", "slug": "qdrant/config/overview", "duration": "25m", "type": "doc" },
+            { "id": "qdrant-storage", "title": "Storage & Memory", "slug": "qdrant/config/storage", "duration": "20m", "type": "doc" },
+            { "id": "qdrant-performance", "title": "Performance Tuning", "slug": "qdrant/config/performance", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 4: Data Operations (1h)",
+          "items": [
+            { "id": "qdrant-collections", "title": "Collections & Points", "slug": "qdrant/data/collections", "duration": "25m", "type": "doc" },
+            { "id": "qdrant-vectors", "title": "Vector Types & Quantization", "slug": "qdrant/data/vectors", "duration": "20m", "type": "doc" },
+            { "id": "qdrant-filtering", "title": "Payload & Filtering", "slug": "qdrant/data/filtering", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 5: Distributed Qdrant (1h 30m)",
+          "items": [
+            { "id": "qdrant-clustering", "title": "Clustering Concepts", "slug": "qdrant/cluster/clustering", "duration": "25m", "type": "doc" },
+            { "id": "qdrant-sharding", "title": "Sharding Strategy", "slug": "qdrant/cluster/sharding", "duration": "25m", "type": "doc" },
+            { "id": "qdrant-replication", "title": "Replication & HA", "slug": "qdrant/cluster/replication", "duration": "20m", "type": "doc" },
+            { "id": "qdrant-scaling", "title": "Scaling Operations", "slug": "qdrant/cluster/scaling", "duration": "20m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 6: Production Operations (1h 30m)",
+          "items": [
+            { "id": "qdrant-backup", "title": "Backup & Restore", "slug": "qdrant/ops/backup", "duration": "25m", "type": "doc" },
+            { "id": "qdrant-monitoring", "title": "Monitoring & Metrics", "slug": "qdrant/ops/monitoring", "duration": "25m", "type": "doc" },
+            { "id": "qdrant-security", "title": "Security & TLS", "slug": "qdrant/ops/security", "duration": "20m", "type": "doc" },
+            { "id": "qdrant-troubleshooting", "title": "Troubleshooting", "slug": "qdrant/ops/troubleshooting", "duration": "20m", "type": "doc" }
+          ]
+        }
+      ]
     }
   ]
 }

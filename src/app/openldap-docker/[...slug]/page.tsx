@@ -55,6 +55,18 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Splunk Integration - OpenLDAP Docker',
     description: 'Configure Splunk Enterprise LDAP authentication with OpenLDAP. Role mapping and group authorization.',
   },
+  'integrations/guacamole': {
+    title: 'Apache Guacamole Integration - OpenLDAP Docker',
+    description: 'Configure Apache Guacamole LDAP authentication with OpenLDAP. Centralized identity for remote access gateway.',
+  },
+  'integrations/redmine': {
+    title: 'Redmine Integration - OpenLDAP Docker',
+    description: 'Configure Redmine LDAP authentication with OpenLDAP. On-the-fly user creation and centralized identity management.',
+  },
+  'integrations/portainer': {
+    title: 'Portainer Integration - OpenLDAP Docker',
+    description: 'Configure Portainer CE LDAP authentication with OpenLDAP. Group-based administrator access control for container management.',
+  },
 };
 
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
@@ -100,6 +112,9 @@ const sidebarGroups = [
       { id: 'jenkins', title: 'Jenkins', slug: 'integrations/jenkins' },
       { id: 'vault', title: 'HashiCorp Vault', slug: 'integrations/vault' },
       { id: 'splunk', title: 'Splunk Enterprise', slug: 'integrations/splunk' },
+      { id: 'guacamole', title: 'Apache Guacamole', slug: 'integrations/guacamole' },
+      { id: 'redmine', title: 'Redmine', slug: 'integrations/redmine' },
+      { id: 'portainer', title: 'Portainer CE', slug: 'integrations/portainer' },
     ],
   },
 ];
@@ -156,5 +171,8 @@ export function generateStaticParams() {
     { slug: ['integrations', 'jenkins'] },
     { slug: ['integrations', 'vault'] },
     { slug: ['integrations', 'splunk'] },
+    { slug: ['integrations', 'guacamole'] },
+    { slug: ['integrations', 'redmine'] },
+    { slug: ['integrations', 'portainer'] },
   ];
 }
