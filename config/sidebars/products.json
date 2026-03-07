@@ -140,7 +140,22 @@
             { "id": "sonarqube", "title": "SonarQube", "slug": "integrations/sonarqube" },
             { "id": "jenkins", "title": "Jenkins", "slug": "integrations/jenkins" },
             { "id": "vault", "title": "HashiCorp Vault", "slug": "integrations/vault" },
-            { "id": "splunk", "title": "Splunk Enterprise", "slug": "integrations/splunk" }
+            { "id": "splunk", "title": "Splunk Enterprise", "slug": "integrations/splunk" },
+            { "id": "guacamole", "title": "Apache Guacamole", "slug": "integrations/guacamole" },
+            { "id": "portainer", "title": "Portainer", "slug": "integrations/portainer" },
+            { "id": "redmine", "title": "Redmine", "slug": "integrations/redmine" }
+          ]
+        },
+        {
+          "title": "Use Cases",
+          "items": [
+            { "id": "uc-single-node", "title": "Single Node Deployment", "slug": "use-cases/single-node" },
+            { "id": "uc-multi-master", "title": "Multi-Master Cluster", "slug": "use-cases/multi-master-cluster" },
+            { "id": "uc-docker-secrets", "title": "Docker Secrets", "slug": "use-cases/docker-secrets" },
+            { "id": "uc-tls", "title": "TLS/SSL", "slug": "use-cases/tls-ssl" },
+            { "id": "uc-overlays", "title": "Overlay Features", "slug": "use-cases/overlay-features" },
+            { "id": "uc-password-policy", "title": "Password Policy", "slug": "use-cases/password-policy" },
+            { "id": "uc-idempotency", "title": "Idempotency Test", "slug": "use-cases/idempotency" }
           ]
         }
       ]

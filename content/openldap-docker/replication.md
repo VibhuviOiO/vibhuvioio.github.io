@@ -25,7 +25,7 @@ Deploy a high-availability OpenLDAP cluster with 3 nodes using mirror mode repli
 Download the 3-node replication compose file:
 
 ```bash
-wget https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/main/openldap/docker-compose-replication.yml -O docker-compose.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/docker-compose.replication.yml -O docker-compose.yml
 ```
 
 ## Environment Files

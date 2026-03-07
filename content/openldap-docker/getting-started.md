@@ -118,7 +118,7 @@ Access the UI at http://localhost:5000
 For a more complete setup with persistent volumes and health checks:
 
 ```bash
-wget https://raw.githubusercontent.com/VibhuviOiO/infinite-containers/main/openldap/docker-compose.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/docker-compose.yml
 docker compose up -d
 ```
 
