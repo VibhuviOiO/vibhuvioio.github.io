@@ -61,6 +61,29 @@ OpenLDAP Docker is configured entirely through environment variables. No manual 
 | `LDAP_QUERY_LIMIT_SOFT` | `500` | Soft limit for search results |
 | `LDAP_QUERY_LIMIT_HARD` | `1000` | Hard limit for search results |
 | `LDAP_IDLE_TIMEOUT` | `600` | Connection idle timeout in seconds |
+| `LDAP_CONN_MAX_PENDING` | `100` | Max unauthenticated connections (DoS protection) |
+| `LDAP_CONN_MAX_PENDING_AUTH` | `1000` | Max authenticated pending connections |
+
+### Connection Rate Limiting
+
+The `LDAP_CONN_MAX_PENDING` and `LDAP_CONN_MAX_PENDING_AUTH` variables protect against connection flooding attacks:
+
+- **`LDAP_CONN_MAX_PENDING`** (default: 100): Maximum unauthenticated connections waiting to be processed. Additional connections are refused.
+- **`LDAP_CONN_MAX_PENDING_AUTH`** (default: 1000): Maximum authenticated connections waiting for operations.
+
+**Increase for high-traffic environments:**
+```yaml
+environment:
+  - LDAP_CONN_MAX_PENDING=500
+  - LDAP_CONN_MAX_PENDING_AUTH=5000
+```
+
+**Disable limits (not recommended):**
+```yaml
+environment:
+  - LDAP_CONN_MAX_PENDING=unlimited
+  - LDAP_CONN_MAX_PENDING_AUTH=unlimited
+```
 
 ## Volumes
 
@@ -157,6 +180,65 @@ services:
     ports:
       - "391:389"
 ```
+
+## Database Size Limits
+
+The MDB (LMDB) backend has a **fixed maximum size of 1 GB** by default. This limit is set at database creation and cannot be changed without reconfiguring.
+
+**Important:** Plan your database size **before** deploying to production. Once the database reaches its limit, writes will fail with `MDB_MAP_FULL` errors.
+
+### Checking Current Size
+
+```bash
+# Check database file size
+docker exec openldap ls -lh /var/lib/ldap/data.mdb
+
+# Check max size setting
+docker exec openldap ldapsearch -Y EXTERNAL -H ldapi:/// \
+  -b "cn=config" "(olcDbMaxSize=*)" olcDbMaxSize
+```
+
+### Increasing Database Size
+
+To use a larger database, you must configure it **before** data is loaded:
+
+```bash
+# Create a custom LDIF file
+cat > custom-db-size.ldif << 'EOF'
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+replace: olcDbMaxSize
+olcDbMaxSize: 2147483648
+EOF
+
+# Apply after container starts (before loading data)
+docker exec -i openldap ldapmodify -Y EXTERNAL -H ldapi:/// < custom-db-size.ldif
+```
+
+Or use an initialization script in `/docker-entrypoint-initdb.d/` to set it automatically on first startup.
+
+### Health Checks
+
+Add Docker health checks to monitor container status:
+
+```yaml
+services:
+  openldap:
+    image: ghcr.io/vibhuvioio/openldap:latest
+    environment:
+      - LDAP_DOMAIN=example.com
+      - LDAP_ADMIN_PASSWORD=changeme
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/scripts/healthcheck.sh", "basic"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+```
+
+Health check levels:
+- `basic` — Checks if slapd process is running
+- `bind` — Performs an authenticated bind test
 
 ## Database Details
 

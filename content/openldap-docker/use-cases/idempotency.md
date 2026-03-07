@@ -7,20 +7,12 @@ description: Validate that OpenLDAP Docker handles restarts gracefully — no er
 
 Verify that restarting the OpenLDAP container is safe — configuration is idempotent, data persists, and no duplicate entries are created.
 
-## Download
+## Project Files
 
-```bash
-mkdir -p openldap-idempotency && cd openldap-idempotency
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/idempotency-test/docker-compose.yml
-
-# Init script (creates test data)
-mkdir -p init
-wget -O init/test-idempotency.sh \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/idempotency-test/init/test-idempotency.sh
-
-mkdir -p logs
+```project
+name: openldap-idempotency
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/idempotency-test/docker-compose.yml
+init/test-idempotency.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/idempotency-test/init/test-idempotency.sh
 ```
 
 ## Start

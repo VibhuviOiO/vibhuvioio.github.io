@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { loadDocContent } from '@/lib/docs-server';
+import { processLessonContent } from '@/lib/content-processor';
 import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
 import TableOfContents from '@/components/docs/TableOfContents';
+import ProjectExplorer from '@/components/docs/ProjectExplorer';
 
 const docSeo: Record<string, { title: string; description: string }> = {
   'getting-started': {
@@ -67,6 +69,42 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Portainer Integration - OpenLDAP Docker',
     description: 'Configure Portainer CE LDAP authentication with OpenLDAP. Group-based administrator access control for container management.',
   },
+  'use-cases/single-node': {
+    title: 'Single Node Deployment - OpenLDAP Docker',
+    description: 'Deploy a single-node OpenLDAP server with custom schemas, employee data, and persistent volumes using the OpenLDAP Docker image.',
+  },
+  'use-cases/multi-master-cluster': {
+    title: 'Multi-Master Cluster - OpenLDAP Docker',
+    description: 'Deploy a 3-node multi-master OpenLDAP cluster with automatic replication, custom schema, and 30 employees using Docker Compose.',
+  },
+  'use-cases/docker-secrets': {
+    title: 'Docker Secrets - OpenLDAP Docker',
+    description: 'Securely manage OpenLDAP passwords using Docker secrets instead of plaintext environment variables.',
+  },
+  'use-cases/tls-ssl': {
+    title: 'TLS/SSL - OpenLDAP Docker',
+    description: 'Deploy OpenLDAP with TLS/SSL support for encrypted connections using StartTLS and LDAPS.',
+  },
+  'use-cases/overlay-features': {
+    title: 'Overlay Features - OpenLDAP Docker',
+    description: 'Test memberOf, password policy, and audit log overlays simultaneously in a single OpenLDAP Docker deployment.',
+  },
+  'use-cases/password-policy': {
+    title: 'Password Policy - OpenLDAP Docker',
+    description: 'Validate OpenLDAP password policy overlay enforcement — minimum length, lockout, history, and expiration.',
+  },
+  'use-cases/idempotency': {
+    title: 'Idempotency Test - OpenLDAP Docker',
+    description: 'Validate that OpenLDAP Docker handles restarts gracefully — no errors, no duplicates, full data persistence.',
+  },
+  'use-cases/initialization-scripts': {
+    title: 'Initialization Scripts - OpenLDAP Docker',
+    description: 'Automate OpenLDAP setup with initialization scripts. Load sample data, create custom OUs, and configure indexes on first startup.',
+  },
+  'troubleshooting': {
+    title: 'Troubleshooting - OpenLDAP Docker',
+    description: 'Common OpenLDAP Docker issues and solutions. Container startup failures, connection problems, TLS errors, replication issues, and database errors.',
+  },
 };
 
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
@@ -117,6 +155,25 @@ const sidebarGroups = [
       { id: 'portainer', title: 'Portainer CE', slug: 'integrations/portainer' },
     ],
   },
+  {
+    title: 'Use Cases',
+    items: [
+      { id: 'uc-single-node', title: 'Single Node Deployment', slug: 'use-cases/single-node' },
+      { id: 'uc-multi-master', title: 'Multi-Master Cluster', slug: 'use-cases/multi-master-cluster' },
+      { id: 'uc-docker-secrets', title: 'Docker Secrets', slug: 'use-cases/docker-secrets' },
+      { id: 'uc-tls', title: 'TLS/SSL', slug: 'use-cases/tls-ssl' },
+      { id: 'uc-overlays', title: 'Overlay Features', slug: 'use-cases/overlay-features' },
+      { id: 'uc-password-policy', title: 'Password Policy', slug: 'use-cases/password-policy' },
+      { id: 'uc-idempotency', title: 'Idempotency Test', slug: 'use-cases/idempotency' },
+      { id: 'uc-init-scripts', title: 'Initialization Scripts', slug: 'use-cases/initialization-scripts' },
+    ],
+  },
+  {
+    title: 'Reference',
+    items: [
+      { id: 'troubleshooting', title: 'Troubleshooting', slug: 'troubleshooting' },
+    ],
+  },
 ];
 
 interface DocPageProps {
@@ -132,6 +189,9 @@ export default async function OpenLDAPDockerDocPage({ params }: DocPageProps) {
   if (!doc) {
     notFound();
   }
+
+  const { content, projects } = await processLessonContent(doc.content);
+  doc.content = content;
 
   return (
     <DocsLayout
@@ -149,7 +209,24 @@ export default async function OpenLDAPDockerDocPage({ params }: DocPageProps) {
 
       <div className="flex gap-8">
         <article className="flex-1 min-w-0 max-w-none">
-          <DocContent content={doc.content} />
+          {projects.length > 0 ? (
+            doc.content
+              .split(/(___PROJECT_BLOCK_\d+___)/)
+              .map((segment, i) => {
+                const projectMatch = segment.match(/___PROJECT_BLOCK_(\d+)___/);
+                if (projectMatch) {
+                  const project = projects[parseInt(projectMatch[1])];
+                  return project
+                    ? <ProjectExplorer key={`project-${i}`} name={project.name} files={project.files} />
+                    : null;
+                }
+                return segment.trim()
+                  ? <DocContent key={`content-${i}`} content={segment} />
+                  : null;
+              })
+          ) : (
+            <DocContent content={doc.content} />
+          )}
         </article>
         <TableOfContents content={doc.content} />
       </div>
@@ -174,5 +251,14 @@ export function generateStaticParams() {
     { slug: ['integrations', 'guacamole'] },
     { slug: ['integrations', 'redmine'] },
     { slug: ['integrations', 'portainer'] },
+    { slug: ['use-cases', 'single-node'] },
+    { slug: ['use-cases', 'multi-master-cluster'] },
+    { slug: ['use-cases', 'docker-secrets'] },
+    { slug: ['use-cases', 'tls-ssl'] },
+    { slug: ['use-cases', 'overlay-features'] },
+    { slug: ['use-cases', 'password-policy'] },
+    { slug: ['use-cases', 'idempotency'] },
+    { slug: ['use-cases', 'initialization-scripts'] },
+    { slug: ['troubleshooting'] },
   ];
 }

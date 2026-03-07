@@ -155,7 +155,14 @@
             { "id": "uc-tls", "title": "TLS/SSL", "slug": "use-cases/tls-ssl" },
             { "id": "uc-overlays", "title": "Overlay Features", "slug": "use-cases/overlay-features" },
             { "id": "uc-password-policy", "title": "Password Policy", "slug": "use-cases/password-policy" },
-            { "id": "uc-idempotency", "title": "Idempotency Test", "slug": "use-cases/idempotency" }
+            { "id": "uc-idempotency", "title": "Idempotency Test", "slug": "use-cases/idempotency" },
+            { "id": "uc-init-scripts", "title": "Initialization Scripts", "slug": "use-cases/initialization-scripts" }
+          ]
+        },
+        {
+          "title": "Reference",
+          "items": [
+            { "id": "troubleshooting", "title": "Troubleshooting", "slug": "troubleshooting" }
           ]
         }
       ]

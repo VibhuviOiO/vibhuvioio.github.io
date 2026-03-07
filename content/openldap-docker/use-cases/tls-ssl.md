@@ -7,22 +7,13 @@ description: Deploy OpenLDAP with TLS/SSL support for encrypted connections usin
 
 Deploy OpenLDAP with encrypted connections using StartTLS (port 389) and LDAPS (port 636). Self-signed certificates are included for testing.
 
-## Download
+## Project Files
 
-```bash
-mkdir -p openldap-tls && cd openldap-tls
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/docker-compose.yml
-
-# Pre-generated self-signed certificates (for testing only)
-mkdir -p certs
-wget -O certs/ldap.crt \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.crt
-wget -O certs/ldap.key \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.key
-
-mkdir -p logs
+```project
+name: openldap-tls
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/docker-compose.yml
+certs/ldap.crt: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.crt
+certs/ldap.key: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.key
 ```
 
 ## Start

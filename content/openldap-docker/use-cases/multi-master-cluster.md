@@ -19,35 +19,17 @@ Deploy a 3-node multi-master OpenLDAP cluster with automatic replication. Write 
               Bidirectional Replication
 ```
 
-## Download
+## Project Files
 
-```bash
-mkdir -p openldap-multinode && cd openldap-multinode
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/docker-compose.yml
-
-# Environment files (one per node)
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node1
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node2
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node3
-
-# Custom schema
-mkdir -p custom-schema
-wget -O custom-schema/oioCloudEmployee.ldif \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/custom-schema/oioCloudEmployee.ldif
-
-# Sample data
-mkdir -p sample
-wget -O sample/oiocloud_data.ldif \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/sample/oiocloud_data.ldif
-
-# Init script (runs on node 1, data replicates to other nodes)
-mkdir -p init
-wget -O init/init-data.sh \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/init/init-data.sh
-
-mkdir -p logs/node1 logs/node2 logs/node3
+```project
+name: openldap-multinode
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/docker-compose.yml
+.env.node1: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node1
+.env.node2: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node2
+.env.node3: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node3
+custom-schema/oioCloudEmployee.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/custom-schema/oioCloudEmployee.ldif
+sample/oiocloud_data.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/sample/oiocloud_data.ldif
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/init/init-data.sh
 ```
 
 ## Start the Cluster

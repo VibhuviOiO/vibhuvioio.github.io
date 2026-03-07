@@ -7,20 +7,12 @@ description: Test memberOf, password policy, and audit log overlays simultaneous
 
 Deploy OpenLDAP with all three overlays enabled — memberOf, password policy, and audit logging — and validate they work together.
 
-## Download
+## Project Files
 
-```bash
-mkdir -p openldap-overlays && cd openldap-overlays
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/overlay-features/docker-compose.yml
-
-# Test script (runs automatically on startup)
-mkdir -p init
-wget -O init/test-overlays.sh \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/overlay-features/init/test-overlays.sh
-
-mkdir -p logs
+```project
+name: openldap-overlays
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/overlay-features/docker-compose.yml
+init/test-overlays.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/overlay-features/init/test-overlays.sh
 ```
 
 ## Start

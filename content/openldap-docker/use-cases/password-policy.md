@@ -7,22 +7,13 @@ description: Validate OpenLDAP password policy overlay enforcement — minimum l
 
 Test the OpenLDAP password policy overlay with automated validation of policy enforcement rules.
 
-## Download
+## Project Files
 
-```bash
-mkdir -p openldap-ppolicy && cd openldap-ppolicy
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/docker-compose.yml
-
-# Environment file
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/.env.password-policy
-
-# Automated test script
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/test-password-policy.sh
-chmod +x test-password-policy.sh
-
-mkdir -p logs
+```project
+name: openldap-ppolicy
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/docker-compose.yml
+.env.password-policy: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/.env.password-policy
+test-password-policy.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/test-password-policy.sh
 ```
 
 ## Start

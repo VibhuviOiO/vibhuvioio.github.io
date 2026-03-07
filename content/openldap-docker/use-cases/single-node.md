@@ -11,33 +11,15 @@ Deploy a production-ready OpenLDAP server with custom schemas and auto-loaded sa
 
 A corporate LDAP directory with 28 employees from 25+ countries across 8 departments, using a custom `vibhuviEmployee` objectClass.
 
-### Download
+### Project Files
 
-```bash
-mkdir -p openldap-vibhuvi && cd openldap-vibhuvi
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/docker-compose.yml
-
-# Environment file
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/.env.vibhuvi
-
-# Custom schema
-mkdir -p custom-schema
-wget -O custom-schema/vibhuviEmployee.ldif \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/custom-schema/vibhuviEmployee.ldif
-
-# Sample data
-mkdir -p sample
-wget -O sample/employee_data_global.ldif \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/sample/employee_data_global.ldif
-
-# Init script
-mkdir -p init
-wget -O init/init-data.sh \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/init/init-data.sh
-
-mkdir -p logs
+```project
+name: openldap-vibhuvi
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/docker-compose.yml
+.env.vibhuvi: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/.env.vibhuvi
+custom-schema/vibhuviEmployee.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/custom-schema/vibhuviEmployee.ldif
+sample/employee_data_global.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/sample/employee_data_global.ldif
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/init/init-data.sh
 ```
 
 ### Start
@@ -117,33 +99,15 @@ The `vibhuviEmployee` objectClass extends `inetOrgPerson` with:
 
 A themed LDAP directory with 20 characters and 5 groups from the Mahabharata, using a custom `MahabharataUser` objectClass.
 
-### Download
+### Project Files
 
-```bash
-mkdir -p openldap-vibhuvioio && cd openldap-vibhuvioio
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/docker-compose.yml
-
-# Environment file
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/.env.vibhuvioio
-
-# Custom schema
-mkdir -p custom-schema
-wget -O custom-schema/MahabharataCharacter.ldif \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/custom-schema/MahabharataCharacter.ldif
-
-# Sample data
-mkdir -p sample
-wget -O sample/mahabharata_data.ldif \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/sample/mahabharata_data.ldif
-
-# Init script
-mkdir -p init
-wget -O init/init-data.sh \
-  https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/init/init-data.sh
-
-mkdir -p logs
+```project
+name: openldap-vibhuvioio
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/docker-compose.yml
+.env.vibhuvioio: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/.env.vibhuvioio
+custom-schema/MahabharataCharacter.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/custom-schema/MahabharataCharacter.ldif
+sample/mahabharata_data.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/sample/mahabharata_data.ldif
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/init/init-data.sh
 ```
 
 ### Start

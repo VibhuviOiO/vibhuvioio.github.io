@@ -7,15 +7,11 @@ description: Securely manage OpenLDAP passwords using Docker secrets instead of 
 
 Deploy OpenLDAP with passwords loaded from Docker secrets instead of plaintext environment variables. Passwords never appear in `docker inspect`, process lists, or container metadata.
 
-## Download
+## Project Files
 
-```bash
-mkdir -p openldap-secrets && cd openldap-secrets
-
-# Docker Compose
-wget https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/docker-secrets/docker-compose.yml
-
-mkdir -p secrets logs
+```project
+name: openldap-secrets
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/docker-secrets/docker-compose.yml
 ```
 
 ## Create Secret Files
