@@ -7,6 +7,7 @@ import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
 import TableOfContents from '@/components/docs/TableOfContents';
 import ProjectExplorer from '@/components/docs/ProjectExplorer';
+import MultiMasterArchitecture from '@/components/ui/MultiMasterArchitecture';
 
 const docSeo: Record<string, { title: string; description: string }> = {
   'getting-started': {
@@ -209,10 +210,13 @@ export default async function OpenLDAPDockerDocPage({ params }: DocPageProps) {
 
       <div className="flex gap-8">
         <article className="flex-1 min-w-0 max-w-none">
-          {projects.length > 0 ? (
+          {(projects.length > 0 || doc.content.includes('___MULTI_MASTER_ARCHITECTURE___')) ? (
             doc.content
-              .split(/(___PROJECT_BLOCK_\d+___)/)
+              .split(/(___PROJECT_BLOCK_\d+___|___MULTI_MASTER_ARCHITECTURE___)/)
               .map((segment, i) => {
+                if (segment === '___MULTI_MASTER_ARCHITECTURE___') {
+                  return <MultiMasterArchitecture key={`mm-arch-${i}`} />;
+                }
                 const projectMatch = segment.match(/___PROJECT_BLOCK_(\d+)___/);
                 if (projectMatch) {
                   const project = projects[parseInt(projectMatch[1])];

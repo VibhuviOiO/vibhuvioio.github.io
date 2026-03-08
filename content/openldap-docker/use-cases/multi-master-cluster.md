@@ -9,15 +9,7 @@ Deploy a 3-node multi-master OpenLDAP cluster with automatic replication. Write 
 
 ## Architecture
 
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Node 1    │────▶│   Node 2    │────▶│   Node 3    │
-│  Port 392   │◀────│  Port 393   │◀────│  Port 394   │
-└─────────────┘     └─────────────┘     └─────────────┘
-       ▲                                        │
-       └────────────────────────────────────────┘
-              Bidirectional Replication
-```
+___MULTI_MASTER_ARCHITECTURE___
 
 ## Project Files
 
