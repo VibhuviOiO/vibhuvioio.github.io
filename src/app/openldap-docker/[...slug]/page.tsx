@@ -18,9 +18,21 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Configuration - OpenLDAP Docker',
     description: 'Complete environment variable reference for OpenLDAP Docker. Configure domains, passwords, TLS, overlays, and replication.',
   },
-  'replication': {
-    title: 'Multi-Master Replication - OpenLDAP Docker',
-    description: 'Set up a 3-node multi-master OpenLDAP cluster with automatic replication using Docker.',
+  'deployment/docker-run': {
+    title: 'Docker Run Commands - OpenLDAP Docker',
+    description: 'Complete reference for deploying OpenLDAP Docker using docker run with all configuration options.',
+  },
+  'deployment/single-node': {
+    title: 'Single Node Deployment - OpenLDAP Docker',
+    description: 'Production-ready single-node OpenLDAP deployment with Docker Compose — persistent storage, health checks, and restart policies.',
+  },
+  'deployment/multi-master': {
+    title: 'Multi-Master Cluster Deployment - OpenLDAP Docker',
+    description: 'Deploy a 3-node multi-master OpenLDAP cluster with Docker Compose — bidirectional replication, failover, and production hardening.',
+  },
+  'deployment/kubernetes': {
+    title: 'Kubernetes Deployment - OpenLDAP Docker',
+    description: 'Why deploying LDAP on Kubernetes is risky, when it makes sense, and how to do it safely with StatefulSets.',
   },
   'overlays': {
     title: 'Overlays - OpenLDAP Docker',
@@ -136,7 +148,15 @@ const sidebarGroups = [
   {
     title: 'Deployment',
     items: [
-      { id: 'replication', title: 'Multi-Master Replication', slug: 'replication' },
+      { id: 'deploy-docker-run', title: 'Docker Run', slug: 'deployment/docker-run' },
+      { id: 'deploy-single-node', title: 'Single Node', slug: 'deployment/single-node' },
+      { id: 'deploy-multi-master', title: 'Multi-Master Cluster', slug: 'deployment/multi-master' },
+      { id: 'deploy-kubernetes', title: 'Kubernetes', slug: 'deployment/kubernetes' },
+    ],
+  },
+  {
+    title: 'Features',
+    items: [
       { id: 'overlays', title: 'Overlays', slug: 'overlays' },
       { id: 'monitoring', title: 'Monitoring', slug: 'monitoring' },
       { id: 'security', title: 'Security', slug: 'security' },
@@ -242,7 +262,10 @@ export function generateStaticParams() {
   return [
     { slug: ['getting-started'] },
     { slug: ['configuration'] },
-    { slug: ['replication'] },
+    { slug: ['deployment', 'docker-run'] },
+    { slug: ['deployment', 'single-node'] },
+    { slug: ['deployment', 'multi-master'] },
+    { slug: ['deployment', 'kubernetes'] },
     { slug: ['overlays'] },
     { slug: ['monitoring'] },
     { slug: ['security'] },

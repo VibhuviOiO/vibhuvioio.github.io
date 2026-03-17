@@ -126,7 +126,15 @@
         {
           "title": "Deployment",
           "items": [
-            { "id": "replication", "title": "Multi-Master Replication", "slug": "replication" },
+            { "id": "deploy-docker-run", "title": "Docker Run", "slug": "deployment/docker-run" },
+            { "id": "deploy-single-node", "title": "Single Node", "slug": "deployment/single-node" },
+            { "id": "deploy-multi-master", "title": "Multi-Master Cluster", "slug": "deployment/multi-master" },
+            { "id": "deploy-kubernetes", "title": "Kubernetes", "slug": "deployment/kubernetes" }
+          ]
+        },
+        {
+          "title": "Features",
+          "items": [
             { "id": "overlays", "title": "Overlays", "slug": "overlays" },
             { "id": "monitoring", "title": "Monitoring", "slug": "monitoring" },
             { "id": "security", "title": "Security", "slug": "security" }

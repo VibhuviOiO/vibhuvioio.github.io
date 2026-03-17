@@ -217,7 +217,7 @@ See [Troubleshooting](/openldap-docker/troubleshooting) for more solutions.
 ## Next Steps
 
 - [Configuration](/openldap-docker/configuration) — full environment variable reference
-- [Multi-Master Replication](/openldap-docker/replication) — set up a 3-node HA cluster
+- [Multi-Master Cluster](/openldap-docker/deployment/multi-master) — deploy a 3-node HA cluster
 - [Initialization Scripts](/openldap-docker/use-cases/initialization-scripts) — automate setup tasks
 - [Troubleshooting](/openldap-docker/troubleshooting) — solve common issues
 - [Integrations](/openldap-docker/integrations/keycloak) — connect with Keycloak, Jenkins, and more

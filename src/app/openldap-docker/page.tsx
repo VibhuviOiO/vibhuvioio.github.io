@@ -84,7 +84,7 @@ services:
   docs: [
     { href: '/openldap-docker/getting-started', title: 'Getting Started', desc: 'Quick start guide and installation' },
     { href: '/openldap-docker/configuration', title: 'Configuration', desc: 'Environment variables and settings' },
-    { href: '/openldap-docker/replication', title: 'Replication', desc: 'Multi-master cluster setup' },
+    { href: '/openldap-docker/deployment/multi-master', title: 'Multi-Master Cluster', desc: 'Deploy a 3-node HA cluster' },
     { href: '/openldap-docker/overlays', title: 'Overlays', desc: 'memberOf, ppolicy, auditlog overlays' },
     { href: '/openldap-docker/monitoring', title: 'Monitoring', desc: 'cn=Monitor backend and health checks' },
     { href: '/openldap-docker/integrations/keycloak', title: 'Integrations', desc: 'Keycloak, Jenkins, SonarQube, Vault, Splunk' },
