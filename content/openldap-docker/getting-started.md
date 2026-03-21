@@ -19,9 +19,10 @@ docker run -d \
   --name openldap \
   -e LDAP_DOMAIN=example.com \
   -e LDAP_ADMIN_PASSWORD=changeme \
+  -e INCLUDE_SCHEMAS=cosine,inetorgperson,nis \
   -p 389:389 \
   -v ldap-data:/var/lib/ldap \
-  -v ldap-config:/etc/openldap/slapd.d \
+  -v ldap-config:/etc/ldap/slapd.d \
   ghcr.io/vibhuvioio/openldap:latest
 ```
 
@@ -124,7 +125,7 @@ clusters:
 
 ```bash
 docker run -d --name ldap-manager \
-  -p 5000:5000 \
+  -p 5000:8000 \
   -v $(pwd)/config.yml:/app/config.yml \
   ghcr.io/vibhuvioio/ldap-manager:latest
 ```
