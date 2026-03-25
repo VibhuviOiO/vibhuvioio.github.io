@@ -14,9 +14,14 @@ name: openldap-secrets
 docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/docker-secrets/docker-compose.yml
 ```
 
+## Set image
+```bash
+export LDAP_IMAGE=ghcr.io/vibhuvioio/openldap:latest
+```
 ## Create Secret Files
 
 ```bash
+mkdir -p secrets
 echo "YourSecureAdminPassword" > secrets/admin_password.txt
 echo "YourSecureConfigPassword" > secrets/config_password.txt
 ```

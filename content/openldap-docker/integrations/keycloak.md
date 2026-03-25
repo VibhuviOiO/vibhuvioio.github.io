@@ -133,9 +133,15 @@ Fill exactly:
 
 Click **Test connection** and **Test authentication**, then **Save**.
 
+Click on `ldap`
+
 ### Synchronize Users
 
-Scroll down → Click **Synchronize all users**.
+In the top-right corner, locate the Actions dropdown
+
+Click on Actions
+
+Select Synchronize all users 
 
 You should see: `1 imported users`
 
