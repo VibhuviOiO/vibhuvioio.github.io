@@ -15,7 +15,10 @@ docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker
 certs/ldap.crt: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.crt
 certs/ldap.key: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.key
 ```
-
+## Set image
+```bash
+export LDAP_IMAGE=ghcr.io/vibhuvioio/openldap:latest
+```
 ## Start
 
 ```bash
