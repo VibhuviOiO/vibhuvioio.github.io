@@ -80,6 +80,12 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-WCRSK785');
           `}
         </Script>
+        <Script
+          id="ahrefs-analytics"
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="Yr6UlonNNwb9aueOuY93Rw"
+          strategy="afterInteractive"
+        />
         {/* End Google Tag Manager */}
       </head>
       <body
