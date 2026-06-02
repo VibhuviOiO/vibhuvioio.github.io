@@ -4,6 +4,63 @@
   "type": "product",
   "products": [
     {
+      "id": "fastforge",
+      "name": "FastForge",
+      "slug": "fastforge",
+      "description": "Production-grade FastAPI project generator with AI infrastructure, SOLID architecture, Docker, and tests out of the box",
+      "icon": "⚡",
+      "status": "live",
+      "repoUrl": "https://github.com/VibhuviOiO/fastforge-cli",
+      "features": [
+        "60-second project generation",
+        "SOLID FastAPI architecture",
+        "AI gateway, embeddings & vector stores",
+        "Docker + debug compose included",
+        "Plugin entry-point system"
+      ],
+      "technologies": ["Python", "FastAPI", "Docker", "Pydantic", "structlog"],
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "getting-started", "title": "Quickstart", "slug": "getting-started" },
+            { "id": "installation", "title": "Installation", "slug": "installation" },
+            { "id": "create-application", "title": "Create an Application", "slug": "create-application" },
+            { "id": "use-cases", "title": "Use Cases", "slug": "use-cases" }
+          ]
+        },
+        {
+          "title": "AI Ecosystem",
+          "items": [
+            { "id": "ai-ecosystem", "title": "Overview & Layers", "slug": "ai-ecosystem" },
+            { "id": "ai-runbook", "title": "AI Runbook", "slug": "ai-runbook" },
+            { "id": "ai-app-kinds", "title": "App Kinds (search / RAG / agent)", "slug": "ai-app-kinds" },
+            { "id": "ai-providers-gateway", "title": "Gateway Providers", "slug": "ai-providers-gateway" },
+            { "id": "ai-providers-embeddings", "title": "Embedding Providers", "slug": "ai-providers-embeddings" },
+            { "id": "ai-providers-vector-store", "title": "Vector Store Providers", "slug": "ai-providers-vector-store" },
+            { "id": "ai-telemetry", "title": "AI Telemetry (Cost & Traces)", "slug": "ai-telemetry" },
+            { "id": "ai-cost-recipes", "title": "Cost Recipes & Dashboards", "slug": "ai-cost-recipes" }
+          ]
+        },
+        {
+          "title": "Guides",
+          "items": [
+            { "id": "ecosystem", "title": "Ecosystem Overview", "slug": "ecosystem" },
+            { "id": "production-readiness", "title": "Production Readiness", "slug": "production-readiness" }
+          ]
+        },
+        {
+          "title": "Plugins",
+          "items": [
+            { "id": "plugins-overview", "title": "Plugins Overview", "slug": "plugins-overview" },
+            { "id": "authoring-a-plugin", "title": "Authoring a Plugin", "slug": "authoring-a-plugin" },
+            { "id": "plugin-reference", "title": "Plugin Protocol Reference", "slug": "plugin-reference" },
+            { "id": "publishing-a-plugin", "title": "Publishing a Plugin", "slug": "publishing-a-plugin" }
+          ]
+        }
+      ]
+    },
+    {
       "id": "docker-registry-ui",
       "name": "Docker Registry UI",
       "slug": "docker-registry-ui",
