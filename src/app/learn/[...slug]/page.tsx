@@ -11,7 +11,6 @@ import DocsLayout from '@/components/layout/DocsLayout';
 import CourseLanding from '@/components/layout/CourseLanding';
 import DocContent from '@/components/docs/DocContent';
 import TableOfContents from '@/components/docs/TableOfContents';
-import DisqusComments from '@/components/DisqusComments';
 import ProjectExplorer from '@/components/docs/ProjectExplorer';
 import LessonHeader from '@/components/docs/LessonHeader';
 import InvertedIndexDemo from '@/components/docs/InvertedIndexDemo';
@@ -132,6 +131,23 @@ const courseMeta: Record<string, {
     readingTime: '4h',
     labTime: '4h',
     githubUrl: 'https://github.com/VibhuviOiO/qdrant-ops',
+  },
+  langfuse: {
+    color: 'linear-gradient(135deg, #5b2333 0%, #a03a5f 100%)',
+    level: 'Beginner',
+    icon: <Database className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
+    whatYoullLearn: [
+      'Understand the core services in a self-hosted Langfuse deployment',
+      'Run Langfuse locally with a single Docker Compose file',
+      'Verify Postgres, ClickHouse, Redis, and MinIO dependencies',
+      'Use the local Langfuse UI for SDK tracing experiments',
+      'Identify what must change before using this setup beyond local development',
+    ],
+    updated: 'Jun 2026',
+    totalDuration: '50m',
+    readingTime: '25m',
+    labTime: '25m',
+    githubUrl: 'https://github.com/VibhuviOiO/infinite-containers/tree/main/langfuse',
   },
 };
 
@@ -285,7 +301,6 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
           ) : (
             <DocContent content={doc.content} />
           )}
-          <DisqusComments title={doc.meta.title || slug[slug.length - 1]} />
         </article>
         <TableOfContents content={doc.content} />
       </div>

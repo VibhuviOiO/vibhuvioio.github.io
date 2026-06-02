@@ -281,6 +281,31 @@
       ]
     },
     {
+      "id": "langfuse",
+      "title": "Langfuse Operations",
+      "slug": "langfuse",
+      "description": "Self-hosted Langfuse for local tracing and evaluation workflows, starting with a single-machine Docker Compose developer quickstart.",
+      "icon": "🧪",
+      "totalDuration": "50m",
+      "readingTime": "25m",
+      "labTime": "25m",
+      "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/langfuse",
+      "sidebar": [
+        {
+          "title": "Phase 1: Introduction (15m)",
+          "items": [
+            { "id": "langfuse-overview", "title": "Course Overview", "slug": "langfuse/overview", "duration": "15m", "type": "doc" }
+          ]
+        },
+        {
+          "title": "Phase 2: Developer Quickstart (35m)",
+          "items": [
+            { "id": "langfuse-developer-quickstart", "title": "Developer Quickstart", "slug": "langfuse/developer-quickstart", "duration": "35m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/langfuse/developer-quickstart" }
+          ]
+        }
+      ]
+    },
+    {
       "id": "qdrant",
       "title": "Qdrant Vector Database",
       "slug": "qdrant",
