@@ -14,13 +14,15 @@ docker network create registry-net
 docker run -d --name test-registry --network registry-net -p 5001:5000 \
   -e REGISTRY_STORAGE_DELETE_ENABLED=true registry:2
 
-# Run Registry UI (using container name)
+# Run Registry UI with built-in Trivy scanner
 docker run -d --name registry-ui --network registry-net -p 5000:5000 \
-  -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000"}]' \
+  -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000","vulnerabilityScan":{"enabled":true,"scanner":"trivy","scannerUrl":"builtin"}}]' \
   -v $(pwd)/data:/app/data \
   -v $(pwd)/trivy-data:/root/.cache/trivy \
   vibhuvioio/docker-registry-ui:latest
 ```
+
+            For remote Trivy scanning, start a separate Trivy server and point `scannerUrl` to `http://<trivy-server>:8080` instead of `builtin`.
 
             ### Activity Log - Docker Run
             
@@ -37,7 +39,7 @@ $ docker run -d --name test-registry --network registry-net -p 5001:5000 \
 c991c042ebb30d9d2643005ab7f4e4a033ba64aa6fdb94175bfa42fb00ff54f1
 
 $ docker run -d --name registry-ui --network registry-net -p 5005:5000 \
-  -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000"}]' \
+  -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000","vulnerabilityScan":{"enabled":true,"scanner":"trivy","scannerUrl":"builtin"}}]' \
   -v $(pwd)/data:/app/data \
   -v $(pwd)/trivy-data:/root/.cache/trivy \
   vibhuvioio/docker-registry-ui:latest
@@ -73,7 +75,7 @@ git clone https://github.com/vibhuvi/docker-registry-ui.git
 cd docker-registry-ui
 
 # Start development environment
-docker-compose -f docker-compose.dev.yml up -d
+docker compose -f docker-compose.dev.yml up -d
 
 # Access UI at http://localhost:5005
 ```
@@ -92,7 +94,7 @@ remote: Total 1234 (delta 0), reused 0 (delta 0), pack-reused 1234
 Receiving objects: 100% (1234/1234), 2.5 MiB | 1.2 MiB/s, done.
 
 $ cd docker-registry-ui
-$ docker-compose -f docker-compose.dev.yml up -d
+$ docker compose -f docker-compose.dev.yml up -d
 [+] Running 2/2
  ✔ Container docker-registry-ui-registry-1     Running
  ✔ Container docker-registry-ui-registry-ui-1  Started
@@ -111,21 +113,36 @@ cd docker-registry-ui
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
+# Run with uvicorn (production-style ASGI server)
 python run.py
+# Or directly: uvicorn asgi:app --host 0.0.0.0 --port 5000
 ```
 
             ## Production Examples
             Ready-to-use production setups:
 
             
-            ### Single Registry Setup
+            ### Single Registry with Remote Trivy (Recommended)
+            Uses a dedicated Trivy server container so scans can run concurrently and the vulnerability database is managed separately.
             ```
-# Download files
-wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/single-registry/docker-compose.yml
-wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/single-registry/registries.config.json
+# Download compose file
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/remote-trivy/docker-compose.yml
 
 # Start
-docker-compose up -d
+docker compose up -d
+
+# Access UI at http://localhost:5000
+```
+
+            ### Single Registry with Built-in Trivy
+            Uses the Trivy binary bundled inside the UI container. Simpler, but local scans are serialized to avoid filesystem cache contention.
+            ```
+# Download compose file
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/built-in-trivy/docker-compose.yml
+
+# Start
+docker compose up -d
 
 # Access UI at http://localhost:5000
 ```
@@ -138,7 +155,7 @@ wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker
 wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/multi-registry/populate-test-images.sh
 
 # Start
-docker-compose up -d
+docker compose up -d
 
 # Populate test images
 chmod +x populate-test-images.sh
@@ -155,7 +172,7 @@ wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker
 wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/basic-auth/nginx.conf
 
 # Start
-docker-compose up -d
+docker compose up -d
 
 # Access UI at http://localhost:5003
 # Auth Registry: admin/secret

@@ -56,12 +56,13 @@ description: Features for Docker Registry UI
 
             ![Vulnerability Scanning with CVE Details](/img/docker-registry-ui/cves.png)
             
-                **On-Demand Scanning**: Scan any image tag
+                **On-Demand Scanning**: Scan any image tag asynchronously
                 **Severity Levels**: Critical, High, Medium, Low, Unknown
                 **CVE Details**: View detailed vulnerability information
                 **NVD Links**: Direct links to National Vulnerability Database
                 **Layer Attribution**: See which layer introduced each vulnerability
                 **Persistent Results**: Scan results saved for future reference
+                **Flexible Scanner Deployment**: Use the built-in Trivy binary or connect to a remote Trivy server
             
 
             ## Bulk Operations
@@ -97,12 +98,14 @@ description: Features for Docker Registry UI
             
 
             ## API Integration
-            Full Docker Registry v2 API support:
+            FastAPI-based backend with full Docker Registry v2 API support:
 
             
                 List repositories and tags
                 Get image manifests
                 Delete images by digest
+                Async vulnerability scanning endpoints
+                Health and readiness probes
                 CORS support for browser access
             
 

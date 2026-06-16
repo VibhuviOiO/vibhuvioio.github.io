@@ -12,7 +12,7 @@
       "status": "live",
       "repoUrl": "https://github.com/VibhuviOiO/docker-registry-ui",
       "demoUrl": "https://vibhuvioio.com/docker-registry-ui",
-      "pwdUrl": "https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker-compose.yml",
+      "pwdUrl": "https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/built-in-trivy/docker-compose.yml",
       "features": [
         "Multi-registry support",
         "Security vulnerability scanning",
@@ -20,7 +20,7 @@
         "Image tagging & cleanup",
         "User-friendly interface"
       ],
-      "technologies": ["React", "Go", "Docker", "Trivy"],
+      "technologies": ["Python", "FastAPI", "JavaScript", "Docker", "Trivy"],
       "sidebar": [
         {
           "title": "Getting Started",
