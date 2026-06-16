@@ -18,7 +18,8 @@ docker run -d --name test-registry --network registry-net -p 5001:5000 \
 docker run -d --name registry-ui --network registry-net -p 5000:5000 \
   -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000"}]' \
   -v $(pwd)/data:/app/data \
-  ghcr.io/vibhuvioio/docker-registry-ui:latest
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
+  vibhuvioio/docker-registry-ui:latest
 ```
 
             ### Activity Log - Docker Run
@@ -38,12 +39,13 @@ c991c042ebb30d9d2643005ab7f4e4a033ba64aa6fdb94175bfa42fb00ff54f1
 $ docker run -d --name registry-ui --network registry-net -p 5005:5000 \
   -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000"}]' \
   -v $(pwd)/data:/app/data \
-  ghcr.io/vibhuvioio/docker-registry-ui:latest
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
+  vibhuvioio/docker-registry-ui:latest
 ef26a979e49cf3a118601771d9068cba7537caac108614d4f4c682bfe1a9557f
 
 $ docker ps -a
 CONTAINER ID   IMAGE                                          COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-ef26a979e49c   ghcr.io/vibhuvioio/docker-registry-ui:latest   "uvicorn asgi:app --…"   2 seconds ago    Up 2 seconds    0.0.0.0:5005->5000/tcp, :::5005->5000/tcp   registry-ui
+ef26a979e49c   vibhuvioio/docker-registry-ui:latest   "uvicorn asgi:app --…"   2 seconds ago    Up 2 seconds    0.0.0.0:5005->5000/tcp, :::5005->5000/tcp   registry-ui
 c991c042ebb3   registry:2                                     "/entrypoint.sh /etc…"   16 seconds ago   Up 15 seconds   0.0.0.0:5001->5000/tcp, :::5001->5000/tcp   test-registry
 
 # Push test images
@@ -158,3 +160,22 @@ docker-compose up -d
 # Access UI at http://localhost:5003
 # Auth Registry: admin/secret
 ```
+
+            ## Health Checks
+            The UI exposes health endpoints useful for monitoring and load balancers:
+
+            ```bash
+# Liveness probe - confirms the process is running
+curl http://localhost:5000/health/live
+# {"status":"alive"}
+
+# Readiness probe - confirms registries are configured
+curl http://localhost:5000/health/ready
+# {"status":"ready","registries":1}
+
+# Combined health check
+curl http://localhost:5000/health
+# {"status":"healthy","registries":1,"read_only":false}
+```
+
+            Use these endpoints in Docker Compose `healthcheck`, Kubernetes probes, or monitoring tools to verify the application is running successfully.

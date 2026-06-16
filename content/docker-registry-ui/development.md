@@ -111,6 +111,7 @@ docker build -t docker-registry-ui:latest .
 # Test production image
 docker run -d -p 5000:5000 \
   -v $(pwd)/data:/app/data \
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
   docker-registry-ui:latest
 ```
 
