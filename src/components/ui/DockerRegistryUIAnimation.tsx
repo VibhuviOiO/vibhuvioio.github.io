@@ -6,37 +6,42 @@ import {
   Shield,
   Search,
   Trash2,
-  Layers,
   Globe,
   AlertTriangle,
   CheckCircle,
   ArrowRight,
   Package,
   Tag,
-  FileSearch,
+  User,
 } from 'lucide-react';
 
 const PHASES = [
   {
     id: 'browse',
-    title: 'Browse Images',
-    description: 'Connect to any Docker Registry v2 and explore repositories, tags, and layers in a clean web UI.',
-    active: ['registry', 'ui'],
-    arrow: 'registry-ui',
+    step: 1,
+    title: 'Browse Your Registry',
+    description: 'Connect Docker Registry UI to any Docker Registry v2 API and explore repositories, tags, and image layers.',
+    active: ['user', 'ui', 'registry'],
+    flow: 'registry → ui',
+    badge: { icon: 'search', text: 'nginx:latest, redis:alpine...' },
   },
   {
     id: 'scan',
-    title: 'Scan for CVEs',
-    description: 'Send any image to the built-in or remote Trivy scanner and see vulnerabilities by severity.',
-    active: ['ui', 'trivy'],
-    arrow: 'ui-trivy',
+    step: 2,
+    title: 'Scan for Vulnerabilities',
+    description: 'Click Scan on any tag. The image is analyzed by Trivy and results are shown as severity badges with CVE details.',
+    active: ['user', 'ui', 'trivy'],
+    flow: 'ui → trivy',
+    badge: { icon: 'shield', text: 'Critical 2 · High 5 · Medium 12' },
   },
   {
     id: 'cleanup',
-    title: 'Clean Up',
-    description: 'Bulk delete old tags by pattern, age, or retention policy with a safe dry-run mode.',
-    active: ['ui', 'registry'],
-    arrow: 'ui-registry',
+    step: 3,
+    title: 'Clean Up Images',
+    description: 'Use bulk operations to delete tags by pattern, age, or retention policy — with a safe dry-run preview first.',
+    active: ['user', 'ui', 'registry'],
+    flow: 'ui → registry',
+    badge: { icon: 'trash', text: 'Delete 12 tags matching dev-*' },
   },
 ];
 
@@ -46,104 +51,126 @@ export default function DockerRegistryUIAnimation() {
   useEffect(() => {
     const timer = setInterval(() => {
       setPhaseIndex((prev) => (prev + 1) % PHASES.length);
-    }, 4500);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
   const phase = PHASES[phaseIndex];
 
   return (
-    <div className="relative w-full max-w-xl mx-auto select-none">
+    <div className="relative w-full max-w-2xl mx-auto select-none">
       {/* Soft background glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#2702a6]/10 via-transparent to-cyan-500/10 blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-cyan-300/10 blur-3xl" />
 
-      {/* Stage */}
-      <div className="relative h-[360px]">
-        {/* Left: Docker Registry */}
+      {/* Architecture diagram */}
+      <div className="relative h-[320px]">
+        {/* User */}
         <Node
-          icon={<Container className="w-8 h-8 text-sky-600" />}
-          label="Docker Registry"
-          sublabel="your images"
-          position="left"
-          active={phase.active.includes('registry')}
+          icon={<User className="w-6 h-6 text-white" />}
+          label="You"
+          position={{ top: '0%', left: '50%' }}
+          active={phase.active.includes('user')}
         />
 
-        {/* Center: Registry UI Browser */}
+        {/* Registry UI - center */}
         <Node
-          icon={<Globe className="w-8 h-8 text-[#2702a6]" />}
+          icon={<Globe className="w-8 h-8 text-white" />}
           label="Registry UI"
-          sublabel="web interface"
-          position="center"
+          position={{ top: '40%', left: '50%' }}
           active={phase.active.includes('ui')}
           isMain
         />
 
-        {/* Right: Trivy Scanner */}
+        {/* Docker Registry - left */}
         <Node
-          icon={<Shield className="w-8 h-8 text-red-500" />}
+          icon={<Container className="w-7 h-7 text-white" />}
+          label="Docker Registry"
+          position={{ top: '40%', left: '12%' }}
+          active={phase.active.includes('registry')}
+        />
+
+        {/* Trivy - right */}
+        <Node
+          icon={<Shield className="w-7 h-7 text-white" />}
           label="Trivy Scanner"
-          sublabel="CVE detection"
-          position="right"
+          position={{ top: '40%', left: '88%' }}
           active={phase.active.includes('trivy')}
         />
 
         {/* Connection lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
           <defs>
-            <marker id="arrow-registry-ui" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-              <polygon points="0 0, 8 4, 0 8" fill={phase.arrow === 'registry-ui' ? '#2702a6' : '#cbd5e1'} />
+            <marker id="arr-ui-registry" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+              <polygon points="0 0, 8 4, 0 8" fill={phase.flow.includes('registry') ? '#60a5fa' : 'rgba(255,255,255,0.25)'} />
             </marker>
-            <marker id="arrow-ui-trivy" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-              <polygon points="0 0, 8 4, 0 8" fill={phase.arrow === 'ui-trivy' ? '#ef4444' : '#cbd5e1'} />
+            <marker id="arr-ui-trivy" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+              <polygon points="0 0, 8 4, 0 8" fill={phase.flow.includes('trivy') ? '#f87171' : 'rgba(255,255,255,0.25)'} />
             </marker>
-            <marker id="arrow-ui-registry" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-              <polygon points="0 0, 8 4, 0 8" fill={phase.arrow === 'ui-registry' ? '#0ea5e9' : '#cbd5e1'} />
+            <marker id="arr-user-ui" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+              <polygon points="0 0, 8 4, 0 8" fill={phase.active.includes('user') ? '#a78bfa' : 'rgba(255,255,255,0.25)'} />
             </marker>
           </defs>
 
-          {/* Registry ↔ UI */}
+          {/* User → UI */}
           <line
-            x1="105" y1="180" x2="210" y2="180"
-            stroke={phase.arrow === 'registry-ui' || phase.arrow === 'ui-registry' ? '#2702a6' : '#cbd5e1'}
+            x1="50%" y1="60" x2="50%" y2="130"
+            stroke={phase.active.includes('user') ? '#a78bfa' : 'rgba(255,255,255,0.2)'}
             strokeWidth="2"
             className="transition-colors duration-700"
-            markerEnd="url(#arrow-registry-ui)"
+            markerEnd="url(#arr-user-ui)"
+          />
+
+          {/* Registry ↔ UI */}
+          <line
+            x1="22%" y1="160" x2="42%" y2="160"
+            stroke={phase.flow.includes('registry') ? '#60a5fa' : 'rgba(255,255,255,0.2)'}
+            strokeWidth="2"
+            className="transition-colors duration-700"
+            markerEnd="url(#arr-ui-registry)"
           />
 
           {/* UI → Trivy */}
           <line
-            x1="290" y1="180" x2="395" y2="180"
-            stroke={phase.arrow === 'ui-trivy' ? '#ef4444' : '#cbd5e1'}
+            x1="58%" y1="160" x2="78%" y2="160"
+            stroke={phase.flow.includes('trivy') ? '#f87171' : 'rgba(255,255,255,0.2)'}
             strokeWidth="2"
             className="transition-colors duration-700"
-            markerEnd="url(#arrow-ui-trivy)"
+            markerEnd="url(#arr-ui-trivy)"
           />
         </svg>
 
         {/* Animated packet */}
         <Packet phase={phase} />
 
-        {/* Feature mini-cards near UI */}
+        {/* Feature badge */}
         <FeatureBadge phase={phase} />
       </div>
 
-      {/* Caption */}
-      <div className="text-center">
-        <h3 className="text-lg font-bold text-gray-900 mb-1">{phase.title}</h3>
-        <p className="text-sm text-gray-600 max-w-md mx-auto">{phase.description}</p>
+      {/* Caption - light text for dark hero background */}
+      <div className="text-center mt-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-semibold mb-3">
+          <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px]">
+            {phase.step}
+          </span>
+          Step {phase.step} of {PHASES.length}
+        </div>
+        <h3 className="text-xl font-bold text-white drop-shadow-lg mb-2">{phase.title}</h3>
+        <p className="text-sm text-white/80 drop-shadow-md max-w-md mx-auto leading-relaxed">
+          {phase.description}
+        </p>
       </div>
 
       {/* Progress dots */}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2 mt-5">
         {PHASES.map((_, i) => (
           <button
             key={i}
             onClick={() => setPhaseIndex(i)}
             className="rounded-full transition-all duration-300"
             style={{
-              width: i === phaseIndex ? 22 : 7,
-              height: 7,
-              background: i === phaseIndex ? '#2702a6' : '#d1d5db',
+              width: i === phaseIndex ? 24 : 8,
+              height: 8,
+              background: i === phaseIndex ? '#ffffff' : 'rgba(255,255,255,0.35)',
             }}
             aria-label={`Show phase ${i + 1}`}
           />
@@ -151,11 +178,29 @@ export default function DockerRegistryUIAnimation() {
       </div>
 
       <style jsx>{`
-        @keyframes packetMove {
-          0% { transform: translateX(0) scale(0.8); opacity: 0; }
+        @keyframes packetMoveRegistry {
+          0% { left: 22%; opacity: 0; }
           15% { opacity: 1; }
           85% { opacity: 1; }
-          100% { transform: translateX(var(--dx)) scale(0.8); opacity: 0; }
+          100% { left: 42%; opacity: 0; }
+        }
+        @keyframes packetMoveTrivy {
+          0% { left: 58%; opacity: 0; }
+          15% { opacity: 1; }
+          85% { opacity: 1; }
+          100% { left: 78%; opacity: 0; }
+        }
+        @keyframes packetMoveCleanup {
+          0% { left: 42%; opacity: 0; }
+          15% { opacity: 1; }
+          85% { opacity: 1; }
+          100% { left: 22%; opacity: 0; }
+        }
+        @keyframes packetMoveUser {
+          0% { top: 60px; opacity: 0; }
+          15% { opacity: 1; }
+          85% { opacity: 1; }
+          100% { top: 122px; opacity: 0; }
         }
       `}</style>
     </div>
@@ -165,102 +210,104 @@ export default function DockerRegistryUIAnimation() {
 function Node({
   icon,
   label,
-  sublabel,
   position,
   active,
   isMain,
 }: {
   icon: React.ReactNode;
   label: string;
-  sublabel: string;
-  position: 'left' | 'center' | 'right';
+  position: { top: string; left: string };
   active: boolean;
   isMain?: boolean;
 }) {
-  const posClasses = {
-    left: 'left-0 top-1/2 -translate-y-1/2',
-    center: 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-    right: 'right-0 top-1/2 -translate-y-1/2',
-  };
-
   return (
-    <div className={`absolute flex flex-col items-center ${posClasses[position]} z-10`}>
+    <div
+      className="absolute flex flex-col items-center z-10 transition-all duration-700"
+      style={{
+        top: position.top,
+        left: position.left,
+        transform: 'translate(-50%, -50%)',
+        opacity: active ? 1 : 0.55,
+      }}
+    >
       <div
-        className={`rounded-2xl flex items-center justify-center shadow-lg border-2 transition-all duration-700 ${
-          isMain ? 'w-24 h-24' : 'w-20 h-20'
-        } ${active ? 'scale-110' : 'opacity-70 scale-100'}`}
+        className={`rounded-2xl flex items-center justify-center border-2 transition-all duration-700 ${
+          isMain ? 'w-24 h-24' : 'w-18 h-18'
+        } ${active ? 'scale-110' : 'scale-100'}`}
         style={{
-          backgroundColor: active ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.85)',
-          borderColor: active ? '#2702a6' : 'rgba(226, 232, 240, 0.9)',
-          boxShadow: active ? '0 0 30px rgba(39, 2, 166, 0.2)' : '0 10px 25px -5px rgba(0,0,0,0.1)',
+          backgroundColor: active
+            ? isMain
+              ? 'rgba(255,255,255,0.2)'
+              : 'rgba(255,255,255,0.15)'
+            : 'rgba(255,255,255,0.08)',
+          borderColor: active ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.25)',
+          boxShadow: active
+            ? '0 0 40px rgba(255,255,255,0.25), inset 0 0 20px rgba(255,255,255,0.1)'
+            : '0 8px 24px rgba(0,0,0,0.2)',
+          backdropFilter: 'blur(8px)',
         }}
       >
         {icon}
       </div>
-      <div className="mt-3 text-center">
-        <div className="text-sm font-bold text-white drop-shadow-md">{label}</div>
-        <div className="text-xs text-white/80 drop-shadow-md">{sublabel}</div>
-      </div>
+      <span className="mt-3 text-sm font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] whitespace-nowrap">
+        {label}
+      </span>
     </div>
   );
 }
 
 function Packet({ phase }: { phase: (typeof PHASES)[number] }) {
-  const config: Record<string, { start: string; dx: string; color: string }> = {
-    'registry-ui': { start: 'left-[105px] top-[174px]', dx: '105px', color: '#2702a6' },
-    'ui-trivy': { start: 'left-[290px] top-[174px]', dx: '105px', color: '#ef4444' },
-    'ui-registry': { start: 'left-[290px] top-[186px]', dx: '-105px', color: '#0ea5e9' },
+  const animations: Record<string, { animation: string; color: string; top: string }> = {
+    'registry → ui': { animation: 'packetMoveRegistry 2s ease-in-out infinite', color: '#60a5fa', top: '160px' },
+    'ui → trivy': { animation: 'packetMoveTrivy 2s ease-in-out infinite', color: '#f87171', top: '160px' },
+    'ui → registry': { animation: 'packetMoveCleanup 2s ease-in-out infinite', color: '#60a5fa', top: '172px' },
   };
 
-  const cfg = config[phase.arrow];
+  const cfg = animations[phase.flow];
   if (!cfg) return null;
 
   return (
     <div
-      className={`absolute w-3 h-3 rounded-full z-20 ${cfg.start}`}
+      className="absolute w-3 h-3 rounded-full pointer-events-none z-20"
       style={{
+        top: cfg.top,
         backgroundColor: cfg.color,
-        boxShadow: `0 0 12px ${cfg.color}`,
-        '--dx': cfg.dx,
-        animation: 'packetMove 1.8s ease-in-out infinite',
-      } as React.CSSProperties}
+        boxShadow: `0 0 14px ${cfg.color}`,
+        animation: cfg.animation,
+      }}
     />
   );
 }
 
 function FeatureBadge({ phase }: { phase: (typeof PHASES)[number] }) {
-  const configs: Record<string, { icon: React.ReactNode; label: string; color: string; bg: string }> = {
-    browse: {
-      icon: <Search className="w-3 h-3" />,
-      label: 'Browse repos & tags',
-      color: 'text-[#2702a6]',
-      bg: 'bg-white/95',
-    },
-    scan: {
-      icon: <AlertTriangle className="w-3 h-3" />,
-      label: 'Critical: 2  High: 5',
-      color: 'text-red-600',
-      bg: 'bg-white/95',
-    },
-    cleanup: {
-      icon: <Trash2 className="w-3 h-3" />,
-      label: 'Dry-run delete 12 tags',
-      color: 'text-sky-600',
-      bg: 'bg-white/95',
-    },
+  const icons = {
+    search: <Search className="w-3.5 h-3.5" />,
+    shield: <Shield className="w-3.5 h-3.5" />,
+    trash: <Trash2 className="w-3.5 h-3.5" />,
   };
 
-  const cfg = configs[phase.id];
-  if (!cfg) return null;
+  const colors = {
+    browse: { bg: 'rgba(59, 130, 246, 0.2)', border: 'rgba(96, 165, 250, 0.5)', text: '#bfdbfe' },
+    scan: { bg: 'rgba(239, 68, 68, 0.2)', border: 'rgba(248, 113, 113, 0.5)', text: '#fecaca' },
+    cleanup: { bg: 'rgba(14, 165, 233, 0.2)', border: 'rgba(56, 189, 248, 0.5)', text: '#bae6fd' },
+  };
+
+  const c = colors[phase.id as keyof typeof colors];
 
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 top-[60px] z-20">
+    <div className="absolute left-1/2 -translate-x-1/2 top-[72%] z-20">
       <div
-        className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg border transition-all duration-700 ${cfg.color} ${cfg.bg}`}
-        style={{ borderColor: phase.id === 'scan' ? '#fecaca' : phase.id === 'cleanup' ? '#bae6fd' : '#c4b5fd' }}
+        className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold backdrop-blur-md border shadow-xl transition-all duration-700"
+        style={{
+          backgroundColor: c.bg,
+          borderColor: c.border,
+          color: c.text,
+        }}
       >
-        {cfg.icon}
-        {cfg.label}
+        {phase.badge.icon === 'search' && icons.search}
+        {phase.badge.icon === 'shield' && icons.shield}
+        {phase.badge.icon === 'trash' && icons.trash}
+        {phase.badge.text}
       </div>
     </div>
   );
