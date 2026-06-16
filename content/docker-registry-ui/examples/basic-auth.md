@@ -109,7 +109,8 @@ EOF
 docker run -d --name registry-ui --network registry-net -p 5003:5000 \
   -v $(pwd)/registries.config.json:/app/registries.config.json:ro \
   -v $(pwd)/data:/app/data \
-  ghcr.io/vibhuvioio/docker-registry-ui:latest
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
+  vibhuvioio/docker-registry-ui:latest
 ```
 
             ## Access
@@ -231,7 +232,8 @@ $ curl -u admin:secret http://localhost:5004/v2/_catalog
 $ docker run -d --name registry-ui --network registry-net -p 5003:5000 \
   -v $(pwd)/registries.config.json:/app/registries.config.json:ro \
   -v $(pwd)/data:/app/data \
-  ghcr.io/vibhuvioio/docker-registry-ui:latest
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
+  vibhuvioio/docker-registry-ui:latest
 c82d5b19cb470d7f45557166786497443aeaf5759305e0e1d5bf6a2ec6ebd345
 
 $ docker logs registry-ui | grep "Configured"
@@ -320,7 +322,8 @@ $ curl -u admin:secret http://localhost:5004/v2/secure/alpine/tags/list
 $ docker run -d --name registry-ui --network registry-net -p 5003:5000 \
   -v $(pwd)/registries.config.json:/app/registries.config.json:ro \
   -v $(pwd)/data:/app/data \
-  ghcr.io/vibhuvioio/docker-registry-ui:latest
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
+  vibhuvioio/docker-registry-ui:latest
 c82d5b19cb470d7f45557166786497443aeaf5759305e0e1d5bf6a2ec6ebd345
 
 $ docker logs registry-ui | grep "Configured"

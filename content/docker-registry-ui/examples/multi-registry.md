@@ -81,7 +81,8 @@ EOF
 docker run -d --name registry-ui --network registry-net -p 5000:5000 \
   -v $(pwd)/registries.config.json:/app/registries.config.json:ro \
   -v $(pwd)/data:/app/data \
-  ghcr.io/vibhuvioio/docker-registry-ui:latest
+  -v $(pwd)/trivy-data:/root/.cache/trivy \
+  vibhuvioio/docker-registry-ui:latest
 ```
 
             ## Alternative: Docker Compose

@@ -66,7 +66,7 @@ description: Vulnerability Scanning for Docker Registry UI
             Scan results are persisted to disk:
 
             
-                Stored in the same directory that contains the configured `CONFIG_FILE` (for example, if `CONFIG_FILE=/app/data/registries.config.json` then results are written under `/app/data`).
+                Stored under the directory configured by `DATA_DIR` (default `/app/data`). Mount this directory to persist scan results across container restarts.
                 One JSON file per image tag. Filenames use the pattern `&lt;repo_with_slashes_replaced_by_underscores&gt;_&lt;tag&gt;.json` (e.g. `myrepo_subrepo_latest.json`).
                 Results remain available after UI restart
                 Re-scanning overwrites previous results
@@ -97,3 +97,4 @@ description: Vulnerability Scanning for Docker Registry UI
                 **Minimize Layers**: Fewer layers = smaller attack surface
                 **Remove Unnecessary Packages**: Only install what you need
                 **Use Specific Versions**: Avoid `latest` tags in production
+                **Persist Trivy Database**: Mount `TRIVY_CACHE_DIR` (default `/root/.cache/trivy`) to avoid re-downloading the vulnerability DB on every restart

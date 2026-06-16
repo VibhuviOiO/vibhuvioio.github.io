@@ -29,6 +29,16 @@ description: Configuration Guide for Docker Registry UI
                           `/app/registries.config.json`
                         
                     
+                          `DATA_DIR`
+                          Directory where vulnerability scan results are persisted. Mount this directory to keep scan history across container restarts.
+                          `/app/data`
+                        
+                    
+                          `TRIVY_CACHE_DIR`
+                          Directory where Trivy stores its vulnerability database. Mount this directory to avoid re-downloading the database on every restart.
+                          `/root/.cache/trivy`
+                        
+                    
                         `READ_ONLY`
                         Enable read-only mode (disable delete operations)
                         `false`
@@ -57,7 +67,7 @@ description: Configuration Guide for Docker Registry UI
                 
                 Click "Test Connection" to verify
                 Save configuration
-                Configuration is saved to the directory containing the configured `CONFIG_FILE` (for example if `CONFIG_FILE=/app/data/registries.config.json`, files are saved under `/app/data`).
+                Configuration is saved to the directory containing the configured `CONFIG_FILE`. Scan results are persisted under `DATA_DIR` (default `/app/data`).
             
 
             ## Manual Configuration File
