@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   Container,
   Shield,
   Search,
   Trash2,
-  Globe,
   AlertTriangle,
   CheckCircle,
   ArrowRight,
@@ -74,7 +74,15 @@ export default function DockerRegistryUIAnimation() {
 
         {/* Registry UI - center */}
         <Node
-          icon={<Globe className="w-8 h-8 text-white" />}
+          icon={
+            <Image
+              src="/img/docker-registry-ui/docker-registry-ui.svg"
+              alt="Docker Registry UI"
+              width={44}
+              height={44}
+              className="drop-shadow-md"
+            />
+          }
           label="Registry UI"
           position={{ top: '40%', left: '50%' }}
           active={phase.active.includes('ui')}
