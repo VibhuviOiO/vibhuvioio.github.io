@@ -30,23 +30,48 @@ description: Configuration Guide for Docker Registry UI
                         
                     
                           `DATA_DIR`
-                          Directory where vulnerability scan results are persisted. Mount this directory to keep scan history across container restarts.
+                          Directory where vulnerability scan results and scan job state are persisted. Mount this directory to keep scan history across container restarts.
                           `/app/data`
                         
                     
                           `TRIVY_CACHE_DIR`
-                          Directory where Trivy stores its vulnerability database. Mount this directory to avoid re-downloading the database on every restart.
+                          Directory where the built-in Trivy scanner stores its vulnerability database. Only used when `scannerUrl` is `builtin`. Mount this directory to avoid re-downloading the database on every restart.
                           `/root/.cache/trivy`
                         
                     
-                        `READ_ONLY`
-                        Enable read-only mode (disable delete operations)
-                        `false`
+                          `READ_ONLY`
+                          Enable read-only mode (disable delete operations)
+                          `false`
+                        
                     
+                          `LOG_LEVEL`
+                          Logging verbosity (`DEBUG`, `INFO`, `WARNING`, `ERROR`)
+                          `WARNING`
+                        
                     
-                        `PORT`
-                        Port for the web interface
-                        `5000`
+                          `UVICORN_WORKERS`
+                          Number of Uvicorn worker processes inside the container
+                          `4`
+                        
+                    
+                          `SCAN_WORKERS`
+                          Maximum number of concurrent background scan workers within the UI process
+                          `2`
+                        
+                    
+                          `SCAN_RETRIES`
+                          Number of times to retry a scan that fails due to transient registry contention
+                          `3`
+                        
+                    
+                          `SCAN_RETRY_DELAY`
+                          Base delay in seconds between scan retries (multiplied by the attempt number)
+                          `2`
+                        
+                    
+                          `PORT`
+                          Port for the web interface (used by `run.py`; ignored when running Uvicorn directly)
+                          `5000`
                     
 
                 
@@ -73,12 +98,166 @@ description: Configuration Guide for Docker Registry UI
             ## Manual Configuration File
             For automated deployments, create a `registries.config.json` file before starting the UI:
 
-            ### Create the config file (example)
-            Create a directory to hold the config (for example `./data`) and add a file named `registries.config.json`. The application will read whatever path you point `CONFIG_FILE` at (see environment variables above). Example minimal file:
-
-            ```
+            ### Minimal example
+            ```bash
 mkdir -p data
-cat > ./data/registries.config.json 
+cat > ./data/registries.config.json <<'EOF'
+{
+  "registries": [
+    {
+      "name": "Local Registry",
+      "api": "http://registry:5000"
+    }
+  ]
+}
+EOF
+```
+
+            ### With built-in Trivy scanner
+            ```json
+{
+  "registries": [
+    {
+      "name": "Local Registry",
+      "api": "http://registry:5000",
+      "vulnerabilityScan": {
+        "enabled": true,
+        "scanner": "trivy",
+        "scannerUrl": "builtin"
+      }
+    }
+  ]
+}
+```
+
+            ### With remote Trivy server
+            ```json
+{
+  "registries": [
+    {
+      "name": "Local Registry",
+      "api": "http://registry:5000",
+      "vulnerabilityScan": {
+        "enabled": true,
+        "scanner": "trivy",
+        "scannerUrl": "http://trivy-server:8080"
+      }
+    }
+  ]
+}
+```
+
+            Start the UI with the config file mounted:
+            ```bash
+docker run -d --name registry-ui -p 5000:5000 \
+  -v $(pwd)/data:/app/data \
+  vibhuvioio/docker-registry-ui:latest
+```
+
+            ## Registry Configuration Options
+            
+                
+                    
+                        Field
+                        Description
+                        Required
+                    
+                
+                
+                    
+                          `name`
+                          Display name for the registry
+                          Yes
+                        
+                    
+                          `api`
+                          Registry v2 API endpoint (e.g., `http://registry:5000`)
+                          Yes
+                        
+                    
+                          `default`
+                          Whether this is the default selected registry
+                          No
+                        
+                    
+                          `auth`
+                          Authentication object for basic auth (see below)
+                          No
+                        
+                    
+                          `vulnerabilityScan`
+                          Vulnerability scanning configuration (see below)
+                          No
+                        
+                    
+                          `bulkOperationsEnabled`
+                          Enable bulk delete operations for this registry
+                          No
+                    
+
+                
+            
+
+            ## Authentication
+            Basic authentication is supported by adding an `auth` object:
+            ```json
+{
+  "name": "Secure Registry",
+  "api": "http://nginx-proxy:5004",
+  "auth": {
+    "type": "basic",
+    "username": "admin",
+    "password": "secret"
+  }
+}
+```
+
+            ## Vulnerability Scanning Configuration
+            The `vulnerabilityScan` object controls per-registry scanning behavior:
+
+            ```json
+{
+  "vulnerabilityScan": {
+    "enabled": true,
+    "scanner": "trivy",
+    "scannerUrl": "builtin",
+    "scanLatestOnly": 1,
+    "autoScanRules": [
+      { "pattern": ".*" }
+    ]
+  }
+}
+```
+
+            
+                `enabled`: Turn scanning on or off for this registry
+                `scanner`: Scanner type — currently only `trivy` is supported
+                `scannerUrl`: `builtin` for local Trivy, or a remote Trivy server URL such as `http://trivy-server:8080`
+                `scanLatestOnly`: Number of latest tags to scan when using auto-scan / scan-all
+                `autoScanRules`: List of repository name patterns; only matching repositories are scanned by scan-all
+            
+
+            ### Local vs remote Trivy
+            
+                **Built-in (`scannerUrl: "builtin"`)**
+                
+                    Uses the Trivy binary inside the UI container
+                    Requires mounting `/root/.cache/trivy` (or `TRIVY_CACHE_DIR`) to persist the vulnerability DB
+                    Scans are serialized with a file lock to protect Trivy's filesystem cache
+                    Best for simple, low-volume deployments
+                
+                
+                **Remote Trivy server**
+                
+                    Uses a separate Trivy server container (e.g., `aquasec/trivy:latest server`)
+                    Scans can run concurrently across UI workers
+                    The Trivy server manages its own DB and cache
+                    Recommended for production and multi-worker deployments
+                
+            
+
+            ## Security Best Practices
+            
                 Store credentials securely (use Docker secrets or environment variables)
                 Use HTTPS for production registries
                 Enable read-only mode in production environments

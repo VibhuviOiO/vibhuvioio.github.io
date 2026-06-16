@@ -18,16 +18,16 @@ cd docker-registry-ui
             ### Development Workflow
             ```
 # Build the development environment
-docker-compose -f docker/docker-compose.dev.yml build
+docker compose -f docker-compose.dev.yml build
 
 # Start registry and UI in development mode
-docker-compose -f docker/docker-compose.dev.yml up -d
+docker compose -f docker-compose.dev.yml up -d
 
 # View logs
-docker-compose -f docker/docker-compose.dev.yml logs -f registry-ui
+docker compose -f docker-compose.dev.yml logs -f registry-ui
 
 # Stop services
-docker-compose -f docker/docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml down
 ```
 
             ### Live Reload
@@ -41,12 +41,12 @@ docker-compose -f docker/docker-compose.dev.yml down
             Changes to these files are reflected immediately. For Python changes, restart the container:
 
             ```
-docker-compose -f docker/docker-compose.dev.yml restart registry-ui
+docker compose -f docker-compose.dev.yml restart registry-ui
 ```
 
             ### Access Points
             
-                **UI**: http://localhost:5003
+                **UI**: http://localhost:5005
                 **Registry**: http://localhost:5001
             
 
@@ -61,54 +61,57 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Run application (recommended)
+# Run application (production-style ASGI server)
 python run.py
 
-# Or run as ASGI (matches production image)
+# Or run Uvicorn directly
 uvicorn asgi:app --host 0.0.0.0 --port 5000
 ```
 
             ## Project Structure
             ```
 docker-registry-ui/
-├── run.py                 # Application entrypoint (Flask factory)
-├── asgi.py                # ASGI wrapper for production (uvicorn)
+├── run.py                 # Application entrypoint (Uvicorn)
+├── asgi.py                # FastAPI ASGI application
+├── logging_config.json    # JSON logging configuration
 ├── app/
-│   ├── data_store.py     # Scan results storage
-│   ├── registry.py       # Registry API client
+│   ├── __init__.py        # FastAPI app factory
+│   ├── config.py          # Configuration loader
+│   ├── data_store.py      # Scan results and job state storage
+│   ├── health.py          # Health check endpoints
+│   ├── logger.py          # JSON logging formatter
+│   ├── registry.py        # Registry API client
+│   ├── routes.py          # API and HTML routes
 │   └── scanners/
-│       └── trivy.py      # Trivy scanner integration
+│       ├── base.py        # Scanner interface
+│       ├── factory.py     # Scanner factory
+│       └── trivy.py       # Trivy scanner integration
 ├── static/
-│   ├── css/              # Stylesheets
-│   └── js/               # JavaScript files
-├── templates/            # HTML templates
-├── docker/               # Docker configuration
-└── docs/                 # Documentation
+│   ├── js/                # JavaScript files
+│   └── style.css          # Stylesheets
+├── templates/             # Jinja2 HTML templates
+├── docker/                # Docker Compose examples
+└── data/                  # Runtime data (created on first run)
 ```
 
             ## Technology Stack
             
-                **Backend**: Python 3.9+, Flask
+                **Backend**: Python 3.13, FastAPI
                 **Frontend**: Vanilla JavaScript, Bootstrap 5
-                **Scanner**: Trivy
+                **Scanner**: Trivy (built-in or remote server)
                 **API**: Docker Registry v2 API
+                **Server**: Uvicorn (ASGI)
             
 
             ## Running Tests
-            ```
-# Run unit tests
-python -m pytest tests/
-
-# Run with coverage
-python -m pytest --cov=app tests/
-```
+            This project currently does not have automated test coverage. Contributions for unit and integration tests are welcome!
 
             ## Building Production Image
             ```
 # Build production image
 docker build -t docker-registry-ui:latest .
 
-# Test production image
+# Test production image with built-in Trivy
 docker run -d -p 5000:5000 \
   -v $(pwd)/data:/app/data \
   -v $(pwd)/trivy-data:/root/.cache/trivy \
@@ -118,7 +121,7 @@ docker run -d -p 5000:5000 \
             ## Development Tips
             
                 **Code Editor**: Use any editor (VS Code, PyCharm, etc.)
-                **Debugging**: Check logs with `docker-compose logs -f`
+                **Debugging**: Check logs with `docker compose logs -f`
                 **Database**: No database required - stateless design
                 **Hot Reload**: Frontend changes (HTML/CSS/JS) reflect immediately
                 **Backend Changes**: Restart container for Python changes

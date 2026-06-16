@@ -43,7 +43,7 @@ volumes:
             Start the registry:
 
             ```
-docker-compose up -d
+docker compose up -d
 ```
 
             ### Verify Registry is Running
@@ -172,38 +172,131 @@ curl -s -H "Accept: application/vnd.oci.image.manifest.v1+json" \
 ```
 
             ## UI Backend API
-            The UI provides additional endpoints:
+            The UI provides additional endpoints. All endpoints return JSON.
 
-            ### Scan Image
+            ### Scan Image (Async)
+            Vulnerability scans are queued and run in the background.
+
             ```
-POST /api/scan
-Content-Type: application/json
-
-{
-  "registry_id": 1,
-  "repository": "myapp",
-  "tag": "1.0"
-}
+GET /api/scan/{registry_name}/{repository}/{tag}
 
 Response:
 {
-  "status": "success",
-  "vulnerabilities": {...}
+  "scanId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "queued"
 }
 ```
 
-            ### Get Scan Results
+            ### Get Scan Status / Results
+            Poll this endpoint using the `scanId` returned above.
+
             ```
-GET /api/scan-results?registry_id=1&repository=myapp&tag=1.0
+GET /api/scan-status/{scan_id}
+
+Response (in progress):
+{
+  "scanId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "in_progress",
+  "registry": "Local Registry",
+  "repo": "myapp",
+  "tag": "1.0",
+  "result": null,
+  "error": null
+}
+
+Response (completed):
+{
+  "scanId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "completed",
+  "registry": "Local Registry",
+  "repo": "myapp",
+  "tag": "1.0",
+  "result": {
+    "total": 42,
+    "summary": {
+      "CRITICAL": 2,
+      "HIGH": 10,
+      "MEDIUM": 20,
+      "LOW": 10
+    },
+    "vulnerabilities": [...]
+  },
+  "error": null
+}
+```
+
+            ### Get All Scan Results for a Registry
+            ```
+GET /api/vulnerabilities/{registry_name}
 
 Response:
 {
-  "total": 42,
-  "critical": 2,
-  "high": 10,
-  "medium": 20,
-  "low": 10,
-  "layers": [...]
+  "results": {
+    "myapp:1.0": { ... },
+    "nginx:latest": { ... }
+  }
+}
+```
+
+            ### List Registries
+            ```
+GET /api/registries
+
+Response:
+{
+  "registries": [
+    {
+      "name": "Local Registry",
+      "api": "http://registry:5000",
+      "isAuthEnabled": false,
+      "vulnerabilityScan": { ... }
+    }
+  ]
+}
+```
+
+            ### List Repositories
+            ```
+GET /api/repositories/{registry_name}
+
+Response:
+{
+  "repositories": ["myapp", "nginx", "postgres"]
+}
+```
+
+            ### List Tags
+            ```
+GET /api/tags/{registry_name}/{repository}
+
+Response:
+{
+  "tags": ["latest", "1.0", "1.1"]
+}
+```
+
+            ### Delete Tag
+            ```
+DELETE /api/delete/tag/{registry_name}/{repository}/{tag}
+
+Response:
+{
+  "success": true
+}
+```
+
+            ### Bulk Operation
+            ```
+POST /api/bulk-operation
+Content-Type: application/json
+
+{
+  "registry": "Local Registry",
+  "repoPattern": "myapp-*",
+  "olderThanDays": 30,
+  "keepMin": 2,
+  "tagPattern": "v.*",
+  "dryRun": true
 }
 ```
 

@@ -9,15 +9,34 @@ description: Vulnerability Scanning for Docker Registry UI
             Docker Registry UI includes built-in vulnerability scanning powered by Trivy, providing comprehensive security analysis of your container images.
 
             ## Quick Start with Trivy
-            Trivy is built into the Docker Registry UI container. No additional setup required!
+            Docker Registry UI integrates with Trivy for vulnerability scanning. You can use the built-in Trivy binary inside the UI container, or connect to a remote Trivy server for better concurrency.
 
             ### Scanning Images
             
                 Navigate to the repository
                 Find the tag you want to scan
                 Click the "Scan" button (shield icon 🛡️) next to the tag
-                Wait for the scan to complete (usually 10-30 seconds)
-                View vulnerability badges showing counts by severity
+                The scan is queued and runs asynchronously
+                The UI polls for status and displays vulnerability badges when complete
+            
+
+            ### Scanner Modes
+            
+                **Built-in Trivy (`scannerUrl: "builtin"`)**
+                
+                    Trivy binary runs inside the UI container
+                    Scans are serialized with a file lock to protect the shared Trivy cache
+                    Mount `/root/.cache/trivy` to persist the vulnerability database
+                    Simplest setup for single-container deployments
+                
+                
+                **Remote Trivy Server**
+                
+                    Deploy `aquasec/trivy:latest` as a separate server
+                    Point `vulnerabilityScan.scannerUrl` to `http://trivy-server:8080`
+                    Scans can run concurrently across UI workers
+                    Recommended for production and high scan volume
+                
             
 
             ## What Trivy Detects
@@ -75,8 +94,9 @@ description: Vulnerability Scanning for Docker Registry UI
             ## Troubleshooting
             ### Scanner Not Responding
             
-                Verify Trivy is installed in container
-                Check network connectivity to registry
+                For built-in mode: verify `trivy --version` runs inside the UI container
+                For remote mode: verify the Trivy server `/healthz` endpoint is reachable
+                Check network connectivity to registry and Trivy server
                 Verify image exists and is accessible
                 Check container logs for errors
             

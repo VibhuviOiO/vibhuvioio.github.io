@@ -87,11 +87,12 @@ docker run -d --name registry-ui --network registry-net -p 5000:5000 \
 
             ## Alternative: Docker Compose
             ```
-# Download multi-registry compose
-wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/docker-compose-multi-registry.yml
+# Download multi-registry compose and config
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/multi-registry/docker-compose.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/multi-registry/registries.config.json
 
 # Start all services
-docker-compose -f docker-compose-multi-registry.yml up -d
+docker compose -f docker-compose.yml up -d
 ```
 
             ## Access

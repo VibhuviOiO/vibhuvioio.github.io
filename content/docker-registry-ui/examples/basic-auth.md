@@ -99,6 +99,11 @@ cat  registries.config.json
         "type": "basic",
         "username": "admin",
         "password": "secret"
+      },
+      "vulnerabilityScan": {
+        "enabled": true,
+        "scanner": "trivy",
+        "scannerUrl": "builtin"
       }
     }
   ]
@@ -356,7 +361,7 @@ Basic auth registry setup works perfectly with docker run commands:
             
 
             ## Test with Authentication
-            Modify [docker-compose-multi-registry.yml](example-multi-registry.html) to add basic auth to registries and test authentication flow.
+            Modify the multi-registry [docker-compose.yml](example-multi-registry.html) to add basic auth to registries and test authentication flow.
 
             
             ## Next Steps

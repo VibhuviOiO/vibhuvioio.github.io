@@ -18,10 +18,13 @@ mkdir docker-registry-ui-test
 cd docker-registry-ui-test
 
 # Download multi-registry compose file
-wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/docker-compose-multi-registry.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/multi-registry/docker-compose.yml
+
+# Download multi-registry configuration
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/multi-registry/registries.config.json
 
 # Download test image population script
-wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/populate-test-images.sh
+wget https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/refs/heads/main/docker/multi-registry/populate-test-images.sh
 
 # Make script executable
 chmod +x populate-test-images.sh
@@ -29,11 +32,11 @@ chmod +x populate-test-images.sh
 
             ### Step 2: Start Multi-Registry Environment
             ```
-# Start two registries and the UI
-docker-compose -f docker-compose-multi-registry.yml up -d
+# Start two registries, the Trivy server, and the UI
+docker compose -f docker-compose.yml up -d
 
-# Wait for services to be ready (about 10 seconds)
-sleep 10
+# Wait for services to be ready (about 10-20 seconds)
+sleep 20
 ```
 
             ### Step 3: Populate with Test Images
@@ -144,8 +147,8 @@ http://localhost:5003
             ```
 1. Navigate to nginx repository
 2. Click "Scan" on nginx:latest
-3. Wait for scan to complete
-4. View vulnerability badges
+3. The scan is queued and runs asynchronously
+4. Wait for the UI to poll and display vulnerability badges
 5. Click badge to see CVE details
 6. Filter by severity (Critical, High)
 7. Click CVE ID to view in NVD
@@ -165,7 +168,7 @@ http://localhost:5003
 
             ```
 # Stop and remove all containers
-docker-compose -f docker-compose-multi-registry.yml down -v
+docker compose -f docker-compose.yml down -v
 
 # Remove downloaded images (optional)
 docker image prune -a
@@ -183,14 +186,14 @@ docker image prune -a
             ### UI Not Accessible
             
                 Check if containers are running: `docker ps`
-                Check logs: `docker-compose logs registry-ui`
+                Check logs: `docker compose logs registry-ui`
                 Verify port 5003 is not in use
             
 
             ### Registries Not Showing Images
             
                 Ensure populate script completed successfully
-                Check registry logs: `docker-compose logs registry-1`
+                Check registry logs: `docker compose logs registry-1`
                 Verify images were pushed: `curl http://localhost:5001/v2/_catalog`
             
 
@@ -206,7 +209,7 @@ docker push localhost:5001/myapp:v1.0.0
 ```
 
             ### Test with Authentication
-            Modify docker-compose-multi-registry.yml to add basic auth to registries and test authentication flow.
+            Modify the multi-registry `docker-compose.yml` to add basic auth to registries and test authentication flow.
 
             ## Automated Testing
             **Note:** This project currently does not have automated test coverage. Contributions for unit and integration tests are welcome!
