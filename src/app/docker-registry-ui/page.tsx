@@ -21,7 +21,7 @@ const config: ProductPageConfig = {
   name: 'Docker Registry UI',
   description: 'Modern, lightweight web interface for managing your Docker Registry. Browse images, scan vulnerabilities, and manage multiple registries.',
   heroImage: '/img/docker-registry-ui/docker-registry-ui.svg',
-  heroScreenshot: { src: '/img/docker-registry-ui/repositories.png', alt: 'Docker Registry UI - Repository browser' },
+  heroAnimation: 'docker-registry-ui',
   tryInBrowserUrl: 'https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/built-in-trivy/docker-compose.yml',
   docsUrl: '/docker-registry-ui/getting-started',
   githubUrl: 'https://github.com/VibhuviOiO/docker-registry-ui',
