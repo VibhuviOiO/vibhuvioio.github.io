@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Github, ArrowRight, ExternalLink, Play } from 'lucide-react';
+import DockerRegistryUIAnimation from './ui/DockerRegistryUIAnimation';
 
 export type ProductFeature = {
   icon: string;
@@ -32,6 +33,7 @@ export type ProductPageConfig = {
   heroIcon?: string;
   heroImage?: string;
   heroScreenshot?: { src: string; alt: string };
+  heroAnimation?: 'docker-registry-ui';
   tryInBrowserUrl?: string;
   docsUrl: string;
   githubUrl: string;
@@ -270,7 +272,11 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
               </div>
             </div>
 
-            {config.heroScreenshot && (
+            {config.heroAnimation === 'docker-registry-ui' ? (
+              <div className="relative">
+                <DockerRegistryUIAnimation />
+              </div>
+            ) : config.heroScreenshot ? (
               <div className="relative">
                 <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                   <Image
@@ -282,7 +288,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
                   />
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
