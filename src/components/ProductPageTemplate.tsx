@@ -438,9 +438,9 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
               Deploy in seconds
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-8 max-w-4xl mx-auto">
             {config.quickStart.map((block) => (
-              <div key={block.title} className="flex flex-col rounded-2xl overflow-hidden shadow-lg border border-gray-700/50 bg-gray-950">
+              <div key={block.title} className="rounded-2xl overflow-hidden shadow-lg border border-gray-700/50 bg-gray-950">
                 <div className="px-5 py-3 border-b border-gray-700/50 bg-gray-900 flex items-center gap-3">
                   <div className="flex items-center gap-1.5">
                     <span className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -449,7 +449,7 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
                   </div>
                   <h3 className="font-bold text-gray-300 text-sm">{block.title}</h3>
                 </div>
-                <div className="p-5 overflow-x-auto flex-1">
+                <div className="p-5 overflow-x-auto">
                   <pre className="text-sm font-mono leading-relaxed">
                     <code><HighlightedCode code={block.code} language={block.language} /></code>
                   </pre>
