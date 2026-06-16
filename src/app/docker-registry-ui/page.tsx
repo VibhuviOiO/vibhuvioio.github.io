@@ -28,6 +28,24 @@ const config: ProductPageConfig = {
 
   badges: ['Production Ready', 'Trivy Security Scanning', 'Multi-Registry Support', 'Self-Hosted'],
 
+  story: {
+    title: 'Why I created this',
+    intro: 'We run three registries — QA, Staging, and Production — with around 160 images in each environment. Each registry sits close to its local environment for fast pulls, but that also made cleanup and maintenance a real pain.',
+    problem: [
+      'No web UI to see what is in each registry',
+      'Hard to find old or unused tags across 500+ images',
+      'No easy way to scan images for CVEs',
+      'Manual cleanup was slow and risky',
+    ],
+    solution: [
+      'One UI for all three registries',
+      'Browse, search, and delete tags quickly',
+      'Built-in Trivy vulnerability scanning',
+      'Bulk cleanup with dry-run before deleting',
+    ],
+    note: 'Built as a weekend project over two weekends. Modern AI-powered coding made it possible to go from idea to shipped product fast.',
+  },
+
   featuresHeading: 'Everything you need to manage registries',
   features: [
     { icon: '📦', title: 'Repository Management', desc: 'Browse, search, and manage Docker images and tags with an intuitive interface' },
