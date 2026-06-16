@@ -56,6 +56,15 @@ export type ProductPageConfig = {
   // Screenshots
   screenshots?: ProductScreenshot[];
 
+  // Story / Why created
+  story?: {
+    title: string;
+    intro: string;
+    problem: string[];
+    solution: string[];
+    note?: string;
+  };
+
   // Quick Start
   quickStart: QuickStartBlock[];
   quickStartPort?: string;
@@ -292,6 +301,70 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
           </div>
         </div>
       </div>
+
+      {/* Story / Why created */}
+      {config.story && (
+        <section className="py-16 lg:py-20 bg-white">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-10">
+                <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-[#2702a6]/10 text-[#2702a6] border border-[#2702a6]/20">
+                  Behind the project
+                </span>
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+                  {config.story.title}
+                </h2>
+              </div>
+
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 p-8 lg:p-10 shadow-sm">
+                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                  {config.story.intro}
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center text-sm">⚠</span>
+                      The problem
+                    </h3>
+                    <ul className="space-y-3">
+                      {config.story.problem.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-gray-600">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-lg bg-green-100 text-green-600 flex items-center justify-center text-sm">✓</span>
+                      What this solves
+                    </h3>
+                    <ul className="space-y-3">
+                      {config.story.solution.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-gray-600">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-2 shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {config.story.note && (
+                  <div className="mt-8 pt-6 border-t border-gray-200">
+                    <p className="text-sm text-gray-500 italic">
+                      {config.story.note}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Trust badges */}
       <section className="py-6 bg-white border-b border-gray-100">
