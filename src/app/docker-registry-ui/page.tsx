@@ -22,7 +22,7 @@ const config: ProductPageConfig = {
   description: 'Modern, lightweight web interface for managing your Docker Registry. Browse images, scan vulnerabilities, and manage multiple registries.',
   heroImage: '/img/docker-registry-ui/docker-registry-ui.svg',
   heroScreenshot: { src: '/img/docker-registry-ui/repositories.png', alt: 'Docker Registry UI - Repository browser' },
-  tryInBrowserUrl: 'https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/pwd/docker-compose.yml',
+  tryInBrowserUrl: 'https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/VibhuviOiO/docker-registry-ui/main/docker/built-in-trivy/docker-compose.yml',
   docsUrl: '/docker-registry-ui/getting-started',
   githubUrl: 'https://github.com/VibhuviOiO/docker-registry-ui',
 
@@ -58,29 +58,86 @@ const config: ProductPageConfig = {
 
   quickStart: [
     {
-      title: 'Docker Run',
+      title: 'Docker Run (3 commands)',
       language: 'bash' as const,
-      code: `docker run -d \\
-  -p 5000:5000 \\
-  -e CONFIG_FILE=/app/data/registries.config.json \\
-  -e READ_ONLY=false \\
-  -v ./data:/app/data \\
-  ghcr.io/vibhuvioio/docker-registry-ui:latest`,
+      code: `# 1. Create a network so containers can talk to each other
+docker network create registry-net
+
+# 2. Run a Docker registry
+docker run -d --name test-registry --network registry-net -p 5001:5000 \\
+  -e REGISTRY_STORAGE_DELETE_ENABLED=true \\
+  -v registry-data:/var/lib/registry \\
+  registry:2
+
+# 3. (Optional) Run a remote Trivy scanner for vulnerability scans
+docker run -d --name trivy-server --network registry-net \\
+  -v trivy-server-data:/root/.cache/trivy \\
+  aquasec/trivy:latest server --listen 0.0.0.0:8080
+
+# 4. Run Docker Registry UI
+docker run -d --name registry-ui --network registry-net -p 5000:5000 \\
+  -e LOG_LEVEL=INFO \\
+  -e 'REGISTRIES=[{"name":"Local Registry","api":"http://test-registry:5000","vulnerabilityScan":{"enabled":true,"scanner":"trivy","scannerUrl":"http://trivy-server:8080"}}]' \\
+  -v ui-data:/app/data \\
+  vibhuvioio/docker-registry-ui:v2.1.0`,
     },
     {
       title: 'Docker Compose',
       language: 'yaml' as const,
-      code: `version: '3.8'
-services:
+      code: `services:
+  registry:
+    image: registry:2
+    ports:
+      - "5001:5000"
+    environment:
+      REGISTRY_STORAGE_DELETE_ENABLED: "true"
+    volumes:
+      - registry-data:/var/lib/registry
+    networks:
+      - registry-net
+
+  trivy-server:
+    image: aquasec/trivy:latest
+    command: ["server", "--listen", "0.0.0.0:8080"]
+    volumes:
+      - trivy-server-data:/root/.cache/trivy
+    networks:
+      - registry-net
+
   registry-ui:
-    image: ghcr.io/vibhuvioio/docker-registry-ui:latest
+    image: vibhuvioio/docker-registry-ui:v2.1.0
     ports:
       - "5000:5000"
     environment:
-      - CONFIG_FILE=/app/data/registries.config.json
-      - READ_ONLY=false
+      LOG_LEVEL: INFO
+      REGISTRIES: |-
+        [
+          {
+            "name": "Local Registry",
+            "api": "http://registry:5000",
+            "vulnerabilityScan": {
+              "enabled": true,
+              "scanner": "trivy",
+              "scannerUrl": "http://trivy-server:8080"
+            }
+          }
+        ]
     volumes:
-      - ./data:/app/data`,
+      - ui-data:/app/data
+    depends_on:
+      - registry
+      - trivy-server
+    networks:
+      - registry-net
+
+volumes:
+  registry-data:
+  trivy-server-data:
+  ui-data:
+
+networks:
+  registry-net:
+    driver: bridge`,
     },
   ],
 
