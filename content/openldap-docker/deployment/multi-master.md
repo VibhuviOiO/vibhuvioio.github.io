@@ -25,7 +25,7 @@ Create `docker-compose.yml`:
 ```yaml
 services:
   openldap-node1:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     container_name: openldap-node1
     restart: unless-stopped
     ports:
@@ -45,7 +45,7 @@ services:
       - ldap-cluster
 
   openldap-node2:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     container_name: openldap-node2
     restart: unless-stopped
     ports:
@@ -65,7 +65,7 @@ services:
       - ldap-cluster
 
   openldap-node3:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     container_name: openldap-node3
     restart: unless-stopped
     ports:

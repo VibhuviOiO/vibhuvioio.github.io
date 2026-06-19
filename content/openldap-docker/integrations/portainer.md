@@ -145,6 +145,6 @@ If group membership is correct, the user receives administrator privileges.
 
 | Service | Image | Port |
 |---------|-------|------|
-| openldap | ghcr.io/vibhuvioio/openldap-docker/openldap:main | 389 |
-| ldap-manager | ghcr.io/vibhuvioio/ldap-manager:latest | 8000 |
+| openldap | vibhuvioio/openldap-docker/openldap:main | 389 |
+| ldap-manager | vibhuvioio/ldap-manager:latest | 8000 |
 | portainer | portainer/portainer-ce:2.20.3 | 9000, 9443 |

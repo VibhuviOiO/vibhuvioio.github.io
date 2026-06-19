@@ -17,7 +17,7 @@ docker run -d \
   -e LDAP_ADMIN_PASSWORD=changeme \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 This starts a single OpenLDAP server with:
@@ -44,7 +44,7 @@ docker run -d \
   -e LOG_LEVEL=256 \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 ### Flag Reference
@@ -73,7 +73,7 @@ docker run -d \
   -v /path/to/certs:/etc/openldap/certs:ro \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 ## With Custom Schemas
@@ -90,7 +90,7 @@ docker run -d \
   -v /path/to/schemas:/docker-entrypoint-initdb.d/schemas:ro \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 ## With Initialization Scripts
@@ -106,7 +106,7 @@ docker run -d \
   -v /path/to/init-scripts:/docker-entrypoint-initdb.d:ro \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 > **Note:** Init scripts run **only on first startup** when the data volume is empty. To re-run them, remove the volumes first.
@@ -128,7 +128,7 @@ docker run -d \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
   -v ldap-logs:/var/log/openldap \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 ## Health Check
@@ -148,7 +148,7 @@ docker run -d \
   --health-start-period=30s \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/openldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 Check health status:
@@ -165,7 +165,7 @@ docker inspect --format='{{.State.Health.Status}}' openldap
 docker run -d --name openldap -p 389:389 \
   -e LDAP_DOMAIN=company.com \
   -e LDAP_ADMIN_PASSWORD=changeme \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 ### Host Network
@@ -176,7 +176,7 @@ No port mapping needed — binds directly to host ports:
 docker run -d --name openldap --network host \
   -e LDAP_DOMAIN=company.com \
   -e LDAP_ADMIN_PASSWORD=changeme \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 ### Custom Network
@@ -188,7 +188,7 @@ docker run -d --name openldap --network ldap-network \
   -p 389:389 \
   -e LDAP_DOMAIN=company.com \
   -e LDAP_ADMIN_PASSWORD=changeme \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 Other containers on the same network can reach LDAP at `openldap:389`.

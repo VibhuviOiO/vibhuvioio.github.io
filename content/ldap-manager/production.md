@@ -82,7 +82,7 @@ version: '3.8'
 
 services:
   ldap-manager:
-    image: ghcr.io/vibhuvioio/ldap-manager:latest
+    image: vibhuvioio/ldap-manager:latest
     restart: unless-stopped
 
     env_file: .env
@@ -376,7 +376,7 @@ curl http://localhost:8000/health | jq '.checks.ldap'
 
 ```
 # Pull latest image
-docker pull ghcr.io/vibhuvioio/ldap-manager:latest
+docker pull vibhuvioio/ldap-manager:latest
 
 # Restart with new image
 docker-compose -f docker-compose.prod.yml up -d
@@ -392,7 +392,7 @@ curl http://localhost:8000/health
 ```
 # Use specific version
 docker-compose -f docker-compose.prod.yml down
-docker pull ghcr.io/vibhuvioio/ldap-manager:v1.0.0
+docker pull vibhuvioio/ldap-manager:v1.0.0
 docker-compose -f docker-compose.prod.yml up -d
 ```
 

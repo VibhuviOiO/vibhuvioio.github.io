@@ -80,7 +80,7 @@ docker run -d \
   -p 5173:5173 \
   -p 8000:8000 \
   -v $(pwd)/config.yml:/app/config.yml:ro \
-  ghcr.io/vibhuvioio/ldap-manager:latest
+  vibhuvioio/ldap-manager:latest
 ```
 
 

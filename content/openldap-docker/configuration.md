@@ -102,7 +102,7 @@ environment:
 version: '3.8'
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     environment:
       - LDAP_DOMAIN=example.com
       - LDAP_ADMIN_PASSWORD=changeme
@@ -120,7 +120,7 @@ services:
 version: '3.8'
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     environment:
       - LDAP_DOMAIN=mycompany.com
       - LDAP_ADMIN_PASSWORD=securepassword
@@ -145,7 +145,7 @@ services:
 version: '3.8'
 services:
   openldap-node1:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     hostname: openldap-node1
     environment:
       - LDAP_DOMAIN=example.com
@@ -157,7 +157,7 @@ services:
       - "389:389"
 
   openldap-node2:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     hostname: openldap-node2
     environment:
       - LDAP_DOMAIN=example.com
@@ -169,7 +169,7 @@ services:
       - "390:389"
 
   openldap-node3:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     hostname: openldap-node3
     environment:
       - LDAP_DOMAIN=example.com
@@ -224,7 +224,7 @@ Add Docker health checks to monitor container status:
 ```yaml
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     environment:
       - LDAP_DOMAIN=example.com
       - LDAP_ADMIN_PASSWORD=changeme

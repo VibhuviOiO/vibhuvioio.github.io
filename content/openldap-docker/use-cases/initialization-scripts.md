@@ -59,7 +59,7 @@ Mount and run:
 ```yaml
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     environment:
       - LDAP_DOMAIN=example.com
       - LDAP_ADMIN_PASSWORD=changeme

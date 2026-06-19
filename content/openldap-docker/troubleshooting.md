@@ -68,7 +68,7 @@ docker logs openldap
 # Debug mode: override entrypoint
 docker run --rm -it \
   -v ldap-data:/var/lib/ldap \
-  ghcr.io/vibhuvioio/openldap:latest \
+  vibhuvioio/openldap:latest \
   bash
 
 # Then manually run startup script to see errors
@@ -140,7 +140,7 @@ ldap_bind: Invalid credentials (49)
    
    # Test with known password
    docker run --rm -e LDAP_ADMIN_PASSWORD=test123 \
-     ghcr.io/vibhuvioio/openldap:latest
+     vibhuvioio/openldap:latest
    ```
 
 3. **Reset admin password:**

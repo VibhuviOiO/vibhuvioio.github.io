@@ -90,7 +90,7 @@ spec:
     spec:
       containers:
         - name: openldap
-          image: ghcr.io/vibhuvioio/openldap:latest
+          image: vibhuvioio/openldap:latest
           ports:
             - containerPort: 389
               name: ldap
@@ -255,7 +255,7 @@ spec:
     spec:
       containers:
         - name: openldap
-          image: ghcr.io/vibhuvioio/openldap:latest
+          image: vibhuvioio/openldap:latest
           ports:
             - containerPort: 389
           env:

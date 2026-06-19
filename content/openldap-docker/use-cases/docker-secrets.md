@@ -16,7 +16,7 @@ docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker
 
 ## Set image
 ```bash
-export LDAP_IMAGE=ghcr.io/vibhuvioio/openldap:latest
+export LDAP_IMAGE=vibhuvioio/openldap:latest
 ```
 ## Create Secret Files
 

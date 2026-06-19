@@ -26,7 +26,7 @@ const config: ProductPageConfig = {
   docsUrl: '/ldap-manager/getting-started',
   githubUrl: 'https://github.com/VibhuviOiO/ldap-manager',
 
-  badges: ['Production Ready', 'Enterprise Security', 'High Availability', '104 Tests'],
+  badges: ['Production Ready', 'Enterprise Security', 'High Availability', 'Automated Tests'],
 
   featuresHeading: 'Everything you need to manage LDAP',
   features: [
@@ -63,7 +63,7 @@ const config: ProductPageConfig = {
       code: `docker run -d \\
   -p 5000:5000 \\
   -v $(pwd)/config.yml:/app/config.yml \\
-  ghcr.io/vibhuvioio/ldap-manager:latest`,
+  vibhuvioio/ldap-manager:latest`,
     },
     {
       title: 'Docker Compose',
@@ -71,7 +71,7 @@ const config: ProductPageConfig = {
       code: `version: '3.8'
 services:
   ldap-manager:
-    image: ghcr.io/vibhuvioio/ldap-manager:latest
+    image: vibhuvioio/ldap-manager:latest
     ports:
       - "5000:5000"
     volumes:

@@ -139,7 +139,7 @@ You should see `redmineuser` listed, created automatically on first LDAP login.
 
 | Service | Image | Port |
 |---------|-------|------|
-| openldap | ghcr.io/vibhuvioio/openldap-docker/openldap:main | 389 |
-| ldap-manager | ghcr.io/vibhuvioio/ldap-manager:latest | 8000 |
+| openldap | vibhuvioio/openldap-docker/openldap:main | 389 |
+| ldap-manager | vibhuvioio/ldap-manager:latest | 8000 |
 | redmine-db | mariadb:11 | — |
 | redmine | redmine:6 | 3000 |

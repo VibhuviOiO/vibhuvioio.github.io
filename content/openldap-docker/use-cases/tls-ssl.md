@@ -17,7 +17,7 @@ certs/ldap.key: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/mai
 ```
 ## Set image
 ```bash
-export LDAP_IMAGE=ghcr.io/vibhuvioio/openldap:latest
+export LDAP_IMAGE=vibhuvioio/openldap:latest
 ```
 ## Start
 

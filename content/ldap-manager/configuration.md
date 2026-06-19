@@ -445,7 +445,7 @@ Configure LDAP Manager behavior using environment variables in docker-compose.ym
 ```yml
 services:
   ldap-manager:
-    image: ghcr.io/vibhuvioio/ldap-manager:latest
+    image: vibhuvioio/ldap-manager:latest
     ports:
       - "5173:5173"
       - "8000:8000"
