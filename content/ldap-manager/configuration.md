@@ -404,7 +404,7 @@ Serve LDAP Manager under a custom base path (e.g., `/ldap-manager/`) for integra
 ### Production Deployment
 ```
 # Build and run with context path
-CONTEXT_PATH=/ldap-manager docker-compose -f docker-compose.prod.yml up -d
+CONTEXT_PATH=/ldap-manager docker compose -f docker-compose.prod.yml up -d
 
 # Access at
 http://localhost:8000/ldap-manager/
@@ -414,7 +414,7 @@ http://localhost:8000/ldap-manager/
 ### Development Mode
 ```
 # Run with context path
-CONTEXT_PATH=/ldap-manager docker-compose up
+CONTEXT_PATH=/ldap-manager docker compose up
 
 # Access at
 http://localhost:5173/ldap-manager/
