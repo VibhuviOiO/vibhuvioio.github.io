@@ -119,8 +119,8 @@ The full stack includes:
 
 | Service | Image | Port |
 |---------|-------|------|
-| openldap | ghcr.io/vibhuvioio/openldap-docker/openldap:main | 389 |
-| ldap-manager | ghcr.io/vibhuvioio/ldap-manager:latest | 8000 |
+| openldap | vibhuvioio/openldap-docker/openldap:main | 389 |
+| ldap-manager | vibhuvioio/ldap-manager:latest | 8000 |
 | guacd | guacamole/guacd:1.5.5 | — |
 | guacamole | guacamole/guacamole:1.5.5 | 8080 |
 

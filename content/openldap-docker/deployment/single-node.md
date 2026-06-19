@@ -23,7 +23,7 @@ Create `docker-compose.yml`:
 ```yaml
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     container_name: openldap
     restart: unless-stopped
     ports:
@@ -159,7 +159,7 @@ Add TLS for encrypted connections:
 ```yaml
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     container_name: openldap
     restart: unless-stopped
     ports:

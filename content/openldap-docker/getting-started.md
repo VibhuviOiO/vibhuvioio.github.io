@@ -23,7 +23,7 @@ docker run -d \
   -p 389:389 \
   -v ldap-data:/var/lib/ldap \
   -v ldap-config:/etc/ldap/slapd.d \
-  ghcr.io/vibhuvioio/openldap:latest
+  vibhuvioio/openldap:latest
 ```
 
 - `-e LDAP_DOMAIN=example.com` — automatically creates base DN `dc=example,dc=com`
@@ -127,7 +127,7 @@ clusters:
 docker run -d --name ldap-manager \
   -p 5000:8000 \
   -v $(pwd)/config.yml:/app/config.yml \
-  ghcr.io/vibhuvioio/ldap-manager:latest
+  vibhuvioio/ldap-manager:latest
 ```
 
 Access the UI at http://localhost:5000
@@ -156,7 +156,7 @@ docker volume rm ldap-data ldap-config
 
 If port 389 is taken, use a different host port:
 ```bash
-docker run -d ... -p 1389:389 ghcr.io/vibhuvioio/openldap:latest
+docker run -d ... -p 1389:389 vibhuvioio/openldap:latest
 
 # Then connect to localhost:1389
 ldapsearch -x -H ldap://localhost:1389 ...

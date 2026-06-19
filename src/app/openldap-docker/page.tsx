@@ -58,7 +58,7 @@ const config: ProductPageConfig = {
   -p 389:389 \\
   -v ldap-data:/var/lib/ldap \\
   -v ldap-config:/etc/openldap/slapd.d \\
-  ghcr.io/vibhuvioio/openldap:latest`,
+  vibhuvioio/openldap:latest`,
     },
     {
       title: 'Docker Compose',
@@ -66,7 +66,7 @@ const config: ProductPageConfig = {
       code: `version: '3.8'
 services:
   openldap:
-    image: ghcr.io/vibhuvioio/openldap:latest
+    image: vibhuvioio/openldap:latest
     ports:
       - "389:389"
       - "636:636"

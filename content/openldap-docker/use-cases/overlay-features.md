@@ -16,7 +16,7 @@ init/test-overlays.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-doc
 ```
 ## Set image
 ```bash
-export LDAP_IMAGE=ghcr.io/vibhuvioio/openldap:latest
+export LDAP_IMAGE=vibhuvioio/openldap:latest
 ```
 ## Start
 
