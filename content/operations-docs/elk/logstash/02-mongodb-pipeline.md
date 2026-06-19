@@ -92,7 +92,7 @@ rm MongoDbJdbcDriver.zip
 # Download pipeline config
 wget https://raw.githubusercontent.com/JinnaBalu/infinite-containers/main/mongo-elasticsearch-logstash/elk/logstash/pipeline/logstash.conf -O logstash/pipeline/logstash.conf
 
-# Download docker-compose for logstash
+# Download docker compose for logstash
 wget https://raw.githubusercontent.com/JinnaBalu/infinite-containers/main/mongo-elasticsearch-logstash/elk/logstash/docker-compose.yml -O logstash/docker-compose.yml
 ```
 

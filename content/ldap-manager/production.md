@@ -133,33 +133,26 @@ volumes:
 
 
 ```
-docker-compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml up -d
 ```
 
 
 ### Step 4: Verify Health
 
 
-```
-curl http://localhost:8000/health | jq
-```
-
-
-Expected response:
+The container serves the React UI and the FastAPI backend on the same port. Verify the container is responding:
 
 
 ```
-{
-  "status": "healthy",
-  "timestamp": "2024-01-25T10:30:00Z",
-  "version": "1.0.0",
-  "checks": {
-    "config": {"status": "ok", "clusters_count": 4},
-    "connection_pool": {"status": "ok", "pool_size": 2},
-    "ldap": {"status": "ok", "cluster": "production"}
-  }
-}
+# Should return HTTP 200
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health
+
+# Verify the API schema is available
+curl -s http://localhost:8000/openapi.json | head
 ```
+
+
+Then open the UI at `http://localhost:8000`, select your cluster, and enter the bind DN password to confirm LDAP connectivity.
 
 
 ## Load Balancing Strategy
@@ -275,11 +268,11 @@ docker logs ldap-manager | grep '"level":"ERROR"'
 
 
 ```
-# Check health endpoint
-curl http://localhost:8000/health
+# Check that the container responds with HTTP 200
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8000/health
 
-# Monitor with watch
-watch -n 5 'curl -s http://localhost:8000/health | jq .status'
+# Follow logs
+docker logs -f ldap-manager
 ```
 
 
@@ -288,17 +281,13 @@ watch -n 5 'curl -s http://localhost:8000/health | jq .status'
 
 ### Connection Pooling
 
-- **Before:** ~500ms per request (new connection)
-- **After:** ~10ms per request (pooled connection)
-- **TTL:** 5 minutes
-- **Cleanup:** Automatic stale connection removal
+Connections to LDAP servers are reused across requests instead of being opened and closed for every call. The pool has a 5-minute TTL and stale connections are cleaned up automatically.
 
 
 ### Server-Side Pagination
 
 - **Protocol:** RFC 2696 Simple Paged Results
-- **Performance:** 10-100x improvement for large directories
-- **Memory:** Constant memory usage regardless of directory size
+- **Benefit:** Reduces memory usage and improves response times for large directories by fetching results in pages from the LDAP server
 
 
 ### Request Timeouts
@@ -360,11 +349,11 @@ curl -X DELETE http://localhost:8000/api/password/cache/your-cluster
 
 
 ```
-# Detailed health status
-curl http://localhost:8000/health | jq
+# Check container HTTP response
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8000/health
 
-# Check specific component
-curl http://localhost:8000/health | jq '.checks.ldap'
+# Check logs for errors
+docker logs ldap-manager | grep -i error
 ```
 
 
@@ -379,10 +368,10 @@ curl http://localhost:8000/health | jq '.checks.ldap'
 docker pull vibhuvioio/ldap-manager:latest
 
 # Restart with new image
-docker-compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml up -d
 
-# Verify health
-curl http://localhost:8000/health
+# Verify the container responds with HTTP 200
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8000/health
 ```
 
 
@@ -391,9 +380,9 @@ curl http://localhost:8000/health
 
 ```
 # Use specific version
-docker-compose -f docker-compose.prod.yml down
+docker compose -f docker-compose.prod.yml down
 docker pull vibhuvioio/ldap-manager:v1.0.0
-docker-compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml up -d
 ```
 
 
