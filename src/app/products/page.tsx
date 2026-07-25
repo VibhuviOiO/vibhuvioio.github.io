@@ -80,7 +80,6 @@ const products: Product[] = [
     icon: '⏱️',
     image: '/img/uptime-o/overview-02-dashboard.png',
     link: '/products/uptime-o',
-    github: 'https://github.com/VibhuviOiO/UptimeO',
     tags: ['Uptime Monitoring', 'Status Pages', 'Distributed Agents'],
     status: 'live',
   },

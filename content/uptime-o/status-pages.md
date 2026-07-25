@@ -10,7 +10,7 @@ Status pages turn your monitors into a customer-ready health dashboard. UptimeO 
 
 ## Create a Status Page
 
-Go to **Internet Insights → Status Pages** and click **Create**.
+Go to **Status Pages** in the sidebar and click **New Status Page**.
 
 ![Create status page](/img/uptime-o/status-pages-01-create.png)
 

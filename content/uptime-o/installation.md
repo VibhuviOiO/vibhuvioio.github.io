@@ -1,99 +1,52 @@
 ---
 title: Installation
-description: Step-by-step local installation of UptimeO from source.
+description: Run UptimeO with Docker — PostgreSQL and the app in one command, no build required.
 order: 2
 ---
 
 # Installation
 
-This guide walks through running UptimeO from source on your local machine. You will start PostgreSQL with Docker Compose, run the Spring Boot backend, run the React frontend, and log in to the console.
+UptimeO is distributed as ready-to-run Docker images — no source checkout or build toolchain needed:
 
-## 1. Clone the Repository
+- `vibhuvioio/uptimeo` — the application (backend + console + status pages)
+- `vibhuvioio/uptimeo-agent` — the monitoring agent
 
-```bash
-git clone https://github.com/VibhuviOiO/UptimeO.git
-cd UptimeO
-```
+## Deploy in Seconds
 
-The two main code directories are:
-
-- `uptime-o/` — Spring Boot backend + React frontend
-- `uptime-o-api-agent/` — Go monitoring agent
-
-## 2. Start PostgreSQL
-
-Create the Docker network that the Compose files expect, then start Postgres:
+Download the all-in-one Compose file (PostgreSQL + app) and start it:
 
 ```bash
-docker network create uptimeo
-cd docker
-docker compose -f postgres.yml up -d
+curl -O https://vibhuvioio.com/files/uptimeo/docker-compose.yml
+docker compose up -d
 ```
 
-Postgres is exposed on `localhost:5432` with:
+Then open `http://localhost:8080` and sign in with `admin` / `admin` (change the password immediately under **Account → Password**).
 
-- **Database:** `uptimeo`
-- **User:** `uptimeo`
-- **Password:** `uptimeo`
-
-To wipe data and start fresh:
+The file ships with example branding (title, logo, favicon, footer). Set your own via environment variables or a `.env` file next to the Compose file — every value has a `${VARIABLE:-default}` override, e.g. `WEBSITE_TITLE`, `WEBSITE_LOGOPATH`, `WEBSITE_FAVICONPATH`, `WEBSITE_FOOTERTITLE`. Generate a real JWT secret before going live:
 
 ```bash
-docker compose -f postgres.yml down -v
-rm -rf tmp/pgdata
-docker compose -f postgres.yml up -d
+openssl rand -base64 64 | tr -d '\n'   # set as JWT_BASE64_SECRET
 ```
 
-## 3. Run the Backend
+To add a monitoring agent later, follow the commented `agent` service at the bottom of the file: create an agent and an API key in the UI, set `UPTIMEO_AGENT_ID` and `UPTIMEO_API_KEY`, uncomment the service, and re-run `docker compose up -d`.
 
-Open a terminal in the `uptime-o/` directory and start the backend without the webapp profile:
-
-```bash
-cd uptime-o
-./mvnw -P-webapp
-```
-
-The `-P-webapp` flag disables the frontend build profile so Maven only compiles and runs the Spring Boot application. The backend starts on `http://localhost:8080` and runs Liquibase migrations automatically.
-
-## 4. Run the Frontend
-
-Open a second terminal in the `uptime-o/` directory and start the webpack dev server:
-
-```bash
-cd uptime-o
-npm start
-```
-
-The dev server starts on `http://localhost:9000` and proxies API requests to `http://localhost:8080`. Hot Module Replacement (HMR) is enabled by default.
-
-## 5. Log In and Verify
-
-Open `http://localhost:9000` in your browser and sign in:
-
-- **Username:** `admin`
-- **Password:** `admin`
-
-You should see the UptimeO dashboard. Verify the backend health endpoint:
+## Verify
 
 ```bash
 curl http://localhost:8080/management/health
 ```
 
-## Useful Commands
+You should see `{"status":"UP"}`. The database schema is created and migrated automatically on first start.
+
+## Stop and Reset
 
 ```bash
-# Watch backend logs
-cd uptime-o && ./mvnw -P-webapp
-
-# Watch frontend logs
-cd uptime-o && npm start
-
-# Stop Postgres
-cd docker && docker compose -f postgres.yml down
+docker compose down        # stop, keep data
+docker compose down -v     # stop and delete all data
 ```
 
 ## Next Steps
 
-- [Development workflow](/products/uptime-o/docs/development)
 - [Connect your first agent](/products/uptime-o/docs/first-agent)
 - [Create HTTP monitors](/products/uptime-o/docs/http-monitors)
+- [Production deployment options](/products/uptime-o/docs/deployment)

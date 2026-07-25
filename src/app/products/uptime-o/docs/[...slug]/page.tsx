@@ -33,15 +33,7 @@ const sidebarGroups = [
     items: [
       { id: 'deployment', title: 'Deployment', slug: 'deployment' },
       { id: 'agent-installation', title: 'Agent Installation', slug: 'agent-installation' },
-      { id: 'prometheus-integration', title: 'Prometheus Integration', slug: 'prometheus-integration' },
       { id: 'troubleshooting', title: 'Troubleshooting', slug: 'troubleshooting' },
-    ],
-  },
-  {
-    title: 'Development',
-    items: [
-      { id: 'development', title: 'Development Guide', slug: 'development' },
-      { id: 'testing', title: 'Testing Guide', slug: 'testing' },
     ],
   },
   {
@@ -103,21 +95,9 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Agent Installation - UptimeO',
     description: 'Install and run UptimeO monitoring agents in Docker or standalone.',
   },
-  'prometheus-integration': {
-    title: 'Prometheus Integration - UptimeO',
-    description: 'Ingest Prometheus and Blackbox exporter metrics into UptimeO.',
-  },
   'troubleshooting': {
     title: 'Troubleshooting - UptimeO',
     description: 'Common issues and fixes for UptimeO deployments.',
-  },
-  'development': {
-    title: 'Development Guide - UptimeO',
-    description: 'Development workflow, scripts, and branding for UptimeO.',
-  },
-  'testing': {
-    title: 'Testing Guide - UptimeO',
-    description: 'Run backend, frontend, and end-to-end tests for UptimeO.',
   },
   'authentication': {
     title: 'Authentication - UptimeO API',
@@ -192,10 +172,7 @@ export function generateStaticParams() {
     { slug: ['audit-retention'] },
     { slug: ['deployment'] },
     { slug: ['agent-installation'] },
-    { slug: ['prometheus-integration'] },
     { slug: ['troubleshooting'] },
-    { slug: ['development'] },
-    { slug: ['testing'] },
     { slug: ['authentication'] },
   ];
 }

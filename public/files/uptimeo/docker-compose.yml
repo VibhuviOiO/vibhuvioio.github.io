@@ -1,0 +1,94 @@
+# UptimeO — all-in-one production deployment.
+#
+# Deploy in seconds:
+#   docker compose -f docker-compose.yml up -d
+#   # open http://localhost:8080 and sign in with admin / admin
+#   # (change the password immediately: Account → Password)
+#
+# Everything is overridable via environment variables or a .env file next to
+# this file. The defaults below brand the app as "Vibhuvi OiO" purely as an
+# EXAMPLE — replace them with your own company name, logo, and links.
+
+name: uptimeo
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: uptimeo-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-uptimeo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-uptimeo-change-me}
+      POSTGRES_DB: ${POSTGRES_DB:-uptimeo}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-uptimeo} -d ${POSTGRES_DB:-uptimeo}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - uptimeo
+
+  app:
+    image: ${UPTIMEO_IMAGE:-docker.io/vibhuvioio/uptimeo}:${UPTIMEO_IMAGE_TAG:-latest}
+    container_name: uptimeo-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod,api-docs
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-uptimeo}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-uptimeo}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-uptimeo-change-me}
+      SPRING_LIQUIBASE_ENABLED: "true"
+      # Generate a real secret: openssl rand -base64 64 | tr -d '\n'
+      JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET: ${JWT_BASE64_SECRET:-g6AO102FG/M38YeTbegbFUxgv13KOJyN1QdhEY8zg4WGVNXmcNZ9sMEa0oam7A+ekbqQTl4Rll/19PjSmih/SA==}
+      # --- Branding (EXAMPLE values — replace with your own) ---
+      WEBSITE_TITLE: ${WEBSITE_TITLE:-Vibhuvi OiO}
+      WEBSITE_DESCRIPTION: ${WEBSITE_DESCRIPTION:-Production-ready open source infrastructure tools for Docker, Kubernetes, LDAP, and monitoring. We make your infrastructure boring, operations invisible, and monitoring effortless.}
+      WEBSITE_KEYWORDS: ${WEBSITE_KEYWORDS:-uptime,monitoring,observability,status page,synthetic monitoring}
+      WEBSITE_AUTHOR: ${WEBSITE_AUTHOR:-VibhuviOiO}
+      WEBSITE_FAVICONPATH: ${WEBSITE_FAVICONPATH:-https://vibhuvioio.com/favicon-32x32.png}
+      WEBSITE_LOGOPATH: ${WEBSITE_LOGOPATH:-https://vibhuvioio.com/img/logo.svg}
+      WEBSITE_LOGOWIDTH: ${WEBSITE_LOGOWIDTH:-50}
+      WEBSITE_LOGOHEIGHT: ${WEBSITE_LOGOHEIGHT:-30}
+      WEBSITE_FOOTERTITLE: ${WEBSITE_FOOTERTITLE:-Powered by Vibhuvi OiO}
+      JAVA_OPTS: ${JAVA_OPTS:--Xms512m -Xmx1024m -XX:+UseG1GC -XX:MaxGCPauseMillis=200}
+      LOGGING_LEVEL_ROOT: ${LOGGING_LEVEL_ROOT:-INFO}
+    ports:
+      - "${UPTIMEO_APP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/management/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    networks:
+      - uptimeo
+
+  # --- Monitoring agent (optional) -----------------------------------------
+  # 1. Sign in to the app, create an Agent (Agents → New Agent).
+  # 2. Create an API key (Account → API Keys).
+  # 3. Uncomment, set AGENT_ID + API_KEY, and re-run `docker compose up -d`.
+  # agent:
+  #   image: docker.io/vibhuvioio/uptimeo-agent:latest
+  #   container_name: uptimeo-agent
+  #   restart: unless-stopped
+  #   environment:
+  #     API_BASE_URL: http://app:8080
+  #     API_KEY: ${UPTIMEO_API_KEY}
+  #     AGENT_ID: ${UPTIMEO_AGENT_ID}
+  #     HEALTH_PORT: "9090"
+  #   ports:
+  #     - "9090:9090"
+  #   networks:
+  #     - uptimeo
+
+networks:
+  uptimeo:
+    driver: bridge
+
+volumes:
+  postgres-data:

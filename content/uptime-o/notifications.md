@@ -18,6 +18,8 @@ When an alert condition is met, UptimeO sends a message through the selected not
 
 ## Create a notifier
 
+![Notifiers](/img/uptime-o/notifications-01-notifiers.png)
+
 1. Go to **Admin → Notifiers**.
 2. Click **New Notifier**.
 3. Enter a name (e.g., "Slack #alerts").

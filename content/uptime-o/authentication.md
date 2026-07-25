@@ -21,7 +21,7 @@ The UptimeO web console uses standard user accounts. On a fresh install, sign in
 
 Agents and external tools authenticate with API keys.
 
-Create a key under **Management → API Keys**.
+Create a key under **Admin → API Keys**.
 
 ![API keys page](/img/uptime-o/account-01-api-keys.png)
 

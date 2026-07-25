@@ -3,7 +3,7 @@ import ProductPageTemplate, { type ProductPageConfig } from '@/components/Produc
 
 export const metadata: Metadata = {
   title: 'UptimeO - Self-Hosted Uptime Observability Platform',
-  description: 'UptimeO is a self-hosted uptime observability platform with distributed Go agents, public and private status pages, multi-region monitoring, response-time analytics, and Prometheus integration.',
+  description: 'UptimeO is a self-hosted uptime observability platform with distributed Go agents, public and private status pages, multi-region monitoring, and response-time analytics.',
   keywords: ['uptime monitoring', 'status page', 'synthetic monitoring', 'distributed agents', 'observability', 'self-hosted'],
   openGraph: {
     title: 'UptimeO - Self-Hosted Uptime Observability Platform',
@@ -22,9 +22,8 @@ const config: ProductPageConfig = {
   heroIcon: '⏱️',
   heroScreenshot: { src: '/img/uptime-o/overview-02-dashboard.png', alt: 'UptimeO dashboard overview' },
   docsUrl: '/products/uptime-o/docs/getting-started',
-  githubUrl: 'https://github.com/VibhuviOiO/UptimeO',
 
-  badges: ['Self-Hosted', 'Distributed Agents', 'Status Pages', 'Prometheus Ready'],
+  badges: ['Self-Hosted', 'Distributed Agents', 'Status Pages', 'Docker Deploy'],
 
   featuresHeading: 'Everything you need to watch your services',
   features: [
@@ -33,7 +32,7 @@ const config: ProductPageConfig = {
     { icon: '📊', title: 'Response-Time Analytics', desc: 'Track availability, latency trends, and status history from one analytics dashboard.' },
     { icon: '📢', title: 'Public & Private Status Pages', desc: 'Share real-time status with customers or keep it internal with private page links.' },
     { icon: '📜', title: 'Audit Log & Retention', desc: 'Review every change and configure automatic cleanup of old heartbeat partitions.' },
-    { icon: '🔥', title: 'Prometheus Integration', desc: 'Ingest Prometheus and Blackbox exporter metrics alongside agent heartbeats.' },
+    { icon: '🔔', title: 'Smart Notifications', desc: 'Slack and email alerts for outages, high latency, and agent health issues.' },
   ],
 
   screenshots: [
@@ -45,22 +44,18 @@ const config: ProductPageConfig = {
 
   quickStart: [
     {
-      title: 'Clone & run with Docker Compose',
+      title: 'Deploy in seconds with Docker Compose',
       language: 'bash' as const,
-      code: `git clone https://github.com/VibhuviOiO/UptimeO.git
-cd UptimeO
+      code: `# Download the all-in-one Compose file (PostgreSQL + app)
+curl -O https://vibhuvioio.com/files/uptimeo/docker-compose.yml
 
-# Create a minimal environment file
-cat > .env <<EOF
-SPRING_PROFILES_ACTIVE=prod
-SPRING_LIQUIBASE_ENABLED=true
-EOF
+# Start the stack
+docker compose up -d
 
-# Start PostgreSQL, backend, status page, and agent
-docker compose -f docker/docker-compose-ghcr.yml up -d
+# Watch the app start
+docker compose logs -f app
 
-# Watch the backend start
-docker compose -f docker/docker-compose-ghcr.yml logs -f uptimeo-app`,
+# Open http://localhost:8080 (admin / admin)`,
     },
     {
       title: 'Agent environment variables',
@@ -84,7 +79,7 @@ export QUEUE_PATH="./data/queue"`,
     { href: '/products/uptime-o/docs/http-monitors', title: 'HTTP Monitors', desc: 'Configure monitors, schedules, and monitor-to-agent assignments.' },
     { href: '/products/uptime-o/docs/status-pages', title: 'Status Pages', desc: 'Build public or private status pages from your monitors.' },
     { href: '/products/uptime-o/docs/uptime-analytics', title: 'Uptime Analytics', desc: 'Explore availability, latency, and status history.' },
-    { href: '/products/uptime-o/docs/prometheus-integration', title: 'Prometheus Integration', desc: 'Ingest Prometheus/Blackbox metrics into UptimeO.' },
+    { href: '/products/uptime-o/docs/notifications', title: 'Notifications', desc: 'Slack and email alerts for monitors and agents.' },
   ],
 
   ctaDescription: 'Deploy UptimeO on your own infrastructure and start monitoring your services in minutes.',

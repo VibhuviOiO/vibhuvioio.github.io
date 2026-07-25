@@ -10,7 +10,7 @@ Monitors define the endpoints you want to watch. Each monitor records a heartbea
 
 ## Create a Monitor
 
-Go to **Internet Insights → Monitors** and click **Create**.
+Go to **Monitors** and click **New Monitor**.
 
 ![Monitors list](/img/uptime-o/monitors-01-list.png)
 
@@ -31,3 +31,9 @@ A monitor only runs when it is assigned to an agent.
 ![Assigned monitor](/img/uptime-o/monitors-03-assigned.png)
 
 After assignment, the agent will pick up the monitor on its next config reload and start sending heartbeats.
+
+## Monitor Detail
+
+Open a monitor to see live KPIs, the response-time overview across all assigned agents, per-agent breakdowns, and recent checks.
+
+![Monitor detail](/img/uptime-o/monitors-04-detail.png)
