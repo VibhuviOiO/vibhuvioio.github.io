@@ -195,17 +195,64 @@
       "id": "uptime-o",
       "name": "Uptime O",
       "slug": "uptime-o",
-      "description": "Self-hosted uptime monitoring with beautiful dashboards",
+      "description": "Self-hosted uptime observability platform with distributed agents, status pages, and analytics.",
       "icon": "⏱️",
-      "status": "coming-soon",
+      "status": "live",
+      "repoUrl": "https://github.com/VibhuviOiO/UptimeO",
       "features": [
-        "Monitor websites & APIs",
-        "Alert notifications",
-        "Response time tracking",
-        "Status pages"
+        "Multi-region synthetic monitoring",
+        "Public & private status pages",
+        "Distributed Go agents",
+        "Response-time analytics",
+        "Audit log & data retention",
+        "Prometheus integration"
       ],
-      "technologies": ["Go", "React"],
-      "sidebar": []
+      "technologies": ["Spring Boot", "React", "Go", "PostgreSQL", "Docker"],
+      "sidebar": [
+        {
+          "title": "Getting Started",
+          "items": [
+            { "id": "getting-started", "title": "Getting Started", "slug": "getting-started" },
+            { "id": "installation", "title": "Installation", "slug": "installation" },
+            { "id": "first-agent", "title": "First Agent", "slug": "first-agent" }
+          ]
+        },
+        {
+          "title": "Features",
+          "items": [
+            { "id": "regions-datacenters", "title": "Regions & Datacenters", "slug": "regions-datacenters" },
+            { "id": "agents", "title": "Agents", "slug": "agents" },
+            { "id": "http-monitors", "title": "HTTP Monitors", "slug": "http-monitors" },
+            { "id": "schedules", "title": "Schedules", "slug": "schedules" },
+            { "id": "status-pages", "title": "Status Pages", "slug": "status-pages" },
+            { "id": "notifications", "title": "Notifications & Alerts", "slug": "notifications" },
+            { "id": "uptime-analytics", "title": "Uptime Analytics", "slug": "uptime-analytics" },
+            { "id": "audit-retention", "title": "Audit & Retention", "slug": "audit-retention" }
+          ]
+        },
+        {
+          "title": "Operations",
+          "items": [
+            { "id": "deployment", "title": "Deployment", "slug": "deployment" },
+            { "id": "agent-installation", "title": "Agent Installation", "slug": "agent-installation" },
+            { "id": "prometheus-integration", "title": "Prometheus Integration", "slug": "prometheus-integration" },
+            { "id": "troubleshooting", "title": "Troubleshooting", "slug": "troubleshooting" }
+          ]
+        },
+        {
+          "title": "Development",
+          "items": [
+            { "id": "development", "title": "Development Guide", "slug": "development" },
+            { "id": "testing", "title": "Testing Guide", "slug": "testing" }
+          ]
+        },
+        {
+          "title": "API",
+          "items": [
+            { "id": "authentication", "title": "Authentication", "slug": "authentication" }
+          ]
+        }
+      ]
     }
   ]
 }

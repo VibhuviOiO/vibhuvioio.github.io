@@ -48,11 +48,11 @@ const liveProducts: Product[] = [
   { slug: '/docker-registry-ui', name: 'Docker Registry UI', icon: '🐳', image: '/img/docker-registry-ui/docker-registry-ui.svg' },
   { slug: '/ldap-manager', name: 'LDAP Manager', icon: '🗂️', image: '/img/ldap-manager/ldap-manager-ui.png' },
   { slug: '/openldap-docker', name: 'OpenLDAP Docker', icon: '📦' },
+  { slug: '/products/uptime-o', name: 'Uptime O', icon: '⏱️', image: '/img/uptime-o/overview-02-dashboard.png' },
   { slug: '/products/suchaka', name: 'Suchaka Status', icon: '📊', disabled: true },
 ];
 
 const devProducts: Product[] = [
-  { slug: '/products/uptime-o', name: 'Uptime O', icon: '⏱️', badge: 'Beta', disabled: true },
   { slug: '/products/solrlens', name: 'SolrLens', icon: '🔍', disabled: true },
   { slug: '/products/infra-mirror', name: 'Infra Mirror', icon: '📡', disabled: true },
   { slug: '/products/container-talks', name: 'Container Talks', icon: '📚', disabled: true },

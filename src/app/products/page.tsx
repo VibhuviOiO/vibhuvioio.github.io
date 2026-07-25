@@ -76,11 +76,13 @@ const products: Product[] = [
   {
     id: 'uptime-o',
     title: 'Uptime O',
-    description: 'Modern uptime observability platform with dashboards, multi-region monitoring, and intelligent alerting.',
+    description: 'Self-hosted uptime observability platform with distributed agents, status pages, and analytics.',
     icon: '⏱️',
+    image: '/img/uptime-o/overview-02-dashboard.png',
     link: '/products/uptime-o',
-    tags: ['Uptime Monitoring', 'Status Pages', 'Alerting'],
-    status: 'beta',
+    github: 'https://github.com/VibhuviOiO/UptimeO',
+    tags: ['Uptime Monitoring', 'Status Pages', 'Distributed Agents'],
+    status: 'live',
   },
   {
     id: 'solrlens',
