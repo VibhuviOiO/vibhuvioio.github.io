@@ -1,50 +1,47 @@
 ---
 title: Agent Installation
-description: Create an agent in UptimeO, generate an API key, and run the Go agent locally or with Docker.
+description: Create an agent in UptimeO, generate an API key, and run the agent with Docker.
 order: 12
 ---
 
 # Agent Installation
 
-The UptimeO monitoring agent is a lightweight Go binary that executes HTTP monitors and submits heartbeats to the backend. This guide covers creating an agent record, generating an API key, and running the agent locally or in Docker.
+The UptimeO monitoring agent is a lightweight Go binary that executes HTTP monitors and submits heartbeats to the backend. It is distributed as the `vibhuvioio/uptimeo-agent` Docker image. This guide covers creating an agent record, generating an API key, and running one or more agents.
 
 ## 1. Create an Agent in the UI
 
-Start the UptimeO server and log in as `admin`, then go to **Internet Insights → Agents** and click **Create**.
+Start the UptimeO server and log in as `admin`, then go to **Agents** in the sidebar and click **New Agent**.
 
 Fill in the agent details:
 
 - **Name** — e.g. `agent-us-east-1`
-- **Region** — e.g. `us-east`
-- **Datacenter** — e.g. `us-east-1a`
+- **Datacenter** — optional; pick from the searchable list to group agents by physical location
 - **Description** — optional
 
-Save the agent. The detail page shows the numeric **Agent ID**; copy it for the next step.
+Save the agent. Copy the numeric **Agent ID** for the next steps.
 
 ## 2. Generate an API Key
 
-Navigate to **Management → API Keys** and create a new key.
+Navigate to **Admin → API Keys** and create a new key.
 
 Copy the key value immediately — it is shown only once. The key prefix is `uptimeo_`.
 
-## 3. Build and Run Locally
+## 3. Run with Docker
 
-From the repository root:
-
-```bash
-cd uptime-o-api-agent
-go build -o agent ./cmd/agent
-```
-
-Set the required environment variables and run the agent:
+Run a single agent:
 
 ```bash
-export API_BASE_URL="http://localhost:8080"
-export API_KEY="uptimeo_YOUR_API_KEY"
-export AGENT_ID=1
-export CONFIG_RELOAD_INTERVAL="1m"
-./agent
+docker run -d \
+  --name agent-us-east-1 \
+  -e API_BASE_URL="http://host.docker.internal:8080" \
+  -e API_KEY="uptimeo_YOUR_API_KEY" \
+  -e AGENT_ID=1 \
+  -e CONFIG_RELOAD_INTERVAL="1m" \
+  --restart unless-stopped \
+  vibhuvioio/uptimeo-agent:latest
 ```
+
+`host.docker.internal` lets the container reach an app running on your Docker host. On Linux, use the host's bridge IP instead.
 
 ### Environment Variables
 
@@ -59,67 +56,47 @@ export CONFIG_RELOAD_INTERVAL="1m"
 
 Valid interval examples: `1m`, `5m`, `1h`, `24h`.
 
-## 4. Run with Docker
+## 4. Run Multiple Agents
 
-Build the agent image:
+For several agents (e.g. one per region), use a small Compose file — one service per agent:
 
-```bash
-cd uptime-o-api-agent
-docker build -t uptimeo-api-agent:latest .
+```yaml
+name: uptimeo-agents
+
+services:
+  agent-us-east:
+    image: vibhuvioio/uptimeo-agent:latest
+    environment:
+      AGENT_ID: "1"
+      API_BASE_URL: http://host.docker.internal:8080
+      API_KEY: ${UPTIMEO_API_KEY_US_EAST}
+      CONFIG_RELOAD_INTERVAL: 1m
+    restart: unless-stopped
+
+  agent-eu-west:
+    image: vibhuvioio/uptimeo-agent:latest
+    environment:
+      AGENT_ID: "2"
+      API_BASE_URL: http://host.docker.internal:8080
+      API_KEY: ${UPTIMEO_API_KEY_EU_WEST}
+      CONFIG_RELOAD_INTERVAL: 1m
+    restart: unless-stopped
 ```
 
-Run a single agent:
-
 ```bash
-docker run --rm -p 9090:9090 \
-  -e API_BASE_URL="http://host.docker.internal:8080" \
-  -e API_KEY="uptimeo_YOUR_API_KEY" \
-  -e AGENT_ID=1 \
-  -e CONFIG_RELOAD_INTERVAL="1m" \
-  uptimeo-api-agent:latest
+docker compose up -d
+docker compose logs -f
 ```
 
-Run the published image directly:
+## 5. Verify the Agent
+
+Check the agent health endpoint (map the port if you need it on the host):
 
 ```bash
-docker run -d \
-  --name agent-us-east-1 \
-  --network host \
-  -e AGENT_ID="1" \
-  -e API_BASE_URL="http://host.docker.internal:8080" \
-  -e API_KEY="uptimeo_YOUR_API_KEY" \
-  -e QUEUE_PATH="/data/queue" \
-  -e CONFIG_RELOAD_INTERVAL="1m" \
-  -v "$(pwd)/tmp/data/agent-us-east-1:/data" \
-  --restart unless-stopped \
-  ghcr.io/vibhuvioio/uptimeo-agent:latest
+docker logs agent-us-east-1
 ```
 
-## 5. Multi-Agent Docker Compose Setup
-
-The `uptime-o-api-agent/` directory includes a `multiple-agents-compose.yml` file. Update it with your API key and agent IDs, then start all agents:
-
-```bash
-cd uptime-o-api-agent
-export API_KEY="uptimeo_YOUR_API_KEY"
-docker compose -f multiple-agents-compose.yml up -d
-```
-
-View logs:
-
-```bash
-docker compose -f multiple-agents-compose.yml logs -f
-```
-
-## 6. Verify the Agent
-
-Check the agent health endpoint:
-
-```bash
-curl http://localhost:9090/healthz
-```
-
-In the agent logs, look for:
+In the logs, look for:
 
 - `Acquired leadership` — the agent is active
 - Successful heartbeat posts
@@ -136,7 +113,7 @@ LIMIT 10;
 
 ## Resilience Features
 
-The Go agent is designed for unreliable networks:
+The agent is designed for unreliable networks:
 
 - **Automatic retry** — exponential backoff for API failures
 - **Persistent queue** — heartbeats are saved to disk if the API is unavailable
@@ -148,6 +125,7 @@ The Go agent is designed for unreliable networks:
 | Symptom | Fix |
 |---|---|
 | Agent won't start | Verify `API_BASE_URL` is reachable, `API_KEY` is valid, and `AGENT_ID` exists |
+| `connection refused` to the app | Use `http://host.docker.internal:8080` instead of `http://localhost:8080` — `localhost` inside a container is the container itself |
 | No heartbeats | Ensure the agent has monitors assigned in the UI and that monitors are reachable from the agent host |
 | Queue not flushing | Check API connectivity and API key permissions; review logs for `Failed to flush heartbeat queue` |
 

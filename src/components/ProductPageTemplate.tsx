@@ -36,7 +36,7 @@ export type ProductPageConfig = {
   heroAnimation?: 'docker-registry-ui';
   tryInBrowserUrl?: string;
   docsUrl: string;
-  githubUrl: string;
+  githubUrl?: string;
 
   // Trust badges
   badges: string[];
@@ -269,15 +269,17 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
                   Documentation
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <a
-                  href={config.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 text-base font-bold text-white transition-all hover:bg-white/10"
-                >
-                  <Github className="h-4 w-4" />
-                  GitHub
-                </a>
+                {config.githubUrl && (
+                  <a
+                    href={config.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 text-base font-bold text-white transition-all hover:bg-white/10"
+                  >
+                    <Github className="h-4 w-4" />
+                    GitHub
+                  </a>
+                )}
               </div>
             </div>
 
@@ -586,15 +588,17 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
             >
               View Documentation
             </Link>
-            <a
-              href={config.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-10 py-4 text-lg font-bold text-gray-700 transition-all hover:bg-gray-50"
-            >
-              <Github className="h-5 w-5" />
-              Star on GitHub
-            </a>
+            {config.githubUrl && (
+              <a
+                href={config.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-10 py-4 text-lg font-bold text-gray-700 transition-all hover:bg-gray-50"
+              >
+                <Github className="h-5 w-5" />
+                Star on GitHub
+              </a>
+            )}
           </div>
         </div>
       </section>

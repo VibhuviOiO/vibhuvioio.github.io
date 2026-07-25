@@ -13,13 +13,13 @@ UptimeO groups infrastructure into **Regions** and **Datacenters**. This makes d
 
 ## Create a Region
 
-Go to **Management → Regions** and add a region.
+Go to **Admin → Regions** and add a region.
 
 ![Regions list](/img/uptime-o/regions-01-list.png)
 
 ## Create a Datacenter
 
-Go to **Management → Datacenters** and add datacenters inside the region.
+Go to **Admin → Datacenters** and add datacenters inside the region.
 
 ![Datacenters list](/img/uptime-o/datacenters-01-list.png)
 

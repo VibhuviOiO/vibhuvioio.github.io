@@ -198,14 +198,13 @@
       "description": "Self-hosted uptime observability platform with distributed agents, status pages, and analytics.",
       "icon": "⏱️",
       "status": "live",
-      "repoUrl": "https://github.com/VibhuviOiO/UptimeO",
       "features": [
         "Multi-region synthetic monitoring",
         "Public & private status pages",
         "Distributed Go agents",
         "Response-time analytics",
         "Audit log & data retention",
-        "Prometheus integration"
+        "Slack & email notifications"
       ],
       "technologies": ["Spring Boot", "React", "Go", "PostgreSQL", "Docker"],
       "sidebar": [
@@ -235,15 +234,7 @@
           "items": [
             { "id": "deployment", "title": "Deployment", "slug": "deployment" },
             { "id": "agent-installation", "title": "Agent Installation", "slug": "agent-installation" },
-            { "id": "prometheus-integration", "title": "Prometheus Integration", "slug": "prometheus-integration" },
             { "id": "troubleshooting", "title": "Troubleshooting", "slug": "troubleshooting" }
-          ]
-        },
-        {
-          "title": "Development",
-          "items": [
-            { "id": "development", "title": "Development Guide", "slug": "development" },
-            { "id": "testing", "title": "Testing Guide", "slug": "testing" }
           ]
         },
         {

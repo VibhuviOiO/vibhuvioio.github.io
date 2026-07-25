@@ -1,173 +1,100 @@
 ---
 title: Deployment
-description: Build production artifacts, Docker images, and run UptimeO with containers.
+description: Run UptimeO in production with the published Docker images.
 order: 11
 ---
 
 # Deployment
 
-This guide covers production packaging for UptimeO: building a jar, building a Docker image, running the container against Postgres, and running the API agent container.
+UptimeO is deployed from published Docker images — no build step required:
 
-## Build a Production Jar
+| Image | Purpose |
+|---|---|
+| `vibhuvioio/uptimeo` | Application (backend, console, status pages) |
+| `vibhuvioio/uptimeo-agent` | Monitoring agent |
 
-From the `uptime-o/` directory:
+Both are also mirrored on GitHub Container Registry (`ghcr.io/vibhuvioio/uptimeo`, `ghcr.io/vibhuvioio/uptimeo-agent`).
 
-```bash
-cd uptime-o
-./mvnw -Pprod clean verify
-```
+## All-in-One Compose (recommended)
 
-This concatenates and minifies the frontend assets, compiles the backend, and produces a single executable jar:
-
-```bash
-ls target/*.jar
-```
-
-Run the jar:
+The quickest production setup is the all-in-one Compose file — PostgreSQL and the app on an internal network:
 
 ```bash
-java -jar target/uptime-o-*.jar
+curl -O https://vibhuvioio.com/files/uptimeo/docker-compose.yml
+docker compose up -d
 ```
 
-Then open `http://localhost:8080`.
+The app is available at `http://localhost:8080`. See [Installation](/products/uptime-o/docs/installation) for branding overrides and adding an agent service.
 
-## Build a Docker Image
+## Run Against an Existing PostgreSQL
 
-You can build a production Docker image with npm:
-
-```bash
-cd uptime-o
-npm run java:docker:prod
-```
-
-Or directly with Maven:
-
-```bash
-./mvnw verify -DskipTests -Pprod jib:dockerBuild
-```
-
-Both commands produce a local image tagged `uptimeo:latest`.
-
-For ARM64 machines such as Apple Silicon:
-
-```bash
-npm run java:docker:arm64
-```
-
-## Run the Container with Postgres
-
-Make sure the `uptimeo` network and Postgres are running:
-
-```bash
-cd docker
-docker network create uptimeo || true
-docker compose -f postgres.yml up -d
-```
-
-Then start the UptimeO container:
-
-```bash
-cd docker
-docker compose -f app.yml up -d
-```
-
-The app is available at `http://localhost:8080`.
-
-### Environment Variables for Containers
-
-The `docker/app.yml` file already sets common values. Override them as needed:
-
-```yaml
-environment:
-  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/uptimeo
-  SPRING_DATASOURCE_USERNAME: uptimeo
-  SPRING_DATASOURCE_PASSWORD: uptimeo
-  SPRING_LIQUIBASE_ENABLED: true
-  SPRING_PROFILES_ACTIVE: prod,api-docs
-  SPRING_DATASOURCE_HIKARI_AUTO_COMMIT: "false"
-  WEBSITE_TITLE: "UptimeO"
-  WEBSITE_FOOTERTITLE: "Powered by UptimeO"
-  JAVA_OPTS: "-Xms512m -Xmx1024m -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
-```
-
-> **Important:** Set `SPRING_DATASOURCE_HIKARI_AUTO_COMMIT=false`. With HikariCP's default `autoCommit=true`, Spring's transaction manager cannot commit/rollback read-only transactions, causing `/api/authenticate` to return HTTP 500.
-
-Pass extra variables on the command line:
+If you already run PostgreSQL, start just the app container:
 
 ```bash
 docker run -d \
   --name uptimeo-app \
   -p 8080:8080 \
-  -e SPRING_DATASOURCE_URL="jdbc:postgresql://host.docker.internal:5432/uptimeo" \
+  -e SPRING_DATASOURCE_URL="jdbc:postgresql://your-db-host:5432/uptimeo" \
   -e SPRING_DATASOURCE_USERNAME=uptimeo \
   -e SPRING_DATASOURCE_PASSWORD=uptimeo \
   -e SPRING_LIQUIBASE_ENABLED=true \
+  -e SPRING_PROFILES_ACTIVE=prod \
   -e SPRING_DATASOURCE_HIKARI_AUTO_COMMIT=false \
-  --network uptimeo \
-  uptimeo:latest
+  -e JWT_BASE64_SECRET="your-64-byte-base64-secret" \
+  vibhuvioio/uptimeo:latest
 ```
 
-## Run the API Agent Container
+> **Important:** Keep `SPRING_DATASOURCE_HIKARI_AUTO_COMMIT=false`. With HikariCP's default `autoCommit=true`, Spring's transaction manager cannot commit/rollback read-only transactions, causing `/api/authenticate` to return HTTP 500.
 
-After creating an agent and API key in the UI (see [Agent Installation](/products/uptime-o/docs/agent-installation)), run the agent container. Use the local image built earlier, or pull the published image:
+Liquibase runs migrations automatically on startup, so upgrades only require pulling a newer image and restarting the container.
+
+### Useful Environment Variables
+
+| Variable | Description |
+|---|---|
+| `SPRING_DATASOURCE_URL` | JDBC URL of your PostgreSQL database |
+| `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` | Database credentials |
+| `JWT_BASE64_SECRET` | 64-byte base64 secret for signing tokens (`openssl rand -base64 64`) |
+| `WEBSITE_TITLE` | Browser tab and header title |
+| `WEBSITE_LOGOPATH` | Logo URL (navbar and status pages) |
+| `WEBSITE_FAVICONPATH` | Favicon URL |
+| `WEBSITE_FOOTERTITLE` | Footer text |
+| `JAVA_OPTS` | e.g. `-Xms512m -Xmx1024m -XX:+UseG1GC` |
+
+## Run an Agent Container
+
+After creating an agent and an API key in the UI (see [Agent Installation](/products/uptime-o/docs/agent-installation)):
 
 ```bash
-# Local image
 docker run -d \
   --name agent-us-east-1 \
-  --network host \
   -e AGENT_ID="1" \
-  -e API_BASE_URL="http://host.docker.internal:8080" \
+  -e API_BASE_URL="http://your-uptimeo-host:8080" \
   -e API_KEY="uptimeo_YOUR_API_KEY" \
   -e QUEUE_PATH="/data/queue" \
   -e CONFIG_RELOAD_INTERVAL="1m" \
-  -v "$(pwd)/tmp/data/agent-us-east-1:/data" \
+  -v "$(pwd)/data/agent-us-east-1:/data" \
   --restart unless-stopped \
-  uptimeo-api-agent:latest
-
-# Or use the published image
-# ghcr.io/vibhuvioio/uptimeo-agent:latest
+  vibhuvioio/uptimeo-agent:latest
 ```
 
-On Linux you may need to use the container IP or bridge network instead of `host.docker.internal`.
-
-## Full Stack with Docker Compose
-
-For a managed stack that includes Postgres, backend, status page, and one agent, use:
-
-```bash
-cd UptimeO
-cat > .env <<EOF
-SPRING_PROFILES_ACTIVE=prod
-SPRING_LIQUIBASE_ENABLED=true
-EOF
-docker compose -f docker/docker-compose-ghcr.yml up -d
-```
-
-Services:
-
-| Service | URL |
-|---|---|
-| UptimeO app | `http://localhost:8080` |
-| Status page | `http://localhost:8077` |
-| PostgreSQL | `localhost:5432` |
+If the app runs on the same Docker host, use `http://host.docker.internal:8080` as `API_BASE_URL` (on Linux, use the host's bridge IP instead).
 
 ## Backups
 
 Back up PostgreSQL regularly:
 
 ```bash
-docker exec postgres pg_dump -U uptimeo -d uptimeo > uptimeo-backup.sql
+docker exec uptimeo-postgres pg_dump -U uptimeo -d uptimeo > uptimeo-backup.sql
 ```
 
 Restore from backup:
 
 ```bash
-docker exec -i postgres psql -U uptimeo -d uptimeo < uptimeo-backup.sql
+docker exec -i uptimeo-postgres psql -U uptimeo -d uptimeo < uptimeo-backup.sql
 ```
 
 ## Next Steps
 
 - [Agent installation](/products/uptime-o/docs/agent-installation)
 - [Status pages](/products/uptime-o/docs/status-pages)
-- [Prometheus integration](/products/uptime-o/docs/prometheus-integration)
