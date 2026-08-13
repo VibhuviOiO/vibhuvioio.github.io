@@ -14,6 +14,7 @@ import TableOfContents from '@/components/docs/TableOfContents';
 import ProjectExplorer from '@/components/docs/ProjectExplorer';
 import LessonHeader from '@/components/docs/LessonHeader';
 import InvertedIndexDemo from '@/components/docs/InvertedIndexDemo';
+import LiteLLMGatewayFlow from '@/components/docs/LiteLLMGatewayFlow';
 import CourseJourneyDemo from '@/components/docs/CourseJourneyDemo';
 import MilvusCourseJourneyDemo from '@/components/docs/MilvusCourseJourneyDemo';
 import MilvusArchitecture from '@/components/ui/MilvusArchitecture';
@@ -21,7 +22,7 @@ import MilvusDeploymentArchitecture from '@/components/ui/MilvusDeploymentArchit
 import MilvusInteractiveArchitecture from '@/components/ui/MilvusInteractiveArchitecture';
 import PineconeLearningPath from '@/components/docs/PineconeLearningPath';
 import QdrantLearningPath from '@/components/docs/QdrantLearningPath';
-import { Search, Database, Layers, TreePine, Target } from 'lucide-react';
+import { Search, Database, Layers, TreePine, Target, Network } from 'lucide-react';
 
 // Per-course metadata — colors, icons, learning outcomes
 const courseMeta: Record<string, {
@@ -149,6 +150,26 @@ const courseMeta: Record<string, {
     labTime: '25m',
     githubUrl: 'https://github.com/VibhuviOiO/infinite-containers/tree/main/langfuse',
   },
+  'lite-llm': {
+    color: 'linear-gradient(135deg, #1e293b 0%, #6366f1 60%, #8b5cf6 100%)',
+    level: 'Advanced',
+    icon: <Network className="h-12 w-12 text-white/80" strokeWidth={1.5} />,
+    whatYoullLearn: [
+      'Deploy a local LiteLLM + Ollama gateway with fallback you can trigger on demand',
+      'Validate free-tier provider keys directly with Python before any gateway YAML',
+      'Route five hosted free-tier providers behind one OpenAI-compatible endpoint',
+      'Prove fallback on a healthy route with mock_testing_fallbacks and per-request overrides',
+      'Stand up the smallest verifiable AWS Bedrock dev setup and isolate failures with four curls',
+      'Operate the production-shape Bedrock stack with Postgres, Redis, healthchecks, virtual keys, and response cache',
+      'Mint per-team virtual keys with budgets, TPM/RPM limits, and scoped model access',
+      'Plan the laptop → real server promotion with an honest "what is NOT here" gap table',
+    ],
+    updated: 'Jun 2026',
+    totalDuration: '3h 30m',
+    readingTime: '1h 25m',
+    labTime: '2h 5m',
+    githubUrl: 'https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm',
+  },
 };
 
 interface OperationsPageProps {
@@ -274,10 +295,11 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
             doc.content.includes('___MILVUS_DEPLOYMENT_ARCHITECTURE___') ||
             doc.content.includes('___MILVUS_INTERACTIVE_ARCHITECTURE___') ||
             doc.content.includes('___PINECONE_LEARNING_PATH___') ||
-            doc.content.includes('___QDRANT_LEARNING_PATH___')
+            doc.content.includes('___QDRANT_LEARNING_PATH___') ||
+            doc.content.includes('___LITELLM_GATEWAY_FLOW___')
           ) ? (
             doc.content
-              .split(/(___PROJECT_BLOCK_\d+___|___INVERTED_INDEX_DEMO___|___COURSE_JOURNEY_DEMO___|___MILVUS_ARCHITECTURE___|___MILVUS_COURSE_JOURNEY___|___MILVUS_DEPLOYMENT_ARCHITECTURE___|___MILVUS_INTERACTIVE_ARCHITECTURE___|___PINECONE_LEARNING_PATH___|___QDRANT_LEARNING_PATH___)/)
+              .split(/(___PROJECT_BLOCK_\d+___|___INVERTED_INDEX_DEMO___|___COURSE_JOURNEY_DEMO___|___MILVUS_ARCHITECTURE___|___MILVUS_COURSE_JOURNEY___|___MILVUS_DEPLOYMENT_ARCHITECTURE___|___MILVUS_INTERACTIVE_ARCHITECTURE___|___PINECONE_LEARNING_PATH___|___QDRANT_LEARNING_PATH___|___LITELLM_GATEWAY_FLOW___)/)
               .map((segment, i) => {
                 if (segment === '___INVERTED_INDEX_DEMO___') return <InvertedIndexDemo key={`demo-${i}`} />;
                 if (segment === '___COURSE_JOURNEY_DEMO___') return <CourseJourneyDemo key={`journey-${i}`} />;
@@ -287,6 +309,7 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
                 if (segment === '___MILVUS_INTERACTIVE_ARCHITECTURE___') return <MilvusInteractiveArchitecture key={`interactive-arch-${i}`} />;
                 if (segment === '___PINECONE_LEARNING_PATH___') return <PineconeLearningPath key={`pinecone-path-${i}`} />;
                 if (segment === '___QDRANT_LEARNING_PATH___') return <QdrantLearningPath key={`qdrant-path-${i}`} />;
+                if (segment === '___LITELLM_GATEWAY_FLOW___') return <LiteLLMGatewayFlow key={`gw-flow-${i}`} />;
                 const projectMatch = segment.match(/___PROJECT_BLOCK_(\d+)___/);
                 if (projectMatch) {
                   const project = projects[parseInt(projectMatch[1])];
@@ -310,9 +333,15 @@ export default async function OperationsDocPage({ params }: OperationsPageProps)
 
 export function generateStaticParams() {
   const { categories } = loadOperationsSidebarClient();
-  return categories.flatMap(category =>
-    category.sidebar.flatMap(group =>
-      group.items.map(item => ({ slug: item.slug.split('/') }))
-    )
-  );
+  return categories.flatMap(category => {
+    const sidebarSlugs = category.sidebar.flatMap(group =>
+      group.items
+        .filter((item: any) => !item.disabled)
+        .map((item: any) => item.slug as string)
+    );
+    const allSlugs = sidebarSlugs.includes(`${category.slug}/overview`)
+      ? sidebarSlugs
+      : [`${category.slug}/overview`, ...sidebarSlugs];
+    return allSlugs.map(slug => ({ slug: slug.split('/') }));
+  });
 }

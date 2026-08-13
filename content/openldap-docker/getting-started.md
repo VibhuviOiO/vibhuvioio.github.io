@@ -129,9 +129,6 @@ docker run -d --name ldap-manager \
   -v $(pwd)/config.yml:/app/config.yml \
   vibhuvioio/ldap-manager:latest
 ```
-
-Access the UI at http://localhost:5000
-
 ## Docker Compose Setup
 
 For a more complete setup with persistent volumes and health checks:

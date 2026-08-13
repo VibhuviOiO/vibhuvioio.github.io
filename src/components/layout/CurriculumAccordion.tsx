@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, FileText, PlayCircle, Link2, Github, Clock } from 'lucide-react';
+import { ChevronDown, FileText, PlayCircle, Link2, Github, Clock, Lock } from 'lucide-react';
 
 interface LessonItem {
   id: string;
@@ -12,6 +12,8 @@ interface LessonItem {
   type?: string;
   videoUrl?: string;
   githubUrl?: string;
+  disabled?: boolean;
+  badge?: string;
 }
 
 interface CurriculumSection {
@@ -61,6 +63,8 @@ function LessonRow({ item, basePath }: { item: LessonItem; basePath: string }) {
 
   const rowClass =
     'group flex items-center gap-3 px-6 py-3.5 hover:bg-gray-50 transition-colors border-t border-gray-100 first:border-0';
+  const disabledRowClass =
+    'flex items-center gap-3 px-6 py-3.5 border-t border-gray-100 first:border-0 cursor-not-allowed opacity-60';
 
   const content = (
     <>
@@ -106,6 +110,33 @@ function LessonRow({ item, basePath }: { item: LessonItem; basePath: string }) {
       <a href={item.githubUrl} target="_blank" rel="noopener noreferrer" className={rowClass}>
         {content}
       </a>
+    );
+  }
+
+  if (item.disabled) {
+    return (
+      <div className={disabledRowClass} aria-disabled="true" title="Coming soon">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-400">
+          <Lock className="h-4 w-4" />
+        </span>
+        <div className="flex-1 min-w-0">
+          <span className="block text-sm text-gray-500 leading-snug truncate">
+            {item.title}
+          </span>
+          <span className="text-[11px] font-medium text-gray-400">Coming soon</span>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+            {item.badge || 'Soon'}
+          </span>
+          {item.duration && (
+            <span className="flex items-center gap-1 text-[11px] text-gray-400 whitespace-nowrap">
+              <Clock className="h-3 w-3" />
+              {item.duration}
+            </span>
+          )}
+        </div>
+      </div>
     );
   }
 

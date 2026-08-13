@@ -22,6 +22,10 @@ export interface SidebarItem {
   slug: string;
   items?: SidebarItem[];
   collapsed?: boolean;
+  /** Render as non-clickable placeholder with a "Soon" badge. */
+  disabled?: boolean;
+  /** Optional short badge label shown next to disabled items (defaults to "Soon"). */
+  badge?: string;
 }
 
 export interface SidebarGroup {

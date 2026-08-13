@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { Github, ArrowRight, ExternalLink, Play } from 'lucide-react';
+import { useState } from 'react';
+import { Github, ArrowRight, ExternalLink, Play, Copy, Check } from 'lucide-react';
 import DockerRegistryUIAnimation from './ui/DockerRegistryUIAnimation';
 
 export type ProductFeature = {
@@ -32,7 +35,7 @@ export type ProductPageConfig = {
   description: string;
   heroIcon?: string;
   heroImage?: string;
-  heroScreenshot?: { src: string; alt: string };
+  heroScreenshot?: { src: string; alt: string; presentation?: 'framed' | 'background' };
   heroAnimation?: 'docker-registry-ui';
   tryInBrowserUrl?: string;
   docsUrl: string;
@@ -68,6 +71,7 @@ export type ProductPageConfig = {
   // Quick Start
   quickStart: QuickStartBlock[];
   quickStartPort?: string;
+  showQuickStartUiAccess?: boolean;
 
   // Docs
   docs: ProductDoc[];
@@ -222,6 +226,14 @@ function HighlightedCode({ code, language }: { code: string; language?: 'bash' |
 }
 
 export default function ProductPageTemplate({ config }: { config: ProductPageConfig }) {
+  const [copiedBlock, setCopiedBlock] = useState<string | null>(null);
+
+  const copyQuickStartBlock = async (block: QuickStartBlock) => {
+    await navigator.clipboard.writeText(block.code);
+    setCopiedBlock(block.title);
+    window.setTimeout(() => setCopiedBlock((current) => (current === block.title ? null : current)), 1800);
+  };
+
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
@@ -286,6 +298,18 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
             {config.heroAnimation === 'docker-registry-ui' ? (
               <div className="relative">
                 <DockerRegistryUIAnimation />
+              </div>
+            ) : config.heroScreenshot?.presentation === 'background' ? (
+              <div className="relative -my-16 min-h-[460px] overflow-hidden lg:-my-20 lg:min-h-[620px]">
+                <Image
+                  src={config.heroScreenshot.src}
+                  alt={config.heroScreenshot.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover object-[62%_center]"
+                  style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 18%, black 100%)' }}
+                />
               </div>
             ) : config.heroScreenshot ? (
               <div className="relative">
@@ -379,6 +403,55 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Quick Start */}
+      <section className="py-16 lg:py-20 bg-gray-50">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-green-50 text-green-700 border border-green-200">
+              Quick Start
+            </span>
+            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+              Deploy in seconds
+            </h2>
+          </div>
+          <div className="grid w-full gap-8 lg:grid-cols-2">
+            {config.quickStart.map((block) => {
+              const isCopied = copiedBlock === block.title;
+
+              return (
+              <div key={block.title} className="flex h-[36rem] flex-col rounded-2xl overflow-hidden shadow-lg border border-gray-700/50 bg-gray-950">
+                <div className="px-5 py-3 border-b border-gray-700/50 bg-gray-900 flex items-center gap-3 flex-shrink-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <h3 className="font-bold text-gray-300 text-sm flex-1">{block.title}</h3>
+                  <button
+                    type="button"
+                    onClick={() => copyQuickStartBlock(block)}
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-300 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+                    title={isCopied ? 'Copied' : `Copy ${block.title}`}
+                    aria-label={isCopied ? `${block.title} copied` : `Copy ${block.title}`}
+                  >
+                    {isCopied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
+                  </button>
+                </div>
+                <div className="flex-1 overflow-auto p-5">
+                  <pre className="min-w-max text-sm font-mono leading-relaxed"><code><HighlightedCode code={block.code} language={block.language} /></code></pre>
+                </div>
+              </div>
+              );
+            })}
+          </div>
+          {config.showQuickStartUiAccess !== false && (
+            <p className="text-center text-gray-500 text-sm mt-6">
+              Access the UI at <code className="px-2 py-1 bg-gray-100 rounded text-gray-900 font-medium">http://localhost:{config.quickStartPort || '5000'}</code>
+            </p>
+          )}
         </div>
       </section>
 
@@ -507,42 +580,6 @@ export default function ProductPageTemplate({ config }: { config: ProductPageCon
           </div>
         </section>
       )}
-
-      {/* Quick Start */}
-      <section className="py-16 lg:py-20 bg-gray-50">
-        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-green-50 text-green-700 border border-green-200">
-              Quick Start
-            </span>
-            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-              Deploy in seconds
-            </h2>
-          </div>
-          <div className="flex flex-col gap-8 max-w-4xl mx-auto">
-            {config.quickStart.map((block) => (
-              <div key={block.title} className="rounded-2xl overflow-hidden shadow-lg border border-gray-700/50 bg-gray-950">
-                <div className="px-5 py-3 border-b border-gray-700/50 bg-gray-900 flex items-center gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                  </div>
-                  <h3 className="font-bold text-gray-300 text-sm">{block.title}</h3>
-                </div>
-                <div className="p-5 overflow-x-auto">
-                  <pre className="text-sm font-mono leading-relaxed">
-                    <code><HighlightedCode code={block.code} language={block.language} /></code>
-                  </pre>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-gray-500 text-sm mt-6">
-            Access the UI at <code className="px-2 py-1 bg-gray-100 rounded text-gray-900 font-medium">http://localhost:{config.quickStartPort || '5000'}</code>
-          </p>
-        </div>
-      </section>
 
       {/* Documentation */}
       <section className="py-16 lg:py-20 bg-white">

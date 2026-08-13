@@ -163,9 +163,8 @@
       "githubUrl": "https://github.com/VibhuviOiO/milvus-ops",
       "sidebar": [
         {
-          "title": "Phase 1: Introduction (30m)",
+          "title": "Phase 1: Introduction (15m)",
           "items": [
-            { "id": "milvus-overview", "title": "Course Overview", "slug": "milvus/overview", "duration": "15m", "type": "doc" },
             { "id": "milvus-roadmap", "title": "Course Roadmap", "slug": "milvus/roadmap", "duration": "15m", "type": "doc" }
           ]
         },
@@ -301,6 +300,255 @@
           "title": "Phase 2: Developer Quickstart (35m)",
           "items": [
             { "id": "langfuse-developer-quickstart", "title": "Developer Quickstart", "slug": "langfuse/developer-quickstart", "duration": "35m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/langfuse/developer-quickstart" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lite-llm",
+      "title": "LiteLLM AI Gateway",
+      "slug": "lite-llm",
+      "description": "Platform-engineering the LiteLLM AI gateway — from a local Ollama setup with fallback you can trigger, through five free-tier providers behind one endpoint, to AWS Bedrock in both dev and production shapes with virtual keys, response cache, and an honest gap table.",
+      "icon": "🤖",
+      "totalDuration": "3h 30m",
+      "readingTime": "1h 25m",
+      "labTime": "2h 5m",
+      "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm",
+      "sidebar": [
+        {
+          "title": "Foundations",
+          "items": [
+            { "id": "lite-llm-roadmap", "title": "Course Roadmap & Gateway Pattern", "slug": "lite-llm/roadmap", "duration": "15m", "type": "doc" },
+            { "id": "p0-2", "title": "OpenAI-Compatible API as the Stable Contract", "slug": "lite-llm/foundations/openai-compatible-api", "type": "doc", "disabled": true },
+            { "id": "p0-3", "title": "Provider Economics in 2026", "slug": "lite-llm/foundations/provider-economics", "type": "doc", "disabled": true },
+            { "id": "p0-4", "title": "LiteLLM vs Cloudflare, Kong, Portkey, Self-Built", "slug": "lite-llm/foundations/gateway-landscape", "type": "doc", "disabled": true },
+            { "id": "p0-5", "title": "Course Setup, Repo Layout & Four-Curl Method", "slug": "lite-llm/foundations/course-setup", "type": "doc", "disabled": true },
+            { "id": "p0-6", "title": "Production-Grade Is a Checklist, Not a Binary", "slug": "lite-llm/foundations/production-grade-framing", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Local-First With Ollama",
+          "items": [
+            { "id": "lite-llm-ollama-setup", "title": "LiteLLM + Ollama with Fallback", "slug": "lite-llm/ollama/setup", "duration": "35m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm/ollama" },
+            { "id": "p1-5", "title": "The Four-Curl Debugging Method, Applied", "slug": "lite-llm/ollama/four-curl-debugging", "type": "doc", "disabled": true },
+            { "id": "p1-6", "title": "Why Postgres Ends Up in the Local Stack", "slug": "lite-llm/ollama/why-postgres-local", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Multi-Provider Routing",
+          "items": [
+            { "id": "lite-llm-providers-smoke", "title": "Direct Provider Validation (Pre-Gateway)", "slug": "lite-llm/providers/smoke-tests", "duration": "25m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm/free-models-samples" },
+            { "id": "lite-llm-free-gateway", "title": "Five Providers, One Endpoint", "slug": "lite-llm/free-gateway/multi-provider", "duration": "40m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm/free-models-gateway" },
+            { "id": "p2-2", "title": "Routing Strategies Deep Dive", "slug": "lite-llm/free-gateway/routing-strategies", "type": "doc", "disabled": true },
+            { "id": "p2-3", "title": "Declared Fallback Chains in YAML", "slug": "lite-llm/free-gateway/declared-fallbacks", "type": "doc", "disabled": true },
+            { "id": "p2-4", "title": "Per-Request Fallback Override", "slug": "lite-llm/free-gateway/per-request-override", "type": "doc", "disabled": true },
+            { "id": "p2-5", "title": "Streaming & the Mid-Stream Fallback Limit", "slug": "lite-llm/free-gateway/streaming-fallback", "type": "doc", "disabled": true },
+            { "id": "p2-6", "title": "Provider-Specific Gotchas", "slug": "lite-llm/free-gateway/provider-gotchas", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Enterprise Cloud — Bedrock (Dev)",
+          "items": [
+            { "id": "p3-1", "title": "Why the Dev Profile Exists Separately", "slug": "lite-llm/bedrock/why-dev-profile", "type": "doc", "disabled": true },
+            { "id": "lite-llm-bedrock-dev", "title": "Smallest Verifiable Bedrock Setup", "slug": "lite-llm/bedrock/dev-profile", "duration": "30m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm/dev-bedrock" },
+            { "id": "p3-3", "title": "Seven Bedrock Failure Modes by Likelihood", "slug": "lite-llm/bedrock/failure-modes", "type": "doc", "disabled": true },
+            { "id": "p3-4", "title": "Bedrock Chat — Nova, Claude Haiku, Claude Sonnet", "slug": "lite-llm/bedrock/chat-models", "type": "doc", "disabled": true },
+            { "id": "p3-5", "title": "Bedrock Embeddings — Titan & Cohere", "slug": "lite-llm/bedrock/embeddings", "type": "doc", "disabled": true },
+            { "id": "p3-6", "title": "Bedrock Streaming & IAM Permission", "slug": "lite-llm/bedrock/streaming-iam", "type": "doc", "disabled": true },
+            { "id": "p3-7", "title": "Aliasing Bedrock Models to OpenAI Defaults", "slug": "lite-llm/bedrock/aliasing", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Other Enterprise Providers",
+          "items": [
+            { "id": "p4-1", "title": "Azure OpenAI — Deployment Names & Versions", "slug": "lite-llm/enterprise/azure-openai", "type": "doc", "disabled": true },
+            { "id": "p4-2", "title": "Google Vertex AI", "slug": "lite-llm/enterprise/vertex-ai", "type": "doc", "disabled": true },
+            { "id": "p4-3", "title": "Anthropic Direct (Non-Bedrock)", "slug": "lite-llm/enterprise/anthropic-direct", "type": "doc", "disabled": true },
+            { "id": "p4-4", "title": "Cohere, Mistral & Second-Tier Providers", "slug": "lite-llm/enterprise/second-tier", "type": "doc", "disabled": true },
+            { "id": "p4-5", "title": "The Provider Matrix — When Each One Wins", "slug": "lite-llm/enterprise/provider-matrix", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Production-Shape Platform (Bedrock Prod)",
+          "items": [
+            { "id": "p5-1", "title": "Three-Service Topology — Gateway + Postgres + Redis", "slug": "lite-llm/bedrock/three-service-topology", "type": "doc", "disabled": true },
+            { "id": "p5-2", "title": "Healthchecks & depends_on: service_healthy", "slug": "lite-llm/bedrock/healthchecks", "type": "doc", "disabled": true },
+            { "id": "p5-3", "title": "STORE_MODEL_IN_DB & the Admin UI", "slug": "lite-llm/bedrock/store-model-in-db", "type": "doc", "disabled": true },
+            { "id": "lite-llm-bedrock-prod", "title": "Production-Shape Bedrock Stack", "slug": "lite-llm/bedrock/prod-profile", "duration": "45m", "type": "doc", "githubUrl": "https://github.com/VibhuviOiO/infinite-containers/tree/main/lite-llm/prod-bedrock" },
+            { "id": "p5-4", "title": "The Checklist Framing & Gap Table", "slug": "lite-llm/bedrock/checklist-framing", "type": "doc", "disabled": true },
+            { "id": "p5-5", "title": "Laptop → Real Server Promotion Checklist", "slug": "lite-llm/bedrock/promotion-checklist", "type": "doc", "disabled": true },
+            { "id": "p5-6", "title": "IAM-Role-Ready Auth", "slug": "lite-llm/bedrock/iam-role-auth", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Cost Governance",
+          "items": [
+            { "id": "p6-1", "title": "Three Kinds of Keys — Master, Operator, App", "slug": "lite-llm/cost/key-types", "type": "doc", "disabled": true },
+            { "id": "p6-2", "title": "Per-Key Budgets, TPM/RPM & Model Scoping", "slug": "lite-llm/cost/budgets-and-limits", "type": "doc", "disabled": true },
+            { "id": "p6-3", "title": "Team-Scoped Model Access & Least Privilege", "slug": "lite-llm/cost/team-scoping", "type": "doc", "disabled": true },
+            { "id": "p6-4", "title": "Spend Tracking & Reconciliation Gaps", "slug": "lite-llm/cost/spend-tracking", "type": "doc", "disabled": true },
+            { "id": "p6-5", "title": "Pre-Call Estimation vs Post-Call Reconciliation", "slug": "lite-llm/cost/pre-vs-post-call", "type": "doc", "disabled": true },
+            { "id": "p6-6", "title": "Showback & Chargeback", "slug": "lite-llm/cost/showback-chargeback", "type": "doc", "disabled": true },
+            { "id": "p6-7", "title": "The Finance Conversation in Engineer-Speak", "slug": "lite-llm/cost/finance-conversation", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Caching",
+          "items": [
+            { "id": "p7-1", "title": "Exact-Match Redis Cache", "slug": "lite-llm/cache/exact-match", "type": "doc", "disabled": true },
+            { "id": "p7-2", "title": "Semantic Cache with Similarity Threshold", "slug": "lite-llm/cache/semantic", "type": "doc", "disabled": true },
+            { "id": "p7-3", "title": "Cache Invalidation — TTL, Flush, Version-Keyed", "slug": "lite-llm/cache/invalidation", "type": "doc", "disabled": true },
+            { "id": "p7-4", "title": "Measuring the Delta — p50/p95, Cost, Hit Rate", "slug": "lite-llm/cache/measuring-delta", "type": "doc", "disabled": true },
+            { "id": "p7-5", "title": "Honest Cache Limits per Workload Shape", "slug": "lite-llm/cache/honest-limits", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Observability",
+          "items": [
+            { "id": "p8-1", "title": "What to Log at the Gateway Layer", "slug": "lite-llm/observability/what-to-log", "type": "doc", "disabled": true },
+            { "id": "p8-2", "title": "Shipping Logs to Loki / Datadog / CloudWatch", "slug": "lite-llm/observability/log-shipping", "type": "doc", "disabled": true },
+            { "id": "p8-3", "title": "Prometheus Exporter & Four Standard Dashboards", "slug": "lite-llm/observability/prometheus", "type": "doc", "disabled": true },
+            { "id": "p8-4", "title": "Langfuse for Trace-Level Visibility", "slug": "lite-llm/observability/langfuse-tracing", "type": "doc", "disabled": true },
+            { "id": "p8-5", "title": "OpenTelemetry Export", "slug": "lite-llm/observability/otel", "type": "doc", "disabled": true },
+            { "id": "p8-6", "title": "Alerting on Cliffs That Matter", "slug": "lite-llm/observability/alerting", "type": "doc", "disabled": true },
+            { "id": "p8-7", "title": "The On-Call Runbook for an AI Gateway", "slug": "lite-llm/observability/runbook", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Guardrails, PII & Compliance",
+          "items": [
+            { "id": "p9-1", "title": "PII Detection & Redaction (Presidio)", "slug": "lite-llm/guardrails/pii-redaction", "type": "doc", "disabled": true },
+            { "id": "p9-2", "title": "Prompt-Injection Detection Inbound", "slug": "lite-llm/guardrails/prompt-injection", "type": "doc", "disabled": true },
+            { "id": "p9-3", "title": "Content Filtering Outbound", "slug": "lite-llm/guardrails/content-filtering", "type": "doc", "disabled": true },
+            { "id": "p9-4", "title": "Per-Key Guardrail Policies", "slug": "lite-llm/guardrails/per-key-policies", "type": "doc", "disabled": true },
+            { "id": "p9-5", "title": "SOC2 / HIPAA / GDPR Posture", "slug": "lite-llm/guardrails/compliance-posture", "type": "doc", "disabled": true },
+            { "id": "p9-6", "title": "Audit Logging for Regulated Workloads", "slug": "lite-llm/guardrails/audit-logging", "type": "doc", "disabled": true },
+            { "id": "p9-7", "title": "Data Residency, Made Concrete", "slug": "lite-llm/guardrails/data-residency", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Authentication & Multi-Tenancy",
+          "items": [
+            { "id": "p10-1", "title": "Bearer Tokens vs JWT Validation", "slug": "lite-llm/auth/jwt-validation", "type": "doc", "disabled": true },
+            { "id": "p10-2", "title": "OIDC — Okta, Auth0, Cognito, Azure AD", "slug": "lite-llm/auth/oidc-integration", "type": "doc", "disabled": true },
+            { "id": "p10-3", "title": "End-User Identity → Virtual Key Mapping", "slug": "lite-llm/auth/identity-mapping", "type": "doc", "disabled": true },
+            { "id": "p10-4", "title": "SaaS Multi-Tenancy Key Patterns", "slug": "lite-llm/auth/multi-tenancy", "type": "doc", "disabled": true },
+            { "id": "p10-5", "title": "BYOK — Bring-Your-Own-Key", "slug": "lite-llm/auth/byok", "type": "doc", "disabled": true },
+            { "id": "p10-6", "title": "Per-Tenant Budgets, Model Access, Audit", "slug": "lite-llm/auth/per-tenant-controls", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Advanced Routing",
+          "items": [
+            { "id": "p11-1", "title": "A/B Testing & Shadow Traffic", "slug": "lite-llm/routing/ab-testing", "type": "doc", "disabled": true },
+            { "id": "p11-2", "title": "Canary Deployments for Model Swaps", "slug": "lite-llm/routing/canary", "type": "doc", "disabled": true },
+            { "id": "p11-3", "title": "Latency-Aware Routing", "slug": "lite-llm/routing/latency-aware", "type": "doc", "disabled": true },
+            { "id": "p11-4", "title": "Cost-Aware Routing", "slug": "lite-llm/routing/cost-aware", "type": "doc", "disabled": true },
+            { "id": "p11-5", "title": "Circuit Breakers for Provider Outages", "slug": "lite-llm/routing/circuit-breakers", "type": "doc", "disabled": true },
+            { "id": "p11-6", "title": "Multi-Region / Multi-Account Failover", "slug": "lite-llm/routing/multi-region-failover", "type": "doc", "disabled": true },
+            { "id": "p11-7", "title": "Blast-Radius Isolation Across Accounts", "slug": "lite-llm/routing/blast-radius", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Beyond Text",
+          "items": [
+            { "id": "p12-1", "title": "Embeddings + Vector DB (pgvector / Qdrant / Pinecone)", "slug": "lite-llm/beyond-text/embeddings-vector-db", "type": "doc", "disabled": true },
+            { "id": "p12-2", "title": "Full RAG Loop Behind the Gateway", "slug": "lite-llm/beyond-text/rag-loop", "type": "doc", "disabled": true },
+            { "id": "p12-3", "title": "Image Models — DALL-E, Stable Diffusion", "slug": "lite-llm/beyond-text/image-models", "type": "doc", "disabled": true },
+            { "id": "p12-4", "title": "Audio — Whisper, ElevenLabs, Polly", "slug": "lite-llm/beyond-text/audio-models", "type": "doc", "disabled": true },
+            { "id": "p12-5", "title": "Vision & Multimodal Parity", "slug": "lite-llm/beyond-text/multimodal-parity", "type": "doc", "disabled": true },
+            { "id": "p12-6", "title": "Tool / Function-Calling Parity Across Providers", "slug": "lite-llm/beyond-text/function-calling-parity", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Self-Hosted Models at Scale",
+          "items": [
+            { "id": "p13-1", "title": "vLLM as a Serving Backend", "slug": "lite-llm/self-hosted/vllm-backend", "type": "doc", "disabled": true },
+            { "id": "p13-2", "title": "Text Generation Inference (TGI)", "slug": "lite-llm/self-hosted/tgi-backend", "type": "doc", "disabled": true },
+            { "id": "p13-3", "title": "GPU Autoscaling (KEDA, Karpenter)", "slug": "lite-llm/self-hosted/gpu-autoscaling", "type": "doc", "disabled": true },
+            { "id": "p13-4", "title": "Model Swap Without Downtime", "slug": "lite-llm/self-hosted/zero-downtime-swap", "type": "doc", "disabled": true },
+            { "id": "p13-5", "title": "Hybrid Cloud + On-Prem Behind One Gateway", "slug": "lite-llm/self-hosted/hybrid-routing", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Emerging Standards",
+          "items": [
+            { "id": "p14-1", "title": "Model Context Protocol (MCP) Hub", "slug": "lite-llm/emerging/mcp-hub", "type": "doc", "disabled": true },
+            { "id": "p14-2", "title": "Agent Frameworks Behind the Gateway", "slug": "lite-llm/emerging/agent-frameworks", "type": "doc", "disabled": true },
+            { "id": "p14-3", "title": "Realtime / WebSocket APIs", "slug": "lite-llm/emerging/realtime-apis", "type": "doc", "disabled": true },
+            { "id": "p14-4", "title": "Streaming Function-Call Wire Formats", "slug": "lite-llm/emerging/streaming-function-calls", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "CI/CD & Config-as-Code",
+          "items": [
+            { "id": "p15-1", "title": "LiteLLM Config Schema Validation in CI", "slug": "lite-llm/cicd/schema-validation", "type": "doc", "disabled": true },
+            { "id": "p15-2", "title": "Dry-Run Testing for Model-List Changes", "slug": "lite-llm/cicd/dry-run-testing", "type": "doc", "disabled": true },
+            { "id": "p15-3", "title": "Staged Rollout — Dev → Staging → Prod", "slug": "lite-llm/cicd/staged-rollout", "type": "doc", "disabled": true },
+            { "id": "p15-4", "title": "GitOps with Flux / ArgoCD", "slug": "lite-llm/cicd/gitops", "type": "doc", "disabled": true },
+            { "id": "p15-5", "title": "Disaster Recovery and Backups", "slug": "lite-llm/cicd/disaster-recovery", "type": "doc", "disabled": true },
+            { "id": "p15-6", "title": "Rolling Back a Bad Model Swap in < 5 Min", "slug": "lite-llm/cicd/rollback", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Load Testing & Capacity",
+          "items": [
+            { "id": "p16-1", "title": "Why the Gateway Is on the Hot Path", "slug": "lite-llm/capacity/hot-path", "type": "doc", "disabled": true },
+            { "id": "p16-2", "title": "k6 & Locust Scripts Against the Proxy", "slug": "lite-llm/capacity/k6-locust", "type": "doc", "disabled": true },
+            { "id": "p16-3", "title": "Profiling the Postgres Ceiling", "slug": "lite-llm/capacity/postgres-ceiling", "type": "doc", "disabled": true },
+            { "id": "p16-4", "title": "Profiling the Redis Ceiling", "slug": "lite-llm/capacity/redis-ceiling", "type": "doc", "disabled": true },
+            { "id": "p16-5", "title": "When Horizontal Scaling Starts to Matter", "slug": "lite-llm/capacity/horizontal-scaling", "type": "doc", "disabled": true },
+            { "id": "p16-6", "title": "Capacity-Planning Conversation", "slug": "lite-llm/capacity/planning-conversation", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Capstone — Production End-to-End",
+          "items": [
+            { "id": "p17-1", "title": "The Brief — B2B SaaS AI Feature", "slug": "lite-llm/capstone/brief", "type": "doc", "disabled": true },
+            { "id": "p17-2", "title": "Full Stack — TLS + RDS + ElastiCache + Obs", "slug": "lite-llm/capstone/full-stack", "type": "doc", "disabled": true },
+            { "id": "p17-3", "title": "IAM Model & Audit Trail", "slug": "lite-llm/capstone/iam-model", "type": "doc", "disabled": true },
+            { "id": "p17-4", "title": "Deployment — ECS / EKS / Single EC2", "slug": "lite-llm/capstone/deployment-options", "type": "doc", "disabled": true },
+            { "id": "p17-5", "title": "Load Test, Failover Drill, Rollback Drill", "slug": "lite-llm/capstone/drills", "type": "doc", "disabled": true },
+            { "id": "p17-6", "title": "90-Day Operational Review", "slug": "lite-llm/capstone/90-day-review", "type": "doc", "disabled": true },
+            { "id": "p17-7", "title": "Submitting the Capstone Artifacts", "slug": "lite-llm/capstone/submission", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Career & Communication",
+          "items": [
+            { "id": "p18-1", "title": "Positioning as an LLM Platform Engineer", "slug": "lite-llm/career/positioning", "type": "doc", "disabled": true },
+            { "id": "p18-2", "title": "System Design Interviews for AI Gateways", "slug": "lite-llm/career/system-design-interviews", "type": "doc", "disabled": true },
+            { "id": "p18-3", "title": "Writing the Right Kind of Public Content", "slug": "lite-llm/career/public-content", "type": "doc", "disabled": true },
+            { "id": "p18-4", "title": "The About Blurb That Signals Authority", "slug": "lite-llm/career/about-blurb", "type": "doc", "disabled": true },
+            { "id": "p18-5", "title": "Building a Public Portfolio Repo", "slug": "lite-llm/career/portfolio-repo", "type": "doc", "disabled": true }
+          ]
+        },
+        {
+          "title": "Use Cases — Publishing & Video Arc",
+          "items": [
+            { "id": "uc-roadmap", "title": "Roadmap & Gap List (Overview)", "slug": "lite-llm/use-cases/roadmap", "duration": "10m", "type": "doc" },
+            { "id": "uc-1", "title": "Local Gateway + Fallback (Ollama)", "slug": "lite-llm/ollama/setup", "type": "doc" },
+            { "id": "uc-2", "title": "Multi-Provider Free-Tier Gateway", "slug": "lite-llm/free-gateway/multi-provider", "type": "doc" },
+            { "id": "uc-3", "title": "AWS Bedrock Dev Profile", "slug": "lite-llm/bedrock/dev-profile", "type": "doc" },
+            { "id": "uc-4", "title": "AWS Bedrock Prod Profile", "slug": "lite-llm/bedrock/prod-profile", "type": "doc" },
+            { "id": "uc-5", "title": "Cost Governance with Virtual Keys + Budgets", "slug": "lite-llm/use-cases/cost-governance", "type": "doc", "badge": "Soon" },
+            { "id": "uc-6", "title": "Semantic Caching", "slug": "lite-llm/use-cases/semantic-caching", "type": "doc", "badge": "Soon" },
+            { "id": "uc-7", "title": "Observability + Per-Key Analytics", "slug": "lite-llm/use-cases/observability-analytics", "type": "doc", "badge": "Soon" },
+            { "id": "uc-8", "title": "PII Redaction + Guardrails", "slug": "lite-llm/use-cases/pii-guardrails", "type": "doc", "badge": "Soon" },
+            { "id": "uc-9", "title": "Multi-Region / Multi-Account Failover", "slug": "lite-llm/use-cases/multi-region-failover", "type": "doc", "badge": "Soon" },
+            { "id": "uc-10", "title": "Streaming + Function-Calling Parity", "slug": "lite-llm/use-cases/function-calling-parity", "type": "doc", "badge": "Soon" },
+            { "id": "uc-11", "title": "A/B Testing & Shadow Traffic", "slug": "lite-llm/use-cases/ab-shadow-traffic", "type": "doc", "badge": "Soon" },
+            { "id": "uc-12", "title": "Auth Beyond Bearer Tokens", "slug": "lite-llm/use-cases/auth-beyond-bearer", "type": "doc", "badge": "Soon" },
+            { "id": "uc-13", "title": "SaaS Multi-Tenancy and BYOK", "slug": "lite-llm/use-cases/multi-tenancy-byok", "type": "doc", "badge": "Soon" },
+            { "id": "uc-14", "title": "Embeddings + Vector DB for RAG", "slug": "lite-llm/use-cases/embeddings-rag", "type": "doc", "badge": "Soon" },
+            { "id": "uc-15", "title": "Image, Audio, and Multimodal Routing", "slug": "lite-llm/use-cases/multimodal-routing", "type": "doc", "badge": "Soon" },
+            { "id": "uc-16", "title": "Self-Hosted LLM Cluster (vLLM / TGI)", "slug": "lite-llm/use-cases/self-hosted-cluster", "type": "doc", "badge": "Soon" },
+            { "id": "uc-17", "title": "CI/CD and Config-as-Code for LiteLLM", "slug": "lite-llm/use-cases/cicd-config-as-code", "type": "doc", "badge": "Soon" },
+            { "id": "uc-18", "title": "MCP Routing Through the Gateway", "slug": "lite-llm/use-cases/mcp-routing", "type": "doc", "badge": "Soon" },
+            { "id": "uc-19", "title": "Realtime / WebSocket APIs", "slug": "lite-llm/use-cases/realtime-apis", "type": "doc", "badge": "Soon" },
+            { "id": "uc-20", "title": "Agent Frameworks Behind the Gateway", "slug": "lite-llm/use-cases/agent-frameworks", "type": "doc", "badge": "Soon" },
+            { "id": "uc-21", "title": "Cost Showback/Chargeback Automation", "slug": "lite-llm/use-cases/showback-chargeback", "type": "doc", "badge": "Soon" },
+            { "id": "uc-22", "title": "Load Testing & Capacity Planning", "slug": "lite-llm/use-cases/load-testing", "type": "doc", "badge": "Soon" }
           ]
         }
       ]
