@@ -53,11 +53,23 @@ const config: ProductPageConfig = {
       language: 'bash' as const,
       code: `docker run -d \\
   --name openldap \\
-  -e LDAP_DOMAIN=example.com \\
-  -e LDAP_ADMIN_PASSWORD=changeme \\
+  --hostname openldap \\
+  -e LDAP_DOMAIN=vibhuvioio.com \\
+  -e LDAP_BASE_DN=dc=vibhuvioio,dc=com \\
+  -e LDAP_ADMIN_DN=cn=Manager,dc=vibhuvioio,dc=com \\
+  -e LDAP_ADMIN_PASSWORD=Password123 \\
+  -e LDAP_ROOT_PASSWORD=Password123 \\
+  -e LDAP_ORGANISATION=VibhuviOiO \\
+  -e INCLUDE_SCHEMAS=cosine,inetorgperson,nis \\
+  -e ENABLE_REPLICATION=false \\
+  -e SERVER_ID=1 \\
+  -e ENABLE_MONITORING=true \\
   -p 389:389 \\
+  -p 636:636 \\
   -v ldap-data:/var/lib/ldap \\
   -v ldap-config:/etc/openldap/slapd.d \\
+  -v ./logs:/logs \\
+  --restart unless-stopped \\
   vibhuvioio/openldap:latest`,
     },
     {
@@ -67,19 +79,33 @@ const config: ProductPageConfig = {
 services:
   openldap:
     image: vibhuvioio/openldap:latest
+    container_name: openldap
+    hostname: openldap
+    restart: unless-stopped
     ports:
       - "389:389"
       - "636:636"
     environment:
-      - LDAP_DOMAIN=example.com
-      - LDAP_ADMIN_PASSWORD=changeme
-      - ENABLE_MONITORING=true
+      LDAP_DOMAIN: vibhuvioio.com
+      LDAP_BASE_DN: dc=vibhuvioio,dc=com
+      LDAP_ADMIN_DN: cn=Manager,dc=vibhuvioio,dc=com
+      LDAP_ADMIN_PASSWORD: Password123
+      LDAP_ROOT_PASSWORD: Password123
+      LDAP_ORGANISATION: VibhuviOiO
+      INCLUDE_SCHEMAS: cosine,inetorgperson,nis
+      ENABLE_REPLICATION: "false"
+      SERVER_ID: "1"
+      ENABLE_MONITORING: "true"
     volumes:
       - ldap-data:/var/lib/ldap
       - ldap-config:/etc/openldap/slapd.d
-      - ldap-logs:/logs`,
+      - ./logs:/logs
+volumes:
+  ldap-data:
+  ldap-config:`,
     },
   ],
+  showQuickStartUiAccess: false,
 
   docs: [
     { href: '/openldap-docker/getting-started', title: 'Getting Started', desc: 'Quick start guide and installation' },

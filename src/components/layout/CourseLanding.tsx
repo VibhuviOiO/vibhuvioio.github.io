@@ -15,6 +15,8 @@ interface LessonItem {
   type?: string;
   videoUrl?: string;
   githubUrl?: string;
+  disabled?: boolean;
+  badge?: string;
 }
 
 interface CurriculumSection {

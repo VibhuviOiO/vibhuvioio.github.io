@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { ChevronRight, FileText, Folder, FolderOpen } from 'lucide-react';
+import { ChevronRight, FileText, Folder, FolderOpen, Lock } from 'lucide-react';
 import { SidebarGroup } from '@/types/docs';
 
 interface SidebarProps {
@@ -18,6 +18,8 @@ interface SidebarItemProps {
     title: string;
     slug: string;
     items?: any[];
+    disabled?: boolean;
+    badge?: string;
   };
   basePath: string;
   depth?: number;
@@ -38,7 +40,8 @@ function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
   const baseClasses = "flex items-center gap-2 py-1.5 pr-2 text-sm transition-colors rounded-md mx-2";
   const activeClasses = "sidebar-active";
   const inactiveClasses = "text-gray-700 hover:text-gray-900 hover:bg-gray-100";
-  
+  const disabledClasses = "text-gray-400 cursor-not-allowed";
+
   const paddingLeft = getPaddingLeft(depth, !!hasChildren);
 
   if (hasChildren) {
@@ -72,6 +75,23 @@ function SidebarItem({ item, basePath, depth = 0 }: SidebarItemProps) {
             ))}
           </div>
         )}
+      </div>
+    );
+  }
+
+  if (item.disabled) {
+    return (
+      <div
+        className={`${baseClasses} ${disabledClasses}`}
+        style={{ paddingLeft, fontWeight: 400 }}
+        title="Coming soon"
+        aria-disabled="true"
+      >
+        <Lock className="h-3.5 w-3.5 shrink-0 text-gray-300" />
+        <span className="truncate flex-1">{item.title}</span>
+        <span className="shrink-0 rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+          {item.badge || 'Soon'}
+        </span>
       </div>
     );
   }

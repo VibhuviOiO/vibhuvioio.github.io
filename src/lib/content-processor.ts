@@ -8,6 +8,10 @@ export interface SidebarItem {
   type?: string;
   videoUrl?: string;
   githubUrl?: string;
+  /** Render as non-clickable placeholder with a "Soon" badge. */
+  disabled?: boolean;
+  /** Optional short badge label shown next to disabled items (defaults to "Soon"). */
+  badge?: string;
 }
 
 export interface SidebarSection {
@@ -131,7 +135,9 @@ export async function processLessonContent(raw: string): Promise<ProcessedConten
 export function buildSidebarGroups(sidebar: SidebarSection[]) {
   return sidebar.map(section => ({
     title: section.title,
-    items: section.items.map(({ id, title, slug }) => ({ id, title, slug })),
+    items: section.items.map(({ id, title, slug, disabled, badge }) => ({
+      id, title, slug, disabled, badge,
+    })),
   }));
 }
 
