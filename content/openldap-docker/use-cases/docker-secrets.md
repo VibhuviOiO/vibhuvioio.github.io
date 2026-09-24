@@ -11,7 +11,7 @@ Deploy OpenLDAP with passwords loaded from Docker secrets instead of plaintext e
 
 ```project
 name: openldap-secrets
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/docker-secrets/docker-compose.yml
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/docker-compose.yml
 ```
 
 ## Set image

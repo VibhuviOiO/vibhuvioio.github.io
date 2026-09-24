@@ -15,11 +15,11 @@ A corporate LDAP directory with 28 employees from 25+ countries across 8 departm
 
 ```project
 name: openldap-vibhuvi
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/docker-compose.yml
-.env.vibhuvi: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/.env.vibhuvi
-custom-schema/vibhuviEmployee.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/custom-schema/vibhuviEmployee.ldif
-sample/employee_data_global.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/sample/employee_data_global.ldif
-init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/init/init-data.sh
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvi-com-singlenode/docker-compose.yml
+.env.vibhuvi: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvi-com-singlenode/.env.vibhuvi.example
+custom-schema/vibhuviEmployee.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvi-com-singlenode/custom-schema/vibhuviEmployee.ldif
+sample/employee_data_global.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvi-com-singlenode/init/employee_data_global.ldif
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvi-com-singlenode/init/init-data.sh
 ```
 
 ### Start
@@ -103,11 +103,11 @@ A themed LDAP directory with 20 characters and 5 groups from the Mahabharata, us
 
 ```project
 name: openldap-vibhuvioio
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/docker-compose.yml
-.env.vibhuvioio: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/.env.vibhuvioio
-custom-schema/MahabharataCharacter.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/custom-schema/MahabharataCharacter.ldif
-sample/mahabharata_data.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/sample/mahabharata_data.ldif
-init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvioio-com-singlenode/init/init-data.sh
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvioio-com-singlenode/docker-compose.yml
+.env.vibhuvioio: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvioio-com-singlenode/.env.vibhuvioio.example
+custom-schema/MahabharataCharacter.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvioio-com-singlenode/custom-schema/MahabharataCharacter.ldif
+sample/mahabharata_data.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvioio-com-singlenode/sample/mahabharata_data.ldif
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvioio-com-singlenode/init/init-data.sh
 ```
 
 ### Start

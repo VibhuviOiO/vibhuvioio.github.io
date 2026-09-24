@@ -273,7 +273,7 @@ fi
 ```project
 name: openldap-init
 docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/docker-compose.yml
-init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/vibhuvi-com-singlenode/init/init-data.sh
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/vibhuvi-com-singlenode/init/init-data.sh
 ```
 
 ## Connection Details
