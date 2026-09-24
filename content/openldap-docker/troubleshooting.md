@@ -236,6 +236,35 @@ ldapsearch -x -H ldap://localhost:389 -ZZ -d 1 \
   -D "cn=Manager,dc=example,dc=com" -w changeme -b "" -s base
 ```
 
+### "FAILED: LDAPS on port 636 is not answering" while TLS is fine
+
+The probe reports the LDAPS listener as down, and slapd's own log disagrees:
+
+```
+TLS established tls_ssf=256 ssf=256 tls_proto=TLSv1.3 tls_cipher=TLS_AES_256_GCM_SHA384
+```
+
+If anonymous binds are disabled (`features.disableAnonymousBind=true`, or `LDAP_DISABLE_ANONYMOUS_BIND=true`), images before `2.6.10-3` cannot pass this check: it verified LDAPS with an **anonymous** bind, and the server answers
+
+```
+ldap_bind: Inappropriate authentication (48)
+	additional info: anonymous bind disallowed
+```
+
+A refused bind still proves the TLS handshake completed, but the old check read it as "not answering", so the startup probe failed forever and `helm install --wait` ended in `context deadline exceeded`. The TLS listener was never the problem.
+
+Confirm the listener itself is healthy — expect a DN or `err=48`, never `Can't contact LDAP server`:
+
+```bash
+kubectl -n <namespace> exec <pod> -- \
+  env LDAPTLS_REQCERT=never \
+  ldapsearch -x -H ldaps://localhost:636 -b "" -s base "(objectClass=*)"
+```
+
+`LDAPTLS_REQCERT=never` is required, not optional: the certificate is normally self-signed, so the default trust store rejects it before the server ever sees the request.
+
+The check now requires only that the listener answer at the LDAP layer. Upgrade to `vibhuvioio/openldap:2.6.10` (build `2.6.10-3` or later).
+
 ## Database Errors
 
 ### "MDB_MAP_FULL: Environment mapsize limit reached"

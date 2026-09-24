@@ -15,13 +15,13 @@ ___MULTI_MASTER_ARCHITECTURE___
 
 ```project
 name: openldap-multinode
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/docker-compose.yml
-.env.node1: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node1
-.env.node2: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node2
-.env.node3: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/.env.node3
-custom-schema/oioCloudEmployee.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/custom-schema/oioCloudEmployee.ldif
-sample/oiocloud_data.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/sample/oiocloud_data.ldif
-init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/oiocloud-com-multinode/init/init-data.sh
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/docker-compose.yml
+.env.node1: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/.env.node1.example
+.env.node2: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/.env.node2.example
+.env.node3: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/.env.node3.example
+custom-schema/oioCloudEmployee.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/custom-schema/oioCloudEmployee.ldif
+sample/oiocloud_data.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/sample/oiocloud_data.ldif
+init/init-data.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/oiocloud-com-multinode/init/init-data.sh
 ```
 
 ## Start the Cluster

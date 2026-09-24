@@ -11,8 +11,8 @@ Verify that restarting the OpenLDAP container is safe — configuration is idemp
 
 ```project
 name: openldap-idempotency
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/idempotency-test/docker-compose.yml
-init/test-idempotency.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/idempotency-test/init/test-idempotency.sh
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/idempotency-test/docker-compose.yml
+init/test-idempotency.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/idempotency-test/init/test-idempotency.sh
 ```
 
 ## Start

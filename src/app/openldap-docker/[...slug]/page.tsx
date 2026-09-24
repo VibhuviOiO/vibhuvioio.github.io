@@ -110,6 +110,14 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Idempotency Test - OpenLDAP Docker',
     description: 'Validate that OpenLDAP Docker handles restarts gracefully — no errors, no duplicates, full data persistence.',
   },
+  'use-cases/password-rotation': {
+    title: 'Password Rotation - OpenLDAP Docker',
+    description: 'Rotate the OpenLDAP admin password in the right order so the container does not re-bootstrap a healthy directory.',
+  },
+  'use-cases/kubernetes': {
+    title: 'Kubernetes - OpenLDAP Docker',
+    description: 'Run OpenLDAP Docker on k3s with hostPort access, three-provider replication, and the published Helm chart.',
+  },
   'use-cases/initialization-scripts': {
     title: 'Initialization Scripts - OpenLDAP Docker',
     description: 'Automate OpenLDAP setup with initialization scripts. Load sample data, create custom OUs, and configure indexes on first startup.',
@@ -286,6 +294,8 @@ export function generateStaticParams() {
     { slug: ['use-cases', 'password-policy'] },
     { slug: ['use-cases', 'idempotency'] },
     { slug: ['use-cases', 'initialization-scripts'] },
+    { slug: ['use-cases', 'password-rotation'] },
+    { slug: ['use-cases', 'kubernetes'] },
     { slug: ['troubleshooting'] },
   ];
 }

@@ -11,8 +11,8 @@ Deploy OpenLDAP with all three overlays enabled — memberOf, password policy, a
 
 ```project
 name: openldap-overlays
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/overlay-features/docker-compose.yml
-init/test-overlays.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/overlay-features/init/test-overlays.sh
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/overlay-features/docker-compose.yml
+init/test-overlays.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/overlay-features/init/test-overlays.sh
 ```
 ## Set image
 ```bash

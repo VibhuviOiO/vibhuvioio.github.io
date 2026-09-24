@@ -11,9 +11,9 @@ Deploy OpenLDAP with encrypted connections using StartTLS (port 389) and LDAPS (
 
 ```project
 name: openldap-tls
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/docker-compose.yml
-certs/ldap.crt: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.crt
-certs/ldap.key: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/tls-enabled/certs/ldap.key
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/tls-enabled/docker-compose.yml
+certs/ldap.crt: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/tls-enabled/certs/ldap.crt
+certs/ldap.key: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/tls-enabled/certs/ldap.key
 ```
 ## Set image
 ```bash

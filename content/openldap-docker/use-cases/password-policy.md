@@ -11,9 +11,9 @@ Test the OpenLDAP password policy overlay with automated validation of policy en
 
 ```project
 name: openldap-ppolicy
-docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/docker-compose.yml
-.env.password-policy: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/.env.password-policy
-test-password-policy.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-docker/main/use-cases/password-policy-test/test-password-policy.sh
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/password-policy-test/docker-compose.yml
+.env.password-policy: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/password-policy-test/.env.password-policy.example
+test-password-policy.sh: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/main/password-policy-test/test-password-policy.sh
 ```
 
 ## Start
