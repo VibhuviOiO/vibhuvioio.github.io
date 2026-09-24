@@ -20,36 +20,82 @@
         "Image tagging & cleanup",
         "User-friendly interface"
       ],
-      "technologies": ["Python", "FastAPI", "JavaScript", "Docker", "Trivy"],
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "JavaScript",
+        "Docker",
+        "Trivy"
+      ],
       "sidebar": [
         {
           "title": "Getting Started",
           "items": [
-            { "id": "installation", "title": "Installation", "slug": "getting-started" },
-            { "id": "configuration", "title": "Configuration", "slug": "configuration" },
-            { "id": "features", "title": "Features Overview", "slug": "features" }
+            {
+              "id": "installation",
+              "title": "Installation",
+              "slug": "getting-started"
+            },
+            {
+              "id": "configuration",
+              "title": "Configuration",
+              "slug": "configuration"
+            },
+            {
+              "id": "features",
+              "title": "Features Overview",
+              "slug": "features"
+            }
           ]
         },
         {
           "title": "Guides",
           "items": [
-            { "id": "security", "title": "Security Scanning", "slug": "security" },
-            { "id": "bulk-operations", "title": "Bulk Operations", "slug": "bulk-operations" }
+            {
+              "id": "security",
+              "title": "Security Scanning",
+              "slug": "security"
+            },
+            {
+              "id": "bulk-operations",
+              "title": "Bulk Operations",
+              "slug": "bulk-operations"
+            }
           ]
         },
         {
           "title": "Examples",
           "items": [
-            { "id": "multi-registry", "title": "Multi-Registry Setup", "slug": "examples/multi-registry" },
-            { "id": "basic-auth", "title": "Basic Auth Registry", "slug": "examples/basic-auth" }
+            {
+              "id": "multi-registry",
+              "title": "Multi-Registry Setup",
+              "slug": "examples/multi-registry"
+            },
+            {
+              "id": "basic-auth",
+              "title": "Basic Auth Registry",
+              "slug": "examples/basic-auth"
+            }
           ]
         },
         {
           "title": "Development",
           "items": [
-            { "id": "api", "title": "API Integration", "slug": "api" },
-            { "id": "development", "title": "Development Guide", "slug": "development" },
-            { "id": "testing", "title": "Testing Guide", "slug": "testing" }
+            {
+              "id": "api",
+              "title": "API Integration",
+              "slug": "api"
+            },
+            {
+              "id": "development",
+              "title": "Development Guide",
+              "slug": "development"
+            },
+            {
+              "id": "testing",
+              "title": "Testing Guide",
+              "slug": "testing"
+            }
           ]
         }
       ]
@@ -68,33 +114,65 @@
         "Import/Export LDIF",
         "Access control management"
       ],
-      "technologies": ["Vue.js", "Node.js", "LDAP"],
+      "technologies": [
+        "Vue.js",
+        "Node.js",
+        "LDAP"
+      ],
       "sidebar": [
         {
           "title": "Getting Started",
           "items": [
-            { "id": "installation", "title": "Installation", "slug": "getting-started/installation" },
-            { "id": "configuration", "title": "Configuration", "slug": "getting-started/configuration" }
+            {
+              "id": "installation",
+              "title": "Installation",
+              "slug": "getting-started/installation"
+            },
+            {
+              "id": "configuration",
+              "title": "Configuration",
+              "slug": "getting-started/configuration"
+            }
           ]
         },
         {
           "title": "Features",
           "items": [
-            { "id": "overview", "title": "Overview", "slug": "features/overview" },
-            { "id": "security", "title": "Security", "slug": "features/security" }
+            {
+              "id": "overview",
+              "title": "Overview",
+              "slug": "features/overview"
+            },
+            {
+              "id": "security",
+              "title": "Security",
+              "slug": "features/security"
+            }
           ]
         },
         {
           "title": "Deployment",
           "items": [
-            { "id": "production", "title": "Production Guide", "slug": "deployment/production" }
+            {
+              "id": "production",
+              "title": "Production Guide",
+              "slug": "deployment/production"
+            }
           ]
         },
         {
           "title": "Contributing",
           "items": [
-            { "id": "development", "title": "Development", "slug": "contributing/development" },
-            { "id": "testing", "title": "Testing Guide", "slug": "contributing/testing" }
+            {
+              "id": "development",
+              "title": "Development",
+              "slug": "contributing/development"
+            },
+            {
+              "id": "testing",
+              "title": "Testing Guide",
+              "slug": "contributing/testing"
+            }
           ]
         }
       ]
@@ -114,63 +192,185 @@
         "Enterprise security",
         "Built-in monitoring"
       ],
-      "technologies": ["OpenLDAP", "AlmaLinux 9", "Docker"],
+      "technologies": [
+        "OpenLDAP",
+        "AlmaLinux 9",
+        "Docker"
+      ],
       "sidebar": [
         {
           "title": "Getting Started",
           "items": [
-            { "id": "getting-started", "title": "Quick Start", "slug": "getting-started" },
-            { "id": "configuration", "title": "Configuration", "slug": "configuration" }
+            {
+              "id": "getting-started",
+              "title": "Quick Start",
+              "slug": "getting-started"
+            },
+            {
+              "id": "configuration",
+              "title": "Configuration",
+              "slug": "configuration"
+            }
           ]
         },
         {
           "title": "Deployment",
           "items": [
-            { "id": "deploy-docker-run", "title": "Docker Run", "slug": "deployment/docker-run" },
-            { "id": "deploy-single-node", "title": "Single Node", "slug": "deployment/single-node" },
-            { "id": "deploy-multi-master", "title": "Multi-Master Cluster", "slug": "deployment/multi-master" },
-            { "id": "deploy-kubernetes", "title": "Kubernetes", "slug": "deployment/kubernetes" }
+            {
+              "id": "deploy-docker-run",
+              "title": "Docker Run",
+              "slug": "deployment/docker-run"
+            },
+            {
+              "id": "deploy-single-node",
+              "title": "Single Node",
+              "slug": "deployment/single-node"
+            },
+            {
+              "id": "deploy-multi-master",
+              "title": "Multi-Master Cluster",
+              "slug": "deployment/multi-master"
+            },
+            {
+              "id": "deploy-kubernetes",
+              "title": "Kubernetes",
+              "slug": "deployment/kubernetes"
+            }
           ]
         },
         {
           "title": "Features",
           "items": [
-            { "id": "overlays", "title": "Overlays", "slug": "overlays" },
-            { "id": "monitoring", "title": "Monitoring", "slug": "monitoring" },
-            { "id": "security", "title": "Security", "slug": "security" }
+            {
+              "id": "overlays",
+              "title": "Overlays",
+              "slug": "overlays"
+            },
+            {
+              "id": "monitoring",
+              "title": "Monitoring",
+              "slug": "monitoring"
+            },
+            {
+              "id": "security",
+              "title": "Security",
+              "slug": "security"
+            }
           ]
         },
         {
           "title": "Integrations",
           "items": [
-            { "id": "keycloak", "title": "Keycloak (SSO)", "slug": "integrations/keycloak" },
-            { "id": "keycloak-auth-only", "title": "Keycloak (Auth Only)", "slug": "integrations/keycloak-auth-only" },
-            { "id": "sonarqube", "title": "SonarQube", "slug": "integrations/sonarqube" },
-            { "id": "jenkins", "title": "Jenkins", "slug": "integrations/jenkins" },
-            { "id": "vault", "title": "HashiCorp Vault", "slug": "integrations/vault" },
-            { "id": "splunk", "title": "Splunk Enterprise", "slug": "integrations/splunk" },
-            { "id": "guacamole", "title": "Apache Guacamole", "slug": "integrations/guacamole" },
-            { "id": "portainer", "title": "Portainer", "slug": "integrations/portainer" },
-            { "id": "redmine", "title": "Redmine", "slug": "integrations/redmine" }
+            {
+              "id": "keycloak",
+              "title": "Keycloak (SSO)",
+              "slug": "integrations/keycloak"
+            },
+            {
+              "id": "keycloak-auth-only",
+              "title": "Keycloak (Auth Only)",
+              "slug": "integrations/keycloak-auth-only"
+            },
+            {
+              "id": "sonarqube",
+              "title": "SonarQube",
+              "slug": "integrations/sonarqube"
+            },
+            {
+              "id": "jenkins",
+              "title": "Jenkins",
+              "slug": "integrations/jenkins"
+            },
+            {
+              "id": "vault",
+              "title": "HashiCorp Vault",
+              "slug": "integrations/vault"
+            },
+            {
+              "id": "splunk",
+              "title": "Splunk Enterprise",
+              "slug": "integrations/splunk"
+            },
+            {
+              "id": "guacamole",
+              "title": "Apache Guacamole",
+              "slug": "integrations/guacamole"
+            },
+            {
+              "id": "portainer",
+              "title": "Portainer",
+              "slug": "integrations/portainer"
+            },
+            {
+              "id": "redmine",
+              "title": "Redmine",
+              "slug": "integrations/redmine"
+            }
           ]
         },
         {
           "title": "Use Cases",
           "items": [
-            { "id": "uc-single-node", "title": "Single Node Deployment", "slug": "use-cases/single-node" },
-            { "id": "uc-multi-master", "title": "Multi-Master Cluster", "slug": "use-cases/multi-master-cluster" },
-            { "id": "uc-docker-secrets", "title": "Docker Secrets", "slug": "use-cases/docker-secrets" },
-            { "id": "uc-tls", "title": "TLS/SSL", "slug": "use-cases/tls-ssl" },
-            { "id": "uc-overlays", "title": "Overlay Features", "slug": "use-cases/overlay-features" },
-            { "id": "uc-password-policy", "title": "Password Policy", "slug": "use-cases/password-policy" },
-            { "id": "uc-idempotency", "title": "Idempotency Test", "slug": "use-cases/idempotency" },
-            { "id": "uc-init-scripts", "title": "Initialization Scripts", "slug": "use-cases/initialization-scripts" }
+            {
+              "id": "uc-single-node",
+              "title": "Single Node Deployment",
+              "slug": "use-cases/single-node"
+            },
+            {
+              "id": "uc-multi-master",
+              "title": "Multi-Master Cluster",
+              "slug": "use-cases/multi-master-cluster"
+            },
+            {
+              "id": "uc-docker-secrets",
+              "title": "Docker Secrets",
+              "slug": "use-cases/docker-secrets"
+            },
+            {
+              "id": "uc-tls",
+              "title": "TLS/SSL",
+              "slug": "use-cases/tls-ssl"
+            },
+            {
+              "id": "uc-overlays",
+              "title": "Overlay Features",
+              "slug": "use-cases/overlay-features"
+            },
+            {
+              "id": "uc-password-policy",
+              "title": "Password Policy",
+              "slug": "use-cases/password-policy"
+            },
+            {
+              "id": "uc-idempotency",
+              "title": "Idempotency Test",
+              "slug": "use-cases/idempotency"
+            },
+            {
+              "id": "uc-init-scripts",
+              "title": "Initialization Scripts",
+              "slug": "use-cases/initialization-scripts"
+            },
+            {
+              "id": "uc-password-rotation",
+              "title": "Password Rotation",
+              "slug": "use-cases/password-rotation"
+            },
+            {
+              "id": "uc-kubernetes",
+              "title": "Kubernetes",
+              "slug": "use-cases/kubernetes"
+            }
           ]
         },
         {
           "title": "Reference",
           "items": [
-            { "id": "troubleshooting", "title": "Troubleshooting", "slug": "troubleshooting" }
+            {
+              "id": "troubleshooting",
+              "title": "Troubleshooting",
+              "slug": "troubleshooting"
+            }
           ]
         }
       ]
@@ -188,7 +388,10 @@
         "Custom branding",
         "API access"
       ],
-      "technologies": ["Next.js", "PostgreSQL"],
+      "technologies": [
+        "Next.js",
+        "PostgreSQL"
+      ],
       "sidebar": []
     },
     {
@@ -206,41 +409,107 @@
         "Audit log & data retention",
         "Slack & email notifications"
       ],
-      "technologies": ["Spring Boot", "React", "Go", "PostgreSQL", "Docker"],
+      "technologies": [
+        "Spring Boot",
+        "React",
+        "Go",
+        "PostgreSQL",
+        "Docker"
+      ],
       "sidebar": [
         {
           "title": "Getting Started",
           "items": [
-            { "id": "getting-started", "title": "Getting Started", "slug": "getting-started" },
-            { "id": "installation", "title": "Installation", "slug": "installation" },
-            { "id": "first-agent", "title": "First Agent", "slug": "first-agent" }
+            {
+              "id": "getting-started",
+              "title": "Getting Started",
+              "slug": "getting-started"
+            },
+            {
+              "id": "installation",
+              "title": "Installation",
+              "slug": "installation"
+            },
+            {
+              "id": "first-agent",
+              "title": "First Agent",
+              "slug": "first-agent"
+            }
           ]
         },
         {
           "title": "Features",
           "items": [
-            { "id": "regions-datacenters", "title": "Regions & Datacenters", "slug": "regions-datacenters" },
-            { "id": "agents", "title": "Agents", "slug": "agents" },
-            { "id": "http-monitors", "title": "HTTP Monitors", "slug": "http-monitors" },
-            { "id": "schedules", "title": "Schedules", "slug": "schedules" },
-            { "id": "status-pages", "title": "Status Pages", "slug": "status-pages" },
-            { "id": "notifications", "title": "Notifications & Alerts", "slug": "notifications" },
-            { "id": "uptime-analytics", "title": "Uptime Analytics", "slug": "uptime-analytics" },
-            { "id": "audit-retention", "title": "Audit & Retention", "slug": "audit-retention" }
+            {
+              "id": "regions-datacenters",
+              "title": "Regions & Datacenters",
+              "slug": "regions-datacenters"
+            },
+            {
+              "id": "agents",
+              "title": "Agents",
+              "slug": "agents"
+            },
+            {
+              "id": "http-monitors",
+              "title": "HTTP Monitors",
+              "slug": "http-monitors"
+            },
+            {
+              "id": "schedules",
+              "title": "Schedules",
+              "slug": "schedules"
+            },
+            {
+              "id": "status-pages",
+              "title": "Status Pages",
+              "slug": "status-pages"
+            },
+            {
+              "id": "notifications",
+              "title": "Notifications & Alerts",
+              "slug": "notifications"
+            },
+            {
+              "id": "uptime-analytics",
+              "title": "Uptime Analytics",
+              "slug": "uptime-analytics"
+            },
+            {
+              "id": "audit-retention",
+              "title": "Audit & Retention",
+              "slug": "audit-retention"
+            }
           ]
         },
         {
           "title": "Operations",
           "items": [
-            { "id": "deployment", "title": "Deployment", "slug": "deployment" },
-            { "id": "agent-installation", "title": "Agent Installation", "slug": "agent-installation" },
-            { "id": "troubleshooting", "title": "Troubleshooting", "slug": "troubleshooting" }
+            {
+              "id": "deployment",
+              "title": "Deployment",
+              "slug": "deployment"
+            },
+            {
+              "id": "agent-installation",
+              "title": "Agent Installation",
+              "slug": "agent-installation"
+            },
+            {
+              "id": "troubleshooting",
+              "title": "Troubleshooting",
+              "slug": "troubleshooting"
+            }
           ]
         },
         {
           "title": "API",
           "items": [
-            { "id": "authentication", "title": "Authentication", "slug": "authentication" }
+            {
+              "id": "authentication",
+              "title": "Authentication",
+              "slug": "authentication"
+            }
           ]
         }
       ]
