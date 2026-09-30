@@ -179,6 +179,13 @@ const sidebarGroups = [
     ],
   },
   {
+    title: 'Observability',
+    items: [
+      { id: 'prometheus-exporter', title: 'Prometheus Exporter', slug: 'observability/prometheus-exporter' },
+      { id: 'grafana-dashboard', title: 'Grafana Dashboard', slug: 'observability/grafana-dashboard' },
+    ],
+  },
+  {
     title: 'Integrations',
     items: [
       { id: 'keycloak', title: 'Keycloak (SSO)', slug: 'integrations/keycloak' },
