@@ -144,3 +144,7 @@ Restore from backup:
 ```bash
 docker exec -i openldap slapadd -n 2 -l /dev/stdin < backup.ldif
 ```
+
+## Metrics in Prometheus
+
+`cn=Monitor` answers `ldapsearch`. To get these numbers into Prometheus and a dashboard, run the exporter — see [Prometheus Exporter](/openldap-docker/observability/prometheus-exporter) and [Grafana Dashboard](/openldap-docker/observability/grafana-dashboard).

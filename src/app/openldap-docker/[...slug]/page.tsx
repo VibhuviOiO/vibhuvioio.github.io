@@ -42,6 +42,14 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Monitoring - OpenLDAP Docker',
     description: 'Monitor OpenLDAP with cn=Monitor backend. Track connections, operations, and database health.',
   },
+  'observability/prometheus-exporter': {
+    title: 'Prometheus Exporter - OpenLDAP Docker',
+    description: 'Export OpenLDAP 2.6 metrics to Prometheus — replication state, contextCSN convergence, LMDB pressure, cn=Monitor operations and TLS expiry.',
+  },
+  'observability/grafana-dashboard': {
+    title: 'Grafana Dashboard - OpenLDAP Docker',
+    description: 'Import the OpenLDAP Grafana dashboard — replication topology, contextCSN convergence, per-node entry counts, LMDB and TLS.',
+  },
   'security': {
     title: 'Security - OpenLDAP Docker',
     description: 'Security best practices for OpenLDAP Docker. TLS/SSL, ACLs, non-root execution, and password policies.',
@@ -276,6 +284,8 @@ export function generateStaticParams() {
     { slug: ['deployment', 'kubernetes'] },
     { slug: ['overlays'] },
     { slug: ['monitoring'] },
+    { slug: ['observability', 'prometheus-exporter'] },
+    { slug: ['observability', 'grafana-dashboard'] },
     { slug: ['security'] },
     { slug: ['integrations', 'keycloak'] },
     { slug: ['integrations', 'keycloak-auth-only'] },
