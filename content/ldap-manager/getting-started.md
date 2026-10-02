@@ -6,6 +6,20 @@ description: Quick start guide for LDAP Manager. Learn how to install and config
 # Getting Started
 
 Quick start guide to get LDAP Manager up and running in minutes.
+
+## Project Files
+
+```project
+name: ldap-manager
+config.example.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/config.example.yml
+docker-compose.prod.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/docker-compose.prod.yml
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/docker-compose.yml
+.env.example: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/.env.example
+```
+
+**Download All** saves every file. Copy `config.example.yml` to `config.yml` - Compose
+mounts `./config.yml`.
+
 ## Prerequisites
 - Docker 20.10+
 - Docker Compose 2.0+ (optional)
@@ -61,10 +75,10 @@ clusters:
 ```
 
 
-> **Note:** **Tip:** Download the example config:
+> **Note:** **Tip:** `config.example.yml` is in the Project Files panel above - **Download All**, then rename it to `config.yml`. Or from a terminal:
 
 ```
-wget https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/main/config.example.yml -O config.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/config.example.yml -O config.yml
 ```
 
 
@@ -91,11 +105,11 @@ Access the UI at `http://localhost:5173` (Frontend) or `http://localhost:8000` (
 
 
 
-Download docker-compose.prod.yml:
+`docker-compose.prod.yml` is in the Project Files panel above. Or from a terminal:
 
 
 ```
-wget https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/main/docker-compose.prod.yml
+wget https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/docker-compose.prod.yml
 ```
 
 

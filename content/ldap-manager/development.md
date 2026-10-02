@@ -499,6 +499,41 @@ Add screenshots for UI changes
 - **Code Comments** - Read inline documentation
 
 
+## Referencing Files in These Docs
+
+Long config and Compose files are not pasted into markdown. They are rendered from the
+public repository in a read-only IDE panel - file tree, line numbers, copy button and
+**Download All** - by a fenced block whose language is `project`:
+
+| Line | Format |
+| --- | --- |
+| panel title | `name: ldap-manager` |
+| one line per file | `tree-name: https://raw.githubusercontent.com/OWNER/REPO/refs/heads/BRANCH/PATH` |
+
+Parsed by `src/lib/content-processor.ts`, rendered by
+`src/components/docs/ProjectExplorer.tsx`. It only renders on routes that call
+`processLessonContent`: `/learn/*`, `/openldap-docker/*`, `/ldap-manager/*`.
+
+Check a path before you reference it:
+
+```bash
+# is the exact path committed on that branch?
+git -C <repo> ls-files --error-unmatch <path>
+
+# does the raw URL actually resolve?
+curl -s -o /dev/null -w '%{http_code}\n' <raw-url>
+```
+
+| Rule | Why |
+| --- | --- |
+| Keep the `/refs/heads/main/` segment | a raw URL without the ref returns nothing |
+| Only committed paths | a gitignored file on disk still 404s - `config.yml` is ignored, `config.example.yml` is not |
+| Public repository only | the file is fetched at build time and served to every reader |
+| Content is fetched at build | the panel cannot drift from the repository |
+
+Live example: [Configuration](/ldap-manager/configuration/) renders `config.example.yml`.
+
+
 ## Resources
 
 - React Documentation

@@ -279,6 +279,51 @@ FastAPI with Pydantic validates all API inputs:
 - ✅ Includes context (cluster, DN, operation)
 
 
+## Role-Based Access Control
+
+Every request resolves to a role, and every route enforces a minimum role server-side.
+The UI hides controls a role cannot use, but the API is the boundary.
+
+| Role | Capability |
+|---|---|
+| `readonly` | Browse, tree, search, export CSV, monitoring, schema/ACI viewing |
+| `readwrite` | Also create, edit, delete, bulk operations and LDIF **Apply** |
+| `admin` | Also clusters, credentials, backups, local users, schema and ACI **editing** |
+
+### Where the role comes from
+
+| `auth.mode` | Who you are | Role source |
+|---|---|---|
+| `none` | everyone (no login) | `auth.default_role` - one operator-set role |
+| `local` | a built-in account | that account's `role` |
+| `ldap` | a directory user (binds with their own password) | the highest-ranked group in `auth.ldap.role_map.groups`; otherwise `role_map.default` |
+
+```yaml
+auth:
+  mode: ldap
+  ldap:
+    cluster: "Production LDAP"
+    user_dn_template: "uid={username},ou=People,dc=example,dc=com"
+    role_map:
+      default: readonly
+      groups:                 # member, uniqueMember and memberUid all work
+        "cn=ldap-admins,ou=Group,dc=example,dc=com": admin
+        "cn=ldap-ops,ou=Group,dc=example,dc=com": readwrite
+```
+
+`auth.default_role` is deliberately **not** selectable in the UI: letting an anonymous
+visitor choose "admin" would be privilege escalation. The header badge shows which role
+is active and where it came from.
+
+In `local` and `ldap` mode a login is **required** - anonymous requests get
+`401 Authentication required` even for reads. Only `none` serves anonymous traffic.
+
+Every mode, its exact YAML, the login DN rules and the group-matching order:
+[Authentication Modes](/ldap-manager/authentication/).
+
+A cluster marked `readonly: true` suppresses write controls for every role, including
+`admin`.
+
 ## Security Testing
 
 

@@ -4,7 +4,9 @@ description: "Complete configuration guide for LDAP Manager: single node, multi-
 ---
 
 # Configuration Guide
-Complete guide to configuring LDAP Manager for your environment.
+
+Complete guide to configuring LDAP Manager for your environment. The examples end with the
+committed `config.example.yml`, rendered in full at the end of this page.
 ## Configuration Approaches
 LDAP Manager supports two configuration approaches:
 
@@ -398,6 +400,42 @@ clusters:
 ```
 
 
+## TLS / LDAPS
+
+Per cluster. The certificate paths are inside the container.
+
+```yaml
+    tls:
+      mode: ldaps          # none (default) | ldaps | starttls
+      ca_file: /certs/ca.crt
+      verify: true         # false accepts any certificate - lab only
+      # cert_file: /certs/client.crt   # mutual TLS
+      # key_file: /certs/client.key
+```
+
+```bash
+# mount the certificates
+docker run -d -v ./certs:/certs:ro ldap-manager:latest
+```
+
+`mode: ldaps` with a configured port of `389` is raised to `636` (logged). Full details:
+[TLS & LDAPS](/ldap-manager/tls/).
+
+## cn=config credential (Schema and ACI editors)
+
+The data bind DN normally cannot read `cn=config`, so clusters using the Schema or ACI
+editors need a second credential:
+
+```yaml
+    config:
+      bind_dn: "cn=config"
+      credential:
+        source: env          # LDAP_MANAGER_CONFIG_<CLUSTER>_PASSWORD
+```
+
+Source may be `stored`, `env`, `file` or `config`, exactly like the data credential.
+Without this block the editors report a clear message and nothing else is affected.
+
 ## Context Path Configuration
 Serve LDAP Manager under a custom base path (e.g., `/ldap-manager/`) for integration with other applications.
 
@@ -497,76 +535,30 @@ services:
 ## Complete Example
 
 
-Production-ready configuration with all features:
+`config.example.yml` is the maintained, complete example - fetched from the repository at
+build time, so the panel cannot drift from the code. `config.minimal.yml` is the smallest
+working config: auto-detection, no custom forms or columns.
 
 
-```yaml
-clusters:
-  # Production cluster with full configuration
-  - name: "Production LDAP Cluster"
-    description: "Main production directory"
-    nodes:
-      - host: "ldap1.company.com"
-        port: 389
-        name: "node1"
-      - host: "ldap2.company.com"
-        port: 389
-        name: "node2"
-      - host: "ldap3.company.com"
-        port: 389
-        name: "node3"
-    bind_dn: "cn=Manager,dc=company,dc=com"
-    base_dn: "dc=company,dc=com"
-    readonly: false
-    
-    user_creation_form:
-      base_ou: "ou=People,dc=company,dc=com"
-      object_classes: [inetOrgPerson, posixAccount]
-      fields:
-        - name: uid
-          label: Username
-          type: text
-          required: true
-        - name: cn
-          label: Full Name
-          type: text
-          required: true
-        - name: mail
-          label: Email
-          type: email
-          required: true
-          auto_generate: "${uid}@company.com"
-        - name: userPassword
-          label: Password
-          type: password
-          required: true
-    
-    table_columns:
-      users:
-        - name: uid
-          label: Username
-          default_visible: true
-        - name: cn
-          label: Full Name
-          default_visible: true
-        - name: mail
-          label: Email
-          default_visible: true
-        - name: objectClass
-          label: Type
-          default_visible: true
-
-  # Development cluster with minimal config
-  - name: "Development LDAP"
-    host: "ldap-dev.company.com"
-    port: 389
-    bind_dn: "cn=admin,dc=dev,dc=company,dc=com"
-    readonly: false
+```project
+name: ldap-manager
+config.example.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/config.example.yml
+config.minimal.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/config.minimal.yml
 ```
+
+
+`config.example.yml` is the reference for clusters, `user_creation_form` and
+`table_columns`. The `tls` and `config` blocks above are per-cluster keys - add them to a
+cluster in the same file.
+
+The `auth:` block at the top of the file is not per-cluster: it decides how people sign in to
+LDAP Manager itself. All three modes are documented on
+[Authentication Modes](/ldap-manager/authentication/).
 
 
 ## Next Steps
 
-- Explore all features
-- Review security best practices
-- Learn about API endpoints
+- [Authentication Modes](/ldap-manager/authentication/) - `none`, `local` or `ldap`
+- [Compatibility](/ldap-manager/compatibility/) - what your server must have enabled
+- [TLS & LDAPS](/ldap-manager/tls/) - certificate modes per cluster
+- [Security](/ldap-manager/security/) - what each role can do

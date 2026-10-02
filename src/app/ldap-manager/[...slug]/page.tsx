@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { loadDocContent } from '@/lib/docs-server';
+import { processLessonContent } from '@/lib/content-processor';
 import DocsLayout from '@/components/layout/DocsLayout';
 import DocContent from '@/components/docs/DocContent';
 import TableOfContents from '@/components/docs/TableOfContents';
+import ProjectExplorer from '@/components/docs/ProjectExplorer';
 
 // SEO metadata mapping for doc pages
 const docSeo: Record<string, { title: string; description: string }> = {
@@ -36,6 +38,18 @@ const docSeo: Record<string, { title: string; description: string }> = {
     title: 'Testing Guide - LDAP Manager',
     description: 'Testing guide for LDAP Manager. Run tests, validate multi-registry setup, and ensure feature coverage.',
   },
+  'authentication': {
+    title: 'Authentication Modes - LDAP Manager',
+    description: 'auth.mode none, local and ldap explained: exact config.yml, where each role comes from, and whether login is required.',
+  },
+  'audit-logging': {
+    title: 'Audit & Change Logs - LDAP Manager',
+    description: 'The always-on app audit log that names the UI user, and the OpenLDAP accesslog overlay that sees every writer. Enablement and deployment constraints.',
+  },
+  'compatibility': {
+    title: 'Compatibility - LDAP Manager',
+    description: 'What works with any OpenLDAP server, what needs optional server-side configuration, and the exact enablement LDIF.',
+  },
 };
 
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
@@ -61,19 +75,29 @@ const sidebarGroups = [
     items: [
       { id: 'getting-started', title: 'Installation', slug: 'getting-started' },
       { id: 'configuration', title: 'Configuration', slug: 'configuration' },
+      { id: 'compatibility', title: 'Compatibility', slug: 'compatibility' },
     ],
   },
   {
     title: 'Features',
     items: [
       { id: 'features', title: 'Overview', slug: 'features' },
+      { id: 'ui-guide', title: 'UI Guide', slug: 'ui-guide' },
       { id: 'security', title: 'Security', slug: 'security' },
+    ],
+  },
+  {
+    title: 'Access & Audit',
+    items: [
+      { id: 'authentication', title: 'Authentication Modes', slug: 'authentication' },
+      { id: 'audit-logging', title: 'Audit & Change Logs', slug: 'audit-logging' },
     ],
   },
   {
     title: 'Deployment',
     items: [
       { id: 'production', title: 'Production Guide', slug: 'production' },
+      { id: 'tls', title: 'TLS & LDAPS', slug: 'tls' },
     ],
   },
   {
@@ -99,6 +123,10 @@ export default async function LDAPManagerDocPage({ params }: DocPageProps) {
     notFound();
   }
 
+  // Resolve ```project blocks into ProjectExplorer panels; files are fetched at build time
+  const { content, projects } = await processLessonContent(doc.content);
+  doc.content = content;
+
   // Title comes from markdown content H1, not meta
 
   return (
@@ -117,7 +145,24 @@ export default async function LDAPManagerDocPage({ params }: DocPageProps) {
       
       <div className="flex gap-8">
         <article className="flex-1 min-w-0 max-w-none">
-          <DocContent content={doc.content} />
+          {projects.length > 0 ? (
+            doc.content
+              .split(/(___PROJECT_BLOCK_\d+___)/)
+              .map((segment, i) => {
+                const projectMatch = segment.match(/___PROJECT_BLOCK_(\d+)___/);
+                if (projectMatch) {
+                  const project = projects[parseInt(projectMatch[1])];
+                  return project
+                    ? <ProjectExplorer key={`project-${i}`} name={project.name} files={project.files} />
+                    : null;
+                }
+                return segment.trim()
+                  ? <DocContent key={`content-${i}`} content={segment} />
+                  : null;
+              })
+          ) : (
+            <DocContent content={doc.content} />
+          )}
         </article>
         <TableOfContents content={doc.content} />
       </div>
@@ -130,10 +175,15 @@ export function generateStaticParams() {
     { slug: ['getting-started'] },
     { slug: ['configuration'] },
     { slug: ['features'] },
+    { slug: ['ui-guide'] },
     { slug: ['security'] },
     { slug: ['production'] },
+    { slug: ['tls'] },
     { slug: ['development'] },
     { slug: ['testing'] },
+    { slug: ['authentication'] },
+    { slug: ['audit-logging'] },
+    { slug: ['compatibility'] },
   ];
   return paths;
 }

@@ -155,6 +155,9 @@ View health status across all nodes in a multi-master cluster.
 - **Connection Metrics** - Response times and availability
 - **Cluster Overview** - All nodes at a glance
 
+The monitor backend is optional server-side configuration. If a cluster lacks it, the app
+says so instead of failing - see [Compatibility](/ldap-manager/compatibility/).
+
 
 ## Replication Topology
 
@@ -175,16 +178,74 @@ Visualize multi-master replication topology and sync status between nodes.
 
 ## Activity Logs
 
+Who changed what, recorded at the point of the change: the signed-in user, their role, the
+action, the target DN and the cluster, as append-only JSON Lines. Admin-only, because it
+names people.
 
-View LDAP operation history and search examples.
+Changes made outside the UI - scripts, `ldapmodify`, replication - are a second layer, from
+the optional OpenLDAP `accesslog` overlay. The Activity tab shows how to enable it when the
+server does not have it.
 
+Full detail: [Audit & Change Logs](/ldap-manager/audit-logging/).
 
 ### Features:
 
-- **Operation History** - See recent LDAP operations
-- **Search Examples** - Learn LDAP filter syntax
-- **Audit Trail** - Track directory changes
+- **Operation history** - actor, role, action, target, result, timestamp
+- **Filters** - by actor and by action prefix
+- **Audit trail** - append-only, survives restarts, ships to a log pipeline
 
+
+## DIT Tree Browser
+
+A lazy-loaded tree of the whole directory. Children load on demand, so a directory with
+tens of thousands of entries opens instantly.
+
+- Expand OUs and groups to walk the tree; users are leaves
+- Click any entry to inspect every attribute
+- Password hashes are stripped server-side before the response leaves the API
+- With write access, delete the selected entry from the panel
+
+## LDIF Editor
+
+Syntax-highlighted, with a dry run and a real apply. See the [UI Guide](/ldap-manager/ui-guide/) for the sample seed LDIF and per-record errors.
+
+| Action | Writes to the directory |
+|---|---|
+| **Validate** | No - parses and plans only |
+| **Apply** | Yes |
+
+Supports `add`, `modify` (with `add:` / `replace:` / `delete:` directives) and `delete`.
+Blank-line separated records, folded values and base64 (`::`) values are handled, and
+per-record errors are reported so one bad entry does not fail the batch.
+
+## Schema Editor
+
+Reads `cn=schema` and lists every schema with its object classes and attribute types -
+name, OID, SUP, syntax, equality, and the raw RFC 4512 definition. Admins can add or
+remove an attribute type or object class; definitions are validated before writing and a
+malformed one is rejected by the directory. Requires a `config:` credential.
+
+## ACI Editor
+
+Every `cn=config` database with its `olcAccess` rules, numbered in evaluation order -
+first match wins. Admins can add a rule, insert one at a position, or remove one by
+index. Because a wrong rule can lock users out, the UI warns before applying.
+
+## TLS / LDAPS
+
+Per-cluster `ldaps` or StartTLS with CA and client-certificate verification. TLS applies
+to every connection the app opens - entries, monitoring, schema, ACI, backup, LDIF and
+LDAP authentication. See [TLS & LDAPS](/ldap-manager/tls/).
+
+## Bulk Operations
+
+Select entries with the row checkboxes to reveal the bulk bar:
+
+- **Set** - one attribute, one value, every selected entry
+- **Add to group** - assign many users to a single group (one role, many users)
+- **Delete** - remove every selected entry
+
+Each entry is applied independently and failures are reported per DN.
 
 ## Production-Grade Features
 
@@ -328,11 +389,15 @@ Automatic base DN detection from LDAP rootDSE.
 
 ## Compatible LDAP Servers
 
-- ✅ OpenLDAP 2.4+
-- ✅ OpenLDAP 2.6+
-- ✅ 389 Directory Server
-- ✅ ApacheDS
-- ✅ Any RFC 4511 compliant LDAP server
+OpenLDAP only, by design:
+
+- ✅ OpenLDAP 2.6.x - what the project's own `openldap-docker` image ships
+- ❌ Active Directory - not supported
+- ❌ 389 Directory Server - not supported
+
+The app reads OpenLDAP's `cn=config`, `cn=Monitor` and the `accesslog` overlay, which other
+servers do not have. See [Compatibility](/ldap-manager/compatibility/) for the feature matrix
+and the optional server-side configuration.
 
 
 ## Next Steps

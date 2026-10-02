@@ -74,59 +74,29 @@ WORKERS=4
 ### Step 2: Docker Compose Production Setup
 
 
-Use the production-hardened Docker Compose configuration:
+`docker-compose.prod.yml` is committed and rendered below - fetched at build time. Put a
+`.env` (start from `.env.example`) and a `config.yml` beside it.
 
 
+```project
+name: ldap-manager
+docker-compose.prod.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/docker-compose.prod.yml
+docker-compose.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/docker-compose.yml
+.env.example: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/.env.example
 ```
-version: '3.8'
 
-services:
-  ldap-manager:
-    image: vibhuvioio/ldap-manager:latest
-    restart: unless-stopped
 
-    env_file: .env
+What matters in it:
 
-    volumes:
-      - ./config.yml:/app/config.yml:ro
-      - ldap-cache:/app/.cache
-      - ldap-secrets:/app/.secrets
 
-    ports:
-      - "5173:5173"  # Frontend
-      - "8000:8000"  # Backend API
-
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 256M
-
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-    security_opt:
-      - no-new-privileges:true
-
-volumes:
-  ldap-cache:
-    driver: local
-  ldap-secrets:
-    driver: local
-```
+| Setting | Why |
+| --- | --- |
+| `./config.yml:/app/config.yml:ro` | config is read-only inside the container |
+| `ldap-cache`, `ldap-secrets` volumes | encrypted password cache and Fernet key survive a restart |
+| `healthcheck` on `/health` | `docker ps` shows the real container state |
+| `ALLOWED_ORIGINS` (from `.env`) | CORS allow-list - never `*` with credentials |
+| `no-new-privileges:true` | blocks privilege escalation inside the container |
+| `deploy.resources.limits` | caps CPU and memory |
 
 
 ### Step 3: Start the Application
