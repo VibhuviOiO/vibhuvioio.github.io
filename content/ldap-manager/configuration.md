@@ -540,6 +540,8 @@ build time, so the panel cannot drift from the code. `config.minimal.yml` is the
 working config: auto-detection, no custom forms or columns.
 
 
+## Project Files
+
 ```project
 name: ldap-manager
 config.example.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/config.example.yml

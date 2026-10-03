@@ -78,6 +78,8 @@ WORKERS=4
 `.env` (start from `.env.example`) and a `config.yml` beside it.
 
 
+## Project Files
+
 ```project
 name: ldap-manager
 docker-compose.prod.yml: https://raw.githubusercontent.com/VibhuviOiO/ldap-manager/refs/heads/main/docker-compose.prod.yml

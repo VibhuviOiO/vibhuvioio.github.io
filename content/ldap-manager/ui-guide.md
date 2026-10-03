@@ -112,6 +112,8 @@ A committed seed dataset for the custom schema used in the examples above. Both 
 from the [openldap-usecases](https://github.com/VibhuviOiO/openldap-usecases) lab repo and
 are fetched at build time.
 
+## Project Files
+
 ```project
 name: mahabharata-lab
 MahabharataCharacter.ldif: https://raw.githubusercontent.com/VibhuviOiO/openldap-usecases/refs/heads/main/vibhuvioio-com-singlenode/custom-schema/MahabharataCharacter.ldif
